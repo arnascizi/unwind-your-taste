@@ -15,33 +15,8 @@ import java.util.Map;
 @SpringBootApplication
 public class ZkGaleryProjectApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ZkGaleryProjectApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ZkGaleryProjectApplication.class, args);
+    }
 
-	@Bean
-	public ServletRegistrationBean dHtmlLayoutServlet() {
-		Map<String, String> params = new HashMap<>();
-		params.put("update-uri", "/zkau");
-		ServletRegistrationBean reg = new ServletRegistrationBean(new DHtmlLayoutServlet(), "*.zul");
-		reg.setLoadOnStartup(1);
-		reg.setInitParameters(params);
-		return reg;
-	}
-
-	@Bean
-	public ServletRegistrationBean dHtmlUpdateServlet() {
-		Map<String, String> params = new HashMap<>();
-		params.put("update-uri", "/zkau/*");
-		ServletRegistrationBean reg = new ServletRegistrationBean(new DHtmlUpdateServlet(), "/zkau/*");
-		reg.setLoadOnStartup(2);
-		reg.setInitParameters(params);
-		return reg;
-	}
-
-	// ZK listeners
-	@Bean
-	public ServletListenerRegistrationBean<HttpSessionListener> httpSessionListener() {
-		return new ServletListenerRegistrationBean<>(new HttpSessionListener());
-	}
 }
