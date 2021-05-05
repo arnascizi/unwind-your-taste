@@ -1,7 +1,7 @@
-package lt.insoft.controller;
+package lt.insoft.gallerybl.controller;
 
 import lt.insoft.entity.Image;
-import lt.insoft.service.ImageService;
+import lt.insoft.gallerybl.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
