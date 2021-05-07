@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow">
+    <xh:div self="@{define(pageContent)}" viewModel="@id('vm')
+        @init('lt.insoft.galleryui.view.ImageVm">
+        <head>
+            <meta charset="UTF-8"/>
+            <title>ZK Gallery</title>
+        </head>
+        <body>
+            <p>ZK gallery</p>
+        </body>
+    </xh:div>
+</html>
