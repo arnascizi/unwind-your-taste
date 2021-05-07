@@ -1,7 +1,7 @@
 package lt.insoft.gallerybl.service;
 
-import lt.insoft.entity.Image;
 import lt.insoft.gallerybl.repository.ImageRepository;
+import lt.insoft.gallerymodel.model.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class ImageService {
         this.imageRepository = imageRepository;
     }
 
-    public List<Image> getAllImages() {
+    public List<Image> fetchAllImages() {
         return imageRepository.findAll();
     }
 }

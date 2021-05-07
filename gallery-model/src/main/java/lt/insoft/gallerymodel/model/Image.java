@@ -1,4 +1,4 @@
-package lt.insoft.entity;
+package lt.insoft.gallerymodel.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +25,14 @@ public class Image {
 
     @Column
     private String url;
-}
 
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
+}

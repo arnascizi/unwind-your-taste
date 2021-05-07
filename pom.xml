@@ -2,29 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>gallery-model</module>
-        <module>gallery-bl</module>
-        <module>gallery-ui</module>
-    </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>lt.insoft.arnas.cizikovas.galery</groupId>
-    <artifactId>zkgaleryproject</artifactId>
+
+    <groupId>lt.insoft</groupId>
+    <artifactId>gallery-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>zk-galery-project</name>
-    <description>ZK Gallery Project</description>
-    <properties>
-        <gson.version>2.8.5</gson.version>
-        <java.version>1.8</java.version>
-        <zk.version>8.5.0</zk.version>
-        <zke.version>8.5.0-Eval</zke.version>
-    </properties>
+    <name>gallery-parent</name>
+    <packaging>pom</packaging>
+
+    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>gallery-bl</module>
+        <module>gallery-model</module>
+        <module>gallery-ui</module>
+    </modules>
 
     <repositories>
         <repository>
@@ -32,14 +29,47 @@
             <name>ZK CE Repository</name>
             <url>https://mavensync.zkoss.org/maven2</url>
         </repository>
-        <repository>
-            <id>ZK PE/EE Evaluation</id>
-            <url>https://mavensync.zkoss.org/eval/</url>
-        </repository>
     </repositories>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <zk.version>8.5.0</zk.version>
+        <data.jpa.version>2.4.5</data.jpa.version>
+        <h2.version>1.4.200</h2.version>
+        <gson.version>2.8.6</gson.version>
+        <lombok.version>1.18.20</lombok.version>
+        <slf4j.version>1.7.30</slf4j.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>lt.insoft</groupId>
+                <artifactId>gallery-bl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>lt.insoft</groupId>
+                <artifactId>gallery-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>lt.insoft</groupId>
+                <artifactId>gallery-ui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${data.jpa.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+                <scope>runtime</scope>
+            </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
@@ -68,12 +98,23 @@
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zuti</artifactId>
-                <version>${zke.version}</version>
+                <version>${zk.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.zkoss.zk</groupId>
                 <artifactId>zkex</artifactId>
-                <version>${zke.version}</version>
+                <version>${zk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -81,30 +122,13 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

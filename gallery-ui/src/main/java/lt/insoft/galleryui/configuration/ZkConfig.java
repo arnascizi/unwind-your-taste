@@ -1,4 +1,4 @@
-package lt.insoft.galleryui.config;
+package lt.insoft.galleryui.configuration;
 
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -14,7 +14,6 @@ import java.util.Map;
 @Configuration
 public class ZkConfig {
 
-    // ZK servlets
     @Bean
     public ServletRegistrationBean dHtmlLayoutServlet() {
         Map<String, String> params = new HashMap<>();
@@ -35,9 +34,9 @@ public class ZkConfig {
         return reg;
     }
 
-    // ZK listeners
     @Bean
     public ServletListenerRegistrationBean<HttpSessionListener> httpSessionListener() {
         return new ServletListenerRegistrationBean<>(new HttpSessionListener());
+
     }
 }
