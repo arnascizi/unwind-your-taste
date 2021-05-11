@@ -7,11 +7,20 @@
     <meta charset="utf-8" />
     <xh:zkhead stubonly="false" />
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <title>Gallery</title>
+    <title>ZK fw gallery app</title>
   </head>
 
   <xh:body>
-    <h2>Webapp</h2>
+    <xh:nav class="navbar navbar-expand-md sticky-top">
+      <xh:a class="navbar-brand" href="/index.zul">Gallery</xh:a>
+      <xh:div class="collapse navbar-collapse" id="navbarCollapse">
+        <xh:ul class="navbar-nav mr-auto">
+          <xh:li class="nav-item">
+            <xh:a class="nav-link" href="/index.zul">Home</xh:a>
+          </xh:li>
+        </xh:ul>
+      </xh:div>
+    </xh:nav>
     <!-- Page content -->
     <xh:div self="@{insert(pageContent)}" />
   </xh:body>

@@ -5,7 +5,6 @@
     xmlns:zul="http://www.zkoss.org/2005/zul">
     <xh:div self="@{define(pageContent)}" viewModel="@id('vm')
         @init('lt.insoft.galleryui.viewmodel.ImageVm')">
-        <h1>we need a working page from webapp!!!</h1>
-        <a href="/random.zul">Random</a>
+        <xh:h3>Index is working</xh:h3>
     </xh:div>
 </zk>
