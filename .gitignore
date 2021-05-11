@@ -1,6 +1,9 @@
 HELP.md
 target/
 .mvn/wrapper/*
+gallery-bl/.mvn/wrapper/*
+gallery-model/.mvn/wrapper/*
+gallery-ui/.mvn/wrapper/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -18,6 +21,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.cmd
 
 ### NetBeans ###
 /nbproject/private/
