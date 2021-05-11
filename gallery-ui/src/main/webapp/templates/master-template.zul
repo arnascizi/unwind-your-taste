@@ -1,8 +1,20 @@
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="~./templates/master-template.zul" ?>
-<?page complete="true"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
-<zk xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow" xmlns:zul="http://www.zkoss.org/2005/zul">
-  <xh:div self="@{define(pageContent)}" viewModel="@id('vm') @init('lt.insoft.app.vm.PageVm')">
+<!DOCTYPE html>
+<xh:html xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:xh="xhtml" xmlns:sh="shadow">
+  <head>
+    <meta charset="utf-8" />
+    <xh:zkhead stubonly="false" />
+    <link rel="stylesheet" href="${c:encodeURL('~./css/styles.css')}" />
+  </head>
 
-  </xh:div>
-</zk>
+  <xh:body>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+    </ul>
+    <xh:div self="@{insert(pageContent)}" />
+
+  </xh:body>
+</xh:html>

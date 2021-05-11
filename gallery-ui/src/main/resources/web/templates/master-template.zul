@@ -10,7 +10,8 @@
   </head>
 
   <xh:body>
-    <xh:div self="@{insert(pageContent)}" />
 
+    <!-- Page content -->
+    <xh:div self="@{insert(pageContent)}" />
   </xh:body>
 </xh:html>

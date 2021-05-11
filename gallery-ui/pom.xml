@@ -16,6 +16,7 @@
     <properties>
         <java.version>1.8</java.version>
         <zk.version>8.5.0</zk.version>
+        <urlrewrite.version>4.0.4</urlrewrite.version>
     </properties>
 
     <dependencies>
@@ -71,6 +72,11 @@
             <groupId>org.zkoss.zk</groupId>
             <artifactId>zkplus</artifactId>
             <version>${zk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>${urlrewrite.version}</version>
         </dependency>
     </dependencies>
 

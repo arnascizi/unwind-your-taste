@@ -26,13 +26,4 @@ public class Image {
     @Column
     private String url;
 
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", url='" + url + '\'' +
-                '}';
-    }
 }

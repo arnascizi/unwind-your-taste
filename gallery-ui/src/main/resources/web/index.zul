@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow">
+<?init class="org.zkoss.zk.ui.util.Composition"
+        arg0="~./templates/master-template.zul"?>
+<?page complete="true"?>
+<zk xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:sh="shadow"
+    xmlns:zul="http://www.zkoss.org/2005/zul">
     <xh:div self="@{define(pageContent)}" viewModel="@id('vm')
-        @init('lt.insoft.galleryui.viewmodel.ImageVm">
-        <head>
-            <meta charset="UTF-8"/>
-            <title>ZK Gallery</title>
-        </head>
-        <body>
-            <p>ZK gallery</p>
-        </body>
+        @init('lt.insoft.galleryui.viewmodel.ImageVm')">
+        <h1>we need a working page from resources!!!</h1>
     </xh:div>
-</html>
+</zk>
