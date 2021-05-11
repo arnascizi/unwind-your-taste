@@ -37,6 +37,5 @@ public class ZkConfig {
     @Bean
     public ServletListenerRegistrationBean<HttpSessionListener> httpSessionListener() {
         return new ServletListenerRegistrationBean<>(new HttpSessionListener());
-
     }
 }
