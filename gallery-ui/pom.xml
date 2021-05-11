@@ -17,7 +17,17 @@
         <java.version>1.8</java.version>
         <zk.version>8.5.0</zk.version>
         <urlrewrite.version>4.0.4</urlrewrite.version>
+        <webjars.boostrap.version>4.6.0</webjars.boostrap.version>
+        <webjars.locator.version>0.40</webjars.locator.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -78,8 +88,17 @@
             <artifactId>urlrewritefilter</artifactId>
             <version>${urlrewrite.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${webjars.boostrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>${webjars.locator.version}</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

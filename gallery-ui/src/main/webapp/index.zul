@@ -1,13 +1,11 @@
 <?init class="org.zkoss.zk.ui.util.Composition"
-        arg0="~./templates/master-template.zul"?>
+        arg0="/templates/master-template.zul"?>
 <?page complete="true"?>
 <zk xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:sh="shadow"
     xmlns:zul="http://www.zkoss.org/2005/zul">
     <xh:div self="@{define(pageContent)}" viewModel="@id('vm')
         @init('lt.insoft.galleryui.viewmodel.ImageVm')">
-        <ul>
-            <li>1</li>
-        </ul>
         <h1>we need a working page from webapp!!!</h1>
+        <a href="/random.zul">Random</a>
     </xh:div>
 </zk>

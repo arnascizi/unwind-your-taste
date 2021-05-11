@@ -6,15 +6,13 @@
   <head>
     <meta charset="utf-8" />
     <xh:zkhead stubonly="false" />
-    <link rel="stylesheet" href="${c:encodeURL('~./css/styles.css')}" />
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <title>Gallery</title>
   </head>
 
   <xh:body>
-    <ul>
-      <li>1</li>
-      <li>2</li>
-    </ul>
+    <h2>Webapp</h2>
+    <!-- Page content -->
     <xh:div self="@{insert(pageContent)}" />
-
   </xh:body>
 </xh:html>

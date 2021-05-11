@@ -5,6 +5,6 @@
     xmlns:zul="http://www.zkoss.org/2005/zul">
     <xh:div self="@{define(pageContent)}" viewModel="@id('vm')
         @init('lt.insoft.galleryui.viewmodel.ImageVm')">
-        <h1>we need a working page from resources!!!</h1>
+        <h1>Random</h1>
     </xh:div>
 </zk>
