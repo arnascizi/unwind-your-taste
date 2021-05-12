@@ -7,7 +7,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import java.io.Serializable;
 
 public class ImageVm implements Serializable {
-    private static final long serialVersionUID = -694624904097484135L;
+    private static final long serialVersionUID = -1373492169780328182L;
 
     @WireVariable(rewireOnActivate = true)
     private transient ImageService imageService;
@@ -16,3 +16,4 @@ public class ImageVm implements Serializable {
     public void init() {
     }
 }
+

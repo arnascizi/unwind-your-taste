@@ -1,7 +1,7 @@
 package lt.insoft.gallerybl.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import lt.insoft.gallerymodel.model.Image;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
