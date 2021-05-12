@@ -110,11 +110,6 @@
                 <version>${webjars.boostrap.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>webjars-locator</artifactId>
-                <version>${webjars.locator.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring.version}</version>
