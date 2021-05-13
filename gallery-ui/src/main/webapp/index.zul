@@ -1,9 +1,9 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
 <?page complete="true"?>
-<zk xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" >
+<zk xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
     <xh:div self="@{define(pageContent)}" viewModel="@id('vm')
         @init('lt.insoft.galleryui.viewmodel.ImageVm')">
-        <xh:h3>Index is working</xh:h3>
+        <h3>Index is working</h3>
 
     </xh:div>
 </zk>

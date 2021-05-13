@@ -1,15 +1,13 @@
 package lt.insoft.gallerymodel.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
+@Getter
+@RequiredArgsConstructor
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "image")
 public class Image {
 
@@ -26,4 +24,19 @@ public class Image {
     @Column
     private String url;
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }
