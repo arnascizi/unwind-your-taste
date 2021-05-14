@@ -1,11 +1,8 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
 <?page complete="true"?>
 <xh:div xmlns="native"
-    xmlns:xh="http://www.w3.org/1999/xhtml"
-    xmlns:zul="http://www.zkoss.org/2005/zul"
-    self="@{define(pageContent)}"
-    viewModel="@id('vm') @init('lt.insoft.galleryui.viewmodel.ImageVm')">
-    <zul:div forEach="@load('vm.imageList')">
-        <zul:div>1</zul:div>
-    </zul:div>
+        xmlns:xh="http://www.w3.org/1999/xhtml"
+        xmlns:zul="http://www.zkoss.org/2005/zul"
+        self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('lt.insoft.galleryui.viewmodel.ImageVm')">
 </xh:div>

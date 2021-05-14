@@ -3,6 +3,7 @@ package lt.insoft.galleryui.viewmodel;
 import lombok.Getter;
 import lt.insoft.gallerybl.service.ImageService;
 import lt.insoft.gallerymodel.model.Image;
+
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
@@ -14,10 +15,6 @@ public class ImageVm implements Serializable {
 
     @WireVariable(rewireOnActivate = true)
     private transient ImageService imageService;
-
-    public ImageVm(ImageService imageService) {
-        this.imageService = imageService;
-    }
 
     @Getter
     public List<Image> imageList;

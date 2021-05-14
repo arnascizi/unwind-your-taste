@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"lt.insoft.gallerybl.repository"})
-public class JpaConfig {
-}
+public class JpaConfig {}
