@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import javassist.NotFoundException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lt.insoft.galleryui.helper.ImageViewHelper;
 import lt.insoft.galleryui.view.ImageSmall;
@@ -16,11 +18,13 @@ public class ImageVm implements Serializable {
     @WireVariable(rewireOnActivate = true)
     private transient ImageViewHelper imageViewHelper;
 
+    @Getter
     public ImageSmall imageSmall;
 
     @Init
-    public void init() {
-        imageSmall = imageViewHelper.getImageView(4534312L);
+    public void init() throws NotFoundException {
+        imageSmall = imageViewHelper.getImageView(1L);
+        System.out.println(imageSmall.toString());
     }
 }
 

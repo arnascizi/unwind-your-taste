@@ -1,8 +1,18 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
 <?page complete="true"?>
 <xh:div xmlns="native"
-    xmlns:xh="http://www.w3.org/1999/xhtml"
-    xmlns:zul="http://www.zkoss.org/2005/zul"
-    self="@{define(pageContent)}"
-    viewModel="@id('vm') @init('lt.insoft.galleryui.viewmodel.ImageVm')">
+        xmlns:xh="http://www.w3.org/1999/xhtml"
+        xmlns:zul="http://www.zkoss.org/2005/zul"
+        self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('lt.insoft.galleryui.viewmodel.ImageVm')">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="card m-3">
+        <img class="card-img" src="${vm.imageSmall.url}" alt="${vm.imageSmall.name}"/>
+      </div>
+      <div class="card m-3">
+        <img class="card-img" src="${vm.imageSmall.url}" alt="${vm.imageSmall.name}"/>
+      </div>
+    </div>
+  </div>
 </xh:div>
