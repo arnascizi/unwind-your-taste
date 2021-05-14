@@ -2,7 +2,6 @@ package lt.insoft.gallerybl.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import lt.insoft.gallerybl.repository.ImageRepository;
 import lt.insoft.gallerymodel.model.Image;
 
 @Service
-@Repository
 @RequiredArgsConstructor
 public class ImageService {
 
@@ -21,7 +19,7 @@ public class ImageService {
     }
 
     public Image fetchImage(Long id) {
-        return imageRepository.getOne(id);
+        return imageRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public void saveImage(Image image) {

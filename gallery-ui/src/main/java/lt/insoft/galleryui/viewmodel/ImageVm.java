@@ -1,29 +1,26 @@
 package lt.insoft.galleryui.viewmodel;
 
-import lombok.Getter;
-import lt.insoft.gallerybl.service.ImageService;
-import lt.insoft.gallerymodel.model.Image;
+import java.io.Serializable;
 
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
-import java.io.Serializable;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lt.insoft.galleryui.helper.ImageViewHelper;
+import lt.insoft.galleryui.view.ImageSmall;
 
+@RequiredArgsConstructor
 public class ImageVm implements Serializable {
     private static final long serialVersionUID = -1373492169780328182L;
 
     @WireVariable(rewireOnActivate = true)
-    private transient ImageService imageService;
+    private transient ImageViewHelper imageViewHelper;
 
-    @Getter
-    public List<Image> imageList;
-
-    @Getter
-    public Image findImage;
+    public ImageSmall imageSmall;
 
     @Init
     public void init() {
+        imageSmall = imageViewHelper.getImageView(4534312L);
     }
 }
 
