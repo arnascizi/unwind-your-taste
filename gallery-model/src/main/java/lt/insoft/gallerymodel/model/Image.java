@@ -1,18 +1,20 @@
 package lt.insoft.gallerymodel.model;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
-@RequiredArgsConstructor
+@Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "image")
 public class Image {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -24,19 +26,4 @@ public class Image {
     @Column
     private String url;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
 }

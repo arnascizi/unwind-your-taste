@@ -2,26 +2,39 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
 <!DOCTYPE html>
-<xh:html xmlns="native" xmlns:xh="xhtml">
+<xh:html xmlns="native" xmlns:xh="xhtml" >
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
     <xh:zkhead stubonly="false" />
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <title>ZK fw gallery app</title>
   </head>
-
   <xh:body>
-    <nav class="navbar navbar-expand-md sticky-top">
-      <a class="navbar-brand" href="/index.zul">Gallery</a>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/index.zul">Home</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- Page content -->
-    <xh:div self="@{insert(pageContent)}" />
+    <div class="header-wrapper">
+      <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #4a65a4">
+        <div class="container-fluid" role="navigation">
+          <ul class="nav navbar-nav">
+            <div style="display: inline-block">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a class="nav-link" href="/index.zul">Home</a>
+                </li>
+              </ul>
+            </div>
+          </ul>
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/index.zul">Gallery</a>
+          </div>
+
+        </div>
+      </header>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- Page content -->
+      <xh:div self="@{insert(pageContent)}" />
+    </div>
+
   </xh:body>
 </xh:html>

@@ -25,10 +25,11 @@
         <spring.version>2.4.5</spring.version>
         <h2.version>1.4.200</h2.version>
         <lombok.version>1.18.20</lombok.version>
-        <slf4j.version>1.7.30</slf4j.version>
         <urlrewrite.version>4.0.4</urlrewrite.version>
         <webjars.boostrap.version>4.6.0</webjars.boostrap.version>
-        <webjars.locator.version>0.40</webjars.locator.version>
+        <jquery.version>3.6.0</jquery.version>
+        <hibernate.version>5.4.31.Final</hibernate.version>
+        <hibernate.entity.version>5.2.3.Final</hibernate.entity.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -105,6 +106,11 @@
                 <version>${webjars.boostrap.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>${jquery.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring.version}</version>
@@ -118,6 +124,16 @@
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.entity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
