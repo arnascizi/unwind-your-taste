@@ -10,9 +10,6 @@
       <div class="card m-3">
         <img class="card-img" src="${vm.imageSmall.url}" alt="${vm.imageSmall.name}"/>
       </div>
-      <div class="card m-3">
-        <img class="card-img" src="${vm.imageSmall.url}" alt="${vm.imageSmall.name}"/>
-      </div>
     </div>
   </div>
 </xh:div>
