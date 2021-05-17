@@ -1,0 +1,14 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
+<?page complete="true"?>
+<xh:div xmlns="native"
+        xmlns:xh="http://www.w3.org/1999/xhtml"
+        xmlns:zul="http://www.zkoss.org/2005/zul"
+        xmlns:sh="shadow"
+        self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
+  <div class="container mt-5">
+    <sh:forEach items="@load(vm.imageSmallList)">
+        <xh:img class="img-thumbnail mx-1 my-2" style="height: 250px;" src="@load(each.url)" alt="@load(each.name)" />
+    </sh:forEach>
+  </div>
+</xh:div>

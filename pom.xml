@@ -8,7 +8,7 @@
     <version>2.4.5</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>lt.insoft</groupId>
+  <groupId>lt.insoft.gallery</groupId>
   <artifactId>gallery-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>gallery-parent</name>
@@ -16,7 +16,7 @@
   <modules>
     <module>gallery-bl</module>
     <module>gallery-model</module>
-    <module>gallery-ui</module>
+    <module>gallery-app</module>
   </modules>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -40,18 +40,18 @@
         <version>${urlrewrite.version}</version>
       </dependency>
       <dependency>
-        <groupId>lt.insoft</groupId>
+        <groupId>lt.insoft.gallery</groupId>
         <artifactId>gallery-bl</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>lt.insoft</groupId>
+        <groupId>lt.insoft.gallery</groupId>
         <artifactId>gallery-model</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>lt.insoft</groupId>
-        <artifactId>gallery-ui</artifactId>
+        <groupId>lt.insoft.gallery</groupId>
+        <artifactId>gallery-app</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
