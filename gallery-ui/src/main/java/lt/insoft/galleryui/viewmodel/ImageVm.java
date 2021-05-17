@@ -1,6 +1,7 @@
 package lt.insoft.galleryui.viewmodel;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -21,10 +22,13 @@ public class ImageVm implements Serializable {
     @Getter
     public ImageSmall imageSmall;
 
+    @Getter
+    public List<ImageSmall> imageSmallList;
+
     @Init
     public void init() throws NotFoundException {
         imageSmall = imageViewHelper.getImageView(1L);
-        System.out.println(imageSmall.toString());
+        imageSmallList = imageViewHelper.getAllImagesView();
     }
 }
 

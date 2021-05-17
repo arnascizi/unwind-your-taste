@@ -1,6 +1,7 @@
 package lt.insoft.galleryui.helper;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,14 @@ import lt.insoft.galleryui.view.ImageSmall;
 public class ImageViewHelper {
 
     private final ImageService imageService;
+
+    public List<ImageSmall> getAllImagesView() {
+        List<ImageSmall> listView = new ArrayList<>();
+        for (Image image: imageService.fetchAllImages()) {
+            listView.add(buildView(image));
+        }
+        return listView;
+    }
 
     public ImageSmall getImageView(Long id) throws NotFoundException {
         Image image = imageService.fetchImage(id);

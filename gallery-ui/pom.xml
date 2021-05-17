@@ -47,6 +47,14 @@
       <artifactId>zkplus</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zuti</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zkex</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.tuckey</groupId>
       <artifactId>urlrewritefilter</artifactId>
     </dependency>
@@ -57,6 +65,10 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>jquery</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
     </dependency>
   </dependencies>
 </project>
