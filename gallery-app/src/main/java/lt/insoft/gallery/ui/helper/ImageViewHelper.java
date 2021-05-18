@@ -9,7 +9,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.ui.view.ImageSmall;
 import lt.insoft.gallery.bl.service.ImageService;
-import lt.insoft.gallery.model.Image;
+import lt.insoft.gallery.model.ImageOld;
 
 @Component
 @RequiredArgsConstructor
@@ -19,18 +19,18 @@ public class ImageViewHelper {
 
     public List<ImageSmall> getAllImagesView() {
         List<ImageSmall> listView = new ArrayList<>();
-        for (Image image: imageService.fetchAllImages()) {
+        for (ImageOld image: imageService.fetchAllImages()) {
             listView.add(buildView(image));
         }
         return listView;
     }
 
     public ImageSmall getImageView(Long id) throws NotFoundException {
-        Image image = imageService.fetchImage(id);
+        ImageOld image = imageService.fetchImage(id);
         return image != null ? buildView(image) : null;
     }
 
-    private ImageSmall buildView(Image image) {
+    private ImageSmall buildView(ImageOld image) {
         ImageSmall view = new ImageSmall();
 
         view.setName(image.getName());

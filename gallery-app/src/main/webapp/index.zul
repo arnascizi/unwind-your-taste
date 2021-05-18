@@ -6,9 +6,9 @@
         xmlns:sh="shadow"
         self="@{define(pageContent)}"
         viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
-  <div class="container mt-5">
+  <xh:div class="container mt-5">
     <sh:forEach items="@load(vm.imageSmallList)">
         <xh:img class="img-thumbnail mx-1 my-2" style="height: 250px;" src="@load(each.url)" alt="@load(each.name)" />
     </sh:forEach>
-  </div>
+  </xh:div>
 </xh:div>

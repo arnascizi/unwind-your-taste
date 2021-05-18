@@ -1,12 +1,13 @@
 HELP.md
 target/
 .mvn/wrapper/*
-gallery-bl/.mvn/wrapper/*
+*/.mvn/wrapper/*
 gallery-model/.mvn/wrapper/*
 gallery-ui/.mvn/wrapper/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 mvnw
+gallery-bl/src/main/resources/postgresql-data.sql
 
 ### STS ###
 .apt_generated
