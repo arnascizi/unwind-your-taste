@@ -16,13 +16,13 @@
       <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #4a65a4">
         <div class="container-fluid" role="navigation">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/index.zul">Gallery</a>
+            <a class="navbar-brand" href="/index">Gallery</a>
           </div>
           <ul class="nav navbar-nav">
             <div style="display: inline-block">
               <ul class="nav navbar-nav">
                 <li>
-                  <a class="nav-link" href="/index.zul">Home</a>
+                  <a class="nav-link" href="/index">Home</a>
                 </li>
               </ul>
             </div>

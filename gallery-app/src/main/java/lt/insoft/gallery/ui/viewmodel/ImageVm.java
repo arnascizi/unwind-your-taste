@@ -8,11 +8,9 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import javassist.NotFoundException;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lt.insoft.gallery.ui.view.ImageSmall;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
+import lt.insoft.gallery.ui.view.ImageSmall;
 
-@RequiredArgsConstructor
 public class ImageVm implements Serializable {
     private static final long serialVersionUID = -1373492169780328182L;
 
@@ -20,10 +18,10 @@ public class ImageVm implements Serializable {
     private transient ImageViewHelper imageViewHelper;
 
     @Getter
-    public ImageSmall imageSmall;
+    private ImageSmall imageSmall;
 
     @Getter
-    public List<ImageSmall> imageSmallList;
+    private List<ImageSmall> imageSmallList;
 
     @Init
     public void init() throws NotFoundException {

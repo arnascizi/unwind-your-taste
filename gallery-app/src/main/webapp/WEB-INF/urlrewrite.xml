@@ -7,4 +7,9 @@
     <to>/index.zul</to>
   </rule>
 
+  <rule>
+    <from>^/index$</from>
+    <to>/index.zul</to>
+  </rule>
+
 </urlrewrite>

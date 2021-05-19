@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.repository.ImageRepository;
-import lt.insoft.gallery.model.ImageOld;
+import lt.insoft.gallery.model.Image;
 
 @Service
 @RequiredArgsConstructor
@@ -15,15 +15,15 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    public List<ImageOld> fetchAllImages() {
+    public List<Image> fetchAllImages() {
         return imageRepository.findAll();
     }
 
-    public ImageOld fetchImage(Long id) throws NotFoundException {
+    public Image fetchImage(Long id) throws NotFoundException {
         return imageRepository.findById(id).orElseThrow(() -> new NotFoundException("Such image with id " + id +" is not found!"));
     }
 
-    public void saveImage(ImageOld image) {
+    public void saveImage(Image image) {
         imageRepository.save(image);
     }
 
