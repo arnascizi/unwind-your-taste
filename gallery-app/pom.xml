@@ -11,6 +11,7 @@
   <artifactId>gallery-ui</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>gallery-app</name>
+  <packaging>war</packaging>
   <dependencies>
     <dependency>
       <groupId>lt.insoft.gallery</groupId>
@@ -67,8 +68,32 @@
       <artifactId>jquery</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>popper.js</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>

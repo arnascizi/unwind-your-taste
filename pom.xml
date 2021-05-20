@@ -19,18 +19,23 @@
     <module>gallery-app</module>
   </modules>
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <java.version>1.8</java.version>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.version>3.8.1</maven.compiler.version>
     <zk.version>8.5.0</zk.version>
-    <spring.version>2.4.5</spring.version>
-    <h2.version>1.4.200</h2.version>
-    <postgresql.version>42.2.20</postgresql.version>
-    <lombok.version>1.18.20</lombok.version>
     <urlrewrite.version>4.0.4</urlrewrite.version>
-    <bootstrap.version>4.6.0</bootstrap.version>
-    <bootstrap.jquery.version>3.6.0</bootstrap.jquery.version>
+    <commons.version>3.11</commons.version>
+    <lombok.version>1.18.20</lombok.version>
+    <h2.version>1.4.200</h2.version>
     <hibernate.version>5.4.31.Final</hibernate.version>
     <hibernate.entity.version>5.2.3.Final</hibernate.entity.version>
+    <postgresql.version>42.2.20</postgresql.version>
+    <bootstrap.version>4.6.0</bootstrap.version>
+    <bootstrap.jquery.version>3.6.0</bootstrap.jquery.version>
+    <bootstrap.popper.version>1.12.9-1</bootstrap.popper.version>
+    <spring.version>2.4.5</spring.version>
+    <spring.security.version>2.1.0.RELEASE</spring.security.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -53,11 +58,6 @@
         <groupId>lt.insoft.gallery</groupId>
         <artifactId>gallery-app</artifactId>
         <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-        <version>${spring.version}</version>
       </dependency>
       <dependency>
         <groupId>com.h2database</groupId>
@@ -118,6 +118,16 @@
         <version>${bootstrap.jquery.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>popper.js</artifactId>
+        <version>${bootstrap.popper.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter</artifactId>
         <version>${spring.version}</version>
@@ -127,6 +137,11 @@
         <artifactId>spring-boot-starter-test</artifactId>
         <version>${spring.version}</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+        <version>${spring.security.version}</version>
       </dependency>
       <dependency>
         <groupId>org.hibernate</groupId>
@@ -144,24 +159,32 @@
         <scope>runtime</scope>
         <version>${postgresql.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.version}</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>

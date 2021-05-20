@@ -1,5 +1,6 @@
 package lt.insoft.gallery.ui.helper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,16 +26,15 @@ public class ImageViewHelper {
         return listView;
     }
 
-    public ImageSmall getImageView(Long id) throws NotFoundException {
+    public ImageSmall getImageView(Long id) {
         Image image = imageService.fetchImage(id);
         return image != null ? buildView(image) : null;
     }
 
     private ImageSmall buildView(Image image) {
         ImageSmall view = new ImageSmall();
-
         view.setName(image.getName());
-        view.setUrl(image.getUrl());
+        view.setFile(image.getFile());
         return view;
     }
 }

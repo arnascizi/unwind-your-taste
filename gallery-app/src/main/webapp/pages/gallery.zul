@@ -5,8 +5,10 @@
         xmlns:zul="http://www.zkoss.org/2005/zul"
         xmlns:sh="shadow"
         self="@{define(pageContent)}"
-        >
+        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
   <xh:div class="container mt-5">
-    <h3>HomePage</h3>
+    <sh:forEach items="@load(vm.imageSmallList)">
+      <zul:image class="img-thumbnail mx-1 my-2" style="height: 250px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.helper.ImageToZkImageConverter')" alt="@load(each.name)" />
+    </sh:forEach>
   </xh:div>
 </xh:div>

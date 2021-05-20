@@ -5,8 +5,8 @@
         xmlns:zul="http://www.zkoss.org/2005/zul"
         xmlns:sh="shadow"
         self="@{define(pageContent)}"
-        >
+>
   <xh:div class="container mt-5">
-    <h3>HomePage</h3>
+    <h3>${labels.error}</h3>
   </xh:div>
 </xh:div>

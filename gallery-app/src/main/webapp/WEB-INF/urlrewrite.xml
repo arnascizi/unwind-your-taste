@@ -12,4 +12,18 @@
     <to>/index.zul</to>
   </rule>
 
+  <rule>
+    <from>^/gallery$</from>
+    <to>/pages/gallery.zul</to>
+  </rule>
+
+  <rule>
+    <from>^/upload$</from>
+    <to>/pages/upload.zul</to>
+  </rule>
+
+  <rule>
+    <from>^/login$</from>
+    <to>/pages/login.zul</to>
+  </rule>
 </urlrewrite>
