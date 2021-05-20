@@ -7,10 +7,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
+import lt.insoft.gallery.ui.helper.BCryptEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -21,27 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .usersByUsernameQuery("select username, password, enabled from user_accounts where username = ?")
-                .authoritiesByUsernameQuery("select username, role from user_accounts where username = ?")
-                .dataSource(dataSource)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.jdbcAuthentication().usersByUsernameQuery("select username, password, enabled from user_accounts where username = ?").authoritiesByUsernameQuery(
+                "select username, role from user_accounts where username = ?").dataSource(dataSource).passwordEncoder(BCryptEncoder.encoder());
 
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/gallery").hasRole("ADMIN")
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout");
+        http.csrf().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/gallery").hasRole("ADMIN").and().formLogin().loginPage("/login").and().logout().logoutRequestMatcher(
+                new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout");
 
     }
 }
