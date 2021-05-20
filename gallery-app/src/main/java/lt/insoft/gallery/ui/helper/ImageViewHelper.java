@@ -20,7 +20,7 @@ public class ImageViewHelper {
 
     public List<ImageSmall> getAllImagesView() {
         List<ImageSmall> listView = new ArrayList<>();
-        for (Image image: imageService.fetchAllImages()) {
+        for (Image image : imageService.fetchAllImages()) {
             listView.add(buildView(image));
         }
         return listView;

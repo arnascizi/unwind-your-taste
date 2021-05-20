@@ -2,6 +2,10 @@ CREATE SEQUENCE IF NOT EXISTS tag_id_seq;
 
 CREATE SEQUENCE IF NOT EXISTS image_id_seq;
 
+CREATE SEQUENCE IF NOT EXISTS user_account_id_seq;
+
+CREATE TYPE ROLE AS ENUM ('ROLE_USER', 'ROLE_ADMIN');
+
 CREATE TABLE IF NOT EXISTS image
 (
     id          SERIAL UNIQUE NOT NULL PRIMARY KEY,
@@ -24,21 +28,14 @@ CREATE TABLE IF NOT EXISTS image_tag
     tag_id   BIGINT REFERENCES tag (id)
 );
 
--- CREATE TYPE ROLE AS ENUM ('ROLE_USER','ROLE_ADMIN');
+CREATE TABLE IF NOT EXISTS user_account
+(
+    id       SERIAL UNIQUE NOT NULL PRIMARY KEY,
+    username VARCHAR(50)   NOT NULL,
+    password VARCHAR(255)  NOT NULL,
+    role     ROLE          NOT NULL,
+    enabled  boolean       not null
+);
 
--- CREATE TABLE IF NOT EXISTS author
--- (
---     id         SERIAL       NOT NULL PRIMARY KEY,
---     name       VARCHAR(30)  NOT NULL,
---     username   VARCHAR(30)  NOT NULL UNIQUE,
---     password   VARCHAR(255) NOT NULL,
---     email      VARCHAR(100) NOT NULL UNIQUE,
---     role       ROLE         NOT NULL,
---     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIME
--- );
---
--- INSERT INTO author (id, name, username, password, email, role)
--- VALUES (nextval(author_id_seq.nextval), 'Test', 'Testinis', '123456', 'mail@mail.com', 'ROLE_USER');
---
--- INSERT INTO image (id, name, description, file, author_id)
--- VALUES (nextval(image_id_seq.nextval), 'Waterfall', 'A beautiful waterfall scenery', pg_read_file('C:/gallery/waterfall.jpg')::bytea, 1);
+INSERT INTO user_account (username, password, role, enabled)
+VALUES ('admin', '$2y$12$d4MJlGNUosNplKKctiX8H.mx.eQjApvMOTHlYgnRTTOLVCwzX1Q06 ', 'ROLE_ADMIN', true);

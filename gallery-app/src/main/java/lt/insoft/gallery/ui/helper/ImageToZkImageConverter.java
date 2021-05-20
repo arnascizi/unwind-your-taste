@@ -8,6 +8,7 @@ import org.zkoss.image.AImage;
 import org.zkoss.zul.Image;
 
 public class ImageToZkImageConverter implements Converter<AImage, byte[], Image> {
+
     @Override
     public AImage coerceToUi(byte[] beanProp, Image component, BindContext ctx) {
         try {
