@@ -2,13 +2,13 @@ package lt.insoft.gallery.ui.view;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ImageSmall implements Serializable {
     private static final long serialVersionUID = 803931525124255098L;
 

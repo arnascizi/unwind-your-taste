@@ -13,4 +13,8 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
+
+  <error-page>
+    <location>/pages/error.zul</location>
+  </error-page>
 </web-app>

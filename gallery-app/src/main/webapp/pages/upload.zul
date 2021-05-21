@@ -7,6 +7,8 @@
         self="@{define(pageContent)}"
 >
   <xh:div class="container mt-5">
-    <h3>Upload Page</h3>
+    <h4 class="mt-3 text-muted">${labels.upload}</h4>
+
+
   </xh:div>
 </xh:div>

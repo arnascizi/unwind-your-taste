@@ -7,8 +7,13 @@
         self="@{define(pageContent)}"
         viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
   <xh:div class="container mt-5">
-    <sh:forEach items="@load(vm.imageSmallList)">
-      <zul:image class="img-thumbnail mx-1 my-2" style="height: 250px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.helper.ImageToZkImageConverter')" alt="@load(each.name)" />
-    </sh:forEach>
+    <div class="jumbotron-fluid">
+      <h4 class="mt-3 text-muted">${labels.gallery}</h4>
+      <xh:div class="mt-5">
+        <sh:forEach items="@load(vm.imageSmallList)">
+          <zul:image class="img-thumbnail mx-1 my-2" style="height: 250px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.helper.ImageToZkImageConverter')" />
+        </sh:forEach>
+      </xh:div>
+    </div>
   </xh:div>
 </xh:div>

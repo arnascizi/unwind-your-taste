@@ -7,6 +7,6 @@
         self="@{define(pageContent)}"
 >
   <xh:div class="container mt-5">
-    <h3>${labels.error}</h3>
+    <h4 class="mt-3 text-muted">${labels.error}</h4>
   </xh:div>
 </xh:div>

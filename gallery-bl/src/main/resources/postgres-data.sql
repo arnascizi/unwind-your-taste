@@ -4,22 +4,20 @@ CREATE SEQUENCE IF NOT EXISTS image_id_seq;
 
 CREATE SEQUENCE IF NOT EXISTS user_account_id_seq;
 
-CREATE TYPE ROLE AS ENUM ('ROLE_USER', 'ROLE_ADMIN');
-
 CREATE TABLE IF NOT EXISTS image
 (
     id          SERIAL UNIQUE NOT NULL PRIMARY KEY,
-    name        VARCHAR(60)   NOT NULL,
+    name        VARCHAR       NOT NULL,
     date        TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    quality     VARCHAR(60),
-    description VARCHAR(100),
+    quality     VARCHAR,
+    description VARCHAR,
     file        BYTEA         NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tag
 (
     id   SERIAL UNIQUE NOT NULL PRIMARY KEY,
-    name VARCHAR(20)   NOT NULL
+    name VARCHAR       NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS image_tag
@@ -31,10 +29,10 @@ CREATE TABLE IF NOT EXISTS image_tag
 CREATE TABLE IF NOT EXISTS user_account
 (
     id       SERIAL UNIQUE NOT NULL PRIMARY KEY,
-    username VARCHAR(50)   NOT NULL,
-    password VARCHAR(255)  NOT NULL,
-    role     ROLE          NOT NULL,
-    enabled  boolean       not null
+    username VARCHAR       NOT NULL,
+    password VARCHAR       NOT NULL,
+    role     VARCHAR       NOT NULL,
+    enabled  BOOLEAN       NOT NULL
 );
 
 INSERT INTO user_account (username, password, role, enabled)
