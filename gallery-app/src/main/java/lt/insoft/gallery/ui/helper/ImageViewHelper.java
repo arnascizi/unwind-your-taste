@@ -1,12 +1,10 @@
 package lt.insoft.gallery.ui.helper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.service.ImageService;
 import lt.insoft.gallery.model.Image;
@@ -28,7 +26,7 @@ public class ImageViewHelper {
 
     public ImageSmall getImageView(Long id) {
         Image image = imageService.fetchImage(id);
-        return image != null ? buildView(image) : null;
+        return image != null ? new ImageSmall() : null;
     }
 
     private ImageSmall buildView(Image image) {
