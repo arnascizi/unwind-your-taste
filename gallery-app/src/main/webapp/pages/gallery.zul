@@ -9,6 +9,7 @@
   <xh:div class="container mt-5">
     <div class="jumbotron-fluid">
       <h4 class="mt-3 text-muted">${labels.gallery}</h4>
+      <hr/>
       <xh:div class="mt-5">
         <sh:forEach items="@load(vm.imageSmallList)">
           <zul:image class="img-thumbnail mx-1 my-2" style="height: 250px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')" />

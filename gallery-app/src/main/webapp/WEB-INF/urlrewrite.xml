@@ -8,11 +8,6 @@
   </rule>
 
   <rule>
-    <from>^/index$</from>
-    <to>/index.zul</to>
-  </rule>
-
-  <rule>
     <from>^/gallery$</from>
     <to>/pages/gallery.zul</to>
   </rule>
@@ -26,4 +21,5 @@
     <from>^/login$</from>
     <to>/pages/login.zul</to>
   </rule>
+
 </urlrewrite>

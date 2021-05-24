@@ -2,10 +2,10 @@
         class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #4a65a4">
   <div class="container-fluid" role="navigation">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/index">${labels.title}</a>
+      <a class="navbar-brand" href="/">${labels.title}</a>
     </div>
     <ul class="nav navbar-nav">
-      <ul class="nav navbar-nav">
+      <xh:ul class="nav navbar-nav">
         <li>
           <a class="nav-link" href="/gallery">${labels.gallery}</a>
         </li>
@@ -13,12 +13,13 @@
           <a class="nav-link" href="/upload">${labels.upload}</a>
         </li>
         <li>
+          <a class="nav-link" href="/logout">${labels.log.out}</a>
+        </li>
+        <li>
           <a class="nav-link" href="/login">${labels.login}</a>
         </li>
         <li>
-          <div if="${vm.userLogged}">
-            <div class="nav-link">${vm.username}</div>
-          </div>
+          <a class="nav-link" href="/login">${vm.username}</a>
         </li>
         <li>
           <div class="dropdown">
@@ -31,7 +32,7 @@
             </div>
           </div>
         </li>
-      </ul>
+      </xh:ul>
     </ul>
   </div>
 </xh:header>

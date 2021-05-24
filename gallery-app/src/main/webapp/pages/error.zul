@@ -8,5 +8,6 @@
 >
   <xh:div class="container mt-5">
     <h4 class="mt-3 text-muted">${labels.error}</h4>
+    <hr/>
   </xh:div>
 </xh:div>

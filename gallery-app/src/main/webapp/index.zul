@@ -6,7 +6,8 @@
         xmlns:sh="shadow"
         self="@{define(pageContent)}"
         >
-  <xh:div class="container mt-5">
-    <h3>HomePage</h3>
-  </xh:div>
+  <div class="container mt-5">
+    <h4 class="mt-3 text-muted">${labels.welcome}</h4>
+    <hr/>
+  </div>
 </xh:div>
