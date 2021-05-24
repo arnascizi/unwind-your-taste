@@ -7,6 +7,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import lombok.Getter;
+import lombok.Setter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
 import lt.insoft.gallery.ui.view.ImageDetails;
 
@@ -17,15 +18,15 @@ public class UploadVm implements Serializable {
     private ImageViewHelper helper;
 
     @Getter
+    @Setter
     private ImageDetails imageDetails;
 
     @Init
     public void init() {
-        imageDetails = new ImageDetails();
     }
 
     @Command
-    public void submit() {
-
+    public void doUpload() {
+        helper.saveFullImage(imageDetails);
     }
 }

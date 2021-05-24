@@ -4,54 +4,49 @@
         xmlns:xh="http://www.w3.org/1999/xhtml"
         xmlns:zul="http://www.zkoss.org/2005/zul"
         xmlns:sh="shadow"
+        apply="org.zkoss.bind.BindComposer"
         self="@{define(pageContent)}"
->
-    <zul:div class="container mt-5">
-      <div class="jumbotron-fluid">
-          <h4 class="mt-3 text-muted">${labels.login}</h4>
-          <div class="row justify-content-center">
-            <div class="col-sm-8 col-md-6 col-lg-4">
-              <div class="form-group mt-5">
-                <form action="/login" method="POST">
-                  <sh:if test="${labels.invalid}">
-                    <div class="alert alert-danger">
-                      Invalid username or password.
-                    </div>
-                  </sh:if>
-                  <sh:if test="${labels.logout}">
-                    <div class="alert alert-info">
-                      You have been logged out.
-                    </div>
-                  </sh:if>
-                  <div class="form-group">
-                    <label for="username">${labels.username}</label>:
-                    <input type="text"
-                            id="username"
-                            name="username"
-                            class="form-control"
-                            autofocus="autofocus"
-                            placeholder="${labels.username}" />
-                  </div>
-                  <div class="form-group">
-                    <label for="password">${labels.password}</label>:
-                    <input type="password"
-                            id="password"
-                            name="password"
-                            class="form-control"
-                            placeholder="${labels.password}" />
-                  </div>
-                  <div class="form-group text-center mt-4">
-                    <input type="submit"
-                            name="login-submit"
-                            id="login-submit"
-                            class="btn-sm text-white"
-                            style="background-color: #4a65a4"
-                            value="${labels.login}" />
-                  </div>
-                </form>
+        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.LoginVm')"
+        validationMessages="@id('vmsgs')">
+  <xh:div class="container mt-5">
+    <div class="jumbotron-fluid">
+      <h4 class="mt-3 text-muted">${labels.login}</h4>
+      <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-6 col-lg-4">
+          <div class="form-group mt-5">
+            <form action="/login" method="POST" id="loginform">
+              <div class="form-group">
+                <label for="username">${labels.username}</label>:
+                <zul:textbox type="text"
+                        id="username"
+                        name="username"
+                        value="@load(vm.userView.username) @save(vm.userView.username, before='doSubmit')"
+                        class="form-control"
+                        placeholder="${labels.username}"
+                />
               </div>
-            </div>
+              <div class="form-group">
+                <label for="password">${labels.password}</label>:
+                <zul:textbox type="password"
+                        id="password"
+                        name="password"
+                        value="@load(vm.userView.password) @save(vm.userView.password, before='doSubmit')"
+                        class="form-control"
+                        placeholder="${labels.password}" />
+              </div>
+              <div class="form-group text-center mt-4">
+                <xh:input type="submit"
+                        name="login-submit"
+                        id="loginSubmit"
+                        onclick="@command('doSubmit')"
+                        class="btn-sm text-white"
+                        style="background-color: #4a65a4"
+                        value="${labels.login}" />
+              </div>
+            </form>
           </div>
         </div>
-    </zul:div>
+      </div>
+    </div>
+  </xh:div>
 </xh:div>

@@ -25,7 +25,7 @@ import lombok.Setter;
 @Table(name = "USER_ACCOUNT")
 @Getter
 @Setter
-public class User {
+public class UserAccount {
 
     @Id
     @Column

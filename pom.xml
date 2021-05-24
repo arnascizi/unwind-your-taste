@@ -28,6 +28,7 @@
     <commons.version>3.11</commons.version>
     <lombok.version>1.18.20</lombok.version>
     <h2.version>1.4.200</h2.version>
+    <javax.validation.version>2.0.1.Final</javax.validation.version>
     <hibernate.version>5.4.31.Final</hibernate.version>
     <hibernate.entity.version>5.2.3.Final</hibernate.entity.version>
     <postgresql.version>42.2.20</postgresql.version>
@@ -163,6 +164,11 @@
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>${commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${javax.validation.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

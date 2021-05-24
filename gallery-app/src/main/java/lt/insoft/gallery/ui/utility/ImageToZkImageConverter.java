@@ -1,4 +1,4 @@
-package lt.insoft.gallery.ui.helper;
+package lt.insoft.gallery.ui.utility;
 
 import java.io.IOException;
 
