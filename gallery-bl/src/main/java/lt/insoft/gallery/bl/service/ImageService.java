@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +18,6 @@ import lt.insoft.gallery.model.Image;
 @Service
 @RequiredArgsConstructor
 public class ImageService {
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     private final ImageRepository imageRepository;
 
@@ -32,7 +31,7 @@ public class ImageService {
 
     @Transactional
     public void saveImage(Image image) {
-            imageRepository.save(image);
+        imageRepository.save(image);
     }
 
     public void removeImage(Long id) throws ImageNotFoundException {

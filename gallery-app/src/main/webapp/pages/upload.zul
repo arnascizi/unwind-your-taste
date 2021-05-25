@@ -8,29 +8,32 @@
         viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.UploadVm')">
   <xh:div class="container mt-5">
     <div class="jumbotron-fluid">
-    <h4 class="mt-3 text-muted">${labels.upload}</h4>
-    <hr />
-    <div class="row justify-content-center">
-      <div class="col-sm-8 col-md-6 col-lg-4">
-        <div class="form-group mt-5">
-          <xh:form name="upload" action="/upload">
-            <div class="form-group">
-              <label for="filename">${labels.filename}</label>
-              <xh:input class="form-control" name="fileName" placeholder="${labels.filename}" id="fileName" value="@load(vm.imageDetails.fileName) @save(vm.fileName, before='doUpload')" />
-            </div>
-            <div class="form-group">
-              <label for="description">${labels.description}</label>
-              <xh:textarea class="form-control" name="description" placeholder="${labels.description}" id="description"
-                      content="@load(vm.imageDetails.description) @save(vm.description, before='doUpload')" />
-            </div>
-            <div class="row d-block">
-              <zul:button label="Upload" upload="true" type="submit" class="btn-sm text-white ml-3" style="background-color: #4a65a4">${labels.pick}</zul:button>
-              <zul:button label="submit" type="submit" class="btn-sm text-white float-right mr-3" style="background-color: #4a65a4">${labels.submit}</zul:button>
-            </div>
-          </xh:form>
+      <h4 class="mt-3 text-muted">${labels.upload}</h4>
+      <hr />
+      <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-6 col-lg-4">
+          <div class="form-group mt-5">
+            <xh:form name="upload" action="/upload">
+              <div class="form-group">
+                <label for="filename">${labels.filename}</label>
+                <xh:input class="form-control" name="filename" placeholder="${labels.filename}" id="filename"
+                        value="@load(vm.imageDetails.name) @save(vm.imageDetails.name, before='doUpload')" />
+              </div>
+              <div class="form-group">
+                <label for="description">${labels.description}</label>
+                <xh:textarea class="form-control" name="description" placeholder="${labels.description}" id="description"
+                        content="@load(vm.imageDetails.description) @save(vm.imageDetails.description, before='doUpload')" />
+              </div>
+              <xh:div class="row d-block">
+                <zul:button label="Upload" upload="true, maxsize=-1, multiple=false, native" class="btn-sm text-white ml-3" style="background-color: #4a65a4"
+                        content="@load(vm.imageDetails.image) @save(vm.imageDetails.image, before='doUpload')">${labels.pick}
+                </zul:button>
+                <zul:button label="submit" type="submit" class="btn-sm text-white float-right mr-3" onClick="@command('doUpload')" style="background-color: #4a65a4">${labels.submit}</zul:button>
+              </xh:div>
+            </xh:form>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </xh:div>
 </xh:div>

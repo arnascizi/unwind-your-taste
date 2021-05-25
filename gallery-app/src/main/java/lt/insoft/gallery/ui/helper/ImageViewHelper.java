@@ -31,7 +31,5 @@ public class ImageViewHelper {
     }
 
     public void saveFullImage(ImageDetails imageDetails) {
-        Image newImage = new ImageDetails().createFrom(imageDetails);
-        imageService.saveImage(newImage);
     }
 }

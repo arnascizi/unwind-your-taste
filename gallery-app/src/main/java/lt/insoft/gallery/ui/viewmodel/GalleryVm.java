@@ -10,7 +10,7 @@ import lombok.Getter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
 import lt.insoft.gallery.ui.view.ImageSmall;
 
-public class ImageVm implements Serializable {
+public class GalleryVm implements Serializable {
     private static final long serialVersionUID = -1373492169780328182L;
 
     @WireVariable(rewireOnActivate = true)

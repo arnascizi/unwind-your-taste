@@ -21,7 +21,4 @@ public class ImageDetails implements Serializable {
     private LocalDate uploaded;
     private byte[] image;
 
-    public Image createFrom(ImageDetails details) {
-        return new Image(details.getName(), details.getDescription(), java.time.LocalDateTime.now().toString(), details.getImage());
-    }
 }

@@ -5,7 +5,7 @@
         xmlns:zul="http://www.zkoss.org/2005/zul"
         xmlns:sh="shadow"
         self="@{define(pageContent)}"
-        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
+        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.GalleryVm')">
   <xh:div class="container mt-5">
     <div class="jumbotron-fluid">
       <h4 class="mt-3 text-muted">${labels.gallery}</h4>

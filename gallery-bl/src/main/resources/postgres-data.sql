@@ -37,3 +37,4 @@ CREATE TABLE IF NOT EXISTS user_account
 
 INSERT INTO user_account (username, password, role, enabled)
 VALUES ('admin', '$2y$12$d4MJlGNUosNplKKctiX8H.mx.eQjApvMOTHlYgnRTTOLVCwzX1Q06 ', 'ROLE_ADMIN', true);
+
