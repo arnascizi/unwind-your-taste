@@ -26,9 +26,9 @@
               </div>
               <xh:div class="row d-block">
                 <zul:button label="Upload" upload="true, maxsize=-1, multiple=false, native" class="btn-sm text-white ml-3" style="background-color: #4a65a4"
-                        content="@load(vm.imageDetails.image) @save(vm.imageDetails.image, before='doUpload')">${labels.pick}
+                        content="@load(vm.imageDetails.image) @save(vm.imageDetails.image, before='doUpload')" onUpload="@command('doUpload')">${labels.pick}
                 </zul:button>
-                <zul:button label="submit" type="submit" class="btn-sm text-white float-right mr-3" onClick="@command('doUpload')" style="background-color: #4a65a4">${labels.submit}</zul:button>
+                <zul:button label="submit" type="submit" class="btn-sm text-white float-right mr-3" onClick="@command('doSave')" style="background-color: #4a65a4">${labels.submit}</zul:button>
               </xh:div>
             </xh:form>
           </div>

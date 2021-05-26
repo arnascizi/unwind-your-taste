@@ -12,11 +12,14 @@
         <li>
           <a class="nav-link" href="/upload">${labels.upload}</a>
         </li>
-        <li>
+        <li if="${vm.isUserLogged()}">
           <a class="nav-link" href="/logout">${labels.log.out}</a>
         </li>
-        <li>
+        <li unless="${vm.isUserLogged()}">
           <a class="nav-link" href="/login">${labels.login}</a>
+        </li>
+        <li>
+          <a class="nav-link" href="/">${vm.username}</a>
         </li>
         <li>
           <a class="nav-link" href="/login">${vm.username}</a>

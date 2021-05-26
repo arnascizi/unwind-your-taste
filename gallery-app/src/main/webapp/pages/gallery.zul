@@ -12,7 +12,7 @@
       <hr/>
       <xh:div class="mt-5">
         <sh:forEach items="@load(vm.imageSmallList)">
-          <zul:image class="img-thumbnail mx-1 my-2" style="height: 250px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')" />
+          <zul:image class="img-thumbnail mx-1 my-2" style="height: 250px; width: 300px" content="@load(each.file) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')" />
         </sh:forEach>
       </xh:div>
     </div>

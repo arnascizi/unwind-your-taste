@@ -1,5 +1,8 @@
 package lt.insoft.gallery.bl.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,7 +12,7 @@ import lt.insoft.gallery.model.UserAccount;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -18,7 +21,14 @@ public class UserService {
         userRepository.save(userAccount);
     }
 
-    public UserAccount getUser(String username) {
-        return userRepository.findByUsername(username);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserAccount account = userRepository.findByUsername(username);
+
+        if (account == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        return new UserDetailsPrincipal(account);
     }
 }

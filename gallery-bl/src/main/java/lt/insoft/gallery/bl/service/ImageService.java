@@ -2,11 +2,6 @@ package lt.insoft.gallery.bl.service;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.validation.constraints.NotNull;
-
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +12,7 @@ import lt.insoft.gallery.model.Image;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ImageService {
 
     private final ImageRepository imageRepository;
@@ -29,7 +25,6 @@ public class ImageService {
         return imageRepository.findById(id).orElseThrow(() -> new ImageNotFoundException(id));
     }
 
-    @Transactional
     public void saveImage(Image image) {
         imageRepository.save(image);
     }

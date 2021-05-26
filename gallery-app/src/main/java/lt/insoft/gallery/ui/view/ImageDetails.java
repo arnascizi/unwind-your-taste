@@ -1,13 +1,12 @@
 package lt.insoft.gallery.ui.view;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lt.insoft.gallery.model.Image;
 
 @Getter
 @Setter
@@ -18,7 +17,7 @@ public class ImageDetails implements Serializable {
 
     private String name;
     private String description;
-    private LocalDate uploaded;
+    private LocalDateTime uploaded;
     private byte[] image;
 
 }

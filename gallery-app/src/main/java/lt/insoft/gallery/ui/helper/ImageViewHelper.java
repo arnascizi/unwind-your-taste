@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.zkoss.util.media.Media;
 
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.service.ImageService;
 import lt.insoft.gallery.model.Image;
+import lt.insoft.gallery.ui.utility.ImageExtract;
 import lt.insoft.gallery.ui.view.ImageDetails;
 import lt.insoft.gallery.ui.view.ImageSmall;
 
@@ -30,6 +32,20 @@ public class ImageViewHelper {
         return image != null ? new ImageSmall().buildFrom(image) : null;
     }
 
-    public void saveFullImage(ImageDetails imageDetails) {
+    public ImageDetails getImageDetails(Media media ) {
+        return ImageExtract.get(media);
     }
+
+    public void save(ImageDetails imageDetails) {
+        imageService.saveImage(buildImage(imageDetails));
+    }
+
+    private Image buildImage(ImageDetails imageDetails) {
+        Image result = new Image();
+        result.setName(imageDetails.getName());
+        result.setDescription(imageDetails.getDescription());
+        result.setFile(imageDetails.getImage());
+        return result;
+    }
+
 }

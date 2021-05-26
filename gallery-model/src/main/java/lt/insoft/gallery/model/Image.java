@@ -1,8 +1,6 @@
 package lt.insoft.gallery.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -28,6 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Image {
 
     @Id
@@ -51,7 +49,8 @@ public class Image {
     @JoinTable(name = "IMAGE_TAG", joinColumns = @JoinColumn(name = "IMAGE_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
     private Set<Tag> tags;
 
-    public Image(String name, LocalDateTime date, String description, byte[] file) {
+    public Image(Long id, String name, LocalDateTime date, String description, byte[] file) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.date = date;

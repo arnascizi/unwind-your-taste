@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.ContextParam;
+import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import lombok.Getter;
@@ -24,12 +28,18 @@ public class UploadVm implements Serializable {
     private ImageDetails imageDetails;
 
     @Init
-    public void init() throws IOException {
-        imageDetails = new ImageDetails("Waterfall", "A short description",  java.time.LocalDate.now(), ImageToBinary.convertToBinary("C:/gallery/waterfall.jpg"));
+    public void init() {
+        imageDetails = new ImageDetails();
     }
 
     @Command
-    public void doUpload() {
-        imageViewHelper.saveFullImage(imageDetails);
+    public void doUpload(@ContextParam(ContextType.TRIGGER_EVENT)UploadEvent uploadEvent) {
+        Media media = uploadEvent.getMedia();
+        imageDetails = imageViewHelper.getImageDetails(media);
+    }
+
+    @Command
+    public void doSave() {
+        imageViewHelper.save(imageDetails);
     }
 }
