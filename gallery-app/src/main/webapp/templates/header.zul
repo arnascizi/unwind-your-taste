@@ -1,5 +1,6 @@
-<xh:header xmlns="native" xmlns:xh="xhtml" role="header" xmlns:bs="http://getbootstrap.com/bs" xmlns:sh="shadow" xmlns:zul="http://www.zkoss.org/2005/zul"
-        class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #4a65a4">
+<xh:header xmlns="native" xmlns:xh="xhtml" role="header"
+        class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #4a65a4"
+        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.TemplateVm')">
   <div class="container-fluid" role="navigation">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">${labels.title}</a>
@@ -12,22 +13,16 @@
         <li>
           <a class="nav-link" href="/upload">${labels.upload}</a>
         </li>
-        <li if="${vm.isUserLogged()}">
+        <li if="${vm.isUserLogged() == 'true'}">
           <a class="nav-link" href="/logout">${labels.log.out}</a>
         </li>
-        <li unless="${vm.isUserLogged()}">
+        <li if="${vm.isUserLogged() == 'false'}">
           <a class="nav-link" href="/login">${labels.login}</a>
         </li>
         <li>
-          <a class="nav-link" href="/">${vm.username}</a>
-        </li>
-        <li>
-          <a class="nav-link" href="/login">${vm.username}</a>
-        </li>
-        <li>
           <div class="dropdown">
-            <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              ${vm.currentLanguage}
+            <button class="btn dropdown-toggle nav-link text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              ${vm.username} (${vm.currentLanguage})
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <xh:a class="dropdown-item" href="javascript:;" onClick="@command('doSetLocaleLt')">LT</xh:a>

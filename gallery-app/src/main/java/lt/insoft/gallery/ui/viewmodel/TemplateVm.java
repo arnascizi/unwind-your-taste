@@ -30,9 +30,7 @@ public class TemplateVm implements Serializable {
     @Init
     public void init() {
         LoggedUser loggedUser = userViewHelper.getLoggedUser();
-        if (loggedUser != null) {
-            username = loggedUser.getUsername();
-        }
+        username = loggedUser != null ? loggedUser.getUsername() : "";
     }
 
     @Command

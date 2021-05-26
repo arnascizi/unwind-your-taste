@@ -36,6 +36,7 @@
     <bootstrap.version>4.6.0</bootstrap.version>
     <bootstrap.jquery.version>3.6.0</bootstrap.jquery.version>
     <bootstrap.popper.version>1.12.9-1</bootstrap.popper.version>
+    <webjars.locator.version>0.40</webjars.locator.version>
     <spring.version>2.4.5</spring.version>
     <spring.security.version>2.1.0.RELEASE</spring.security.version>
   </properties>
@@ -113,6 +114,11 @@
         <groupId>org.webjars</groupId>
         <artifactId>bootstrap</artifactId>
         <version>${bootstrap.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>webjars-locator</artifactId>
+        <version>${webjars.locator.version}</version>
       </dependency>
       <dependency>
         <groupId>org.webjars</groupId>

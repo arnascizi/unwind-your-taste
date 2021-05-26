@@ -19,7 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
@@ -28,8 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/upload").hasRole("ADMIN").and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").and().logout().logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+        http.headers().frameOptions().disable();
+        http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/upload").hasRole("ADMIN").and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").and().logout()
+                .logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
     @Bean

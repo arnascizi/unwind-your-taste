@@ -20,4 +20,8 @@ public class ImageDetails implements Serializable {
     private LocalDateTime uploaded;
     private byte[] image;
 
+    public ImageDetails(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
