@@ -1,20 +1,17 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
 <?page complete="true"?>
-<xh:div xmlns="native"
-        xmlns:xh="http://www.w3.org/1999/xhtml"
-        xmlns:zul="http://www.zkoss.org/2005/zul"
-        xmlns:sh="shadow"
-        self="@{define(pageContent)}"
+<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.GalleryVm')">
-  <xh:div class="container mt-5">
+  <div class="container mt-5">
     <div class="jumbotron-fluid">
       <h4 class="mt-3 text-muted">${labels.gallery}</h4>
-      <hr/>
+      <hr />
       <xh:div class="mt-5">
         <sh:forEach items="@load(vm.imageSmallList)">
-          <zul:image class="img-thumbnail mx-1 my-2" style="height: 150px; width: 200px" content="@load(each.file) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')" />
+          <zul:image class="img-thumbnail m-1" style="height: 150px; width: 200px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
+                  onClick="@command('doSelectImage', image=each)" />
         </sh:forEach>
       </xh:div>
     </div>
-  </xh:div>
+  </div>
 </xh:div>

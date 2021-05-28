@@ -15,10 +15,11 @@ import lt.insoft.gallery.model.Image;
 public class ImageSmall implements Serializable {
     private static final long serialVersionUID = 803931525124255098L;
 
+    private Long id;
     private String name;
     private byte[] file;
 
     public ImageSmall buildFrom(Image image) {
-        return new ImageSmall(image.getName(), image.getFile());
+        return new ImageSmall(image.getId(), image.getName(), image.getFile());
     }
 }

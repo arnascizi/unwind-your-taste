@@ -27,9 +27,9 @@ public class ImageViewHelper {
         return listView;
     }
 
-    public ImageSmall getImageView(Long id) {
+    public ImageDetails getImageView(Long id) {
         Image image = imageService.fetchImage(id);
-        return image != null ? new ImageSmall().buildFrom(image) : null;
+        return image != null ? new ImageDetails().buildFrom(image) : null;
     }
 
     public ImageDetails getImageDetails(Media media ) {
@@ -38,6 +38,10 @@ public class ImageViewHelper {
 
     public void save(ImageDetails imageDetails) {
         imageService.saveImage(buildImage(imageDetails));
+    }
+
+    public void delete(ImageSmall imageSmall) {
+        imageService.removeImage(imageSmall.getId());
     }
 
     private Image buildImage(ImageDetails imageDetails) {

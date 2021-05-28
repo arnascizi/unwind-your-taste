@@ -1,8 +1,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-
 <!DOCTYPE html>
-<xh:html xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" >
+<xh:html xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -15,12 +14,10 @@
   </head>
   <xh:body viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.TemplateVm')">
     <xh:div class="header-wrapper">
-      <zul:apply templateURI="/templates/header.zul"/>
+      <zul:apply templateURI="/templates/header.zul" />
     </xh:div>
-
     <div class="content-wrapper">
       <xh:div self="@{insert(pageContent)}" />
     </div>
-
   </xh:body>
 </xh:html>

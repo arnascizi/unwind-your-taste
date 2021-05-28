@@ -1,17 +1,14 @@
 package lt.insoft.gallery.ui.viewmodel;
 
-import java.awt.image.RenderedImage;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
-import org.zkoss.bind.annotation.ContextParam;
-import org.zkoss.bind.annotation.ContextType;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.util.media.Media;
-import org.zkoss.zk.ui.event.UploadEvent;
-import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 import lombok.Getter;
@@ -23,7 +20,7 @@ public class UploadVm implements Serializable {
     private static final long serialVersionUID = 6856564609159631967L;
 
     @WireVariable(rewireOnActivate = true)
-    private ImageViewHelper imageViewHelper;
+    private transient ImageViewHelper imageViewHelper;
 
     @Getter
     @Setter
@@ -43,7 +40,7 @@ public class UploadVm implements Serializable {
         try {
             imageDetails.setName(image.getName());
             imageDetails.setDescription(image.getFormat());
-            imageDetails.setUploaded(java.time.LocalDateTime.now());
+            imageDetails.setUploaded(LocalDateTime.now());
             imageDetails.setImage(image.getByteData());
         } catch (Exception e) {
             Messagebox.show(e.toString());
@@ -52,6 +49,11 @@ public class UploadVm implements Serializable {
 
     @Command
     public void doSave() {
+        try {
             imageViewHelper.save(imageDetails);
+            Clients.alert("Success!", "Success!", "INFORMATION");
+        } catch (Exception e) {
+            Clients.alert("Failed!", "Failed","ERROR");
+        }
     }
 }

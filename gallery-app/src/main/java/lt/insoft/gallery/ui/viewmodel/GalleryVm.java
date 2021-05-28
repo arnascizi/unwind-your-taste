@@ -1,8 +1,11 @@
 package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
@@ -22,6 +25,11 @@ public class GalleryVm implements Serializable {
     @Init
     public void init() {
         imageSmallList = imageViewHelper.getAllImagesView();
+    }
+
+    @Command
+    public void doSelectImage(@BindingParam("image") ImageSmall imageSmall) {
+        // imageViewHelper.delete(imageSmall);
     }
 }
 

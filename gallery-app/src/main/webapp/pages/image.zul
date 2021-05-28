@@ -1,0 +1,24 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
+<?page complete="true"?>
+<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
+  <div class="container mt-5">
+    <div class="jumbotron-fluid">
+      <h4 class="mt-3 text-muted">${labels.gallery}</h4>
+      <hr />
+      <div class="mt-5">
+        <div class="container">
+          <div class="card">
+            <zul:image class="card-img-top" content="@load(vm.imageDetails.image) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')" />
+            <div class="card-body">
+              <xh:h5 class="card-title" content="@load(vm.imageDetails.name)">${vm.imageDetails.name}
+                <xh:span class="text-small text-muted float-right" content="@load(vm.imageDetails.uploaded)">${vm.imageDetails.uploaded}</xh:span>
+              </xh:h5>
+              <xh:p class="card-text" content="@load(vm.imageDetails.description)">${vm.imageDetails.description}</xh:p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</xh:div>

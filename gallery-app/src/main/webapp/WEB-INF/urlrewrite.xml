@@ -22,4 +22,9 @@
     <to>/pages/login.zul</to>
   </rule>
 
+  <rule>
+    <from>^/image$</from>
+    <to>/pages/image.zul</to>
+  </rule>
+
 </urlrewrite>
