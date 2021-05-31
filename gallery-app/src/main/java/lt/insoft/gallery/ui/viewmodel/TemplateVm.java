@@ -24,7 +24,6 @@ public class TemplateVm implements Serializable {
     private transient UserViewHelper userViewHelper;
 
     @Getter
-    @Setter
     private String username;
 
     @Init

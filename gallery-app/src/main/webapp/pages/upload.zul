@@ -9,7 +9,7 @@
       <div class="row justify-content-center">
         <div class="col-sm-8 col-md-6 col-lg-4">
           <div class="form-group mt-5">
-            <xh:form name="upload" action="/upload">
+            <form name="upload" action="/upload">
               <div class="form-group">
                 <label for="filename">${labels.filename}</label>
                 <zul:textbox class="form-control" name="filename" placeholder="${labels.filename}" id="filename" value="@load(vm.imageDetails.name, after={'doUpload'})" />
@@ -22,7 +22,7 @@
                 <zul:button label="Upload" upload="true" class="btn-sm text-white ml-3" style="background-color: #4a65a4" onUpload="@command('doUpload', image=event.media)">${labels.pick}</zul:button>
                 <zul:button label="submit" class="btn-sm text-white float-right mr-3" onClick="@command('doSave')" style="background-color: #4a65a4">${labels.submit}</zul:button>
               </div>
-            </xh:form>
+            </form>
           </div>
         </div>
       </div>

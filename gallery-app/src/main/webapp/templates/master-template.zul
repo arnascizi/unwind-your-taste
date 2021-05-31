@@ -13,9 +13,9 @@
     <title>ZK fw gallery app</title>
   </head>
   <xh:body viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.TemplateVm')">
-    <xh:div class="header-wrapper">
+    <div class="header-wrapper">
       <zul:apply templateURI="/templates/header.zul" />
-    </xh:div>
+    </div>
     <div class="content-wrapper">
       <xh:div self="@{insert(pageContent)}" />
     </div>

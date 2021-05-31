@@ -13,7 +13,7 @@ import lt.insoft.gallery.model.Image;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ImageService {
+public class ImageService{
 
     private final ImageRepository imageRepository;
 

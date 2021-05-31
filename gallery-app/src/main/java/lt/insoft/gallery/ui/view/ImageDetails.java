@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lt.insoft.gallery.model.Image;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ImageDetails implements Serializable {
     private static final long serialVersionUID = -143346528840314787L;
 
@@ -21,13 +22,4 @@ public class ImageDetails implements Serializable {
     private String description;
     private LocalDateTime uploaded;
     private byte[] image;
-
-    public ImageDetails(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public ImageDetails buildFrom(Image image) {
-        return new ImageDetails(image.getId(), image.getName(), image.getDescription(), image.getDate(), getImage());
-    }
 }

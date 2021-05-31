@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 import lt.insoft.gallery.model.Image;
 
+@Repository
 public interface ImageRepository extends JpaRepository<Image, Long> {}

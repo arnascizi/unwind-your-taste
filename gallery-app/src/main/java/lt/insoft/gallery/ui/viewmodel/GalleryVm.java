@@ -1,7 +1,6 @@
 package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 import org.zkoss.bind.annotation.BindingParam;
@@ -11,7 +10,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import lombok.Getter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
-import lt.insoft.gallery.ui.view.ImageSmall;
+import lt.insoft.gallery.ui.view.ImageThumbnail;
 
 public class GalleryVm implements Serializable {
     private static final long serialVersionUID = -1373492169780328182L;
@@ -20,16 +19,16 @@ public class GalleryVm implements Serializable {
     private transient ImageViewHelper imageViewHelper;
 
     @Getter
-    private List<ImageSmall> imageSmallList;
+    private List<ImageThumbnail> imageThumbnailList;
 
     @Init
     public void init() {
-        imageSmallList = imageViewHelper.getAllImagesView();
+        imageThumbnailList = imageViewHelper.getAllImagesThumbnailsView();
     }
 
     @Command
-    public void doSelectImage(@BindingParam("image") ImageSmall imageSmall) {
-        // imageViewHelper.delete(imageSmall);
+    public void doSelectImage(@BindingParam("image") ImageThumbnail imageThumbnail) {
+        imageViewHelper.delete(imageThumbnail);
     }
 }
 
