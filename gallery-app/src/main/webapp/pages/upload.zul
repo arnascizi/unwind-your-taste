@@ -12,11 +12,17 @@
             <form name="upload" action="/upload">
               <div class="form-group">
                 <label for="filename">${labels.filename}</label>
-                <zul:textbox class="form-control" name="filename" placeholder="${labels.filename}" id="filename" value="@load(vm.imageDetails.name, after={'doUpload'})" />
+                <zul:textbox class="form-control" name="filename" placeholder="${labels.filename}" id="filename" value="@load(vm.imageDetails.fileName, after={'doUpload'})" readonly="true" />
+              </div>
+              <div class="form-group">
+                <label for="imagename">${labels.imagename}</label>
+                <zul:textbox class="form-control" name="imagename" placeholder="${labels.imagename}" id="imagename"
+                        value="@load(vm.imageDetails.name, after={'doUpload'}) @save(vm.imageDetails.name, before={'doSave'})" />
               </div>
               <div class="form-group">
                 <label for="description">${labels.description}</label>
-                <zul:textbox class="form-control" name="description" placeholder="${labels.description}" id="description" value="@load(vm.imageDetails.description, after={'doUpload'})" />
+                <zul:textbox class="form-control" name="description" placeholder="${labels.description}" id="description"
+                        value="@load(vm.imageDetails.description, after={'doUpload'}) @save(vm.imageDetails.description, before={'doSave'})" />
               </div>
               <div class="row d-block">
                 <zul:button label="Upload" upload="true" class="btn-sm text-white ml-3" style="background-color: #4a65a4" onUpload="@command('doUpload', image=event.media)">${labels.pick}</zul:button>

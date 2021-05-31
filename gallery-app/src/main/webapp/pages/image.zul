@@ -4,7 +4,7 @@
         viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.ImageVm')">
   <div class="container mt-5">
     <div class="jumbotron-fluid">
-      <h4 class="mt-3 text-muted">${labels.gallery}</h4>
+      <xh:h4 class="mt-3 text-muted" content="@load(vm.imageDetails.name)">${vm.imageDetails.name}</xh:h4>
       <hr />
       <div class="mt-5">
         <div class="container">

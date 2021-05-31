@@ -1,18 +1,22 @@
 package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
+import org.exolab.castor.types.DateTime;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 import lombok.Getter;
-import lombok.Setter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
 import lt.insoft.gallery.ui.view.ImageDetails;
 
@@ -23,27 +27,24 @@ public class UploadVm implements Serializable {
     private transient ImageViewHelper imageViewHelper;
 
     @Getter
-    @Setter
     private ImageDetails imageDetails;
-
-    @Getter
-    @Setter
-    private boolean uploadSuccessful;
 
     @Init
     public void init() {
-        imageDetails = new ImageDetails();
     }
 
     @Command
     public void doUpload(@BindingParam("image") Media image) {
-        try {
-            imageDetails.setName(image.getName());
-            imageDetails.setDescription(image.getFormat());
-            imageDetails.setUploaded(LocalDateTime.now());
-            imageDetails.setImage(image.getByteData());
-        } catch (Exception e) {
-            Messagebox.show(e.toString());
+        if (image.getContentType().contains("image")) {
+            try {
+                imageDetails = new ImageDetails().builder().name(image.getName().substring(0, image.getName().lastIndexOf("."))).fileName(
+                        image.getName().substring(0, image.getName().lastIndexOf("."))).description(image.getContentType()).uploaded(LocalDateTime.now()).image(image.getByteData()).thumbnail(
+                        imageViewHelper.createThumbnail(image.getByteData(), image.getContentType().replace("image/", ""))).build();
+            } catch (Exception e) {
+                Messagebox.show(e.toString());
+            }
+        } else {
+            Messagebox.show("Wrong file type", "Warning", Messagebox.OK, Messagebox.ERROR);
         }
     }
 
@@ -51,9 +52,13 @@ public class UploadVm implements Serializable {
     public void doSave() {
         try {
             imageViewHelper.save(imageDetails);
-            Clients.alert("Success!", "Success!", "INFORMATION");
+            Messagebox.show("Image was successfully saved!", "Information", Messagebox.OK, Messagebox.INFORMATION, event -> {
+                if (event.getName().equals("onOK")) {
+                    Executions.sendRedirect("/gallery");
+                }
+            });
         } catch (Exception e) {
-            Clients.alert("Failed!", "Failed","ERROR");
+            Messagebox.show("Unable to save the image!", "Warning", Messagebox.OK, Messagebox.ERROR);
         }
     }
 }

@@ -39,6 +39,9 @@ public class Image {
     @Column
     private String name;
 
+    @Column(name = "FILE_NAME")
+    private String fileName;
+
     @Column
     private String description;
 
@@ -46,7 +49,10 @@ public class Image {
     private LocalDateTime date;
 
     @Column
-    private byte[] file;
+    private byte[] image;
+
+    @Column
+    private byte[] thumbnail;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "IMAGE_TAG", joinColumns = @JoinColumn(name = "IMAGE_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID"))

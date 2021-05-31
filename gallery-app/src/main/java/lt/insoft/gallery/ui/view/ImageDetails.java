@@ -19,7 +19,9 @@ public class ImageDetails implements Serializable {
 
     private Long id;
     private String name;
+    private String fileName;
     private String description;
     private LocalDateTime uploaded;
     private byte[] image;
+    private byte[] thumbnail;
 }

@@ -7,8 +7,8 @@
       <h4 class="mt-3 text-muted">${labels.gallery}</h4>
       <hr />
       <xh:div class="mt-5">
-        <sh:forEach items="@load(vm.imageSmallList)">
-          <zul:image class="img-thumbnail m-1" style="height: 150px; width: 200px;" content="@load(each.file) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
+        <sh:forEach items="@bind(vm.imageThumbnailList)">
+          <zul:image class="img-thumbnail m-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
                   onClick="@command('doSelectImage', image=each)" />
         </sh:forEach>
       </xh:div>

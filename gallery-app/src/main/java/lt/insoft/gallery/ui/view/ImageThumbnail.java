@@ -18,5 +18,5 @@ public class ImageThumbnail implements Serializable {
 
     private Long id;
     private String name;
-    private byte[] file;
+    private byte[] thumbnail;
 }

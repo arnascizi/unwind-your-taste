@@ -23,6 +23,6 @@ public class ImageVm implements Serializable {
 
     @Init
     public void init(@QueryParam("id") Long id) {
-        imageDetails = imageViewHelper.getDetailedImageView(5L);
+        imageDetails = imageViewHelper.getDetailedImageView(27L);
     }
 }

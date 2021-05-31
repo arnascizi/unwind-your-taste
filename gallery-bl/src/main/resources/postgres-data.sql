@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS image
 (
     id          SERIAL UNIQUE NOT NULL PRIMARY KEY,
     name        VARCHAR       NOT NULL,
-    date        TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    quality     VARCHAR,
+    date        TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     description VARCHAR,
-    file        BYTEA         NOT NULL
+    image        BYTEA         NOT NULL,
+    thumbnail        BYTEA         NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tag

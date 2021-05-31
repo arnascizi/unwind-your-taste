@@ -28,8 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.headers().frameOptions().disable();
-        http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/upload").hasRole("ADMIN").and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").and().logout()
+        http.authorizeRequests().antMatchers("/").permitAll().and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").and().logout()
                 .logoutUrl("/logout").logoutSuccessUrl("/");
+        // .antMatchers("/upload").hasRole("ADMIN")
     }
 
     @Bean
