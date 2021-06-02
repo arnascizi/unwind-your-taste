@@ -7,26 +7,48 @@
       <h4 class="mt-3 text-muted">${labels.upload}</h4>
       <hr />
       <div class="row justify-content-center">
-        <div class="col-sm-8 col-md-6 col-lg-4">
+        <div class="col-sm-8 col-md-6 col-lg-8">
           <div class="form-group mt-5">
             <form name="upload" action="/upload">
-              <div class="form-group">
-                <label for="filename">${labels.filename}</label>
-                <zul:textbox class="form-control" name="filename" placeholder="${labels.filename}" id="filename" value="@load(vm.imageDetails.fileName, after={'doUpload'})" readonly="true" />
-              </div>
-              <div class="form-group">
-                <label for="imagename">${labels.imagename}</label>
-                <zul:textbox class="form-control" name="imagename" placeholder="${labels.imagename}" id="imagename"
-                        value="@load(vm.imageDetails.name, after={'doUpload'}) @save(vm.imageDetails.name, before={'doSave'})" />
-              </div>
-              <div class="form-group">
-                <label for="description">${labels.description}</label>
-                <zul:textbox class="form-control" name="description" placeholder="${labels.description}" id="description"
-                        value="@load(vm.imageDetails.description, after={'doUpload'}) @save(vm.imageDetails.description, before={'doSave'})" />
-              </div>
-              <div class="row d-block">
-                <zul:button label="Upload" upload="true" class="btn-sm text-white ml-3" style="background-color: #4a65a4" onUpload="@command('doUpload', image=event.media)">${labels.pick}</zul:button>
-                <zul:button label="submit" class="btn-sm text-white float-right mr-3" onClick="@command('doSave')" style="background-color: #4a65a4">${labels.submit}</zul:button>
+              <div class="row">
+                <div class="col-4">
+                  <label for="imagethumb">${labels.imagethumb}</label>
+                  <zul:image name="@load(vm.imageDetails.name)" style="width: 200px; height: 150px;" id="imagethumb" class="img-thumbnail"
+                          content="@load(vm.imageDetails.thumbnail, after={'doUpload'}) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')" />
+                </div>
+                <div class="col-8">
+                  <div class="form-group input-group-sm">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text text-muted" for="filename">${labels.filename}</label>
+                      <zul:textbox class="form-control" name="filename" id="filename" value="@load(vm.imageDetails.fileName, after={'doUpload'})" readonly="true" />
+                    </div>
+                  </div>
+                  <div class="form-group input-group-sm">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text text-muted" for="fileType">${labels.filetype}</label>
+                      <zul:textbox class="form-control" name="fileType" id="fileType"
+                              value="@load(vm.imageDetails.fileType, after={'doUpload'}) @save(vm.imageDetails.fileType, before={'doSave'})" readonly="true" />
+                    </div>
+                  </div>
+                  <div class="form-group input-group-sm">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text text-muted" for="imageName">${labels.imagename}</label>
+                      <zul:textbox class="form-control" name="imageName" id="imageName"
+                              value="@load(vm.imageDetails.name, after={'doUpload'}) @save(vm.imageDetails.name, before={'doSave'})" />
+                    </div>
+                  </div>
+                  <div class="form-group input-group-sm">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text text-muted" for="description">${labels.description}</label>
+                      <zul:textbox class="form-control" name="description" id="description"
+                              value="@load(vm.imageDetails.description, after={'doUpload'}) @save(vm.imageDetails.description, before={'doSave'})" />
+                    </div>
+                  </div>
+                  <div class="row d-block">
+                    <zul:button label="${labels.pick}" upload="true" class="btn-sm text-white ml-3" style="background-color: #4a65a4" onUpload="@command('doUpload', image=event.media)" />
+                    <zul:button label="${labels.submit}" class="btn-sm text-white float-right mr-3" onClick="@command('doSave')" style="background-color: #4a65a4" />
+                  </div>
+                </div>
               </div>
             </form>
           </div>

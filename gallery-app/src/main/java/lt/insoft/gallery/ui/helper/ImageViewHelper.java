@@ -29,7 +29,7 @@ public class ImageViewHelper {
     public List<ImageThumbnail> getAllImagesThumbnailsView() {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.fetchAllImages()) {
-            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getName()).thumbnail(image.getThumbnail()).build());
+            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
     }
@@ -43,8 +43,8 @@ public class ImageViewHelper {
         imageService.saveImage(Image.builder().name(imageDetails.getName()).fileName(imageDetails.getFileName()).description(imageDetails.getDescription()).image(imageDetails.getImage()).thumbnail(imageDetails.getThumbnail()).build());
     }
 
-    public void delete(ImageThumbnail imageThumbnail) {
-        imageService.removeImage(imageThumbnail.getId());
+    public void delete(ImageDetails imageDetails) {
+        imageService.removeImage(imageDetails.getId());
     }
 
     public byte[] createThumbnail(byte[] image, String fileType) throws IOException {

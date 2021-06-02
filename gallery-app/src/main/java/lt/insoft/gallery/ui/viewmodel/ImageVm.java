@@ -2,9 +2,15 @@ package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
 
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.QueryParam;
+import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Messagebox;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +28,21 @@ public class ImageVm implements Serializable {
     private ImageDetails imageDetails;
 
     @Init
-    public void init(@QueryParam("id") Long id) {
-        imageDetails = imageViewHelper.getDetailedImageView(27L);
+    public void init(@QueryParam("id") String id) {
+        Executions.getCurrent().getParameter("id");
+        imageDetails = imageViewHelper.getDetailedImageView(Long.parseLong(id));
+    }
+
+    @Command
+    public void doDelete() {
+        Messagebox.show("Are you sure you want to delete " + imageDetails.getName() + "?", "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
+                if (event.getName().equals("onOK")) {
+                    imageViewHelper.delete(imageDetails);
+                    Clients.alert("Image deleted!");
+                    Executions.sendRedirect("/gallery");
+                } else {
+                    Clients.alert("Deletion canceled!");
+                }
+            });
     }
 }

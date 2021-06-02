@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN" "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
-<urlrewrite>
+<urlrewrite use-query-string="true">
 
   <rule>
     <from>^/$</from>
@@ -23,7 +23,8 @@
   </rule>
 
   <rule>
-    <from>^/image$</from>
+    <from>^/image?(.*)</from>
+    <set name="id">$1</set>
     <to>/pages/image.zul</to>
   </rule>
 

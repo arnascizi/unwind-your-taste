@@ -2,6 +2,7 @@ package lt.insoft.gallery.bl.service;
 
 import java.util.List;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

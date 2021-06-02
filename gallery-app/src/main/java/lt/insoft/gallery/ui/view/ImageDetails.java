@@ -1,7 +1,6 @@
 package lt.insoft.gallery.ui.view;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +20,7 @@ public class ImageDetails implements Serializable {
     private String name;
     private String fileName;
     private String description;
-    private LocalDateTime uploaded;
+    private String fileType;
     private byte[] image;
     private byte[] thumbnail;
 }

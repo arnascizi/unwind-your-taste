@@ -1,20 +1,19 @@
 package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import org.exolab.castor.types.DateTime;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 
 import lombok.Getter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
@@ -29,17 +28,25 @@ public class UploadVm implements Serializable {
     @Getter
     private ImageDetails imageDetails;
 
+    @Wire
+    private Textbox description;
+
+    @Wire
+    private Textbox imageName;
+
     @Init
     public void init() {
+        description = new Textbox("");
+        imageName = new Textbox("");
     }
 
     @Command
     public void doUpload(@BindingParam("image") Media image) {
-        if (image.getContentType().contains("image")) {
+        if (image.getContentType().startsWith("image/")) {
             try {
-                imageDetails = new ImageDetails().builder().name(image.getName().substring(0, image.getName().lastIndexOf("."))).fileName(
-                        image.getName().substring(0, image.getName().lastIndexOf("."))).description(image.getContentType()).uploaded(LocalDateTime.now()).image(image.getByteData()).thumbnail(
-                        imageViewHelper.createThumbnail(image.getByteData(), image.getContentType().replace("image/", ""))).build();
+                imageDetails = new ImageDetails().builder().name(imageName.getValue()).fileName(image.getName().substring(0, image.getName().lastIndexOf("."))).description(description.getValue())
+                        .fileType(image.getContentType().substring(6)).image(image.getByteData()).thumbnail(imageViewHelper.createThumbnail(image.getByteData(), image.getContentType().replace("image/", "")))
+                        .build();
             } catch (Exception e) {
                 Messagebox.show(e.toString());
             }

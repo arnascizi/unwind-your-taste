@@ -3,15 +3,30 @@
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('lt.insoft.gallery.ui.viewmodel.GalleryVm')">
   <div class="container mt-5">
-    <div class="jumbotron-fluid">
-      <h4 class="mt-3 text-muted">${labels.gallery}</h4>
-      <hr />
-      <xh:div class="mt-5">
-        <sh:forEach items="@bind(vm.imageThumbnailList)">
-          <zul:image class="img-thumbnail m-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
-                  onClick="@command('doSelectImage', image=each)" />
-        </sh:forEach>
-      </xh:div>
+  <div class="jumbotron-fluid">
+    <h4 class="mt-3 text-muted">${labels.gallery}</h4>
+    <hr />
+    <div class="mt-5">
+      <div class="container">
+        <xh:div class="row">
+          <sh:forEach items="@bind(vm.imageThumbnailList)">
+            <xh:div class="card m-2 p-1">
+              <zul:image class="card-img-top mx-auto m-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
+                      onClick="@command(vm.doSelectImage(each.id))" />
+              <zul:label class="card-title mx-auto text-small" value="@load(each.name)" />
+            </xh:div>
+          </sh:forEach>
+        </xh:div>
+        <div class="row border-top border-bottom py-2 mt-5">
+          <div class="container mx-5 text-center">
+            <zul:button class="btn-sm text-white ml-3" label="${labels.back}" type="button" style="background-color: #4a65a4" onClick="@command('doPreviousPage'"/>
+            <zul:label value="@load(vm.currentPage)" />
+            <zul:label value="@load(vm.showPages)" />
+            <zul:button class="btn-sm text-white mr-3" label="${labels.forward}" type="button" style="background-color: #4a65a4" onClick="@command('doNextPage')"/>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </xh:div>

@@ -1,6 +1,6 @@
 package lt.insoft.gallery.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -45,8 +45,8 @@ public class Image {
     @Column
     private String description;
 
-    @Column
-    private LocalDateTime date;
+    @Column(name = "FILE_TYPE")
+    private String fileType;
 
     @Column
     private byte[] image;
