@@ -1,6 +1,5 @@
 package lt.insoft.gallery.ui.helper;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,6 +11,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -56,5 +56,21 @@ public class ImageViewHelper {
             ImageIO.write(thumbnail, fileType, byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         }
+    }
+
+    public List<ImageThumbnail> findByTagName(String searchParam) {
+        List<ImageThumbnail> listView = new ArrayList<>();
+        for (Image image : imageService.fetchImagesByTagNames(searchParam)) {
+            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
+        }
+        return listView;
+    }
+
+    public List<ImageThumbnail> getAllImagesPageable(Pageable pageable) {
+        List<ImageThumbnail> listView = new ArrayList<>();
+        for (Image image : imageService.getPageable(pageable)) {
+            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
+        }
+        return listView;
     }
 }

@@ -8,7 +8,7 @@
     <hr />
     <div class="mt-5">
       <div class="container">
-        <xh:div class="row">
+        <xh:div id="content" class="row">
           <sh:forEach items="@bind(vm.imageThumbnailList)">
             <xh:div class="card m-2 p-1">
               <zul:image class="card-img-top mx-auto m-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
@@ -17,14 +17,16 @@
             </xh:div>
           </sh:forEach>
         </xh:div>
-        <div class="row border-top border-bottom py-2 mt-5">
-          <div class="container mx-5 text-center">
-            <zul:button class="btn-sm text-white ml-3" label="${labels.back}" type="button" style="background-color: #4a65a4" onClick="@command('doPreviousPage'"/>
-            <zul:label value="@load(vm.currentPage)" />
-            <zul:label value="@load(vm.showPages)" />
-            <zul:button class="btn-sm text-white mr-3" label="${labels.forward}" type="button" style="background-color: #4a65a4" onClick="@command('doNextPage')"/>
-          </div>
-        </div>
+        <zul:paging totalSize="100" pageSize="8" mold="os" onClick="@command('doPaging')" />
+<!--        <div class="border-top border-bottom py-2 mt-5 align-self-center">-->
+<!--          <ul class="pagination">-->
+<!--            <li class="page-item"><xh:button class="page-link text-white" style="background-color: #4a65a4" onClick="@command('doPreviousPage')">Previous</xh:button></li>-->
+<!--            <li class="page-item"><xh:a class="page-link text-white" style="background-color: #4a65a4" href="#">1</xh:a></li>-->
+<!--            <li class="page-item"><xh:a class="page-link text-white" style="background-color: #4a65a4" href="#">2</xh:a></li>-->
+<!--            <li class="page-item"><xh:a class="page-link text-white" style="background-color: #4a65a4" href="#">3</xh:a></li>-->
+<!--            <li class="page-item"><xh:button class="page-link text-white" style="background-color: #4a65a4" onClick="@command('doNextPage')">Next</xh:button></li>-->
+<!--          </ul>-->
+<!--        </div>-->
       </div>
     </div>
     </div>

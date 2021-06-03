@@ -2,7 +2,7 @@ package lt.insoft.gallery.bl.service;
 
 import java.util.List;
 
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +19,7 @@ public class ImageService{
     private final ImageRepository imageRepository;
 
     public List<Image> fetchAllImages() {
-        return imageRepository.findAll();
+        return (List<Image>) imageRepository.findAll();
     }
 
     public Image fetchImage(Long id) throws ImageNotFoundException {
@@ -33,5 +33,13 @@ public class ImageService{
     public void removeImage(Long id) throws ImageNotFoundException {
         Image image = fetchImage(id);
         imageRepository.delete(image);
+    }
+
+    public List<Image> fetchImagesByTagNames(String searchParam) {
+        return imageRepository.findByTagName(searchParam);
+    }
+
+    public Iterable<Image> getPageable(Pageable pageable) {
+        return imageRepository.findAll(pageable);
     }
 }

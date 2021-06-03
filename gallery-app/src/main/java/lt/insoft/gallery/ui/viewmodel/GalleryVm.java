@@ -3,12 +3,11 @@ package lt.insoft.gallery.ui.viewmodel;
 import java.io.Serializable;
 import java.util.List;
 
-import org.zkoss.bind.annotation.BindingParam;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.zhtml.Input;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import lombok.Getter;
@@ -25,7 +24,7 @@ public class GalleryVm implements Serializable {
     private List<ImageThumbnail> imageThumbnailList;
 
     @Getter
-    private int currentPage;
+    private int currentPage = 0;
 
     @Getter
     private int maxPages;
@@ -33,9 +32,13 @@ public class GalleryVm implements Serializable {
     @Getter
     private String showPages;
 
+    @Getter
+    private String searchParam;
+
     @Init
     public void init() {
-        imageThumbnailList = imageViewHelper.getAllImagesThumbnailsView();
+        Pageable pageable = PageRequest.of(currentPage, 8);
+        imageThumbnailList = imageViewHelper.getAllImagesPageable(pageable);
     }
 
     @Command
@@ -44,12 +47,12 @@ public class GalleryVm implements Serializable {
     }
 
     @Command
-    public void doPreviousPage() {
+    public void doSearch() {
+        imageThumbnailList = imageViewHelper.findByTagName(searchParam);
     }
 
     @Command
-    public void doNextPage() {
-
+    public void doPaging() {
     }
 }
 

@@ -1,6 +1,7 @@
 package lt.insoft.gallery.ui.view;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,5 @@ public class ImageDetails implements Serializable {
     private String fileType;
     private byte[] image;
     private byte[] thumbnail;
+    private List<TagView> tags;
 }
