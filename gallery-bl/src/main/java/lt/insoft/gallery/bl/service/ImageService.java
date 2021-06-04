@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.exception.ImageNotFoundException;
 import lt.insoft.gallery.bl.repository.ImageRepository;
+import lt.insoft.gallery.bl.repository.TagRepository;
 import lt.insoft.gallery.model.Image;
 
 @Service
@@ -17,6 +18,8 @@ import lt.insoft.gallery.model.Image;
 public class ImageService{
 
     private final ImageRepository imageRepository;
+
+    private final TagRepository tagRepository;
 
     public List<Image> fetchAllImages() {
         return (List<Image>) imageRepository.findAll();
@@ -27,6 +30,11 @@ public class ImageService{
     }
 
     public void saveImage(Image image) {
+        imageRepository.save(image);
+    }
+
+    public void save(Image image) {
+        image.getTags().forEach(tagRepository::save);
         imageRepository.save(image);
     }
 

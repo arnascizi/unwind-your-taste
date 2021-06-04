@@ -1,6 +1,7 @@
 package lt.insoft.gallery.model;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -54,7 +55,7 @@ public class Image {
     @Column
     private byte[] thumbnail;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "IMAGE_TAG", joinColumns = @JoinColumn(name = "IMAGE_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
-    private Set<Tag> tags;
+    private List<Tag> tags;
 }

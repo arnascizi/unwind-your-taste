@@ -2,6 +2,7 @@ package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
 
+import org.springframework.security.access.annotation.Secured;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
@@ -15,13 +16,18 @@ import org.zkoss.zul.Messagebox;
 import lombok.Getter;
 import lombok.Setter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
+import lt.insoft.gallery.ui.helper.UserViewHelper;
 import lt.insoft.gallery.ui.view.ImageDetails;
+import lt.insoft.gallery.ui.view.LoggedUser;
 
 public class ImageVm implements Serializable {
     private static final long serialVersionUID = -4894191210706198976L;
 
     @WireVariable(rewireOnActivate = true)
     private transient ImageViewHelper imageViewHelper;
+
+    @WireVariable(rewireOnActivate = true)
+    private transient UserViewHelper userViewHelper;
 
     @Getter
     @Setter

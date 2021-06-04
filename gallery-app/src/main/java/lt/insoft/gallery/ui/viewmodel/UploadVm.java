@@ -28,6 +28,7 @@ public class UploadVm implements Serializable {
     private transient ImageViewHelper imageViewHelper;
 
     @Getter
+    @Setter
     private ImageDetails imageDetails;
 
     @Getter
@@ -47,6 +48,8 @@ public class UploadVm implements Serializable {
     public void init() {
         description = new Textbox("");
         imageName = new Textbox("");
+        tags = new ArrayList<>();
+        imageDetails = new ImageDetails();
     }
 
     @Command
@@ -67,6 +70,7 @@ public class UploadVm implements Serializable {
     @Command
     public void doSave() {
         try {
+            imageDetails.setTags(tags);
             imageViewHelper.save(imageDetails);
             Messagebox.show("Image was successfully saved!", "Information", Messagebox.OK, Messagebox.INFORMATION, event -> {
                 if (event.getName().equals("onOK")) {
@@ -79,15 +83,15 @@ public class UploadVm implements Serializable {
     }
 
     @Command
-    @NotifyChange({"imageDetails.tags"})
+    @NotifyChange({"tags"})
     public void doAddTag() {
         TagView newTag = new TagView().builder().name("#" + tag).build();
-        imageDetails.getTags().add(newTag);
+        tags.add(newTag);
     }
 
     @Command
-    @NotifyChange({"imageDetails.tags"})
+    @NotifyChange({"tags"})
     public void doRemoveTag(@BindingParam("tagName") String name) {
-        imageDetails.getTags().removeIf(tag -> tag.getName().equals(name));
+        tags.removeIf(tag -> tag.getName().equals(name));
     }
 }

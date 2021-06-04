@@ -10,7 +10,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import lombok.Getter;
-import lombok.Setter;
 import lt.insoft.gallery.ui.helper.UserViewHelper;
 import lt.insoft.gallery.ui.view.LoggedUser;
 

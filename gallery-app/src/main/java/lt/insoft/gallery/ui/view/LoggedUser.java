@@ -16,4 +16,7 @@ public class LoggedUser implements Serializable {
 
     @Getter
     private String username;
+
+    @Getter
+    private String role;
 }
