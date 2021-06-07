@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class TagView implements Serializable {
-    private final static long serialVersionUID = 8875876700410065880L;
+    private static final long serialVersionUID = 8875876700410065880L;
 
     private String name;
 }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserView implements Serializable {
-    private final static long serialVersionUID = 497644654686714401L;
+    private static final long serialVersionUID = 497644654686714401L;
 
     @NotEmpty(message = "Username can not be empty")
     private String username;

@@ -1,22 +1,15 @@
 package lt.insoft.gallery.ui.viewmodel;
 
-import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Paging;
-import org.zkoss.zul.event.PagingEvent;
-import org.zkoss.zul.event.PagingListener;
-import org.zkoss.zul.ext.Paginal;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -62,5 +55,7 @@ public class GalleryVm implements Serializable {
         Pageable pageable = PageRequest.of(currentPage, pageSize);
         imageThumbnailList = imageViewHelper.getAllImagesPageable(pageable);
     }
+
+
 }
 

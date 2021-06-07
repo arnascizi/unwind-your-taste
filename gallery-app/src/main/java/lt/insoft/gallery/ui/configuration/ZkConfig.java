@@ -11,24 +11,26 @@ import org.zkoss.zk.ui.http.HttpSessionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.Servlet;
+
 @Configuration
 public class ZkConfig {
 
     @Bean
-    public ServletRegistrationBean dHtmlLayoutServlet() {
+    public ServletRegistrationBean<Servlet> dHtmlLayoutServlet() {
         Map<String, String> params = new HashMap<>();
         params.put("update-uri", "/zkau");
-        ServletRegistrationBean reg = new ServletRegistrationBean(new DHtmlLayoutServlet(), "*.zul");
+        ServletRegistrationBean<Servlet> reg = new ServletRegistrationBean<>(new DHtmlLayoutServlet(), "*.zul");
         reg.setLoadOnStartup(1);
         reg.setInitParameters(params);
         return reg;
     }
 
     @Bean
-    public ServletRegistrationBean dHtmlUpdateServlet() {
+    public ServletRegistrationBean<Servlet> dHtmlUpdateServlet() {
         Map<String, String> params = new HashMap<>();
         params.put("update-uri", "/zkau/*");
-        ServletRegistrationBean reg = new ServletRegistrationBean(new DHtmlUpdateServlet(), "/zkau/*");
+        ServletRegistrationBean<Servlet> reg = new ServletRegistrationBean<>(new DHtmlUpdateServlet(), "/zkau/*");
         reg.setLoadOnStartup(2);
         reg.setInitParameters(params);
         return reg;

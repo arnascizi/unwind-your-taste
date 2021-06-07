@@ -32,9 +32,11 @@
                 </div>
               </div>
             </div>
-            <div>
-              <zul:button label="${labels.delete}" class="btn btn-sm text-white float-right mr-3" onClick="@command('doDelete')" style="background-color: #a44a4a" />
-            </div>
+            <xh:div>
+              <sh:if test="@load(vm.hasRoleAdmin)">
+                <zul:button label="${labels.delete}" class="btn btn-sm text-white float-right mr-3" onClick="@command('doDelete')" style="background-color: #a44a4a" />
+              </sh:if>
+            </xh:div>
           </div>
         </div>
       </div>

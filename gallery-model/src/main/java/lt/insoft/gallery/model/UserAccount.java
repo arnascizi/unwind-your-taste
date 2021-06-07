@@ -44,5 +44,4 @@ public class UserAccount {
     @Column
     @NotNull
     private boolean enabled;
-
 }

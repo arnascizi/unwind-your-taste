@@ -2,23 +2,18 @@ package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
 
-import org.springframework.security.access.annotation.Secured;
-import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.QueryParam;
-import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 
 import lombok.Getter;
-import lombok.Setter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
 import lt.insoft.gallery.ui.helper.UserViewHelper;
 import lt.insoft.gallery.ui.view.ImageDetails;
-import lt.insoft.gallery.ui.view.LoggedUser;
 
 public class ImageVm implements Serializable {
     private static final long serialVersionUID = -4894191210706198976L;
@@ -26,29 +21,29 @@ public class ImageVm implements Serializable {
     @WireVariable(rewireOnActivate = true)
     private transient ImageViewHelper imageViewHelper;
 
-    @WireVariable(rewireOnActivate = true)
-    private transient UserViewHelper userViewHelper;
+    @Getter
+    private ImageDetails imageDetails;
 
     @Getter
-    @Setter
-    private ImageDetails imageDetails;
+    private boolean hasRoleAdmin;
 
     @Init
     public void init(@QueryParam("id") String id) {
         Executions.getCurrent().getParameter("id");
         imageDetails = imageViewHelper.getDetailedImageView(Long.parseLong(id));
+        hasRoleAdmin = UserViewHelper.hasRole("ROLE_ADMIN");
     }
 
     @Command
     public void doDelete() {
         Messagebox.show("Are you sure you want to delete " + imageDetails.getName() + "?", "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
-                if (event.getName().equals("onOK")) {
-                    imageViewHelper.delete(imageDetails);
-                    Clients.alert("Image deleted!");
-                    Executions.sendRedirect("/gallery");
-                } else {
-                    Clients.alert("Deletion canceled!");
-                }
-            });
+            if (event.getName().equals("onOK")) {
+                imageViewHelper.delete(imageDetails);
+                Clients.alert("Image deleted!");
+                Executions.sendRedirect("/gallery");
+            } else {
+                Clients.alert("Deletion canceled!");
+            }
+        });
     }
 }

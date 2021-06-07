@@ -15,14 +15,14 @@ import lt.insoft.gallery.model.Image;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ImageService{
+public class ImageService {
 
     private final ImageRepository imageRepository;
 
     private final TagRepository tagRepository;
 
     public List<Image> fetchAllImages() {
-        return (List<Image>) imageRepository.findAll();
+        return imageRepository.findAll();
     }
 
     public Image fetchImage(Long id) throws ImageNotFoundException {

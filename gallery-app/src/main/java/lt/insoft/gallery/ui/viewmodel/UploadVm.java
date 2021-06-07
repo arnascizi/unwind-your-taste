@@ -56,7 +56,8 @@ public class UploadVm implements Serializable {
     public void doUpload(@BindingParam("image") Media image) {
         if (image.getContentType().startsWith("image/")) {
             try {
-                imageDetails = new ImageDetails().builder().name(imageName.getValue()).fileName(image.getName().substring(0, image.getName().lastIndexOf("."))).description(description.getValue())
+                new ImageDetails();
+                imageDetails = ImageDetails.builder().name(imageName.getValue()).fileName(image.getName().substring(0, image.getName().lastIndexOf("."))).description(description.getValue())
                         .fileType(image.getContentType().substring(6)).image(image.getByteData()).thumbnail(imageViewHelper.createThumbnail(image.getByteData(), image.getContentType().replace("image/", "")))
                         .build();
             } catch (Exception e) {
@@ -85,13 +86,14 @@ public class UploadVm implements Serializable {
     @Command
     @NotifyChange({"tags"})
     public void doAddTag() {
-        TagView newTag = new TagView().builder().name("#" + tag).build();
+        new TagView();
+        TagView newTag = TagView.builder().name("#" + tag).build();
         tags.add(newTag);
     }
 
     @Command
     @NotifyChange({"tags"})
     public void doRemoveTag(@BindingParam("tagName") String name) {
-        tags.removeIf(tag -> tag.getName().equals(name));
+        tags.removeIf(selectedTag -> selectedTag.getName().equals(name));
     }
 }

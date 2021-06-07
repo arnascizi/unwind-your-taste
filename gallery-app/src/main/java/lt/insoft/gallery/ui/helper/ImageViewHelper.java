@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.imageio.ImageIO;
 
@@ -32,14 +31,16 @@ public class ImageViewHelper {
     public List<ImageThumbnail> getAllImagesThumbnailsView() {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.fetchAllImages()) {
-            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
+            new ImageDetails();
+            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
     }
 
     public ImageDetails getDetailedImageView(Long id) {
         Image image = imageService.fetchImage(id);
-        return image != null ? new ImageDetails().builder().id(image.getId()).name(image.getName()).fileName(image.getFileName()).description(image.getDescription()).image(image.getImage())
+        new ImageDetails();
+        return image != null ? ImageDetails.builder().id(image.getId()).name(image.getName()).fileName(image.getFileName()).description(image.getDescription()).image(image.getImage())
                 .tags(tagViewList(image.getTags()))
                 .build() : null;
     }
@@ -52,7 +53,8 @@ public class ImageViewHelper {
     private List<Tag> tagList(List<TagView> tagViews) {
         List<Tag> tags = new ArrayList<>();
         for (TagView tagView : tagViews) {
-            tags.add(new Tag().builder().name(tagView.getName()).build());
+            new Tag();
+            tags.add(Tag.builder().name(tagView.getName()).build());
         }
         return tags;
     }
@@ -60,7 +62,8 @@ public class ImageViewHelper {
     private List<TagView> tagViewList(List<Tag> tags) {
         List<TagView> tagViews = new ArrayList<>();
         for (Tag tag : tags) {
-            tagViews.add(new TagView().builder().name(tag.getName()).build());
+            new TagView();
+            tagViews.add(TagView.builder().name(tag.getName()).build());
         }
         return tagViews;
     }
@@ -83,7 +86,8 @@ public class ImageViewHelper {
     public List<ImageThumbnail> findByTagName(String searchParam) {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.fetchImagesByTagNames(searchParam)) {
-            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
+            new ImageThumbnail();
+            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
     }
@@ -91,7 +95,8 @@ public class ImageViewHelper {
     public List<ImageThumbnail> getAllImagesPageable(Pageable pageable) {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.getPageable(pageable)) {
-            listView.add(new ImageThumbnail().builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
+            new ImageThumbnail();
+            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
     }
