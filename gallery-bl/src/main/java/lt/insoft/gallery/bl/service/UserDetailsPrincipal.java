@@ -11,7 +11,7 @@ import lt.insoft.gallery.model.UserAccount;
 
 public class UserDetailsPrincipal implements UserDetails {
 
-    private transient UserAccount userAccount;
+    private UserAccount userAccount;
 
     public UserDetailsPrincipal(UserAccount userAccount) {this.userAccount = userAccount;}
 

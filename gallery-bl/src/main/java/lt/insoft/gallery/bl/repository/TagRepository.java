@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 import lt.insoft.gallery.model.Tag;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {}
+public interface TagRepository extends JpaRepository<Tag, Long> {
+
+    void deleteByName(String name);
+
+    Tag getTagByName(String name);
+}

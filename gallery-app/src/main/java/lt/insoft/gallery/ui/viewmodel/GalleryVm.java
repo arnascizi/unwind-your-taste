@@ -9,7 +9,9 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Textbox;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +37,10 @@ public class GalleryVm implements Serializable {
     @Getter
     private int pageSize;
 
+    @Getter
+    @Setter
+    private String searchParam;
+
     @Init
     @NotifyChange({"currentPage", "imageThumbnailList"})
     public void init() {
@@ -56,6 +62,11 @@ public class GalleryVm implements Serializable {
         imageThumbnailList = imageViewHelper.getAllImagesPageable(pageable);
     }
 
-
+    @Command
+    @NotifyChange({"imageThumbnailList"})
+    public void doSearch() {
+        imageThumbnailList.clear();
+        imageThumbnailList = imageViewHelper.findImagesByName(searchParam);
+    }
 }
 

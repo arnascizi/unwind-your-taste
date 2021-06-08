@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.service.ImageService;
+import lt.insoft.gallery.bl.service.TagService;
 import lt.insoft.gallery.model.Image;
 import lt.insoft.gallery.model.Tag;
 import lt.insoft.gallery.ui.view.ImageDetails;
@@ -27,6 +28,8 @@ import lt.insoft.gallery.ui.view.TagView;
 public class ImageViewHelper {
 
     private final ImageService imageService;
+
+    private final TagService tagService;
 
     public List<ImageThumbnail> getAllImagesThumbnailsView() {
         List<ImageThumbnail> listView = new ArrayList<>();
@@ -40,9 +43,8 @@ public class ImageViewHelper {
     public ImageDetails getDetailedImageView(Long id) {
         Image image = imageService.fetchImage(id);
         new ImageDetails();
-        return image != null ? ImageDetails.builder().id(image.getId()).name(image.getName()).fileName(image.getFileName()).description(image.getDescription()).image(image.getImage())
-                .tags(tagViewList(image.getTags()))
-                .build() : null;
+        return image != null ? ImageDetails.builder().id(image.getId()).name(image.getName()).fileName(image.getFileName()).description(image.getDescription()).image(image.getImage()).tags(
+                tagViewList(image.getTags())).build() : null;
     }
 
     public void save(ImageDetails imageDetails) {
@@ -54,7 +56,9 @@ public class ImageViewHelper {
         List<Tag> tags = new ArrayList<>();
         for (TagView tagView : tagViews) {
             new Tag();
-            tags.add(Tag.builder().name(tagView.getName()).build());
+            if(tagService.getTagByName(tagView.getName()) == null) {
+                tags.add(Tag.builder().name(tagView.getName()).build());
+            }
         }
         return tags;
     }
@@ -83,9 +87,24 @@ public class ImageViewHelper {
         }
     }
 
+    public void removeTag(TagView tagView) {
+        new Tag();
+        tagService.removeTagByName(Tag.builder().name(tagView.getName()).build());
+
+    }
+
     public List<ImageThumbnail> findByTagName(String searchParam) {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.fetchImagesByTagNames(searchParam)) {
+            new ImageThumbnail();
+            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
+        }
+        return listView;
+    }
+
+    public List<ImageThumbnail> findImagesByName(String name) {
+        ArrayList<ImageThumbnail> listView = new ArrayList<>();
+        for (Image image : imageService.getImagesByName(name)) {
             new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }

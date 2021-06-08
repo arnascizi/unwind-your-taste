@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.repository.TagRepository;
+import lt.insoft.gallery.model.Tag;
 
 @Service
 @Transactional
@@ -13,4 +14,11 @@ public class TagService {
 
     private final TagRepository tagRepository;
 
+    public void removeTagByName(Tag tag) {
+        tagRepository.deleteByName(tag.getName());
+    }
+
+    public Tag getTagByName(String tag) {
+        return tagRepository.getTagByName(tag);
+    }
 }

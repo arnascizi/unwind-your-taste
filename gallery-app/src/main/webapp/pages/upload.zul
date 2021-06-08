@@ -33,7 +33,7 @@
                   <div class="input-group-prepend">
                     <label class="input-group-text text-muted" for="imageName">${labels.imagename}</label>
                     <zul:textbox class="form-control" name="imageName" id="imageName"
-                            value="@load(vm.imageDetails.name, after={'doUpload'}) @save(vm.imageDetails.name, before={'doSave'})" />
+                            value="@load(vm.imageDetails.name, before={'doUpload'}) @save(vm.imageDetails.name, before={'doSave'})" />
                   </div>
                 </div>
                 <div class="form-group input-group-sm">

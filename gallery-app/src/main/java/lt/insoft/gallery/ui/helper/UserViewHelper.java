@@ -21,6 +21,6 @@ public class UserViewHelper {
 
     public static boolean hasRole(String role) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        return securityContext.getAuthentication().getAuthorities().contains(role);
+        return securityContext.getAuthentication().getAuthorities().stream().anyMatch(r -> r.getAuthority().equals(role));
     }
 }

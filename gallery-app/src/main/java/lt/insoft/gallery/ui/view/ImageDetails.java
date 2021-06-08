@@ -3,6 +3,8 @@ package lt.insoft.gallery.ui.view;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +20,7 @@ public class ImageDetails implements Serializable {
     private static final long serialVersionUID = -143346528840314787L;
 
     private Long id;
+    @NotNull
     private String name;
     private String fileName;
     private String description;

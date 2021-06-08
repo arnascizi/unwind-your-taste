@@ -44,10 +44,14 @@ public class ImageService {
     }
 
     public List<Image> fetchImagesByTagNames(String searchParam) {
-        return imageRepository.findByTagName(searchParam);
+        return null;
     }
 
     public Iterable<Image> getPageable(Pageable pageable) {
         return imageRepository.findAll(pageable);
+    }
+
+    public List<Image> getImagesByName(String name) {
+        return imageRepository.findImagesByName(name);
     }
 }

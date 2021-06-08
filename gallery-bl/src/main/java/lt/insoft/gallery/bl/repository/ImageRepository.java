@@ -7,14 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import lt.insoft.gallery.model.Image;
-import lt.insoft.gallery.model.Tag;
 
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Long> {
 
-    @Query("SELECT i FROM Image i WHERE i.tags = ?1")
-    List<Image> findByTagName(String searchParam);
+    // @Query("SELECT i FROM Image i LEFT OUTER JOIN Image_tag it on it.image_tag.image_id = i.id LEFT OUTER JOIN Tag t on it.tag_id = t.id where t.name = ?1")
+    // List<Image> findByTagName(String searchParam);
 
-    @Query("SELECT i, t From Image i INNER JOIN Tag t ON i.id = t.id")
-    List<Tag> findAllTagsByImageId(Long id);
+    @Query("SELECT i FROM Image i WHERE i.name = ?1")
+    List<Image> findImagesByName(String name);
 }

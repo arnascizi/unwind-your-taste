@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,9 +37,11 @@ public class Image {
     private Long id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column(name = "FILE_NAME")
+    @NotNull
     private String fileName;
 
     @Column
@@ -48,12 +51,14 @@ public class Image {
     private String fileType;
 
     @Column
+    @NotNull
     private byte[] image;
 
     @Column
+    @NotNull
     private byte[] thumbnail;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "IMAGE_TAG", joinColumns = @JoinColumn(name = "IMAGE_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
     private List<Tag> tags;
 }

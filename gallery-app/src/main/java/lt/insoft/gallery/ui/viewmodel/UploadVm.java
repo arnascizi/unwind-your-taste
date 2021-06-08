@@ -38,16 +38,8 @@ public class UploadVm implements Serializable {
     @Setter
     private String tag;
 
-    @Wire
-    private Textbox description;
-
-    @Wire
-    private Textbox imageName;
-
     @Init
     public void init() {
-        description = new Textbox("");
-        imageName = new Textbox("");
         tags = new ArrayList<>();
         imageDetails = new ImageDetails();
     }
@@ -57,9 +49,8 @@ public class UploadVm implements Serializable {
         if (image.getContentType().startsWith("image/")) {
             try {
                 new ImageDetails();
-                imageDetails = ImageDetails.builder().name(imageName.getValue()).fileName(image.getName().substring(0, image.getName().lastIndexOf("."))).description(description.getValue())
-                        .fileType(image.getContentType().substring(6)).image(image.getByteData()).thumbnail(imageViewHelper.createThumbnail(image.getByteData(), image.getContentType().replace("image/", "")))
-                        .build();
+                imageDetails = ImageDetails.builder().fileName(image.getName().substring(0, image.getName().lastIndexOf("."))).fileType(image.getContentType().substring(6)).image(image.getByteData())
+                        .thumbnail(imageViewHelper.createThumbnail(image.getByteData(), image.getContentType().replace("image/", ""))).build();
             } catch (Exception e) {
                 Messagebox.show(e.toString());
             }
@@ -70,7 +61,11 @@ public class UploadVm implements Serializable {
 
     @Command
     public void doSave() {
+
         try {
+            if(imageDetails.getName() == null || imageDetails.getName().equals("")) {
+                throw new Exception("Empty");
+            }
             imageDetails.setTags(tags);
             imageViewHelper.save(imageDetails);
             Messagebox.show("Image was successfully saved!", "Information", Messagebox.OK, Messagebox.INFORMATION, event -> {
