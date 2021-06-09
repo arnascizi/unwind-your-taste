@@ -56,9 +56,7 @@ public class ImageViewHelper {
         List<Tag> tags = new ArrayList<>();
         for (TagView tagView : tagViews) {
             new Tag();
-            if(tagService.getTagByName(tagView.getName()) == null) {
-                tags.add(Tag.builder().name(tagView.getName()).build());
-            }
+            tags.add(Tag.builder().name(tagView.getName()).build());
         }
         return tags;
     }
@@ -93,18 +91,9 @@ public class ImageViewHelper {
 
     }
 
-    public List<ImageThumbnail> findByTagName(String searchParam) {
-        List<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.fetchImagesByTagNames(searchParam)) {
-            new ImageThumbnail();
-            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
-        }
-        return listView;
-    }
-
-    public List<ImageThumbnail> findImagesByName(String name) {
+    public List<ImageThumbnail> findImagesByName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.getImagesByName(name)) {
+        for (Image image : imageService.getImagesByName(name, pageable)) {
             new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }

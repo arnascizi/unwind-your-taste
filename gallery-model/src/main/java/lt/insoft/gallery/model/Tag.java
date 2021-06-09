@@ -37,8 +37,4 @@ public class Tag {
 
     @Column
     private String name;
-
-    // @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    // @JoinTable(name = "IMAGE_TAG", joinColumns = @JoinColumn(name = "TAG_ID"), inverseJoinColumns = @JoinColumn(name = "IMAGE_ID"))
-    // private List<Image> images;
 }

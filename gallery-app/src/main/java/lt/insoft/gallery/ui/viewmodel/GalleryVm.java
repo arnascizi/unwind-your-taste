@@ -9,9 +9,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Textbox;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -66,7 +64,13 @@ public class GalleryVm implements Serializable {
     @NotifyChange({"imageThumbnailList"})
     public void doSearch() {
         imageThumbnailList.clear();
-        imageThumbnailList = imageViewHelper.findImagesByName(searchParam);
+        if (searchParam == null || searchParam.equals("")) {
+            Pageable pageable = PageRequest.of(currentPage, pageSize);
+            imageThumbnailList = imageViewHelper.getAllImagesPageable(pageable);
+        } else {
+            Pageable pageable = PageRequest.of(0, pageSize);
+            imageThumbnailList = imageViewHelper.findImagesByName(searchParam, pageable);
+        }
     }
 }
 
