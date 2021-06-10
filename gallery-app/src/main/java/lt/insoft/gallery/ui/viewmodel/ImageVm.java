@@ -2,10 +2,8 @@ package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
 
-import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -16,7 +14,6 @@ import lombok.Getter;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
 import lt.insoft.gallery.ui.helper.UserViewHelper;
 import lt.insoft.gallery.ui.view.ImageDetails;
-import lt.insoft.gallery.ui.view.TagView;
 
 public class ImageVm implements Serializable {
     private static final long serialVersionUID = -4894191210706198976L;
@@ -48,15 +45,5 @@ public class ImageVm implements Serializable {
                 Clients.alert("Deletion canceled!");
             }
         });
-    }
-
-    @Command
-    @NotifyChange({"imageDetails.tags"})
-    public void doRemoveTag(@BindingParam("tagName") String name) {
-        for(TagView tagView: imageDetails.getTags()) {
-            if (tagView.getName().equals(name)) {
-                imageViewHelper.removeTag(tagView);
-            }
-        }
     }
 }

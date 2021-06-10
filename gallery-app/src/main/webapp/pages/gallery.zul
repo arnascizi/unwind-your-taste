@@ -16,8 +16,14 @@
         <xh:div id="content" class="row">
           <sh:forEach items="@bind(vm.imageThumbnailList)">
             <xh:div class="card col-3 my-1">
-              <zul:image class="card-img-top mx-auto my-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
-                      onClick="@command(vm.doSelectImage(each.id))" />
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-10 self-align-left">
+                    <zul:image class="card-img mx-auto my-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"
+                            onClick="@command(vm.doSelectImage(each.id))" />
+                  </div>
+                </div>
+              </div>
               <zul:label class="card-title mx-auto" style="font-size: 0.75rem" value="@load(each.name)" />
             </xh:div>
           </sh:forEach>

@@ -74,6 +74,10 @@ public class ImageViewHelper {
         imageService.removeImage(imageDetails.getId());
     }
 
+    public void deleteImageThumbnail(ImageThumbnail imageThumbnail) {
+        imageService.removeImage(imageThumbnail.getId());
+    }
+
     public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
         try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
 

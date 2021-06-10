@@ -10,10 +10,8 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Textbox;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -61,7 +59,6 @@ public class UploadVm implements Serializable {
 
     @Command
     public void doSave() {
-
         try {
             if(imageDetails.getName() == null || imageDetails.getName().equals("")) {
                 throw new Exception("Empty");
