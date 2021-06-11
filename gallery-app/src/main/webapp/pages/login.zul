@@ -17,8 +17,7 @@
               <div class="form-group">
                 <label for="password">${labels.password}</label>:
                 <zul:textbox type="password" id="password" name="password" value="@load(vm.userView.password) @save(vm.userView.password, before='doSubmit')" class="form-control"
-                        errorMessage="@load(vmsgs['notEmpty'])"
-                        placeholder="${labels.password}" />
+                        errorMessage="@load(vmsgs['notEmpty'])" placeholder="${labels.password}" />
               </div>
               <div class="form-group text-center mt-4">
                 <xh:input type="submit" name="login-submit" id="loginSubmit" onclick="@command('doSubmit')" class="btn btn-sm text-white" style="background-color: #4a65a4" value="${labels.login}" />

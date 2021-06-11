@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.QueryParam;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
@@ -36,13 +37,13 @@ public class ImageVm implements Serializable {
 
     @Command
     public void doDelete() {
-        Messagebox.show("Are you sure you want to delete " + imageDetails.getName() + "?", "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
+        Messagebox.show(Labels.getRequiredLabel("delete.confirm") + " " + imageDetails.getName() + "?", "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
             if (event.getName().equals("onOK")) {
                 imageViewHelper.delete(imageDetails);
-                Clients.alert("Image deleted!");
+                Clients.alert(Labels.getRequiredLabel("delete.success"));
                 Executions.sendRedirect("/gallery");
             } else {
-                Clients.alert("Deletion canceled!");
+                Clients.alert(Labels.getRequiredLabel("delete.cancel"));
             }
         });
     }

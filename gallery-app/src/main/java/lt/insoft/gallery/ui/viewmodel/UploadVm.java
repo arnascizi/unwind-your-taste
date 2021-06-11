@@ -9,6 +9,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.Media;
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
@@ -53,7 +54,7 @@ public class UploadVm implements Serializable {
                 Messagebox.show(e.toString());
             }
         } else {
-            Messagebox.show("Wrong file type", "Warning", Messagebox.OK, Messagebox.ERROR);
+            Messagebox.show(Labels.getRequiredLabel("wrong.file"), "Warning", Messagebox.OK, Messagebox.ERROR);
         }
     }
 
@@ -65,13 +66,13 @@ public class UploadVm implements Serializable {
             }
             imageDetails.setTags(tags);
             imageViewHelper.save(imageDetails);
-            Messagebox.show("Image was successfully saved!", "Information", Messagebox.OK, Messagebox.INFORMATION, event -> {
+            Messagebox.show(Labels.getRequiredLabel("save.success"), "Information", Messagebox.OK, Messagebox.INFORMATION, event -> {
                 if (event.getName().equals("onOK")) {
                     Executions.sendRedirect("/gallery");
                 }
             });
         } catch (Exception e) {
-            Messagebox.show("Unable to save the image!", "Warning", Messagebox.OK, Messagebox.ERROR);
+            Messagebox.show(Labels.getRequiredLabel("save.fail"), "Warning", Messagebox.OK, Messagebox.ERROR);
         }
     }
 

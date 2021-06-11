@@ -27,10 +27,10 @@
                   <xh:div>
                     <sh:forEach items="@load(vm.imageDetails.tags)">
                       <sh:if test="@load(vm.hasRoleAdmin)">
-                        <zul:button type="button" class="btn btn-sm btn-info m-1" label="@load(each.name)" onClick="@command('doRemoveTag', tagName=each.name)" />
+                        <zul:button type="button" class="btn btn-sm btn-info m-1" mold="trendy" label="@load(each.name)" onClick="@command('doRemoveTag', tagName=each.name)" />
                       </sh:if>
                       <sh:if test="@load(!vm.hasRoleAdmin)">
-                        <zul:button type="button" class="btn btn-sm btn-info m-1" label="@load(each.name)" />
+                        <zul:button type="button" mold="trendy" class="btn btn-sm btn-info m-1" label="@load(each.name)" />
                       </sh:if>
                     </sh:forEach>
                   </xh:div>
@@ -39,7 +39,7 @@
             </div>
             <xh:div>
               <sh:if test="@load(vm.hasRoleAdmin)">
-                <zul:button label="${labels.delete}" class="btn btn-sm text-white float-right mr-3" onClick="@command('doDelete')" style="background-color: #a44a4a" />
+                <zul:button label="${labels.delete.image}" class="btn btn-sm text-white float-right mr-3" onClick="@command('doDelete')" style="background-color: #a44a4a" />
               </sh:if>
             </xh:div>
           </div>
