@@ -1,5 +1,7 @@
 package lt.insoft.gallery.bl.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +20,11 @@ public class TagService {
         tagRepository.deleteByName(tag.getName());
     }
 
-    public Tag getTagByName(String tag) {
-        return tagRepository.getTagByName(tag);
+    public Tag getTagByName(String name) {
+        return tagRepository.getTagByNameContaining(name);
+    }
+
+    public List<Tag> getTagsByNameList(String name) {
+        return tagRepository.getTagsByNameContainingIgnoreCase(name);
     }
 }

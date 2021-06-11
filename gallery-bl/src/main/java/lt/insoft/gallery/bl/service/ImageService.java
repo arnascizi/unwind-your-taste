@@ -1,6 +1,5 @@
 package lt.insoft.gallery.bl.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
@@ -12,7 +11,6 @@ import lt.insoft.gallery.bl.exception.ImageNotFoundException;
 import lt.insoft.gallery.bl.repository.ImageRepository;
 import lt.insoft.gallery.bl.repository.TagRepository;
 import lt.insoft.gallery.model.Image;
-import lt.insoft.gallery.model.Tag;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +44,6 @@ public class ImageService {
     }
 
     public List<Image> getImagesByName(String name, Pageable pageable) {
-        return imageRepository.findImagesByName(name, pageable);
+        return imageRepository.findImagesByNameContainingIgnoreCase(name, pageable);
     }
-
 }
