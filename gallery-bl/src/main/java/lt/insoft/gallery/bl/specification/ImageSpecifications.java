@@ -1,7 +1,5 @@
 package lt.insoft.gallery.bl.specification;
 
-import java.awt.print.Pageable;
-
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;

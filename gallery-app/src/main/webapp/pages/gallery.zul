@@ -34,7 +34,7 @@
           </sh:forEach>
         </xh:div>
       </div>
-      <zul:paging totalSize="@load(vm.maxPages)" pageSize="@load(vm.pageSize)" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" />
+      <zul:paging totalSize="@load(vm.maxPages)" mold="os" pageSize="@load(vm.pageSize)" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" />
     </div>
   </div>
 </xh:div>
