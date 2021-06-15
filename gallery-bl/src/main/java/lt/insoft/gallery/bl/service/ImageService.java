@@ -14,12 +14,14 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.exception.ImageNotFoundException;
 import lt.insoft.gallery.bl.repository.ImageRepository;
+import lt.insoft.gallery.bl.specification.ImageSpecifications;
 import lt.insoft.gallery.model.Image;
 import lt.insoft.gallery.model.Tag;
 
@@ -33,6 +35,18 @@ public class ImageService {
     private final EntityManager em;
 
     private CriteriaBuilder cb;
+
+    public List<Image> findByName(String name) {
+        return imageRepository.findAll(ImageSpecifications.withName(name));
+    }
+
+    public List<Image> findByTag(String name) {
+        return imageRepository.findAll(ImageSpecifications.withTag(name));
+    }
+
+    public List<Image> findByNameOrTag(String name) {
+        return imageRepository.findAll(ImageSpecifications.withNameOrTag(name));
+    }
 
     public Page<Image> findImagesByNameOrTag(String name, Pageable pageable) {
         cb = em.getCriteriaBuilder();

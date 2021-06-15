@@ -1,9 +1,16 @@
 package lt.insoft.gallery.bl.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import lt.insoft.gallery.model.Image;
 
 @Repository
-public interface ImageRepository extends JpaRepository<Image, Long> {}
+public interface ImageRepository extends JpaRepository<Image, Long>, JpaSpecificationExecutor<Image> {
+
+    List<Image> findAll(Specification specification);
+}

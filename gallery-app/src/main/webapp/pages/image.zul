@@ -26,12 +26,7 @@
                   <label class="text-secondary" for="tags">${labels.tags}</label>
                   <xh:div>
                     <sh:forEach items="@load(vm.imageDetails.tags)">
-                      <sh:if test="@load(vm.hasRoleAdmin)">
-                        <zul:button type="button" class="btn btn-sm btn-info m-1" mold="trendy" label="@load(each.name)" onClick="@command('doRemoveTag', tagName=each.name)" />
-                      </sh:if>
-                      <sh:if test="@load(!vm.hasRoleAdmin)">
-                        <zul:button type="button" mold="trendy" class="btn btn-sm btn-info m-1" label="@load(each.name)" />
-                      </sh:if>
+                      <zul:button type="button" mold="trendy" class="btn btn-sm btn-info m-1" label="@load(each.name)" />
                     </sh:forEach>
                   </xh:div>
                 </div>
