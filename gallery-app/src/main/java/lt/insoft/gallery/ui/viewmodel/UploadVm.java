@@ -80,8 +80,11 @@ public class UploadVm implements Serializable {
     @NotifyChange({"tags"})
     public void doAddTag() {
         new TagView();
-        TagView newTag = TagView.builder().name("#" + tag).build();
-        tags.add(newTag);
+        String[] tagArray = tag.split(" ");
+        for (String t: tagArray) {
+            TagView newTag = TagView.builder().name("#" + t).build();
+            tags.add(newTag);
+        }
     }
 
     @Command

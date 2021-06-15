@@ -89,15 +89,9 @@ public class ImageViewHelper {
         }
     }
 
-    public void removeTag(TagView tagView) {
-        new Tag();
-        tagService.removeTagByName(Tag.builder().name(tagView.getName()).build());
-
-    }
-
     public List<ImageThumbnail> findImagesByName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.getImagesByName(name, pageable)) {
+        for (Image image : imageService.findImagesByName(name, pageable)) {
             new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
@@ -106,30 +100,18 @@ public class ImageViewHelper {
 
     public List<ImageThumbnail> findImagesByNameOrTagName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.getPageable(pageable)) {
+        for (Image image : imageService.findImagesByNameOrTag(name, pageable)) {
             new ImageThumbnail();
-            if (image.getName().contains(name)) {
-                listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
-            } else {
-                for (Tag tag : image.getTags()) {
-                    if (tag.getName().contains(name)) {
-                        listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
-                    }
-                }
-            }
+            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
     }
 
     public List<ImageThumbnail> findImagesByTagName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.getPageable(pageable)) {
-            for (Tag tag : image.getTags()) {
-                if (tag.getName().contains(name)) {
-                    new ImageThumbnail();
-                    listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
-                }
-            }
+        for (Image image : imageService.findImagesByTag(name, pageable)) {
+            new ImageThumbnail();
+            listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
     }
