@@ -7,7 +7,8 @@ gallery-ui/.mvn/wrapper/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 mvnw
-gallery-bl/src/main/resources/postgresql-data.sql
+gallery-bl/src/main/resources/postgres-data.sql
+gallery-bl/src/main/resources/data.sql
 
 ### STS ###
 .apt_generated
