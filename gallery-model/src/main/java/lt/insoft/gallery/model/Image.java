@@ -51,7 +51,7 @@ public class Image {
     @Column(name = "FILE_TYPE")
     private String fileType;
 
-    @Column
+    @Column(name = "IMAGE")
     @NotNull
     private byte[] imageFile;
 

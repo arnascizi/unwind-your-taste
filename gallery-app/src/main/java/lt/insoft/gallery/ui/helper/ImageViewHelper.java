@@ -33,7 +33,6 @@ public class ImageViewHelper {
     public List<ImageThumbnail> getAllImagesThumbnailsView() {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.fetchAllImages()) {
-            new ImageDetails();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -62,10 +61,8 @@ public class ImageViewHelper {
 
     public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
         try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-
             BufferedImage bufferedImage = ImageIO.read(inputStream);
             BufferedImage thumbnail = Scalr.resize(bufferedImage, 150);
-
             ImageIO.write(thumbnail, fileType, byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         }
@@ -74,7 +71,6 @@ public class ImageViewHelper {
     public List<ImageThumbnail> findImagesByName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.findByName(name, pageable)) {
-            new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -83,7 +79,6 @@ public class ImageViewHelper {
     public List<ImageThumbnail> findImagesByNameOrTagName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.findImagesByNameOrTag(name, pageable)) {
-            new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -92,7 +87,6 @@ public class ImageViewHelper {
     public List<ImageThumbnail> findImagesByTagName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.findByTag(name, pageable)) {
-            new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -101,7 +95,6 @@ public class ImageViewHelper {
     public List<ImageThumbnail> getAllImagesPageable(Pageable pageable) {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.getPageable(pageable)) {
-            new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -110,7 +103,6 @@ public class ImageViewHelper {
     private List<Tag> tagList(List<TagView> tagViews) {
         List<Tag> tags = new ArrayList<>();
         for (TagView tagView : tagViews) {
-            new Tag();
             tags.add(Tag.builder().name(tagView.getName()).build());
         }
         return tags;
@@ -119,7 +111,6 @@ public class ImageViewHelper {
     private List<TagView> tagViewList(List<Tag> tags) {
         List<TagView> tagViews = new ArrayList<>();
         for (Tag tag : tags) {
-            new TagView();
             tagViews.add(TagView.builder().name(tag.getName()).build());
         }
         return tagViews;
