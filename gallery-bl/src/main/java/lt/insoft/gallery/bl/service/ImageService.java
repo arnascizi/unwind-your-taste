@@ -2,6 +2,7 @@ package lt.insoft.gallery.bl.service;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,10 +46,6 @@ public class ImageService {
         return imageRepository.findAll(ImageSpecifications.withTag(name));
     }
 
-    public List<Image> findByNameOrTag(String name) {
-        return imageRepository.findAll(ImageSpecifications.withNameOrTag(name));
-    }
-
     public Page<Image> findImagesByNameOrTag(String name, Pageable pageable) {
         cb = em.getCriteriaBuilder();
         CriteriaQuery<Image> cq = cb.createQuery(Image.class);
@@ -57,23 +55,6 @@ public class ImageService {
         Predicate tagsPredicate = cb.like(cb.lower(tagJoin.get("name").as(String.class)), "%" + name.toLowerCase() + "%");
         Predicate predicate = cb.or(namePredicate, tagsPredicate);
         return getImages(pageable, cb, cq, root, predicate);
-    }
-
-    public Page<Image> findImagesByTag(String name, Pageable pageable) {
-        cb = em.getCriteriaBuilder();
-        CriteriaQuery<Image> cq = cb.createQuery(Image.class);
-        Root<Image> root = cq.from(Image.class);
-        Join<Image, Tag> tagJoin = root.join("tags", JoinType.LEFT);
-        Predicate tagsPredicate = cb.like(cb.lower(tagJoin.get("name").as(String.class)), "%" + name.toLowerCase() + "%");
-        return getImages(pageable, cb, cq, root, tagsPredicate);
-    }
-
-    public Page<Image> findImagesByName(String name, Pageable pageable) {
-        cb = em.getCriteriaBuilder();
-        CriteriaQuery<Image> cq = cb.createQuery(Image.class);
-        Root<Image> root = cq.from(Image.class);
-        Predicate namePredicate = cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%");
-        return getImages(pageable, cb, cq, root, namePredicate);
     }
 
     private Page<Image> getImages(Pageable pageable, CriteriaBuilder cb, CriteriaQuery<Image> cq, Root<Image> root, Predicate tagsPredicate) {

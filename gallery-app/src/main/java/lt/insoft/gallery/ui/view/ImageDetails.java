@@ -28,4 +28,5 @@ public class ImageDetails implements Serializable {
     private byte[] image;
     private byte[] thumbnail;
     private List<TagView> tags;
+    private UserView userView;
 }

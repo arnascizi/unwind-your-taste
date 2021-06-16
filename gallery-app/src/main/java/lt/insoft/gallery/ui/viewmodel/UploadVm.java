@@ -16,15 +16,21 @@ import org.zkoss.zul.Messagebox;
 
 import lombok.Getter;
 import lombok.Setter;
+import lt.insoft.gallery.ui.exception.EmptyValueException;
 import lt.insoft.gallery.ui.helper.ImageViewHelper;
+import lt.insoft.gallery.ui.helper.UserViewHelper;
 import lt.insoft.gallery.ui.view.ImageDetails;
 import lt.insoft.gallery.ui.view.TagView;
+import lt.insoft.gallery.ui.view.UserView;
 
 public class UploadVm implements Serializable {
     private static final long serialVersionUID = 6856564609159631967L;
 
     @WireVariable(rewireOnActivate = true)
     private transient ImageViewHelper imageViewHelper;
+
+    @WireVariable(rewireOnActivate = true)
+    private transient UserViewHelper userViewHelper;
 
     @Getter
     @Setter
@@ -61,11 +67,18 @@ public class UploadVm implements Serializable {
     @Command
     public void doSave() {
         try {
-            if(imageDetails.getName() == null || imageDetails.getName().equals("")) {
-                throw new Exception("Empty");
+            if (imageDetails.getName() == null || imageDetails.getName().equals("")) {
+                throw new EmptyValueException("Empty");
             }
             imageDetails.setTags(tags);
-            imageViewHelper.save(imageDetails);
+            if (userViewHelper.getLoggedUser() != null) {
+                new UserView();
+                UserView userView = UserView.builder().username(userViewHelper.getLoggedUser().getUsername()).build();
+                imageDetails.setUserView(userView);
+                imageViewHelper.saveWithUser(imageDetails);
+            } else {
+                imageViewHelper.save(imageDetails);
+            }
             Messagebox.show(Labels.getRequiredLabel("save.success"), "Information", Messagebox.OK, Messagebox.INFORMATION, event -> {
                 if (event.getName().equals("onOK")) {
                     Executions.sendRedirect("/gallery");
@@ -81,7 +94,7 @@ public class UploadVm implements Serializable {
     public void doAddTag() {
         new TagView();
         String[] tagArray = tag.split(" ");
-        for (String t: tagArray) {
+        for (String t : tagArray) {
             TagView newTag = TagView.builder().name("#" + t).build();
             tags.add(newTag);
         }

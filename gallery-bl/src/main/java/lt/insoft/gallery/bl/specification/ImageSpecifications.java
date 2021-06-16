@@ -2,7 +2,6 @@ package lt.insoft.gallery.bl.specification;
 
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -25,18 +24,6 @@ public class ImageSpecifications {
         return ((root, criteriaQuery, criteriaBuilder) -> {
             Join<Image, Tag> tagJoin = root.join("tags", JoinType.LEFT);
             return criteriaBuilder.like(criteriaBuilder.lower(tagJoin.get("name").as(String.class)), "%" + name + "%");
-        });
-    }
-
-    public static Specification<Image> withNameOrTag(String name) {
-        if (name == null) {
-            return null;
-        }
-        return ((root, criteriaQuery, criteriaBuilder) -> {
-            Join<Image, Tag> tagJoin = root.join("tags", JoinType.LEFT);
-            Predicate namePredicate = criteriaBuilder.like(criteriaBuilder.lower(root.get("name").as(String.class)), "%" + name + "%");
-            Predicate tagPredicate = criteriaBuilder.like(criteriaBuilder.lower(tagJoin.get("name").as(String.class)), "%" + name + "%");
-            return criteriaBuilder.or(namePredicate, tagPredicate);
         });
     }
 }
