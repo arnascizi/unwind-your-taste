@@ -30,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.authorizeRequests().antMatchers("/").permitAll().and().formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login").and().logout()
                 .logoutUrl("/logout").logoutSuccessUrl("/");
-        // .antMatchers("/upload").hasRole("ADMIN")
     }
 
     @Bean

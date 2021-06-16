@@ -53,7 +53,7 @@ public class Image {
 
     @Column
     @NotNull
-    private byte[] image;
+    private byte[] imageFile;
 
     @Column
     @NotNull

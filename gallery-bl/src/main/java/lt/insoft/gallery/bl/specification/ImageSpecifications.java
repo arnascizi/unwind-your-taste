@@ -10,6 +10,8 @@ import lt.insoft.gallery.model.Tag;
 
 public class ImageSpecifications {
 
+    private ImageSpecifications() {}
+
     public static Specification<Image> withName(String name) {
         if (name == null) {
             return null;

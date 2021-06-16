@@ -2,7 +2,6 @@ package lt.insoft.gallery.bl.service;
 
 import java.util.List;
 
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,8 +14,6 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,29 +33,23 @@ public class ImageService {
 
     private final EntityManager em;
 
-    private CriteriaBuilder cb;
-
-    public List<Image> findByName(String name) {
-        return imageRepository.findAll(ImageSpecifications.withName(name));
+    public Page<Image> findByName(String name, Pageable pageable) {
+        return new PageImpl<>(imageRepository.findAll(ImageSpecifications.withName(name)), pageable, imageRepository.findAll(ImageSpecifications.withName(name)).size());
     }
 
-    public List<Image> findByTag(String name) {
-        return imageRepository.findAll(ImageSpecifications.withTag(name));
+    public Page<Image> findByTag(String name, Pageable pageable) {
+        return new PageImpl<>(imageRepository.findAll(ImageSpecifications.withTag(name)), pageable, imageRepository.findAll(ImageSpecifications.withTag(name)).size());
     }
 
     public Page<Image> findImagesByNameOrTag(String name, Pageable pageable) {
-        cb = em.getCriteriaBuilder();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Image> cq = cb.createQuery(Image.class);
         Root<Image> root = cq.from(Image.class);
         Join<Image, Tag> tagJoin = root.join("tags", JoinType.LEFT);
         Predicate namePredicate = cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%");
         Predicate tagsPredicate = cb.like(cb.lower(tagJoin.get("name").as(String.class)), "%" + name.toLowerCase() + "%");
         Predicate predicate = cb.or(namePredicate, tagsPredicate);
-        return getImages(pageable, cb, cq, root, predicate);
-    }
-
-    private Page<Image> getImages(Pageable pageable, CriteriaBuilder cb, CriteriaQuery<Image> cq, Root<Image> root, Predicate tagsPredicate) {
-        cq.where(tagsPredicate).distinct(true);
+        cq.where(predicate).distinct(true);
         cb.asc(root.get("name"));
         TypedQuery<Image> query = em.createQuery(cq);
         return new PageImpl<>(query.getResultList(), pageable, query.getResultList().size());
@@ -84,6 +75,4 @@ public class ImageService {
     public Iterable<Image> getPageable(Pageable pageable) {
         return imageRepository.findAll(pageable);
     }
-
-
 }

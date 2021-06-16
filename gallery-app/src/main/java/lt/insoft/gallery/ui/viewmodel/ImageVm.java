@@ -2,7 +2,6 @@ package lt.insoft.gallery.ui.viewmodel;
 
 import java.io.Serializable;
 
-import org.springframework.security.access.annotation.Secured;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.QueryParam;

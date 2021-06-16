@@ -23,8 +23,7 @@ public class LoginVm implements Serializable {
     private UserView userView;
 
     @Init
-    public void init() {
-    }
+    public void init() {}
 
     @Command
     public void doSubmit() {
