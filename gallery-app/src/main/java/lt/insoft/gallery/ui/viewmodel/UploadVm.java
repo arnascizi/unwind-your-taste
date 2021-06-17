@@ -72,7 +72,6 @@ public class UploadVm implements Serializable {
             }
             imageDetails.setTags(tags);
             if (userViewHelper.getLoggedUser() != null) {
-                new UserView();
                 UserView userView = UserView.builder().username(userViewHelper.getLoggedUser().getUsername()).build();
                 imageDetails.setUserView(userView);
                 imageViewHelper.saveWithUser(imageDetails);
@@ -92,7 +91,6 @@ public class UploadVm implements Serializable {
     @Command
     @NotifyChange({"tags"})
     public void doAddTag() {
-        new TagView();
         String[] tagArray = tag.split(" ");
         for (String t : tagArray) {
             TagView newTag = TagView.builder().name("#" + t).build();

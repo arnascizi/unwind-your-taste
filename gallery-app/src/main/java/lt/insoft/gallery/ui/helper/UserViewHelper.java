@@ -20,7 +20,6 @@ public class UserViewHelper {
     public LoggedUser getLoggedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
-            new LoggedUser();
             return LoggedUser.builder().username(((UserDetails) principal).getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities())).build();
         }
         return null;
