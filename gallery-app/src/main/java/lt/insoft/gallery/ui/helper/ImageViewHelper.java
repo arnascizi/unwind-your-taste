@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lt.insoft.gallery.bl.service.ImageService;
-import lt.insoft.gallery.bl.service.TagService;
 import lt.insoft.gallery.model.Image;
 import lt.insoft.gallery.model.Tag;
 import lt.insoft.gallery.ui.view.ImageDetails;
@@ -29,12 +28,11 @@ public class ImageViewHelper {
 
     private final ImageService imageService;
 
-    private final TagService tagService;
+    private final UserViewHelper userViewHelper;
 
     public List<ImageThumbnail> getAllImagesThumbnailsView() {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.fetchAllImages()) {
-            new ImageDetails();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -43,47 +41,28 @@ public class ImageViewHelper {
     public ImageDetails getDetailedImageView(Long id) {
         Image image = imageService.fetchImage(id);
         new ImageDetails();
-        return image != null ? ImageDetails.builder().id(image.getId()).name(image.getName()).fileName(image.getFileName()).description(image.getDescription()).image(image.getImage()).tags(
-                tagViewList(image.getTags())).build() : null;
+        return ImageDetails.builder().id(image.getId()).name(image.getName()).fileName(image.getFileName()).description(image.getDescription()).image(image.getImageFile()).tags(
+                tagViewList(image.getTags())).build();
     }
 
     public void save(ImageDetails imageDetails) {
-        imageService.save(Image.builder().name(imageDetails.getName()).fileName(imageDetails.getFileName()).description(imageDetails.getDescription()).image(imageDetails.getImage()).thumbnail(
+        imageService.save(Image.builder().name(imageDetails.getName()).fileName(imageDetails.getFileName()).description(imageDetails.getDescription()).imageFile(imageDetails.getImage()).thumbnail(
                 imageDetails.getThumbnail()).tags(tagList(imageDetails.getTags())).build());
     }
 
-    private List<Tag> tagList(List<TagView> tagViews) {
-        List<Tag> tags = new ArrayList<>();
-        for (TagView tagView : tagViews) {
-            new Tag();
-            tags.add(Tag.builder().name(tagView.getName()).build());
-        }
-        return tags;
-    }
-
-    private List<TagView> tagViewList(List<Tag> tags) {
-        List<TagView> tagViews = new ArrayList<>();
-        for (Tag tag : tags) {
-            new TagView();
-            tagViews.add(TagView.builder().name(tag.getName()).build());
-        }
-        return tagViews;
+    public void saveWithUser(ImageDetails imageDetails) {
+        imageService.save(Image.builder().name(imageDetails.getName()).fileName(imageDetails.getFileName()).description(imageDetails.getDescription()).imageFile(imageDetails.getImage()).thumbnail(
+                imageDetails.getThumbnail()).tags(tagList(imageDetails.getTags())).userAccount(userViewHelper.getUserAccount(imageDetails.getUserView())).build());
     }
 
     public void delete(ImageDetails imageDetails) {
         imageService.removeImage(imageDetails.getId());
     }
 
-    public void deleteImageThumbnail(ImageThumbnail imageThumbnail) {
-        imageService.removeImage(imageThumbnail.getId());
-    }
-
     public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
         try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-
             BufferedImage bufferedImage = ImageIO.read(inputStream);
             BufferedImage thumbnail = Scalr.resize(bufferedImage, 150);
-
             ImageIO.write(thumbnail, fileType, byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         }
@@ -91,8 +70,7 @@ public class ImageViewHelper {
 
     public List<ImageThumbnail> findImagesByName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.findImagesByName(name, pageable)) {
-            new ImageThumbnail();
+        for (Image image : imageService.findByName(name, pageable)) {
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -101,7 +79,6 @@ public class ImageViewHelper {
     public List<ImageThumbnail> findImagesByNameOrTagName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.findImagesByNameOrTag(name, pageable)) {
-            new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -109,8 +86,7 @@ public class ImageViewHelper {
 
     public List<ImageThumbnail> findImagesByTagName(String name, Pageable pageable) {
         ArrayList<ImageThumbnail> listView = new ArrayList<>();
-        for (Image image : imageService.findImagesByTag(name, pageable)) {
-            new ImageThumbnail();
+        for (Image image : imageService.findByTag(name, pageable)) {
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
@@ -119,9 +95,24 @@ public class ImageViewHelper {
     public List<ImageThumbnail> getAllImagesPageable(Pageable pageable) {
         List<ImageThumbnail> listView = new ArrayList<>();
         for (Image image : imageService.getPageable(pageable)) {
-            new ImageThumbnail();
             listView.add(ImageThumbnail.builder().id(image.getId()).name(image.getFileName()).thumbnail(image.getThumbnail()).build());
         }
         return listView;
+    }
+
+    private List<Tag> tagList(List<TagView> tagViews) {
+        List<Tag> tags = new ArrayList<>();
+        for (TagView tagView : tagViews) {
+            tags.add(Tag.builder().name(tagView.getName()).build());
+        }
+        return tags;
+    }
+
+    private List<TagView> tagViewList(List<Tag> tags) {
+        List<TagView> tagViews = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagViews.add(TagView.builder().name(tag.getName()).build());
+        }
+        return tagViews;
     }
 }

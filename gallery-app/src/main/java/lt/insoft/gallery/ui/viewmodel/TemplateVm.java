@@ -54,5 +54,4 @@ public class TemplateVm implements Serializable {
         }
         return LOCALE_LT.getLanguage().toUpperCase();
     }
-
 }

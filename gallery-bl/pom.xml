@@ -7,7 +7,6 @@
     <groupId>lt.insoft.gallery</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>lt.insoft.gallery</groupId>
   <artifactId>gallery-bl</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>gallery-bl</name>
