@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+  <config-name>app-config</config-name>
+<!--  <system-config>-->
+<!--    <label-location>/WEB-INF/i18n/gallery.properties</label-location>-->
+<!--  </system-config>-->
+
+  <listener>
+    <listener-class>com.github.uyt.app.config.ZkInit</listener-class>
+  </listener>
+
+<!--  <library-property>-->
+<!--    <name>org.zkoss.web.preferred.locale</name>-->
+<!--    <value>lt_LT</value>-->
+<!--  </library-property>-->
+</zk>
