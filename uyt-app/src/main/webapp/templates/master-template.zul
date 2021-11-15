@@ -1,0 +1,23 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<!DOCTYPE html>
+<xh:html xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <xh:zkhead stubonly="false" />
+    <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
+    <script src="/webjars/jquery/3.6.0/jquery.min.js" />
+    <script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js" />
+    <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js" />
+    <title>ZK fw gallery app</title>
+  </head>
+  <xh:body viewModel="@id('vm') @init('com.github.uyt.app.vm.TemplateVm')">
+    <div>
+      <zul:apply templateURI="/templates/header.zul" />
+    </div>
+    <div>
+      <xh:div self="@{insert(pageContent)}" />
+    </div>
+  </xh:body>
+</xh:html>
