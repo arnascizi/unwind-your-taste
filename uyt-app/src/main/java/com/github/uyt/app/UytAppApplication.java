@@ -10,5 +10,4 @@ public class UytAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(UytAppApplication.class, args);
     }
-
 }
