@@ -1,8 +1,0 @@
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
-<?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
-  <div class="container mt-5">
-    <h4 class="mt-3 text-muted">errorr</h4>
-    <hr />
-  </div>
-</xh:div>
