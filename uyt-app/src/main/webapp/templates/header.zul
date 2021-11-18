@@ -2,15 +2,15 @@
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.TemplateVm')">
   <div class="container-fluid" role="navigation">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">${labels.title}</a>
+      <a class="navbar-brand" href="/">Title</a>
     </div>
     <ul class="nav navbar-nav">
       <xh:ul class="nav navbar-nav">
         <li>
-          <a class="nav-link" href="/gallery">${labels.gallery}</a>
+          <a class="nav-link" href="/gallery">Ingredients</a>
         </li>
         <li>
-          <a class="nav-link" href="/upload">${labels.upload}</a>
+          <a class="nav-link" href="/upload">Info</a>
         </li>
 <!--        <li if="${vm.isUserLogged() == 'true'}">-->
 <!--          <a class="nav-link" href="/logout">${labels.log.out}</a>-->
