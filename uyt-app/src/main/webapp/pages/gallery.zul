@@ -1,0 +1,40 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
+<?page complete="true"?>
+<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.GalleryVm')">
+  <div class="container mt-5">
+    <h4 class="mt-3 text-muted">${labels.gallery}</h4>
+    <hr />
+    <div class="input-group">
+      <zul:textbox type="text" placeholder="search" value="@save(vm.searchParam, before='doSearch')" mold="rounded" />
+      <div class="input-group-append">
+        <zul:combobox mold="rounded" selectedItem="@bind(vm.selectedSearch)">
+          <zul:comboitem label="${labels.all}" value="all" />
+          <zul:comboitem label="${labels.tag}" value="tag" />
+          <zul:comboitem label="${labels.name}" value="name" />
+        </zul:combobox>
+        <zul:button class="btn btn-sm text-white" type="button" style="background-color: #4a65a4" label="${labels.search}" onClick="@command('doSearch')" />
+      </div>
+    </div>
+    <div class="mt-2">
+      <div class="container">
+        <xh:div id="content" class="row">
+          <sh:forEach items="@bind(vm.imageThumbnailList)">
+            <xh:div class="card col-3 my-1">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-10 self-align-left">
+                    <zul:image class="card-img mx-auto my-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')"
+                            onClick="@command(vm.doSelectImage(each.id))" />
+                  </div>
+                </div>
+              </div>
+              <zul:label class="card-title mx-auto" style="font-size: 0.75rem" value="@load(each.name)" />
+            </xh:div>
+          </sh:forEach>
+        </xh:div>
+      </div>
+      <zul:paging totalSize="@load(vm.maxPages)" pageSize="@load(vm.pageSize)" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" />
+    </div>
+  </div>
+</xh:div>

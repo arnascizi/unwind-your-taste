@@ -2,13 +2,13 @@ HELP.md
 target/
 .mvn/wrapper/*
 */.mvn/wrapper/*
-gallery-model/.mvn/wrapper/*
-gallery-ui/.mvn/wrapper/*
+uyt-model/.mvn/wrapper/*
+uyt-app/.mvn/wrapper/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 mvnw
-gallery-bl/src/main/resources/postgres-data.sql
-gallery-bl/src/main/resources/data.sql
+uyt-bl/src/main/resources/postgres-data.sql
+uyt-bl/src/main/resources/data.sql
 
 ### STS ###
 .apt_generated

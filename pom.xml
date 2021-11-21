@@ -8,16 +8,37 @@
     <version>2.4.5</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>lt.insoft.gallery</groupId>
-  <artifactId>gallery-parent</artifactId>
+  <groupId>com.github.uyt</groupId>
+  <artifactId>uyt-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>gallery-parent</name>
+  <name>uyt-parent</name>
   <packaging>pom</packaging>
   <modules>
-    <module>gallery-bl</module>
-    <module>gallery-model</module>
-    <module>gallery-app</module>
+    <module>uyt-bl</module>
+    <module>uyt-model</module>
+    <module>uyt-app</module>
   </modules>
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>ZK CE</id>
+      <name>ZK CE Repository</name>
+      <url>https://mavensync.zkoss.org/maven2</url>
+    </repository>
+    <repository>
+      <id>ZK EVAL</id>
+      <name>ZK Evaluation Repository</name>
+      <url>https://mavensync.zkoss.org/eval</url>
+    </repository>
+    <repository>
+      <id>ZK PE/EE Evaluation</id>
+      <url>https://mavensync.zkoss.org/eval/</url>
+    </repository>
+  </repositories>
   <properties>
     <java.version>1.8</java.version>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -50,18 +71,18 @@
         <version>${urlrewrite.version}</version>
       </dependency>
       <dependency>
-        <groupId>lt.insoft.gallery</groupId>
-        <artifactId>gallery-bl</artifactId>
+        <groupId>com.github.uyt</groupId>
+        <artifactId>uyt-bl</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>lt.insoft.gallery</groupId>
-        <artifactId>gallery-model</artifactId>
+        <groupId>com.github.uyt</groupId>
+        <artifactId>uyt-model</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>lt.insoft.gallery</groupId>
-        <artifactId>gallery-app</artifactId>
+        <groupId>com.github.uyt</groupId>
+        <artifactId>uyt-app</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -99,12 +120,12 @@
       <dependency>
         <groupId>org.zkoss.zk</groupId>
         <artifactId>zuti</artifactId>
-        <version>${zk.version}</version>
+        <version>${zk.version}-Eval</version>
       </dependency>
       <dependency>
         <groupId>org.zkoss.zk</groupId>
         <artifactId>zkex</artifactId>
-        <version>${zk.version}</version>
+        <version>${zk.version}-Eval</version>
       </dependency>
       <dependency>
         <groupId>org.projectlombok</groupId>
