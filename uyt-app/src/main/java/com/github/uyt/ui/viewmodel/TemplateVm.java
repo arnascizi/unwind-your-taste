@@ -7,10 +7,6 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.web.Attributes;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.select.annotation.WireVariable;
-
-import com.github.uyt.ui.helper.UserViewHelper;
-import com.github.uyt.ui.view.LoggedUser;
 
 import lombok.Getter;
 
@@ -20,16 +16,14 @@ public class TemplateVm implements Serializable {
     private static final Locale LOCALE_LT = new Locale("lt", "LT");
     private static final Locale LOCALE_EN = Locale.ENGLISH;
 
-    @WireVariable(rewireOnActivate = true)
-    private transient UserViewHelper userViewHelper;
 
     @Getter
     private String username;
 
     @Init
     public void init() {
-        LoggedUser loggedUser = userViewHelper.getLoggedUser();
-        username = loggedUser != null ? loggedUser.getUsername() : "";
+        // LoggedUser loggedUser = userViewHelper.getLoggedUser();
+        // username = loggedUser != null ? loggedUser.getUsername() : "";
     }
 
     @Command
@@ -44,9 +38,9 @@ public class TemplateVm implements Serializable {
         Executions.sendRedirect(null);
     }
 
-    public boolean isUserLogged() {
-        return userViewHelper.getLoggedUser() != null;
-    }
+    // public boolean isUserLogged() {
+    //     return userViewHelper.getLoggedUser() != null;
+    // }
 
     public String getCurrentLanguage() {
         Object localeAttribute = Executions.getCurrent().getSession().getAttribute(Attributes.PREFERRED_LOCALE);

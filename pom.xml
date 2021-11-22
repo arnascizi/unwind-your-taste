@@ -35,7 +35,7 @@
       <url>https://mavensync.zkoss.org/eval</url>
     </repository>
     <repository>
-      <id>ZK PE/EE Evaluation</id>
+      <id>ZK PE Evaluation</id>
       <url>https://mavensync.zkoss.org/eval/</url>
     </repository>
   </repositories>
@@ -62,6 +62,8 @@
     <webjars.locator.version>0.40</webjars.locator.version>
     <spring.version>2.4.5</spring.version>
     <spring.security.version>2.1.0.RELEASE</spring.security.version>
+    <heroku.version>3.0.3</heroku.version>
+    <flyway.version>8.0.4</flyway.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -185,6 +187,11 @@
         <version>${hibernate.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>${flyway.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-entitymanager</artifactId>
         <version>${hibernate.entity.version}</version>
@@ -234,6 +241,16 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.heroku.sdk</groupId>
+          <artifactId>heroku-maven-plugin</artifactId>
+          <version>${heroku.version</version>
+          <configuration>
+            <processTypes>
+              <web>java $JAVA_OPTS -cp target/classes:target/dependency/* UYTApplication</web>
+            </processTypes>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
