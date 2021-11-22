@@ -7,25 +7,4 @@
     <to>/index.zul</to>
   </rule>
 
-  <rule>
-    <from>^/gallery$</from>
-    <to>/pages/gallery.zul</to>
-  </rule>
-
-  <rule>
-    <from>^/upload$</from>
-    <to>/pages/upload.zul</to>
-  </rule>
-
-  <rule>
-    <from>^/login$</from>
-    <to>/pages/login.zul</to>
-  </rule>
-
-  <rule>
-    <from>^/image?(.*)</from>
-    <set name="id">$1</set>
-    <to>/pages/image.zul</to>
-  </rule>
-
 </urlrewrite>
