@@ -46,15 +46,14 @@
       <groupId>org.zkoss.zk</groupId>
       <artifactId>zkplus</artifactId>
     </dependency>
-<!--    Premium only-->
-<!--    <dependency>-->
-<!--      <groupId>org.zkoss.zk</groupId>-->
-<!--      <artifactId>zuti</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.zkoss.zk</groupId>-->
-<!--      <artifactId>zkex</artifactId>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zuti</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.zkoss.zk</groupId>
+      <artifactId>zkex</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.tuckey</groupId>
       <artifactId>urlrewritefilter</artifactId>
