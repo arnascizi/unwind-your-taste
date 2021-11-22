@@ -1,1 +1,1 @@
-web: java -jar uyt-app/target/uyt-ui-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -jar uyt-app/target/uyt-ui-0.0.1-SNAPSHOT.jar
