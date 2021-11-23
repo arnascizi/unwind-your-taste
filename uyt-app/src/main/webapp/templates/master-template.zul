@@ -12,24 +12,24 @@
     <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js" />
     <title>${title}</title>
   </head>
-  <xh:body class="bg-template main-bg" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.TemplateVm')">
-    <div class="border">
-      <div class="d-flex">
-        <div class="column col-sm-8">
-          <header class="border">
-            <zul:apply templateURI="/templates/header.zul" />
-          </header>
-          <main class="border">
-            <xh:div self="@{insert(pageContent)}" />
-          </main>
-        </div>
-        <aside class="side-content col-sm-4 border">
-          side content
+  <xh:body class="main-bg p-5 bg-light" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.TemplateVm')">
+    <div class="container p-3 d-flex bg-dark">
+      <div class="row ml-2 p-1 col-sm-8">
+        <header class="col-sm-12">
+          <zul:apply templateURI="/templates/header.zul" />
+        </header>
+        <main class="col-sm-12">
+          <xh:div self="@{insert(pageContent)}" />
+        </main>
+        <footer class="col-sm-12">
+          footer
+        </footer>
+      </div>
+      <div class="col-sm-4 ml-3">
+        <aside class="col-sm-12 bg-light">
+<!--          <xh:div self="@{insert(pageContent)}" />-->
         </aside>
       </div>
-      <footer class="mt-0 border">
-        footer
-      </footer>
     </div>
   </xh:body>
 </xh:html>

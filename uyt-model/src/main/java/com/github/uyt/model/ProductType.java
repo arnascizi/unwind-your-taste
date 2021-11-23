@@ -10,19 +10,15 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "KATEGORIJA")
+@Table(name = "PRODUKTO_RUSIS")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Category {
+public class ProductType {
 
     @Id
     @Column(name = "ID")
     private Long id;
 
     @Column(name = "PAVADINIMAS")
-    private String categoryName;
-
-    @Column(name = "APRASYMAS")
-    private String categoryDescription;
+    private String productTypeName;
 }
-

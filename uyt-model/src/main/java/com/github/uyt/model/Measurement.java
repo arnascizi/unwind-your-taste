@@ -10,19 +10,18 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "KATEGORIJA")
+@Table(name = "MATAVIMO_VIENETAS")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Category {
+public class Measurement {
 
     @Id
     @Column(name = "ID")
     private Long id;
 
     @Column(name = "PAVADINIMAS")
-    private String categoryName;
+    private String measurementName;
 
-    @Column(name = "APRASYMAS")
-    private String categoryDescription;
+    @Column(name = "VIENETAS")
+    private String measurementValue;
 }
-
