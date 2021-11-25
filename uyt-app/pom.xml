@@ -10,7 +10,7 @@
   <artifactId>uyt-ui</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>uyt-app</name>
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
   <dependencies>
     <dependency>
       <groupId>com.github.uyt</groupId>
