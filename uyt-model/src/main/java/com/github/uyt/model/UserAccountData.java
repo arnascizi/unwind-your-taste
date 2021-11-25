@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -33,6 +34,7 @@ public class UserAccountData {
     @Column(name = "ATNAUJINIMO_DATA")
     private LocalDateTime updatedAt;
 
+    @ManyToOne
     private UserContactDetails userContactDetails;
 
     private Gender gender;

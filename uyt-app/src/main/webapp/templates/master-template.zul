@@ -10,26 +10,22 @@
     <script src="/webjars/jquery/3.6.0/jquery.min.js" />
     <script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js" />
     <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js" />
-    <title>${title}</title>
+    <title>${c:l('title')}</title>
   </head>
   <xh:body class="main-bg p-5 bg-light" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.TemplateVm')">
-    <div class="container p-3 d-flex bg-dark">
-      <div class="row ml-2 p-1 col-sm-8">
-        <header class="col-sm-12">
-          <zul:apply templateURI="/templates/header.zul" />
-        </header>
+    <div class="container p-3 d-block bg-dark">
+      <header class="col-sm-12">
+        <zul:apply templateURI="/templates/header.zul" />
+      </header>
         <main class="col-sm-12">
           <xh:div self="@{insert(pageContent)}" />
         </main>
         <footer class="col-sm-12">
           footer
         </footer>
-      </div>
-      <div class="col-sm-4 ml-3">
         <aside class="col-sm-12 bg-light">
-<!--          <xh:div self="@{insert(pageContent)}" />-->
+          <!--          <xh:div self="@{insert(pageContent)}" />-->
         </aside>
-      </div>
     </div>
   </xh:body>
 </xh:html>

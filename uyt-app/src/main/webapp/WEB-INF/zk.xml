@@ -17,9 +17,4 @@
     <name>org.zkoss.web.preferred.locale</name>
     <value>lt_LT</value>
   </library-property>
-
-  <library-property>
-    <name>org.zkoss.theme.preferred</name>
-    <value>iceblue</value>
-  </library-property>
 </zk>

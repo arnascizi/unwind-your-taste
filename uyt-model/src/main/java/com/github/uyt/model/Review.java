@@ -3,6 +3,8 @@ package com.github.uyt.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -24,4 +26,7 @@ public class Review {
 
     @Column(name = "VERTINIMAS")
     private Double rating;
+
+    @ManyToOne
+    private Recipe recipe;
 }

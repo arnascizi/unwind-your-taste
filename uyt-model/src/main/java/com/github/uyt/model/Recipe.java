@@ -45,19 +45,13 @@ public class Recipe {
 
     @Column(name = "PAVEIKSLIUKAS")
     private byte[] image;
-    //
-    // private User user;
-    //
-    // private Type type;
 
     @ManyToOne
     private Category category;
-    //
-    private Complexity complexity;
-    //
-    // private List<Review> reviews;
 
-    @ManyToMany(targetEntity = Product.class, fetch = FetchType.LAZY, mappedBy = "SUDETIS")
+    private Complexity complexity;
+
+    @ManyToMany(targetEntity = Product.class, fetch = FetchType.LAZY)
     private List<Product> productList;
 }
 

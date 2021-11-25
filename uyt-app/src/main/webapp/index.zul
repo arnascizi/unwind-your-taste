@@ -1,9 +1,10 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
   <div class="container mt-5">
-    <h4 class="mt-3 text-muted">${labels.welcome}</h4>
+    <h4 class="mt-3 text-muted">${c:l('welcome')}</h4>
     <hr />
-    <p class="text-muted m-3">${labels.index.content}</p>
+    <p class="text-muted m-3">${c:l('index.content')}</p>
   </div>
 </xh:div>

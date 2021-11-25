@@ -54,7 +54,9 @@
     <bootstrap.icons.version>1.4.1</bootstrap.icons.version>
     <javax.validation.version>2.0.1.Final</javax.validation.version>
     <hibernate.version>5.4.31.Final</hibernate.version>
+    <hibernate.model.version>6.0.0.Alpha3</hibernate.model.version>
     <hibernate.entity.version>5.2.3.Final</hibernate.entity.version>
+    <facebook.version>2.0.3.RELEASE</facebook.version>
     <postgresql.version>42.2.20</postgresql.version>
     <bootstrap.version>4.6.0</bootstrap.version>
     <bootstrap.jquery.version>3.6.0</bootstrap.jquery.version>
@@ -197,6 +199,11 @@
         <version>${hibernate.entity.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-jpamodelgen</artifactId>
+        <version>${hibernate.model.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.postgresql</groupId>
         <artifactId>postgresql</artifactId>
         <scope>runtime</scope>
@@ -221,6 +228,11 @@
         <groupId>org.imgscalr</groupId>
         <artifactId>imgscalr-lib</artifactId>
         <version>${imgscalr.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.social</groupId>
+        <artifactId>spring-social-facebook</artifactId>
+        <version>${facebook.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

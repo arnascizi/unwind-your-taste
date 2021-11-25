@@ -7,4 +7,9 @@
     <to>/index.zul</to>
   </rule>
 
+  <rule>
+    <from>^/$</from>
+    <to>/login.zul</to>
+  </rule>
+
 </urlrewrite>
