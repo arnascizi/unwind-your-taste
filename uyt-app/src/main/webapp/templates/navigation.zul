@@ -1,0 +1,4 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<xh:nav xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="header" class="bg-secondary py-1 border-top border-light mx-auto col-lg-6">
+  test
+</xh:nav>
