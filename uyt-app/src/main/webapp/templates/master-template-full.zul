@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <xh:zkhead stubonly="false" />
     <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.4.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="shortcut-icon" type="image/x-icon" href="${'/images/favicon.ico'}" />
     <link rel="icon" type="image/x-icon" href="${c:encodeURL('/images/favicon.ico')}" />
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css"/>
     <script src="/webjars/jquery/3.6.0/jquery.min.js" />
     <script src="/webjars/popper.js/1.12.9-1/umd/popper.min.js" />
     <script src="/webjars/bootstrap/4.6.0/js/bootstrap.min.js" />
@@ -25,12 +25,7 @@
     </xh:nav>
     <div class="container col-md-8 px-3 d-block">
       <div class="main-bg d-flex row mx-1">
-        <xh:div class="col-md-3 p-5 my-5 border-right border-secondary">
-          <xh:aside>
-            <zul:apply templateURI="/templates/sidebar.zul" />
-          </xh:aside>
-        </xh:div>
-        <div class="col-md-9 p-5 ">
+        <div class="col-md-12 p-5 ">
           <main>
             <xh:div self="@{insert(pageContent)}" />
           </main>

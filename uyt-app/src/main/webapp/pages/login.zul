@@ -1,0 +1,38 @@
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template-full.zul"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?page complete="true"?>
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RegisterVm')">
+  <div class="container">
+    <div class="signin-content">
+      <div class="signin-form">
+        <h2 class="form-title">Sign up</h2>
+        <form method="POST" class="register-form" id="login-form">
+          <div class="form-group">
+            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+            <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+          </div>
+          <div class="form-group">
+            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+            <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+          </div>
+          <div class="form-group form-button">
+            <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+          </div>
+        </form>
+        <div class="social-login">
+          <span class="social-label">Or login with</span>
+          <ul class="socials">
+            <li><a style="background-color: red;" href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a style="background-color: red;" href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a style="background-color: red;" href="#"><i class="fab fa-google"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</xh:div>

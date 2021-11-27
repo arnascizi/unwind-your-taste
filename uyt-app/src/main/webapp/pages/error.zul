@@ -1,6 +1,7 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template.zul"?>
-<?page complete="true"?><?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
   <div class="container mt-5">
     <h4 class="mt-3 text-muted">${c:l('common.error.unexpected')}</h4>
