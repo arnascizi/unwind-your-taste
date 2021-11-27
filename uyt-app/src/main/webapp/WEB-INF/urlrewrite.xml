@@ -8,8 +8,13 @@
   </rule>
 
   <rule>
-    <from>^/$</from>
-    <to>/login.zul</to>
+    <from>^/register$</from>
+    <to>/pages/register.zul</to>
+  </rule>
+
+  <rule>
+    <from>^/login$</from>
+    <to>/pages/login.zul</to>
   </rule>
 
 </urlrewrite>

@@ -1,5 +1,5 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<xh:aside xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Something</h5>
@@ -12,5 +12,5 @@
       <a class="card-link" href="/">A link</a>
     </div>
   </div>
-</xh:aside>
+</xh:div>
 
