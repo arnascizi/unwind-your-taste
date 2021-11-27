@@ -7,3 +7,20 @@
     width: 100%;
     height: 100vh;
 }
+
+nav {
+    height: 5vh;
+}
+
+ul {
+    list-style: none;
+}
+
+.navigation-btn {
+    height: 2.10em;
+    width: 12em;
+}
+
+.color-hoki {
+    background-color: #617e9f;
+}
