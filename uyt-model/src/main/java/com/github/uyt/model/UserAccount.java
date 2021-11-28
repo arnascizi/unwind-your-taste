@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Immutable
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserAccount {
 
     @Id
@@ -38,11 +38,12 @@ public class UserAccount {
     @Column(name = "SLAPTAZODIS")
     private String password;
 
-    private UserRole userRole;
+    @Column(name = "ROLE")
+    private String userRole;
 
-    @OneToMany
-    private List<Recipe> userRecipes;
-
-    @ManyToOne(targetEntity = UserAccountData.class, fetch = FetchType.LAZY)
-    private UserAccountData userAccountData;
+    // @OneToMany
+    // private List<Recipe> userRecipes;
+    //
+    // @ManyToOne(targetEntity = UserAccountData.class, fetch = FetchType.LAZY)
+    // private UserAccountData userAccountData;
 }

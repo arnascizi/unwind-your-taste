@@ -1,12 +1,12 @@
 package com.github.uyt.bl.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
 import com.github.uyt.model.UserAccount;
 
-@NoRepositoryBean
+@Repository
 public interface UserRepository extends JpaRepository<UserAccount, Long>   {
 
-    UserAccount getUserByUsername(String username);
+    UserAccount findByUsername(String username);
 }

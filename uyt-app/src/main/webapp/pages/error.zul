@@ -4,7 +4,7 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
   <div class="container mt-5">
-    <h4 class="mt-3 text-muted">${c:l('common.error.unexpected')}</h4>
+    <h4 class="mt-3 text-muted">${c:l('error.unexpected')}</h4>
     <hr />
     <img src="/images/coffee-spilled-keyboard.jpg" alt="error" heigh="8000" width="700"/>
   </div>

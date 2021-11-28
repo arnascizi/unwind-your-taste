@@ -2,34 +2,35 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RegisterVm')">
-  <div class="container">
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" validationMessages="@id('vmsgs')"
+        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RegisterVm')">
+  <div class="container-auth">
     <div class="signup-content">
       <div class="signup-form">
-        <h2 class="form-title">Sign up</h2>
+        <h2 class="form-title">${c:l('common.register')}</h2>
         <form method="POST" class="register-form" id="register-form">
           <div class="form-group">
-            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-            <input type="text" name="name" id="name" placeholder="Your Name"/>
+            <label for="name"><i class="bi bi-person-fill" /></label>
+            <input type="text" name="name" id="name" placeholder="${c:l('register.fullName')}"/>
           </div>
           <div class="form-group">
-            <label for="email"><i class="zmdi zmdi-email"></i></label>
-            <input type="email" name="email" id="email" placeholder="Your Email"/>
+            <label for="email"><i class="bi bi-envelope-open-fill" /></label>
+            <input type="email" name="email" id="email" placeholder="${c:l('register.email')}"/>
           </div>
           <div class="form-group">
-            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-            <input type="password" name="pass" id="pass" placeholder="Password"/>
+            <label for="pass"><i class="bi bi-lock-fill" /></label>
+            <input type="password" name="pass" id="pass" placeholder="${c:l('register.password')}"/>
           </div>
           <div class="form-group">
-            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+            <label for="re-pass"><i class="bi bi-lock" /></label>
+            <input type="password" name="re_pass" id="re_pass" placeholder="${c:l('register.password.repeat')}"/>
           </div>
           <div class="form-group">
             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+            <label for="agree-term" class="label-agree-term">${c:l('register.agree')}  <a href="#" class="term-service">${c:l('register.term')}</a></label>
           </div>
           <div class="form-group form-button">
-            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+            <input type="submit" name="signup" id="signup" class="form-submit" value="${c:l('common.register')}"/>
           </div>
         </form>
       </div>

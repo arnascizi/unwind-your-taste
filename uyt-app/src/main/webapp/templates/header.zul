@@ -1,5 +1,5 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="header" class="d-block navbar navbar-expand-lg navbar-dark color-hoki"
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" role="header" class="d-block navbar navbar-expand-lg navbar-dark color-hoki"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.TemplateVm')">
   <div class="container-fluid row mx-2">
     <div class="col-md-2 mx-2">
@@ -18,8 +18,8 @@
       </div>
     </div>
     <div class="col-md-2 mx-3 collapse navbar-collapse" id="navbarMenu">
-      <ul class="nav navbar-nav col-xs-4">
-        <li>
+      <xh:ul class="nav navbar-nav col-xs-4">
+        <xh:li>
           <div class="dropdown">
             <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${vm.currentLanguage}
@@ -29,18 +29,35 @@
               <xh:a class="dropdown-item" href="javascript:;" onClick="@command('doSetLocaleEn')">EN</xh:a>
             </div>
           </div>
-        </li>
-        <li>
-          <div class="dropdown">
-            <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">user</button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="/register">Registration</a>
-              <a class="dropdown-item" href="/login">Login</a>
+        </xh:li>
+        <sh:if test="@load(vm.userLogged)">
+          <xh:li>
+            <div class="dropdown">
+                <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">user</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">option 1</a>
+                  <a class="dropdown-item" href="#">option 2</a>
+                  <a class="dropdown-item" href="#">option 6</a>
+                  <a class="dropdown-item" href="#">option 4</a>
+                  <div class="dropdown-divider" />
+                  <a class="dropdown-item" href="/logout">${c:l('common.logout')}</a>
+                </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </xh:li>
+        </sh:if>
+        <sh:if test="@load(!vm.userLogged)">
+          <xh:li>
+            <a class="dropdown-item" href="/register">${c:l('common.register')}</a>
+          </xh:li>
+          <xh:li>
+            <a class="dropdown-item" href="/login">${c:l('common.login')}</a>
+          </xh:li>
+          <xh:li>
+            <a class="dropdown-item" href="/logout">${c:l('common.logout')}</a>
+          </xh:li>
+        </sh:if>
+      </xh:ul>
     </div>
   </div>
 </xh:div>

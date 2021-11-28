@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.uyt.bl.service.UserService;
 import com.github.uyt.ui.view.LoggedUser;
+import com.github.uyt.ui.view.UserView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,12 +27,12 @@ public class AccountHelper {
 
     public static boolean hasRole(String role) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        return securityContext.getAuthentication().getAuthorities().stream().anyMatch(r -> r.getAuthority().equals(role));
+        return securityContext.getAuthentication().getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals(role));
     }
 
-    public UserDetails getUserAccount(LoggedUser loggedUser) {
-        if (loggedUser.getUsername() != null) {
-            return userService.loadUserByUsername(loggedUser.getUsername());
+    public UserDetails getUserAccount(UserView userView) {
+        if (userView.getUsername() != null) {
+            return userService.loadUserByUsername(userView.getUsername());
         }
         return null;
     }
