@@ -4,6 +4,6 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
   <div class="container mt-5">
-    <h4 class="mt-3 text-muted">${c:l('welcome')}</h4>
+    <h4 class="mt-3 text-muted">${c:l('common.project.name')}</h4>
   </div>
 </xh:div>

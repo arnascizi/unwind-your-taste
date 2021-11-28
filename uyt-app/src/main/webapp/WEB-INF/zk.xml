@@ -3,6 +3,9 @@
   <config-name>app-config</config-name>
   <system-config>
     <label-location>/WEB-INF/i18n/common.properties</label-location>
+    <label-location>/WEB-INF/i18n/error.properties</label-location>
+    <label-location>/WEB-INF/i18n/login.properties</label-location>
+    <label-location>/WEB-INF/i18n/register.properties</label-location>
   </system-config>
 
   <desktop-config>

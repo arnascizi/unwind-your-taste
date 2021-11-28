@@ -8,17 +8,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.uyt.bl.repository.UserRepository;
+import com.github.uyt.model.UserAccount;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     @Autowired private UserRepository userRepository;
 
+    @Transactional
+    public void save(UserAccount userAccount) {
+        userRepository.save(userAccount);
+    }
+
     @Override
     public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
-        return new UserDetailsPrinciple(userRepository.getUserByUsername(username));
+        return new UserDetailsPrinciple(userRepository.findByUsername(username));
     }
 }

@@ -12,9 +12,10 @@ import org.zkoss.zk.ui.WebApp;
 import org.zkoss.zk.ui.util.WebAppInit;
 
 public class ZkInit implements WebAppInit {
+
     @Override
     public void init(WebApp wapp) {
-        for (String name : Arrays.asList("common")) {
+        for (String name : Arrays.asList("common, error, login, register")) {
             Labels.register(new ExtraLabelLocator("./i18n/" + name + ".properties"));
         }
     }
@@ -41,5 +42,4 @@ public class ZkInit implements WebAppInit {
             return locator.getResource(propertiesPath.replace(ZK_CLASS_PATH_PREFIX, ""));
         }
     }
-
 }
