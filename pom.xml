@@ -63,6 +63,8 @@
     <bootstrap.popper.version>1.12.9-1</bootstrap.popper.version>
     <webjars.locator.version>0.40</webjars.locator.version>
     <spring.version>2.4.5</spring.version>
+    <spring.oauth.version>2.3.3.RELEASE</spring.oauth.version>
+    <spring.social.version>2.0.3.RELEASE</spring.social.version>
     <spring.security.version>2.1.0.RELEASE</spring.security.version>
     <heroku.version>3.0.3</heroku.version>
     <flyway.version>8.0.4</flyway.version>
@@ -177,6 +179,16 @@
         <artifactId>spring-boot-starter-test</artifactId>
         <version>${spring.version}</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.social</groupId>
+        <artifactId>spring-social-facebook</artifactId>
+        <version>${spring.social.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        <version>${spring.oauth.version}</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>

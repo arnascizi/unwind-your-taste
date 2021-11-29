@@ -3,9 +3,11 @@ package com.github.uyt.ui.helper;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.github.uyt.bl.service.UserService;
+import com.github.uyt.model.UserAccount;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.UserView;
 
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class AccountHelper {
 
     private final UserService userService;
+    private final BCryptPasswordEncoder bCryptEncoder;
 
     public LoggedUser getLoggedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -30,10 +33,28 @@ public class AccountHelper {
         return securityContext.getAuthentication().getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals(role));
     }
 
-    public UserDetails getUserAccount(UserView userView) {
-        if (userView.getUsername() != null) {
-            return userService.loadUserByUsername(userView.getUsername());
+    // public UserDetails getUserAccount(UserView userView) {
+    //     if (userView.getUsername() != null) {
+    //         return userService.loadUserByUsername(userView.getUsername());
+    //     }
+    //     return null;
+    // }
+
+    public void register(UserView userView) {
+        if (userView != null) {
+            userService.save(buildUserAccount(userView));
         }
-        return null;
     }
+
+
+    private UserAccount buildUserAccount(UserView userView) {
+        return UserAccount.builder()
+                .username(userView.getUsername())
+                .password(bCryptEncoder.encode(userView.getPassword()))
+                .userRole(userView.getRole())
+                .email(userView.getEmail())
+                .build();
+    }
+
+
 }

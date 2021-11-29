@@ -14,6 +14,7 @@ import org.hibernate.annotations.Immutable;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +22,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "VARTOTOJAS")
 @Getter
 @Immutable
+@Builder
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class UserAccount {
 
     @Id
@@ -40,10 +42,7 @@ public class UserAccount {
 
     @Column(name = "ROLE")
     private String userRole;
-
+    //
     // @OneToMany
     // private List<Recipe> userRecipes;
-    //
-    // @ManyToOne(targetEntity = UserAccountData.class, fetch = FetchType.LAZY)
-    // private UserAccountData userAccountData;
 }

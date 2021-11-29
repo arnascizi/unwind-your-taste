@@ -17,4 +17,14 @@
     <to>/pages/login.zul</to>
   </rule>
 
+  <rule>
+    <from>^/about</from>
+    <to>/pages/about.zul</to>
+  </rule>
+
+  <rule>
+    <from>^/cocktails</from>
+    <to>/pages/cocktails.zul</to>
+  </rule>
+
 </urlrewrite>

@@ -11,12 +11,10 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserView {
-    private static final long serialVersionUID = -3641262556141226006L;
+public class Review {
 
-    private String username;
-    private String password;
-    private String email;
-    private String role;
-
+    private Long id;
+    private UserView userView;
+    private String comment;
+    private double evaluation;
 }

@@ -21,40 +21,34 @@ import lombok.Setter;
 public class RegisterVm implements Serializable {
     private static final long serialVersionUID = -4625796528885664236L;
 
-    private final static String ERROR_EMPTY = "common.error.empty";
-    private final static String ERR_NOT_LONGER_THAN = "common.error.not.longer";
+    private final static String ERROR_EMPTY = "error.empty";
+    private final static String ERR_NOT_LONGER_THAN = "error.not.longer";
     private final static String EMAIL = "email";
     private final static String PASSWORD = "password";
     private final static int PASSWORD_MAX_LENGTH = 8;
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
 
-    @Getter @Setter private UserView model;
+    @Getter @Setter private UserView model = new UserView();
     @Getter private Map<String, String> vmsgs = new HashMap<>();
     @Getter private String errorNotificationMessage;
 
-
     @Init
     public void init() {
-        model = new UserView();
+        model.setRole("ROLE_ADMIN");
     }
-    //
-    // @Command
-    // @NotifyChange("vmsgs")
-    // public void doRegister() {
-    //     if (isRegistrationValid()) {
-    //         Clients.submitForm("register-form");
-    //     }
-    // }
 
     @Command
-    @NotifyChange({"vmsgs","model"})
-    public void doSubmit() {
-        if (!isRegistrationValid()) {
-            return;
-        }
+    @NotifyChange("vmsgs")
+    public void doRegister() {
+        Clients.submitForm("register-form");
+        accountHelper.register(model);
+    }
 
-        Clients.submitForm("loginForm");
+    @Command
+    @NotifyChange("vmsgs")
+    public void doSubmit() {
+        Clients.submitForm("login-form");
     }
 
     private boolean isRegistrationValid() {

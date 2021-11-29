@@ -36,7 +36,7 @@
           </main>
         </div>
       </div>
-      <footer class="col-sm-12 p-5 mx-1 border color-hoki">
+      <footer class="col-sm-12 p-3 mx-1 border color-hoki">
         <!-- TODO Some additional info  -->
         <div class="container-fluid d-flex row">
           <div class="col-md-3 mx-1">

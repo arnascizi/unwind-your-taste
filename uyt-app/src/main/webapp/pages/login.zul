@@ -8,19 +8,20 @@
     <div class="signin-content">
       <div class="signin-form">
         <h2 class="form-title">${c:l('common.login')}</h2>
-        <form action="/login" method="POST" id="loginForm">
+        <form action="/login" method="POST" id="login-form">
           <div class="form-group">
-            <label for="email"><i class="bi bi-person-fill" /></label>
-            <zul:textbox type="text" name="email" id="email" placeholder="${c:l('login.username')}"
+<!--            <label for="email"><i class="bi bi-person-fill" /></label>-->
+            <zul:textbox type="text" name="username" id="username" placeholder="${c:l('login.username')}"
                     value="@load(vm.model.username) @save(vm.model.username, before='doSubmit')" errorMessage="@load(vmsgs['email']) "/>
+            <xh:textbox value="@load(vm.model.username)" />
           </div>
           <div class="form-group">
-            <label for="password"><i class="bi bi-lock-fill" /></label>
+<!--            <label for="password"><i class="bi bi-lock-fill" /></label>-->
             <zul:textbox type="password" name="password" id="password" placeholder="${c:l('login.password')}"
                     value="@load(vm.model.password) @save(vm.model.password, before='doSubmit')" errorMessage="@load(vmsgs['password'])" />
           </div>
           <div class="form-group">
-            <input type="checkbox" name="remember-me" id="rememberMe" class="agree-term" />
+            <input type="checkbox" name="rememberMe" id="rememberMe" class="agree-term" />
             <label for="rememberMe" class="label-agree-term">${c:l('login.remember')}</label>
           </div>
           <div class="form-group form-button">
@@ -30,9 +31,9 @@
         <div class="social-login">
           <span class="social-label">${c:l('login.other')}</span>
           <ul class="socials row">
-            <li><a class="btn btn-primary btn-sm" href="#"><i class="bi bi-facebook" /></a></li>
+            <li><a class="btn btn-primary btn-sm" href="/oauth2/authorization/facebook"><i class="bi bi-facebook" /></a></li>
             <li><a class="btn btn-primary btn-sm" href="#"><i class="bi bi-twitter" /></a></li>
-            <li><a class="btn btn-danger btn-sm" href="#"><i class="bi bi-google" /></a></li>
+            <li><a class="btn btn-danger btn-sm" href="/oauth2/authorization/google"><i class="bi bi-google" /></a></li>
           </ul>
         </div>
       </div>
