@@ -23,29 +23,25 @@ public class AccountHelper {
     public LoggedUser getLoggedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
-            return LoggedUser.builder().username(((UserDetails) principal).getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities())).build();
+            return LoggedUser.builder()
+                    .username(((UserDetails) principal)
+                    .getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities()))
+                    .build();
         }
         return null;
     }
 
     public static boolean hasRole(String role) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        return securityContext.getAuthentication().getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals(role));
+        return securityContext.getAuthentication().getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(role));
     }
-
-    // public UserDetails getUserAccount(UserView userView) {
-    //     if (userView.getUsername() != null) {
-    //         return userService.loadUserByUsername(userView.getUsername());
-    //     }
-    //     return null;
-    // }
 
     public void register(UserView userView) {
         if (userView != null) {
             userService.save(buildUserAccount(userView));
         }
     }
-
 
     private UserAccount buildUserAccount(UserView userView) {
         return UserAccount.builder()
@@ -55,6 +51,5 @@ public class AccountHelper {
                 .email(userView.getEmail())
                 .build();
     }
-
 
 }

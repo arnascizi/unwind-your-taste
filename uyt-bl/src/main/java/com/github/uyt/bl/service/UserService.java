@@ -1,6 +1,5 @@
 package com.github.uyt.bl.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,15 +16,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    @Autowired private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Transactional
-    public void save(UserAccount userAccount) {
+    public void save(@NonNull UserAccount userAccount) {
         userRepository.save(userAccount);
     }
 
     @Override
     public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
-        return new UserDetailsPrinciple(userRepository.findByUsername(username));
+        UserAccount account = userRepository.findByUsername(username);
+        if (account == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new UserDetailsPrinciple(account);
     }
 }

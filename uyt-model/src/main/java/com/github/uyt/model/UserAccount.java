@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "VARTOTOJAS")
 @Getter
-@Immutable
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,7 +41,8 @@ public class UserAccount {
 
     @Column(name = "ROLE")
     private String userRole;
-    //
+
+    private boolean enabled = true;
     // @OneToMany
     // private List<Recipe> userRecipes;
 }

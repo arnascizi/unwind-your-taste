@@ -250,7 +250,6 @@ input[type=checkbox]:not(old):checked + label > span:before {
     font-size: 11px;
     line-height: 1.2;
     text-align: center;
-    font-family: 'Material-Design-Iconic-Font';
     font-weight: bold;
 }
 
@@ -295,7 +294,6 @@ label.valid {
 }
 
 label.valid:after {
-    font-family: 'Material-Design-Iconic-Font';
     content: '\f269';
     width: 100%;
     height: 100%;
@@ -313,10 +311,6 @@ label.valid:after {
     -webkit-transform: translateY(0);
     -o-transform: translateY(0);
     -ms-transform: translateY(0);
-}
-
-.material-icons-name {
-    font-size: 18px;
 }
 
 .signin-content {
