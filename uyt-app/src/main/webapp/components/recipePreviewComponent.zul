@@ -1,0 +1,11 @@
+<xh:div xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns="native" viewModel="@id('vm') @init(arg.includer)">
+  <div class="mx-3 ">
+    <div class="col-xs-6 bg-secondary card px-5">
+      <div class="card-body">
+        <img class="card-img" />
+        <h5 class="card-title">text</h5>
+        <a class="btn btn-primary btn-sm">link</a>
+      </div>
+    </div>
+  </div>
+</xh:div>

@@ -4,7 +4,7 @@
 
   <rule>
     <from>^/$</from>
-    <to>/index.zul</to>
+    <to>/pages/index.zul</to>
   </rule>
 
   <rule>
@@ -25,6 +25,11 @@
   <rule>
     <from>^/cocktails</from>
     <to>/pages/cocktails.zul</to>
+  </rule>
+
+  <rule>
+    <from>^/cocktailEntry</from>
+    <to>/pages/cocktailEntry.zul</to>
   </rule>
 
 </urlrewrite>

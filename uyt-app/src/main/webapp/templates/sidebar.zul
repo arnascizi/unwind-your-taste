@@ -1,17 +1,8 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
-  sidebar!!
-  <!--  <div class="card">-->
-<!--    <div class="card-body">-->
-<!--      <h5 class="card-title">Something</h5>-->
-<!--      <a class="card-link" href="/#">A link</a>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="card my-1">-->
-<!--    <div class="card-body">-->
-<!--      <h5 class="card-title">Something</h5>-->
-<!--      <a class="card-link" href="/#">A link</a>-->
-<!--    </div>-->
-<!--  </div>-->
+  <h5>Recomendations</h5>
+  <div>
+<!--    <zul:calendar />-->
+  </div>
 </xh:div>
 

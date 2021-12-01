@@ -2,10 +2,40 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
-  <div class="container mt-5">
-    <form>
-      some content
-    </form>
+<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}">
+  <div class="container mt-0">
+    <h3 class="text-muted">Page Title</h3>
+    <hr/>
+    <a class="btn btn-outline-success" href="/cocktailEntry">Add cocktail</a>
+<!--    <div class="input-group">-->
+<!--      <zul:textbox type="text" placeholder="search" value="@save(vm.searchParam, before='doSearch')" mold="rounded" />-->
+<!--      <div class="input-group-append">-->
+<!--        <zul:combobox mold="rounded">-->
+<!--          <zul:comboitem label="${labels.all}" value="all" />-->
+<!--          <zul:comboitem label="${labels.tag}" value="tag" />-->
+<!--          <zul:comboitem label="${labels.name}" value="name" />-->
+<!--        </zul:combobox>-->
+<!--        <zul:button class="btn btn-sm text-white" type="button" style="background-color: #4a65a4" label="${labels.search}"  />-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="mt-2">-->
+<!--      <div class="container">-->
+<!--        <xh:div id="content" class="row">-->
+<!--&lt;!&ndash;          <sh:forEach items="@bind(vm.imageThumbnailList)">&ndash;&gt;-->
+<!--            <xh:div class="card col-3 my-1">-->
+<!--              <div class="container-fluid">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-10 self-align-left">-->
+<!--&lt;!&ndash;                    <zul:image class="card-img mx-auto my-1" style="height: 150px; width: 200px;" />&ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <zul:label class="card-title mx-auto" style="font-size: 0.75rem"  />-->
+<!--            </xh:div>-->
+<!--&lt;!&ndash;          </sh:forEach>&ndash;&gt;-->
+<!--        </xh:div>-->
+<!--      </div>-->
+<!--      <zul:paging totalSize="3" pageSize="10" activePage="0" onClick="" mold="os" />-->
+<!--    </div>-->
   </div>
 </xh:div>

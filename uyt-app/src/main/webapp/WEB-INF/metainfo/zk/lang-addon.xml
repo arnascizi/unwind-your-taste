@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE language-addon>
+<language-addon>
+  <addon-name>uyt-addons</addon-name>
+  <language-name>xul/html</language-name>
+  <depends>zkmax</depends>
+
+  <component>
+    <component-name>recipePreviewComponent</component-name>
+    <component-class>com.github.uyt.ui.components.RecipePreviewComponent</component-class>
+    <macro-uri>/components/recipePreviewComponent.zul</macro-uri>
+  </component>
+
+</language-addon>
