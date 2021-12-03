@@ -4,7 +4,7 @@
   <div class="container-fluid row mx-2">
     <div class="col-md-2 mx-2">
       <div class="navbar-header p-2">
-        <a class="navbar-brand" href="/" >${c:l('common.title')}</a>
+        <a class="navbar-brand" href="/">${c:l('common.project.name')}</a>
       </div>
     </div>
     <div class="col-sm-8 col-md-6 col-lg-5 ml-5 pl-5">
@@ -12,7 +12,7 @@
         <zul:textbox sclass="form-control form-control-sm" type="text" placeholder="${c:l('common.search')}" />
         <div class="input-group-append">
           <button class="btn btn-light btn-sm">
-            <i class="bi bi-search"></i>
+            <i class="bi bi-search" />
           </button>
         </div>
       </div>
@@ -30,35 +30,15 @@
             </div>
           </div>
         </li>
-<!--        <sh:if test="@load(vm.userLogged)">-->
-<!--          <xh:li>-->
-<!--            <div class="dropdown">-->
-<!--                <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton"-->
-<!--                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">user</button>-->
-<!--                <div class="dropdown-menu dropdown-menu-right">-->
-<!--                  <a class="dropdown-item" href="#">option 1</a>-->
-<!--                  <a class="dropdown-item" href="#">option 2</a>-->
-<!--                  <a class="dropdown-item" href="#">option 6</a>-->
-<!--                  <a class="dropdown-item" href="#">option 4</a>-->
-<!--                  <div class="dropdown-divider" />-->
-<!--                  <a class="dropdown-item" href="/logout">${c:l('common.logout')}</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--          </xh:li>-->
-<!--        </sh:if>-->
-
-          <li class="nav-item">
-            <a class="nav-link" href="/#">${vm.username}</a>
-          </li>
         <li class="nav-item">
-            <a class="nav-link" href="/register">${c:l('common.register')}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">${c:l('common.login')}</a>
-          </li>
-<!--          <xh:li>-->
-<!--            <a class="dropdown-item" href="/logout">${c:l('common.logout')}</a>-->
-<!--          </xh:li>-->
+          <a class="nav-link" href="/#">${vm.username}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">${c:l('common.register')}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">${c:l('common.login')}</a>
+        </li>
       </ul>
     </div>
   </div>

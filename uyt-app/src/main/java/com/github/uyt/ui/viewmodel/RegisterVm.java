@@ -21,11 +21,11 @@ import lombok.Setter;
 public class RegisterVm implements Serializable {
     private static final long serialVersionUID = -4625796528885664236L;
 
-    private final static String ERROR_EMPTY = "error.empty";
-    private final static String ERR_NOT_LONGER_THAN = "error.not.longer";
-    private final static String EMAIL = "email";
-    private final static String PASSWORD = "password";
-    private final static int PASSWORD_MAX_LENGTH = 8;
+    private static final String ERROR_EMPTY = "error.empty";
+    private static final String ERR_NOT_LONGER_THAN = "error.not.longer";
+    private static final String EMAIL = "email";
+    private static final String PASSWORD = "password";
+    private static final int PASSWORD_MAX_LENGTH = 8;
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
 

@@ -7,7 +7,7 @@
     <groupId>com.github.uyt</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>uyt-ui</artifactId>
+  <artifactId>uyt-app</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>uyt-app</name>
   <packaging>war</packaging>
@@ -97,6 +97,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-oauth2-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security.oauth.boot</groupId>
+      <artifactId>spring-security-oauth2-autoconfigure</artifactId>
     </dependency>
     <dependency>
       <groupId>org.imgscalr</groupId>

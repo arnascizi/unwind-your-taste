@@ -23,7 +23,7 @@
       <zul:apply templateURI="/templates/navigation.zul" />
     </xh:nav>
     <div class="container col-md-8 px-3 d-block">
-      <div class="main-bg d-flex row mx-1">
+      <xh:div class="main-bg d-flex row mx-1">
         <xh:div class="col-md-3 p-5 my-5 border-right border-secondary">
           <xh:aside>
             <zul:apply templateURI="/templates/sidebar.zul" />
@@ -34,7 +34,7 @@
             <xh:div self="@{insert(pageContent)}" />
           </main>
         </div>
-      </div>
+      </xh:div>
       <footer class="col-sm-12 p-3 mx-1 border color-hoki">
         <!-- TODO Some additional info  -->
         <div class="container-fluid d-flex row">

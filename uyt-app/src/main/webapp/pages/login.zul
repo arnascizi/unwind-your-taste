@@ -32,7 +32,7 @@
           <span class="social-label">${c:l('login.other')}</span>
           <ul class="socials row">
             <li><a class="btn btn-primary btn-sm" href="/oauth2/authorization/facebook"><i class="bi bi-facebook" /></a></li>
-            <li><a class="btn btn-primary btn-sm" href="#"><i class="bi bi-twitter" /></a></li>
+<!--            <li><a class="btn btn-primary btn-sm" href="#"><i class="bi bi-twitter" /></a></li>-->
             <li><a class="btn btn-danger btn-sm" href="/oauth2/authorization/google"><i class="bi bi-google" /></a></li>
           </ul>
         </div>

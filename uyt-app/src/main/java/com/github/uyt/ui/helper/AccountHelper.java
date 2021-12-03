@@ -21,7 +21,8 @@ public class AccountHelper {
     private final BCryptPasswordEncoder bCryptEncoder;
 
     public LoggedUser getLoggedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(principal);
         if (principal instanceof UserDetails) {
             return LoggedUser.builder()
                     .username(((UserDetails) principal)

@@ -2,39 +2,38 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
+<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
   <div class="container mt-5">
     <h4 class="mt-3 text-muted">Popular categories</h4>
-    <p class="text-muted">${c:l('common.content')}</p>
+    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum velit? Ab cum eius expedita praesentium rem.</p>
     <div class="row d-flex">
-
-      <div class="mx-3 ">
-        <div class="col-xs-6 bg-secondary card px-5">
-          <div class="card-body">
-            <img class="card-img"/>
-            <h5 class="card-title">text</h5>
-            <a class="btn btn-primary btn-sm">link</a>
-          </div>
-        </div>
+      <div class="col-xs-6">
+        <zul:recipePreviewComponent />
       </div>
-
+      <div class="col-xs-6">
+        <zul:recipePreviewComponent />
+      </div>
+      <div class="col-xs-6">
+        <zul:recipePreviewComponent />
+      </div>
     </div>
-
   </div>
   <div class="container mt-5">
-    <h4 class="mt-3 text-muted">Latest<span class="badge badge-light"><button class="btn btn-outline-secondary btn-sm" href="#">View all</button></span></h4>
+    <h4 class="mt-3 text-muted">Latest
+      <span class="badge badge-light">
+        <button class="btn btn-outline-secondary btn-sm" href="#">View all</button>
+      </span>
+    </h4>
     <div class="row d-flex">
-
-      <div class="mx-3 ">
-        <div class="col-xs-6 bg-secondary card px-5">
-          <div class="card-body">
-            <img class="card-img"/>
-            <h5 class="card-title">text</h5>
-            <a class="btn btn-primary btn-sm">link</a>
-          </div>
-        </div>
+      <div class="col-xs-6">
+        <zul:recipePreviewComponent />
       </div>
-
+      <div class="col-xs-6">
+        <zul:recipePreviewComponent />
+      </div>
+      <div class="col-xs-6">
+        <zul:recipePreviewComponent />
+      </div>
     </div>
   </div>
 

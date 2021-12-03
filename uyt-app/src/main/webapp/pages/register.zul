@@ -25,9 +25,9 @@
 <!--            <label for="passRepeat"><i class="bi bi-lock" /></label>-->
             <zul:textbox type="password" name="passRepeat" id="passRepeat" value="@load(vm.model.password) @save(vm.model.password, before='doRegister')" placeholder="${c:l('register.password.repeat')}"/>
           </div>
-          <div class="form-group">
-            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-            <label for="agree-term" class="label-agree-term">${c:l('register.agree')}  <a href="#" class="term-service">${c:l('register.term')}</a></label>
+          <div class="form-check">
+            <input id="agree-term" name="agree-term" type="checkbox" class="form-check-input" label="${c:l('register.term')}" />
+            <label for="agree-term" class="form-check-label">${c:l('register.agree')}  <a href="https://www.freeprivacypolicy.com/live/58ac418a-b6e1-45a5-976c-7204104d18a5" target="_blank" >${c:l('register.term')}</a></label>
           </div>
           <div class="form-group form-button">
             <xh:input type="submit" name="signup" id="signup" class="form-submit" onClick="@command('doRegister')" value="${c:l('common.register')}"/>

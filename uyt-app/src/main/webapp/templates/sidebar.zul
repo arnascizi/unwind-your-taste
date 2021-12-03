@@ -1,8 +1,14 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
-  <h5>Recomendations</h5>
+  <h5 class="ml-4">Recomendations</h5>
+  <hr/>
   <div>
-<!--    <zul:calendar />-->
+    <div class="col-xs-6 mb-2">
+      <zul:recipePreviewComponent />
+    </div>
+    <div class="col-xs-6">
+      <zul:recipePreviewComponent />
+    </div>
   </div>
 </xh:div>
 
