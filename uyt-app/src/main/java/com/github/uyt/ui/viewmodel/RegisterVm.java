@@ -35,7 +35,7 @@ public class RegisterVm implements Serializable {
 
     @Init
     public void init() {
-        model.setRole("ROLE_ADMIN");
+        // model.setRole("ROLE_ADMIN");
     }
 
     @Command

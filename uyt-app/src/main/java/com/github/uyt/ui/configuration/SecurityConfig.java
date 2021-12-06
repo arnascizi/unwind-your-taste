@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .authorizeRequests(authorize -> authorize.anyRequest().permitAll())
-                .oauth2Login().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login")
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
+                .oauth2Login().loginPage("/login").defaultSuccessUrl("/", true).failureUrl("/login")
+                .and().logout().logoutUrl("/logout").deleteCookies("JSESSIONID").logoutSuccessUrl("/");
     }
 
     @Bean

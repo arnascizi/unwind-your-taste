@@ -69,6 +69,8 @@
     <spring.oauth.autoconfigure.version>2.6.1</spring.oauth.autoconfigure.version>
     <heroku.version>3.0.3</heroku.version>
     <flyway.version>8.0.4</flyway.version>
+    <google.oauth.services.version>v2-rev157-1.25.0</google.oauth.services.version>
+    <google.oauth.client.version>1.31.0</google.oauth.client.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -256,6 +258,16 @@
         <groupId>org.springframework.social</groupId>
         <artifactId>spring-social-facebook</artifactId>
         <version>${facebook.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.apis</groupId>
+        <artifactId>google-api-services-oauth2</artifactId>
+        <version>${google.oauth.services.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.oauth-client</groupId>
+        <artifactId>google-oauth-client-servlet</artifactId>
+        <version>${google.oauth.client.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

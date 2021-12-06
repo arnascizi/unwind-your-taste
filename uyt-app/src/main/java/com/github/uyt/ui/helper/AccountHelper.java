@@ -3,8 +3,8 @@ package com.github.uyt.ui.helper;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.zkoss.zk.ui.Sessions;
 
 import com.github.uyt.bl.service.UserService;
 import com.github.uyt.model.UserAccount;
@@ -18,16 +18,12 @@ import lombok.RequiredArgsConstructor;
 public class AccountHelper {
 
     private final UserService userService;
-    private final BCryptPasswordEncoder bCryptEncoder;
 
     public LoggedUser getLoggedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(principal);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        System.out.println(Sessions.getCurrent().getAttribute("userCredential"));
         if (principal instanceof UserDetails) {
-            return LoggedUser.builder()
-                    .username(((UserDetails) principal)
-                    .getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities()))
-                    .build();
+            return LoggedUser.builder().username(((UserDetails) principal).getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities())).build();
         }
         return null;
     }
@@ -47,9 +43,6 @@ public class AccountHelper {
     private UserAccount buildUserAccount(UserView userView) {
         return UserAccount.builder()
                 .username(userView.getUsername())
-                .password(bCryptEncoder.encode(userView.getPassword()))
-                .userRole(userView.getRole())
-                .email(userView.getEmail())
                 .build();
     }
 
