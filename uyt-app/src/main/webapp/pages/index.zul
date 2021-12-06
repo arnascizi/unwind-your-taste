@@ -2,20 +2,15 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
+<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IndexVm')">
   <div class="container mt-5">
     <h4 class="mt-3 text-muted">Popular categories</h4>
     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum velit? Ab cum eius expedita praesentium rem.</p>
     <div class="row d-flex">
       <div class="col-xs-6">
-        <zul:recipePreviewComponent />
+<!--        <zul:recipePreviewComponent model="@load(vm.recipePreviewView)" />-->
       </div>
-      <div class="col-xs-6">
-        <zul:recipePreviewComponent />
-      </div>
-      <div class="col-xs-6">
-        <zul:recipePreviewComponent />
-      </div>
+
     </div>
   </div>
   <div class="container mt-5">
@@ -26,14 +21,9 @@
     </h4>
     <div class="row d-flex">
       <div class="col-xs-6">
-        <zul:recipePreviewComponent />
+<!--        <zul:recipePreviewComponent model="@load(vm.recipePreviewView)" />-->
       </div>
-      <div class="col-xs-6">
-        <zul:recipePreviewComponent />
-      </div>
-      <div class="col-xs-6">
-        <zul:recipePreviewComponent />
-      </div>
+
     </div>
   </div>
 

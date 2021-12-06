@@ -4,33 +4,68 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" validationMessages="@id('vmsgs')"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RegisterVm')">
-  <div class="container-auth">
-    <div class="signup-content">
-      <div class="signup-form">
-        <h2 class="form-title">${c:l('common.register')}</h2>
-        <form method="POST" class="register-form" id="register-form">
+  <div class="">
+    <div class="p-5">
+      <div class="mx-auto  col-sm-12 col-md-8 col-lg-6">
+        <h2 class="mb-4">${c:l('common.register')}</h2>
+        <form action="/register" method="POST" id="register-form">
+
           <div class="form-group">
-<!--            <label for="name"><i class="bi bi-person-fill" /></label>-->
-            <zul:textbox type="text" name="name" id="name" value="@load(vm.model.username) @save(vm.model.username, before='doRegister')" placeholder="${c:l('register.fullName')}"/>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="bi bi-person-fill" />
+                </div>
+              </div>
+              <zul:textbox type="text" sclass="form-control" name="name" id="name" value="@load(vm.model.username) @save(vm.model.username, before='doRegister')"
+                      placeholder="${c:l('register.fullName')}" />
+            </div>
           </div>
+
           <div class="form-group">
-<!--            <label for="email"><i class="bi bi-envelope-open-fill" /></label>-->
-            <zul:textbox type="email" name="email" id="email" value="@load(vm.model.email) @save(vm.model.email, before='doRegister')" placeholder="${c:l('register.email')}"/>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="bi bi-envelope-open-fill" />
+                </div>
+              </div>
+              <zul:textbox type="email" sclass="form-control" name="email" id="email" value="@load(vm.model.email) @save(vm.model.email, before='doRegister')" placeholder="${c:l('register.email')}" />
+            </div>
           </div>
+
           <div class="form-group">
-<!--            <label for="pass"><i class="bi bi-lock-fill" /></label>-->
-            <zul:textbox type="password" name="pass" id="pass" value="@load(vm.model.password) @save(vm.model.password, before='doRegister')" placeholder="${c:l('register.password')}"/>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="bi bi-lock-fill" />
+                </div>
+              </div>
+              <zul:textbox type="password" sclass="form-control" name="pass" id="pass" value="@load(vm.model.password) @save(vm.model.password, before='doRegister')"
+                      placeholder="${c:l('register.password')}" />
+            </div>
           </div>
+
           <div class="form-group">
-<!--            <label for="passRepeat"><i class="bi bi-lock" /></label>-->
-            <zul:textbox type="password" name="passRepeat" id="passRepeat" value="@load(vm.model.password) @save(vm.model.password, before='doRegister')" placeholder="${c:l('register.password.repeat')}"/>
-          </div>
-          <div class="form-check">
-            <input id="agree-term" name="agree-term" type="checkbox" class="form-check-input" label="${c:l('register.term')}" />
-            <label for="agree-term" class="form-check-label">${c:l('register.agree')}  <a href="https://www.freeprivacypolicy.com/live/58ac418a-b6e1-45a5-976c-7204104d18a5" target="_blank" >${c:l('register.term')}</a></label>
-          </div>
-          <div class="form-group form-button">
-            <xh:input type="submit" name="signup" id="signup" class="form-submit" onClick="@command('doRegister')" value="${c:l('common.register')}"/>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="bi bi-lock" />
+                  </div>
+                </div>
+                <zul:textbox type="password" sclass="form-control" name="passRepeat" id="passRepeat" value="@load(vm.model.password) @save(vm.model.password, before='doRegister')"
+                        placeholder="${c:l('register.password.repeat')}" />
+              </div>
+            </div>
+
+<!--          <div class="form-row">-->
+<!--            <div class="check-form">-->
+<!--                <input id="agree-term" name="agree-term" class="form-check-input " type="checkbox" />-->
+<!--                <label for="agree-term" class="form-check-label">${c:l('register.agree')}</label>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <div class="form-group">
+            <xh:input type="submit" name="signup" id="signup" class="btn btn-primary btn-sm col-sm-12 col-md-6 col-lg-4" onClick="@command('doRegister')" value="${c:l('common.register')}" />
           </div>
         </form>
       </div>

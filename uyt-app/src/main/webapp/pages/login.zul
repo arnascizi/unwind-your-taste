@@ -10,10 +10,10 @@
         <h2 class="form-title">${c:l('common.login')}</h2>
         <form action="/login" method="POST" id="login-form">
           <div class="form-group">
+
 <!--            <label for="email"><i class="bi bi-person-fill" /></label>-->
             <zul:textbox type="text" name="username" id="username" placeholder="${c:l('login.username')}"
                     value="@load(vm.model.username) @save(vm.model.username, before='doSubmit')" errorMessage="@load(vmsgs['email']) "/>
-            <xh:textbox value="@load(vm.model.username)" />
           </div>
           <div class="form-group">
 <!--            <label for="password"><i class="bi bi-lock-fill" /></label>-->
@@ -22,7 +22,9 @@
           </div>
           <div class="form-group">
             <input type="checkbox" name="rememberMe" id="rememberMe" class="agree-term" />
-            <label for="rememberMe" class="label-agree-term">${c:l('login.remember')}</label>
+            <xh:label for="rememberMe" class="label-agree-term">
+              ${c:l('login.remember')}
+            </xh:label>
           </div>
           <div class="form-group form-button">
             <xh:input type="submit" name="signin" id="signin" class="form-submit" value="${c:l('common.login')}" onClick="@command('doSubmit')"/>

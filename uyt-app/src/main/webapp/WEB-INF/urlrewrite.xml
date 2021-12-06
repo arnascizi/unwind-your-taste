@@ -37,4 +37,9 @@
     <to>/pages/ingredients.zul</to>
   </rule>
 
+  <rule>
+    <from>^/settings</from>
+    <to>/pages/settings.zul</to>
+  </rule>
+
 </urlrewrite>

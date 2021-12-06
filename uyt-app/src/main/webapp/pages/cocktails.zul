@@ -4,38 +4,49 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}">
   <div class="container mt-0">
-    <h3 class="text-muted">Page Title</h3>
+    <h3 class="text-muted">${c:l('common.cocktails')}</h3>
     <hr/>
-    <a class="btn btn-outline-success" href="/cocktailEntry">Add cocktail</a>
-<!--    <div class="input-group">-->
-<!--      <zul:textbox type="text" placeholder="search" value="@save(vm.searchParam, before='doSearch')" mold="rounded" />-->
-<!--      <div class="input-group-append">-->
-<!--        <zul:combobox mold="rounded">-->
-<!--          <zul:comboitem label="${labels.all}" value="all" />-->
-<!--          <zul:comboitem label="${labels.tag}" value="tag" />-->
-<!--          <zul:comboitem label="${labels.name}" value="name" />-->
-<!--        </zul:combobox>-->
-<!--        <zul:button class="btn btn-sm text-white" type="button" style="background-color: #4a65a4" label="${labels.search}"  />-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="mt-2">-->
-<!--      <div class="container">-->
-<!--        <xh:div id="content" class="row">-->
-<!--&lt;!&ndash;          <sh:forEach items="@bind(vm.imageThumbnailList)">&ndash;&gt;-->
-<!--            <xh:div class="card col-3 my-1">-->
-<!--              <div class="container-fluid">-->
-<!--                <div class="row">-->
-<!--                  <div class="col-10 self-align-left">-->
-<!--&lt;!&ndash;                    <zul:image class="card-img mx-auto my-1" style="height: 150px; width: 200px;" />&ndash;&gt;-->
+<!--    <a class="btn btn-outline-success" href="/cocktailEntry">Add cocktail</a>-->
+    <div class="mt-5">
+      <div class="input-group d-flex justify-content-center">
+        <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@save(vm.searchParam, before='doSearch')" />
+        <div class="col-xs-4">
+          <zul:combobox class="input-group-prepend mx-1">
+            <zul:comboitem label="all" value="all" />
+            <zul:comboitem label="tag" value="tag" />
+            <zul:comboitem label="name" value="name" />
+          </zul:combobox>
+        </div>
+        <div class="col-xs-4">
+          <zul:combobox class="input-group-prepend mx-1">
+            <zul:comboitem label="all" value="all" />
+            <zul:comboitem label="tag" value="tag" />
+            <zul:comboitem label="name" value="name" />
+          </zul:combobox>
+        </div>
+        <zul:button class="input-group-prepend btn btn-sm text-white col-xs-2 mx-1" type="button" style="background-color: #617e9f" label="${c:l('common.search')}" onClick="@command('doSearch')" />
+      </div>
+<!--      -->
+<!--      <div class="mt-2">-->
+<!--        <div class="container">-->
+<!--          <xh:div id="content" class="row">-->
+<!--            <sh:forEach items="@bind(vm.imageThumbnailList)">-->
+<!--              <xh:div class="card col-3 my-1">-->
+<!--                <div class="container-fluid">-->
+<!--                  <div class="row">-->
+<!--                    <div class="col-10 self-align-left">-->
+<!--                      <zul:image class="card-img mx-auto my-1" style="height: 150px; width: 200px;" content="@load(each.thumbnail) @converter('lt.insoft.gallery.ui.utility.ImageToZkImageConverter')"-->
+<!--                              onClick="@command(vm.doSelectImage(each.id))" />-->
+<!--                    </div>-->
 <!--                  </div>-->
 <!--                </div>-->
-<!--              </div>-->
-<!--              <zul:label class="card-title mx-auto" style="font-size: 0.75rem"  />-->
-<!--            </xh:div>-->
-<!--&lt;!&ndash;          </sh:forEach>&ndash;&gt;-->
-<!--        </xh:div>-->
+<!--                <zul:label class="card-title mx-auto" style="font-size: 0.75rem" value="@load(each.name)" />-->
+<!--              </xh:div>-->
+<!--            </sh:forEach>-->
+<!--          </xh:div>-->
+<!--        </div>-->
+<!--        <zul:paging totalSize="@load(vm.maxPages)" pageSize="@load(vm.pageSize)" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" />-->
 <!--      </div>-->
-<!--      <zul:paging totalSize="3" pageSize="10" activePage="0" onClick="" mold="os" />-->
-<!--    </div>-->
+    </div>
   </div>
 </xh:div>

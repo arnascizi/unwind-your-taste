@@ -27,7 +27,7 @@ public class TemplateVm implements Serializable {
     @Init
     public void init() {
         LoggedUser loggedUser = accountHelper.getLoggedUser();
-        username = loggedUser != null ? loggedUser.getUsername() : "";
+        username = loggedUser != null ? loggedUser.getUsername() : "still nothing!";
     }
 
     @Command

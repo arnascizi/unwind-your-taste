@@ -22,7 +22,7 @@
     <xh:nav>
       <zul:apply templateURI="/templates/navigation.zul" />
     </xh:nav>
-    <div class="container col-md-8 px-3 d-block">
+    <div class="container col-md-8 px-3 d-block bg-white">
       <div class="main-bg d-flex row mx-1">
         <div class="col-md-12 p-5 ">
           <main>
@@ -30,9 +30,11 @@
           </main>
         </div>
       </div>
-      <footer class="col-sm-12 p-5 mx-1 border color-hoki">
-        <!-- TODO Some additional info  -->
-        <div class="container-fluid d-flex row">
+    </div>
+    <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">
+      <!-- TODO Some additional info  -->
+      <div class="container">
+        <div class="d-flex row">
           <div class="col-md-3 mx-1">
             <ul>
               <li class="text-white">Info 1</li>
@@ -53,7 +55,8 @@
             </ul>
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
+
   </xh:body>
 </xh:html>

@@ -1,6 +1,6 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
-  <h5 class="ml-4">Recomendations</h5>
+  <h5 class="ml-4">${c:l('common.recommendations')}</h5>
   <hr/>
   <div>
     <div class="col-xs-6 mb-2">

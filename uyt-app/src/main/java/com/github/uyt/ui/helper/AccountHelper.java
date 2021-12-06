@@ -1,10 +1,11 @@
 package com.github.uyt.ui.helper;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.zkoss.zk.ui.Sessions;
 
 import com.github.uyt.bl.service.UserService;
 import com.github.uyt.model.UserAccount;
@@ -18,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 public class AccountHelper {
 
     private final UserService userService;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public LoggedUser getLoggedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        System.out.println(Sessions.getCurrent().getAttribute("userCredential"));
-        if (principal instanceof UserDetails) {
-            return LoggedUser.builder().username(((UserDetails) principal).getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities())).build();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            return LoggedUser.builder().username(authentication.getName()).build();
         }
         return null;
     }
@@ -40,9 +41,23 @@ public class AccountHelper {
         }
     }
 
+    public UserView getUserByName(String username) {
+        return buildUserView(userService.loadUserByUsername(username));
+    }
+
+    private UserView buildUserView(UserDetails details) {
+        return UserView.builder()
+                .username(details.getUsername())
+                .password(details.getPassword())
+                .build();
+    }
+
     private UserAccount buildUserAccount(UserView userView) {
         return UserAccount.builder()
+                .id(1)
                 .username(userView.getUsername())
+                .password(passwordEncoder.encode(userView.getPassword()))
+                .email(userView.getEmail())
                 .build();
     }
 

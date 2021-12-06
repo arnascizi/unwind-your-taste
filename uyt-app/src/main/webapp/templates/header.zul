@@ -18,8 +18,8 @@
       </div>
     </div>
     <div class="col-md-3 collapse navbar-collapse" id="navbarMenu">
-      <ul class="nav navbar-nav col-xs-4">
-        <li>
+      <xh:ul class="nav navbar-nav col-xs-4">
+        <xh:li>
           <div class="dropdown">
             <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${vm.currentLanguage}
@@ -29,17 +29,30 @@
               <xh:a class="dropdown-item" href="javascript:;" onClick="@command('doSetLocaleEn')">EN</xh:a>
             </div>
           </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/#">${vm.username}</a>
-        </li>
-        <li class="nav-item">
+        </xh:li>
+        <xh:li class="nav-item">
+          <sh:if test="@load(vm.userLogged)">
+            <xh:div class="dropdown">
+              <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${vm.username}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="nav-link text-dark" href="/settings">${c:l('common.settings')}</a>
+                <div class="dropdown-divider" />
+                <a class="nav-link text-dark" href="/logout">${c:l('common.logout')}</a>
+              </div>
+            </xh:div>
+          </sh:if>
+        </xh:li>
+        <sh:if test="@load(!vm.userLogged)">
+        <xh:li class="nav-item">
           <a class="nav-link" href="/register">${c:l('common.register')}</a>
-        </li>
-        <li class="nav-item">
+        </xh:li>
+        <xh:li class="nav-item">
           <a class="nav-link" href="/login">${c:l('common.login')}</a>
-        </li>
-      </ul>
+        </xh:li>
+        </sh:if>
+      </xh:ul>
     </div>
   </div>
 </xh:div>
