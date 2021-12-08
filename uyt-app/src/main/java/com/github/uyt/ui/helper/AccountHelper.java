@@ -1,6 +1,5 @@
 package com.github.uyt.ui.helper;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.uyt.bl.service.UserService;
 import com.github.uyt.model.UserAccount;
+import com.github.uyt.model.UserRole;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.UserView;
 
@@ -22,9 +22,9 @@ public class AccountHelper {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public LoggedUser getLoggedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            return LoggedUser.builder().username(authentication.getName()).build();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return LoggedUser.builder().username(((UserDetails) principal).getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities())).build();
         }
         return null;
     }
@@ -54,10 +54,10 @@ public class AccountHelper {
 
     private UserAccount buildUserAccount(UserView userView) {
         return UserAccount.builder()
-                .id(1)
                 .username(userView.getUsername())
                 .password(passwordEncoder.encode(userView.getPassword()))
-                .email(userView.getEmail())
+                .userRole(UserRole.builder().value(userView.getRole()).build())
+                .userEmail(userView.getEmail())
                 .build();
     }
 

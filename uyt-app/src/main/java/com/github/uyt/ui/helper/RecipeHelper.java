@@ -19,7 +19,6 @@ public class RecipeHelper {
         return CategoryView.builder()
                 .id(category.getId())
                 .title(category.getCategoryName())
-                .description(category.getCategoryDescription())
                 .build();
     }
 

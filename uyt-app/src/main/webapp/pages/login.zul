@@ -1,43 +1,68 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template-full.zul"?>
-<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" validationMessages="@id('vmsgs')"
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" apply="org.zkoss.bind.BindComposer" self="@{define(pageContent)}" validationMessages="@id('vmsgs')"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RegisterVm')">
-  <div class="container-auth">
-    <div class="signin-content">
-      <div class="signin-form">
-        <h2 class="form-title">${c:l('common.login')}</h2>
-        <form action="/login" method="POST" id="login-form">
-          <div class="form-group">
+  <div>
+    <div class="p-5">
+      <div class="d-flex justify-content-center">
+        <div class="mx-auto col-sm-8 col-md-6 col-lg-4">
+          <h2 class="mb-4">${c:l('common.login')}</h2>
+          <form action="/login" method="POST" id="login-form" novalidate="true">
+            <div class="form-group">
+              <div class="input-group">
+                <zul:textbox type="text" sclass="form-control border-top-0 border-left-0 border-right-0" name="username" id="username" placeholder="${c:l('login.username')}"
+                        value="@load(vm.model.username) @save(vm.model.username, before='doSubmit')" errorMessage="@load(vmsgs['email']) " />
+                <div class="input-group-append">
+                  <div class="input-group-text bg-white border-top-0 border-left-0 border-right-0">
+                    <i class="bi bi-person fill" />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-<!--            <label for="email"><i class="bi bi-person-fill" /></label>-->
-            <zul:textbox type="text" name="username" id="username" placeholder="${c:l('login.username')}"
-                    value="@load(vm.model.username) @save(vm.model.username, before='doSubmit')" errorMessage="@load(vmsgs['email']) "/>
-          </div>
-          <div class="form-group">
-<!--            <label for="password"><i class="bi bi-lock-fill" /></label>-->
-            <zul:textbox type="password" name="password" id="password" placeholder="${c:l('login.password')}"
-                    value="@load(vm.model.password) @save(vm.model.password, before='doSubmit')" errorMessage="@load(vmsgs['password'])" />
-          </div>
-          <div class="form-group">
-            <input type="checkbox" name="rememberMe" id="rememberMe" class="agree-term" />
-            <xh:label for="rememberMe" class="label-agree-term">
-              ${c:l('login.remember')}
-            </xh:label>
-          </div>
-          <div class="form-group form-button">
-            <xh:input type="submit" name="signin" id="signin" class="form-submit" value="${c:l('common.login')}" onClick="@command('doSubmit')"/>
-          </div>
-        </form>
-        <div class="social-login">
-          <span class="social-label">${c:l('login.other')}</span>
-          <ul class="socials row">
-            <li><a class="btn btn-primary btn-sm" href="/oauth2/authorization/facebook"><i class="bi bi-facebook" /></a></li>
-<!--            <li><a class="btn btn-primary btn-sm" href="#"><i class="bi bi-twitter" /></a></li>-->
-            <li><a class="btn btn-danger btn-sm" href="/oauth2/authorization/google"><i class="bi bi-google" /></a></li>
-          </ul>
+            <div class="form-group">
+              <div class="input-group">
+                <zul:textbox type="password" sclass="form-control border-top-0 border-left-0 border-right-0" name="password" id="password" placeholder="${c:l('login.password')}"
+                        value="@load(vm.model.password) @save(vm.model.password, before='doSubmit')" errorMessage="@load(vmsgs['password'])" />
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white border-top-0 border-left-0 border-right-0">
+                    <i class="bi bi-lock-fill" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group my-0">
+              <input type="checkbox" name="rememberMe" id="rememberMe" />
+              <xh:label for="rememberMe" class="label-agree-term">
+                ${c:l('login.remember')}
+              </xh:label>
+            </div>
+            <div class="d-flex justify-content-left">
+              <div class="form-group col-xs-12">
+                <xh:input type="submit" sclass="btn btn-outline-success" id="signin" value="${c:l('common.login')}" onClick="@command('doSubmit')" />
+              </div>
+
+              <div class="col-xs-6 mt-3">
+                <ul class="d-flex justify-content-center mb-0">
+                  <li>
+                    <a class="btn btn-outline-primary px-2 py-1 mx-2 rounded-circle" href="/oauth2/authorization/facebook">
+                      <i class="bi bi-facebook" />
+                    </a>
+                  </li>
+                  <!--            <li><a class="btn btn-primary btn-sm" href="#"><i class="bi bi-twitter" /></a></li>-->
+                  <li>
+                    <a class="btn btn-outline-danger px-2 py-1 mx-2 rounded-circle" href="/oauth2/authorization/google">
+                      <i class="bi bi-google" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
         </div>
+
       </div>
     </div>
   </div>

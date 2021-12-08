@@ -37,4 +37,13 @@ public class UserRepositoryImpl extends SimpleJpaRepository<UserAccount, Long> i
         cb.equal(root.get(UserAccount_.USERNAME), username);
         return em.createQuery(criteria).getSingleResult();
     }
+
+    @Override
+    public UserAccount findByEmail(@NonNull String email) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<UserAccount> criteria = cb.createQuery(UserAccount.class);
+        Root<UserAccount> root = criteria.from(UserAccount.class);
+        cb.equal(root.get(UserAccount_.userEmail), email);
+        return em.createQuery(criteria).getSingleResult();
+    }
 }

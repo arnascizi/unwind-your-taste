@@ -1,5 +1,7 @@
 package com.github.uyt.bl.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +19,8 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public void save(@NonNull UserAccount userAccount) {
+    @Transactional
+    public void save(UserAccount userAccount) {
         userRepository.save(userAccount);
     }
 

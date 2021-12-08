@@ -1,416 +1,310 @@
--- -----------------------------------------------------
--- Table LYTIS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS LYTIS;
-
-CREATE TABLE IF NOT EXISTS LYTIS
+create sequence if not exists lytis_id_seq maxvalue 2147483647;
+alter sequence lytis_id_seq owner to postgres;
+drop table if exists lytis;
+create table if not exists lytis
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id          integer default nextval('lytis_id_seq'::regclass) not null
+        constraint lytis_id_pkey primary key,
+    pavadinimas character varying                                 not null
 );
+comment on table lytis is 'Lytį aprašanti lentelė';
+comment on column lytis.id is 'Prasminis lentelės raktas';
+comment on column lytis.pavadinimas is 'Lytį nusakantis pavadinimas';
 
-COMMENT ON TABLE LYTIS IS 'Lytį aprašanti lentelė';
-COMMENT ON COLUMN LYTIS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN LYTIS.PAVADINIMAS IS 'Lytį nusakantis pavadinimas';
-
--- -----------------------------------------------------
--- Table SALIS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS SALIS;
-
-CREATE TABLE IF NOT EXISTS SALIS
+create sequence if not exists salis_id_seq maxvalue 2147483647;
+alter sequence salis_id_seq owner to postgres;
+drop table if exists salis;
+create table if not exists salis
 (
-    ID           BIGINT            NOT NULL,
-    PAVADINIMAS  CHARACTER VARYING NOT NULL,
-    SALIES_KODAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id           integer default nextval('salis_id_seq'::regclass) not null
+        constraint salis_id_pkey primary key,
+    pavadinimas  character varying                                 not null,
+    salies_kodas character varying                                 not null
 );
+comment on table salis is 'Šalį aprašanti lentelė';
+comment on column salis.id is 'Prasminis lentelės raktas';
+comment on column salis.pavadinimas is 'Šalies pavadinimas';
+comment on column salis.salies_kodas is 'Šalies kodas pagal iso-3166-1 standartą';
 
-COMMENT ON TABLE SALIS IS 'Šalį aprašanti lentelė';
-COMMENT ON COLUMN SALIS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN SALIS.PAVADINIMAS IS 'Šalies pavadinimas';
-COMMENT ON COLUMN SALIS.SALIES_KODAS IS 'Šalies kodas pagal ISO-3166-1 standartą';
-
--- -----------------------------------------------------
--- Table KONTAKTAI
--- -----------------------------------------------------
-DROP TABLE IF EXISTS KONTAKTAI;
-
-CREATE TABLE IF NOT EXISTS KONTAKTAI
+create sequence if not exists kontaktai_id_seq maxvalue 2147483647;
+alter sequence kontaktai_id_seq owner to postgres;
+drop table if exists kontaktai;
+create table if not exists kontaktai
 (
-    ID          BIGINT            NOT NULL,
-    SALIS_ID    BIGINT            NOT NULL,
-    SAVIVALDYBE CHARACTER VARYING NULL,
-    PASTO_KODAS DECIMAL(10)       NULL,
-    GATVE       CHARACTER VARYING NULL,
-    NAMO_NR     CHARACTER VARYING NULL,
-    BUTO_NR     CHARACTER VARYING NULL,
-    PRIMARY KEY (ID),
-    CONSTRAINT FK_SALIS_ID
-        FOREIGN KEY (SALIS_ID)
-            REFERENCES SALIS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id          integer default nextval('kontaktai_id_seq'::regclass) not null
+        constraint kontaktai_id_pkey primary key,
+    savivaldybe character varying                                     null,
+    gatve       character varying                                     null,
+    namo_nr     character varying                                     null,
+    buto_nr     character varying                                     null,
+    pasto_kodas decimal(10)                                           null,
+    salis_id    integer
+        constraint salis_id_fkey references salis on delete no action on update no action
 );
+comment on table kontaktai is 'Gyvenamąją vietą aprašanti lentelė';
+comment on column kontaktai.id is 'Prasminis lentelės raktas';
+comment on column kontaktai.salis_id is 'Nuorodą į šalies prasminį raktą';
+comment on column kontaktai.savivaldybe is 'Kontaktinio asmens gyvenamoji savivaldybė';
+comment on column kontaktai.pasto_kodas is 'Gyvenamosios vietos pašto kodas';
+comment on column kontaktai.gatve is 'Gyvenamosios vietos adresas';
+comment on column kontaktai.namo_nr is 'Gyvenamosios vietos namo numeris';
+comment on column kontaktai.buto_nr is 'Gyvenamosios vietos buto numeris';
 
-COMMENT ON TABLE KONTAKTAI IS 'Gyvenamąją vietą aprašanti lentelė';
-COMMENT ON COLUMN KONTAKTAI.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN KONTAKTAI.SALIS_ID IS 'Nuorodą į šalies prasminį raktą';
-COMMENT ON COLUMN KONTAKTAI.SAVIVALDYBE IS 'Kontaktinio asmens gyvenamoji savivaldybė';
-COMMENT ON COLUMN KONTAKTAI.PASTO_KODAS IS 'Gyvenamosios vietos pašto kodas';
-COMMENT ON COLUMN KONTAKTAI.GATVE IS 'Gyvenamosios vietos adresas';
-COMMENT ON COLUMN KONTAKTAI.NAMO_NR IS 'Gyvenamosios vietos namo numeris';
-COMMENT ON COLUMN KONTAKTAI.BUTO_NR IS 'Gyvenamosios vietos buto numeris';
-
--- -----------------------------------------------------
--- Table VARTOTOJO_DUOMENYS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS VARTOTOJO_DUOMENYS;
-
-CREATE TABLE IF NOT EXISTS VARTOTOJO_DUOMENYS
+create sequence if not exists vartotojo_gupe_id_seq maxvalue 2147483647;
+alter sequence vartotojo_gupe_id_seq owner to postgres;
+drop table if exists vartotojo_gupe;
+create table if not exists vartotojo_gupe
 (
-    ID               BIGINT            NOT NULL,
-    VARDAS           CHARACTER VARYING NOT NULL,
-    PAVARDE          CHARACTER VARYING NOT NULL,
-    SUKURIMO_DATA     timestamp         NOT NULL,
-    ATNAUJINIMO_DATA TIMESTAMP         NOT NULL,
-    LYTIS_ID         BIGINT            NOT NULL,
-    KONTAKTAI_ID     BIGINT            NOT NULL,
-    PRIMARY KEY (ID),
-    CONSTRAINT FK_KONTAKTAI_ID
-        FOREIGN KEY (KONTAKTAI_ID)
-            REFERENCES KONTAKTAI (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_LYTIS_ID
-        FOREIGN KEY (LYTIS_ID)
-            REFERENCES LYTIS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id          integer default nextval('vartotojo_gupe_id_seq'::regclass) not null
+        constraint vartotojo_gupe_id_pkey primary key,
+    pavadinimas character varying                                          not null
 );
+comment on table vartotojo_gupe is 'Vartotojo grupes aprašanti lentelė';
+comment on column vartotojo_gupe.id is 'Prasminis lentelės raktas';
+comment on column vartotojo_gupe.pavadinimas is 'Vartotojo grupės pavadinimas';
 
-COMMENT ON TABLE VARTOTOJO_DUOMENYS IS 'Vartotojo duomenis aprašanti lentelė';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.VARDAS IS 'Vartotojo vardas';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.PAVARDE IS 'Vartotojo pavardė';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.SUKURIMO_DATA IS 'Vartotojo sukūrimo data';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.ATNAUJINIMO_DATA IS 'Vartotojo duomenų atnaujinimo data';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.LYTIS_ID IS 'Nuorodą į lyties prasminį raktą';
-COMMENT ON COLUMN VARTOTOJO_DUOMENYS.KONTAKTAI_ID IS 'Nuorodą į kontaktų prasminį raktą';
-
-
--- -----------------------------------------------------
--- Table VARTOTOJO_GUPE
--- -----------------------------------------------------
-DROP TABLE IF EXISTS VARTOTOJO_GUPE;
-
-CREATE TABLE IF NOT EXISTS VARTOTOJO_GUPE
+create sequence if not exists vartotojas_id_seq maxvalue 2147483647;
+alter sequence vartotojas_id_seq owner to postgres;
+drop table if exists vartotojas;
+create table if not exists vartotojas
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id                  integer default nextval('vartotojas_id_seq'::regclass) not null
+        constraint vartotojas_id_pkey primary key,
+    prisijungimo_vardas character varying                                      not null,
+    el_pastas           character varying                                      not null,
+    slaptazodis         character varying                                      not null,
+    aktyvuotas          boolean                                                not null,
+    vartotojo_grupe_id  integer
+        constraint vartotojo_gupe_if_fkey references vartotojo_gupe on delete no action on update no action
 );
+comment on table vartotojas is 'Vartotoją aprašanti lentelė';
+comment on column vartotojas.id is 'Prasminis lentelės raktas';
+comment on column vartotojas.prisijungimo_vardas is 'Vartotojo prisijungimo vardas';
+comment on column vartotojas.el_pastas is 'Vartotojo elektroninis pašto adresas';
+comment on column vartotojas.slaptazodis is 'Užšifruotas vartotojo slaptažodis';
+comment on column vartotojas.aktyvuotas is 'Požymis nurodantis ar vartotojas aktyvuotas';
+comment on column vartotojas.vartotojo_grupe_id is 'Nuorodą į vartotojo grupių prasminį raktą';
 
-COMMENT ON TABLE VARTOTOJO_GUPE IS 'Vartotojo grupes aprašanti lentelė';
-COMMENT ON COLUMN VARTOTOJO_GUPE.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN VARTOTOJO_GUPE.PAVADINIMAS IS 'Vartotojo grupės pavadinimas';
-
--- -----------------------------------------------------
--- Table VARTOTOJAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS VARTOTOJAS;
-
-CREATE TABLE IF NOT EXISTS VARTOTOJAS
+create sequence if not exists vartotojo_duomenys_id_seq maxvalue 2147483647;
+alter sequence vartotojo_duomenys_id_seq owner to postgres;
+drop table if exists vartotojo_duomenys;
+create table if not exists vartotojo_duomenys
 (
-    ID                    BIGINT            NOT NULL,
-    PRISIJUNGIMO_VARDAS   CHARACTER VARYING NOT NULL,
-    EL_PASTAS             CHARACTER VARYING NOT NULL,
-    SLAPTAZODIS           CHARACTER VARYING NOT NULL,
-    VARTOTOJO_GRUPE_ID    BIGINT            NOT NULL,
-    VARTOTOJO_DUOMENYS_ID BIGINT            NOT NULL,
-    PRIMARY KEY (ID),
-    CONSTRAINT FK_VARTOTOJO_DUOMENYS_ID
-        FOREIGN KEY (VARTOTOJO_DUOMENYS_ID)
-            REFERENCES VARTOTOJO_DUOMENYS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_VARTOTOJO_GRUPE
-        FOREIGN KEY (VARTOTOJO_GRUPE_ID)
-            REFERENCES VARTOTOJO_GUPE (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id               integer default nextval('vartotojo_duomenys_id_seq'::regclass) not null
+        constraint vartotojo_duomenys_id_pkey primary key,
+    vardas           character varying                                              not null,
+    pavarde          character varying                                              not null,
+    sukurimo_data    timestamp                                                      not null,
+    atnaujinimo_data timestamp                                                      not null,
+    lytis_id         integer
+        constraint lytis_id_fkey references lytis on delete no action
+            on update no action,
+    kontaktai_id     integer
+        constraint kontaktai_id_fkey references kontaktai on delete no action
+            on update no action,
+    vartotojas_id    integer
+        constraint vartotojas_id_fkey references vartotojas on delete no action
+            on update no action
 );
+comment on table vartotojo_duomenys is 'Vartotojo duomenis aprašanti lentelė';
+comment on column vartotojo_duomenys.id is 'Prasminis lentelės raktas';
+comment on column vartotojo_duomenys.vardas is 'Vartotojo vardas';
+comment on column vartotojo_duomenys.pavarde is 'Vartotojo pavardė';
+comment on column vartotojo_duomenys.sukurimo_data is 'Vartotojo sukūrimo data';
+comment on column vartotojo_duomenys.atnaujinimo_data is 'Vartotojo duomenų atnaujinimo data';
+comment on column vartotojo_duomenys.lytis_id is 'Nuorodą į lyties prasminį raktą';
+comment on column vartotojo_duomenys.kontaktai_id is 'Nuorodą į kontaktų prasminį raktą';
+comment on column vartotojo_duomenys.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
 
-COMMENT ON TABLE VARTOTOJAS IS 'Vartotoją aprašanti lentelė';
-COMMENT ON COLUMN VARTOTOJAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN VARTOTOJAS.PRISIJUNGIMO_VARDAS IS 'Vartotojo prisijungimo vardas';
-COMMENT ON COLUMN VARTOTOJAS.EL_PASTAS IS 'Vartotojo elektroninis pašto adresas';
-COMMENT ON COLUMN VARTOTOJAS.SLAPTAZODIS IS 'Užšifruotas vartotojo slaptažodis';
-COMMENT ON COLUMN VARTOTOJAS.VARTOTOJO_GRUPE_ID IS 'Nuorodą į vartotojo grupių prasminį raktą';
-COMMENT ON COLUMN VARTOTOJAS.VARTOTOJO_DUOMENYS_ID IS 'Nuorodą į vartotojo duomenų prasminį raktą';
-
--- -----------------------------------------------------
--- Table KOMENTARAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS KOMENTARAS;
-
-CREATE TABLE IF NOT EXISTS KOMENTARAS
+create sequence if not exists matavimo_vienetas_id_seq maxvalue 2147483647;
+alter sequence matavimo_vienetas_id_seq owner to postgres;
+drop table if exists matavimo_vienetas;
+create table if not exists matavimo_vienetas
 (
-    ID            BIGINT            NOT NULL,
-    VARTOTOJAS_ID BIGINT            NOT NULL,
-    TEKSTAS       CHARACTER VARYING NULL,
-    VERTINIMAS    DECIMAL(3)        NULL DEFAULT 0,
-    PRIMARY KEY (ID),
-    CONSTRAINT FK_VARTOTOJAS_ID
-        FOREIGN KEY (VARTOTOJAS_ID)
-            REFERENCES VARTOTOJAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id          integer default nextval('matavimo_vienetas_id_seq') not null
+        constraint matavimo_vienetas_id_pkey primary key,
+    pavadinimas character varying                                   not null,
+    vienetas    character varying                                   not null
 );
+comment on table matavimo_vienetas is 'Matavimo vienetą aprašanti lentelė';
+comment on column matavimo_vienetas.id is 'Prasminis lentelės raktas';
+comment on column matavimo_vienetas.pavadinimas is 'Matavimo vieneto pavadinimas';
+comment on column matavimo_vienetas.vienetas is 'Matavimo vieneto žymėjimas';
 
-COMMENT ON TABLE KOMENTARAS IS 'Komentarą aprašanti lentelė';
-COMMENT ON COLUMN KOMENTARAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN KOMENTARAS.VARTOTOJAS_ID IS 'Nuorodą į vartotojo prasminį raktą';
-COMMENT ON COLUMN KOMENTARAS.TEKSTAS IS 'Komentaros tekstas';
-COMMENT ON COLUMN KOMENTARAS.VERTINIMAS IS 'Komentaros vertinimas';
-
--- -----------------------------------------------------
--- Table MATAVIMO_VIENETAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS MATAVIMO_VIENETAS;
-
-CREATE TABLE IF NOT EXISTS MATAVIMO_VIENETAS
+-- koks tipas?
+create sequence if not exists tipas_id_seq maxvalue 2147483647;
+alter sequence tipas_id_seq owner to postgres;
+drop table if exists tipas;
+create table if not exists tipas
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    VIENETAS    CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id          integer default nextval('tipas_id_seq') not null
+        constraint tipas_id_pkey primary key,
+    pavadinimas character varying                       not null
 );
+comment on table tipas is 'Tipą aprašanti lentelė';
+comment on column tipas.id is 'Prasminis lentelės raktas';
+comment on column tipas.pavadinimas is 'Tipo pavadinimas';
 
-COMMENT ON TABLE MATAVIMO_VIENETAS IS 'Matavimo vienetą aprašanti lentelė';
-COMMENT ON COLUMN MATAVIMO_VIENETAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN MATAVIMO_VIENETAS.PAVADINIMAS IS 'Matavimo vieneto pavadinimas';
-COMMENT ON COLUMN MATAVIMO_VIENETAS.VIENETAS IS 'Matavimo vieneto žymėjimas';
-
--- -----------------------------------------------------
--- Table TIPAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS TIPAS;
-
-CREATE TABLE IF NOT EXISTS TIPAS
+-- Kieno kategorija
+create sequence if not exists kategorija_id_seq maxvalue 2147483647;
+alter sequence kategorija_id_seq owner to postgres;
+drop table if exists kategorija;
+create table if not exists kategorija
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id          integer default nextval('kategorija_id_seq') not null
+        constraint kategorija_id_pkey primary key,
+    pavadinimas character varying                            not null,
+    aprasymas   character varying                            not null
 );
+comment on table kategorija is 'Kategoriją aprašanti lentelė';
+comment on column kategorija.id is 'Prasminis lentelės raktas';
+comment on column kategorija.pavadinimas is 'Kategorijos pavadinimas';
+comment on column kategorija.aprasymas is 'Trumpas aprašymas apie kategoriją';
 
-COMMENT ON TABLE TIPAS IS 'Tipą aprašanti lentelė';
-COMMENT ON COLUMN TIPAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN TIPAS.PAVADINIMAS IS 'Tipo pavadinimas';
-
--- -----------------------------------------------------
--- Table KATEGORIJA
--- -----------------------------------------------------
-DROP TABLE IF EXISTS KATEGORIJA;
-
-CREATE TABLE IF NOT EXISTS KATEGORIJA
+create sequence if not exists sudetingumas_id_seq maxvalue 2147483647;
+alter sequence sudetingumas_id_seq owner to postgres;
+drop table if exists sudetingumas;
+create table if not exists sudetingumas
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    APRASYMAS   CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id          integer default nextval('sudetingumas_id_seq') not null
+        constraint sudetingumas_id_pkey primary key,
+    pavadinimas character varying                              not null
 );
+comment on table sudetingumas is 'Sudėtingumą aprašanti lentelė';
+comment on column sudetingumas.id is 'Prasminis lentelės raktas';
+comment on column sudetingumas.pavadinimas is 'Sudėtingumo reikšmės pavadinimas';
 
-COMMENT ON TABLE KATEGORIJA IS 'Kategoriją aprašanti lentelė';
-COMMENT ON COLUMN KATEGORIJA.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN KATEGORIJA.PAVADINIMAS IS 'Kategorijos pavadinimas';
-COMMENT ON COLUMN KATEGORIJA.APRASYMAS IS 'Trumpas aprašymas apie kategoriją';
-
--- -----------------------------------------------------
--- Table SUDETINGUMAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS SUDETINGUMAS;
-
-CREATE TABLE IF NOT EXISTS SUDETINGUMAS
+create sequence if not exists komentaras_id_seq maxvalue 2147483647;
+alter sequence komentaras_id_seq owner to postgres;
+drop table if exists komentaras;
+create table if not exists komentaras
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id            integer                default nextval('komentaras_id_seq'::regclass) not null
+        constraint komentaras_id_pkey primary key,
+    tekstas       character varying null,
+    vertinimas    decimal(3)        null default 0,
+    vartotojas_id integer
+        constraint vartotojas_id_fkey references vartotojas on delete no action on update no action
 );
+comment on table komentaras is 'Komentarą aprašanti lentelė';
+comment on column komentaras.id is 'Prasminis lentelės raktas';
+comment on column komentaras.tekstas is 'Komentaros tekstas';
+comment on column komentaras.vertinimas is 'Komentaros vertinimas';
+comment on column komentaras.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
 
-COMMENT ON TABLE SUDETINGUMAS IS 'Sudėtingumą aprašanti lentelė';
-COMMENT ON COLUMN SUDETINGUMAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN SUDETINGUMAS.PAVADINIMAS IS 'Sudėtingumo reikšmės pavadinimas';
-
--- -----------------------------------------------------
--- Table RECEPTAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS RECEPTAS;
-
-CREATE TABLE IF NOT EXISTS RECEPTAS
+create sequence if not exists receptas_id_seq maxvalue 2147483647;
+alter sequence receptas_id_seq owner to postgres;
+drop table if exists receptas;
+create table if not exists receptas
 (
-    ID                   BIGINT            NOT NULL,
-    PAVADINIMAS          CHARACTER VARYING NOT NULL,
-    PARUOSIMO_LAIKAS     CHARACTER VARYING NOT NULL,
-    PAVEIKSLIUKAS        BYTEA             NOT NULL,
-    GAMINIMO_INSTRUKCIJA CHARACTER VARYING NOT NULL,
-    PATIEKIMAS           CHARACTER VARYING NOT NULL,
-    PATALPINIMO_LAIKAS   TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    ATNAUJINIMO_LAIKAS   TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    VARTOTOJAS_ID        BIGINT            NOT NULL,
-    TIPAS_ID             BIGINT            NOT NULL,
-    KATEGORIJA_ID        BIGINT            NOT NULL,
-    SUDETINGUMAS_ID      BIGINT            NOT NULL,
-    KOMENTARAS_ID        BIGINT            NOT NULL,
-    PRIMARY KEY (ID),
-    CONSTRAINT FK_KOMENTARAS_ID
-        FOREIGN KEY (KOMENTARAS_ID)
-            REFERENCES KOMENTARAS (ID)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
-    CONSTRAINT FK_TIPAS_ID
-        FOREIGN KEY (TIPAS_ID)
-            REFERENCES TIPAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_KATEGORIJA_ID
-        FOREIGN KEY (KATEGORIJA_ID)
-            REFERENCES KATEGORIJA (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_SUDETINGUMAS_ID
-        FOREIGN KEY (SUDETINGUMAS_ID)
-            REFERENCES SUDETINGUMAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id                   integer                    default nextval('receptas_id_seq') not null
+        constraint receptas_id_pkey primary key,
+    pavadinimas          character varying not null,
+    paruosimo_laikas     character varying not null,
+    gaminimo_instrukcija character varying not null,
+    patiekimas           character varying not null,
+    patalpinimo_laikas   timestamp         not null default current_timestamp,
+    atnaujinimo_laikas   timestamp         not null default current_timestamp,
+    paveiksliukas        bytea             null,
+    vartotojas_id        integer
+        constraint vartotojas_id_fkey references vartotojas on delete no action
+            on update no action,
+    tipas_id             integer
+        constraint tipas_id_fkey references tipas on delete no action
+            on update no action,
+    kategorija_id        integer
+        constraint kategorija_id_fkey references kategorija on delete no action
+            on update no action,
+    sudetingumas_id      integer
+        constraint sudetingumas_id_fkey references sudetingumas on delete no action
+            on update no action,
+    komentaras_id        integer
+        constraint komentaras_id_fkey references komentaras on delete no action
+            on update no action
 );
+comment on table receptas is 'Receptą aprašanti lentelė';
+comment on column receptas.id is 'Prasminis lentelės raktas';
+comment on column receptas.pavadinimas is 'Receptui priskirtas pavadinimas';
+comment on column receptas.paruosimo_laikas is 'Koketeilio paruošimo laikas';
+comment on column receptas.paveiksliukas is 'Kokteilio nuotrauka';
+comment on column receptas.gaminimo_instrukcija is 'Kokteilio gaminimo instrukcija';
+comment on column receptas.patiekimas is 'Rekomenduojamas kokteilio patiekimas';
+comment on column receptas.patalpinimo_laikas is 'Recepto patalpinimo laikas';
+comment on column receptas.atnaujinimo_laikas is 'Recepto koregavimo laikas';
+comment on column receptas.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
+comment on column receptas.tipas_id is 'Nuorodą į tipo prasminį raktą';
+comment on column receptas.kategorija_id is 'Nuorodą į kategorijos prasminį raktą';
+comment on column receptas.sudetingumas_id is 'Nuorodą į sudėtingumo prasminį raktą';
+comment on column receptas.komentaras_id is 'Nuorodą į komentaro prasminį raktą';
 
-COMMENT ON TABLE RECEPTAS IS 'Receptą aprašanti lentelė';
-COMMENT ON COLUMN RECEPTAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN RECEPTAS.PAVADINIMAS IS 'Receptui priskirtas pavadinimas';
-COMMENT ON COLUMN RECEPTAS.PARUOSIMO_LAIKAS IS 'Koketeilio paruošimo laikas';
-COMMENT ON COLUMN RECEPTAS.PAVEIKSLIUKAS IS 'Kokteilio nuotrauka';
-COMMENT ON COLUMN RECEPTAS.GAMINIMO_INSTRUKCIJA IS 'Kokteilio gaminimo instrukcija';
-COMMENT ON COLUMN RECEPTAS.PATIEKIMAS IS 'Rekomenduojamas kokteilio patiekimas';
-COMMENT ON COLUMN RECEPTAS.PATALPINIMO_LAIKAS IS 'Recepto patalpinimo laikas';
-COMMENT ON COLUMN RECEPTAS.ATNAUJINIMO_LAIKAS IS 'Recepto koregavimo laikas';
-COMMENT ON COLUMN RECEPTAS.VARTOTOJAS_ID IS 'Nuorodą į vartotojo prasminį raktą';
-COMMENT ON COLUMN RECEPTAS.TIPAS_ID IS 'Nuorodą į tipo prasminį raktą';
-COMMENT ON COLUMN RECEPTAS.KATEGORIJA_ID IS 'Nuorodą į kategorijos prasminį raktą';
-COMMENT ON COLUMN RECEPTAS.SUDETINGUMAS_ID IS 'Nuorodą į sudėtingumo prasminį raktą';
-COMMENT ON COLUMN RECEPTAS.KOMENTARAS_ID IS 'Nuorodą į komentaro prasminį raktą';
-
--- -----------------------------------------------------
--- Table PRODUKTO_RUSIS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS PRODUKTO_RUSIS;
-
-CREATE TABLE IF NOT EXISTS PRODUKTO_RUSIS
+create sequence if not exists produkto_rusis_id_seq maxvalue 2147483647;
+alter sequence produkto_rusis_id_seq owner to postgres;
+drop table if exists produkto_rusis;
+create table if not exists produkto_rusis
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id          integer default nextval('produkto_rusis_id_seq'::regclass) not null
+        constraint produkto_rusis_id_pkey primary key,
+    pavadinimas character varying                                          not null
 );
+comment on table produkto_rusis is 'Produkto rušį aprašanti lentelė';
+comment on column produkto_rusis.id is 'Prasminis lentelės raktas';
+comment on column produkto_rusis.pavadinimas is 'Produkto rūšies pavadinimas';
 
-COMMENT ON TABLE PRODUKTO_RUSIS IS 'Produkto rušį aprašanti lentelė';
-COMMENT ON COLUMN PRODUKTO_RUSIS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN PRODUKTO_RUSIS.PAVADINIMAS IS 'Produkto rūšies pavadinimas';
-
--- -----------------------------------------------------
--- Table PRODUKTAS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS PRODUKTAS;
-
-CREATE TABLE IF NOT EXISTS PRODUKTAS
+create sequence if not exists produktas_id_seq maxvalue 2147483647;
+alter sequence produktas_id_seq owner to postgres;
+drop table if exists produktas;
+create table if not exists produktas
 (
-    ID                   BIGINT            NOT NULL,
-    PAVADINIMAS          CHARACTER VARYING NOT NULL,
-    KIEKIS               DECIMAL(5, 2)     NOT NULL,
-    PRODUKTO_RUSIS_ID    BIGINT            NOT NULL,
-    MATAVIMO_VIENETAS_ID BIGINT            NOT NULL,
-    PRIMARY KEY (ID),
-    CONSTRAINT FK_PRODUKTO_RUSIS_ID
-        FOREIGN KEY (PRODUKTO_RUSIS_ID)
-            REFERENCES PRODUKTO_RUSIS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_MATAVIMO_VIENETAS_ID
-        FOREIGN KEY (MATAVIMO_VIENETAS_ID)
-            REFERENCES MATAVIMO_VIENETAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    id                   integer default nextval('produktas_id_seq'::regclass) not null
+        constraint produktas_id_pkey primary key,
+    pavadinimas          character varying                                     not null,
+    kiekis               decimal(5, 2)                                         not null,
+    produkto_rusis_id    integer
+        constraint produkto_rusis_id_fkey references produkto_rusis on delete no action on update no action,
+    matavimo_vienetas_id integer
+        constraint matavimo_vienetas_id_fkey references matavimo_vienetas on delete no action on update no action
 );
+comment on table produktas is 'Produktą aprašanti lentelė';
+comment on column produktas.id is 'Prasminis lentelės raktas';
+comment on column produktas.pavadinimas is 'Produkto pavadinimas';
+comment on column produktas.kiekis is 'Produkto kiekis';
+comment on column produktas.produkto_rusis_id is 'Nuorodą į produkto rūšies prasminį raktą';
+comment on column produktas.matavimo_vienetas_id is 'Nuorodą į matavimo vieneto prasminį raktą';
 
-COMMENT ON TABLE PRODUKTAS IS 'Produktą aprašanti lentelė';
-COMMENT ON COLUMN PRODUKTAS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN PRODUKTAS.PAVADINIMAS IS 'Produkto pavadinimas';
-COMMENT ON COLUMN PRODUKTAS.KIEKIS IS 'Produkto kiekis';
-COMMENT ON COLUMN PRODUKTAS.PRODUKTO_RUSIS_ID IS 'Nuorodą į produkto rūšies prasminį raktą';
-COMMENT ON COLUMN PRODUKTAS.MATAVIMO_VIENETAS_ID IS 'Nuorodą į matavimo vieneto prasminį raktą';
-
--- -----------------------------------------------------
--- Table SUDETIS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS SUDETIS;
-
-CREATE TABLE IF NOT EXISTS SUDETIS
+drop table if exists sudetis;
+create table if not exists sudetis
 (
-    RECEPTAS_ID  BIGINT NOT NULL,
-    PRODUKTAS_ID BIGINT NOT NULL,
-    CONSTRAINT FK_RECEPTAS_ID
-        FOREIGN KEY (RECEPTAS_ID)
-            REFERENCES RECEPTAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_PRODUKTAS_ID
-        FOREIGN KEY (PRODUKTAS_ID)
-            REFERENCES PRODUKTAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    receptas_id  integer
+        constraint receptas_id_fkey references receptas on delete no action on update no action,
+    produktas_id integer
+        constraint produktas_id_fkey references produktas on delete no action on update no action
 );
+comment on table sudetis is 'Sudėtį aprašanti lentelė';
+comment on column sudetis.receptas_id is 'Nuorodą į recepto prasminį raktą';
+comment on column sudetis.produktas_id is 'Nuorodą į produkto prasminį raktą';
 
-COMMENT ON TABLE SUDETIS IS 'Sudėtį aprašanti lentelė';
-COMMENT ON COLUMN SUDETIS.RECEPTAS_ID IS 'Nuorodą į recepto prasminį raktą';
-COMMENT ON COLUMN SUDETIS.PRODUKTAS_ID IS 'Nuorodą į produkto prasminį raktą';
-
--- -----------------------------------------------------
--- Table RUSIS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS RUSIS;
-
-CREATE TABLE IF NOT EXISTS RUSIS
+-- kokia rusis
+create sequence if not exists rusis_id_seq maxvalue 2147483647;
+alter sequence rusis_id_seq owner to postgres;
+drop table if exists rusis;
+create table if not exists rusis
 (
-    ID          BIGINT            NOT NULL,
-    PAVADINIMAS CHARACTER VARYING NOT NULL,
-    PRIMARY KEY (ID)
+    id          integer default nextval('rusis_id_seq'::regclass) not null
+        constraint rusis_id_pkey primary key,
+    pavadinimas character varying                                 not null
 );
+comment on table rusis is 'Rušį aprašanti lentelė';
+comment on column rusis.id is 'Prasminis lentelės raktas';
+comment on column rusis.pavadinimas is 'Rūšies pavadinimas';
 
-COMMENT ON TABLE RUSIS IS 'Rušį aprašanti lentelė';
-COMMENT ON COLUMN RUSIS.ID IS 'Prasminis lentelės raktas';
-COMMENT ON COLUMN RUSIS.PAVADINIMAS IS 'Rūšies pavadinimas';
-
--- -----------------------------------------------------
--- Table KOKTEILIO_RUSIS
--- -----------------------------------------------------
-DROP TABLE IF EXISTS KOKTEILIO_RUSIS;
-
-CREATE TABLE IF NOT EXISTS KOKTEILIO_RUSIS
+drop table if exists kokteilio_rusis;
+create table if not exists kokteilio_rusis
 (
-    RECEPTAS_ID BIGINT NOT NULL,
-    RUSIS_ID    BIGINT NOT NULL,
-    CONSTRAINT FK_RECEPTAS_ID
-        FOREIGN KEY (RECEPTAS_ID)
-            REFERENCES RECEPTAS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-    CONSTRAINT FK_RUSIS_ID
-        FOREIGN KEY (RUSIS_ID)
-            REFERENCES RUSIS (ID)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    receptas_id integer
+        constraint receptas_id_fkey references receptas on delete no action on update no action,
+    rusis_id    integer
+        constraint rusis_id_fkey references rusis on delete no action on update no action
 );
-
-COMMENT ON TABLE KOKTEILIO_RUSIS IS 'Koketeilio rušį aprašanti lentelė';
-COMMENT ON COLUMN KOKTEILIO_RUSIS.RECEPTAS_ID IS 'Nuorodą į recepto prasminį raktą';
-COMMENT ON COLUMN KOKTEILIO_RUSIS.RUSIS_ID IS 'Nuorodą į rūšies prasminį raktą';
+comment on table kokteilio_rusis is 'Koketeilio rušį aprašanti lentelė';
+comment on column kokteilio_rusis.receptas_id is 'Nuorodą į recepto prasminį raktą';
+comment on column kokteilio_rusis.rusis_id is 'Nuorodą į rūšies prasminį raktą';
