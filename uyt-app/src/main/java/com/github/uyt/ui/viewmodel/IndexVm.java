@@ -23,6 +23,6 @@ public class IndexVm implements Serializable {
 
     @Init
     private void init() {
-        recipePreviewView = recipeHelper.singleMockRecipe();
+        recipeHelper.getRecipes();;
     }
 }

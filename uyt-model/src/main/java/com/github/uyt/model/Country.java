@@ -19,20 +19,20 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "SALIS")
+@Table(name = "salis")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Country {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "salis_seq", sequenceName = "SALIS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "salis_seq", sequenceName = "salis_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "salis_seq")
     private Long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "pavadinimas")
     private String name;
 
-    @Column(name = "SALIES_KODAS")
+    @Column(name = "salies_kodas")
     private String code;
 
     @OneToMany(mappedBy = "country")

@@ -16,41 +16,45 @@ import javax.persistence.Table;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "VARTOTOJO_DUOMENYS")
+@Builder
 @NoArgsConstructor
+@Table(name = "vartotojo_duomenys")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserAccountData {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "vartotojo_duomenys_seq", sequenceName = "VARTOTOJO_DUOMENYS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "vartotojo_duomenys_seq", sequenceName = "vartotojo_duomenys_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vartotojo_duomenys_seq")
     private Long id;
 
-    @Column(name = "VARDAS")
+    @Column(name = "vardas")
     private String firstName;
 
-    @Column(name = "PAVARDE")
+    @Column(name = "pavarde")
     private String lastName;
 
-    @Column(name = "SUKURIMO_DATA")
+    @Column(name = "sukurimo_data")
     private LocalDateTime createdAt;
 
-    @Column(name = "ATNAUJINIMO_DATA")
+    @Column(name = "atnaujinimo_data")
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "LYTIS_ID", nullable = false)
+    @JoinColumn(name = "lytis_id", nullable = false)
     private Gender gender;
 
+    // TODO
     @ManyToOne(targetEntity = UserContactDetails.class, fetch = FetchType.LAZY)
     private UserContactDetails userContactDetails;
 
     @ManyToOne(targetEntity = UserAccount.class, fetch = FetchType.LAZY)
     private UserAccount userAccount;
 }
+

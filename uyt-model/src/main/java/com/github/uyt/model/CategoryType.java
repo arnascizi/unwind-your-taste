@@ -21,22 +21,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-@Table(name = "matavimo_vienetas")
+@Table(name = "kategorijos_tipas")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Measurement {
+public class CategoryType {
 
     @Id
     @Column(name = "id")
-    @SequenceGenerator(name = "matavimo_vienetas_seq", sequenceName = "matavimo_vienetas_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matavimo_vienetas_seq")
+    @SequenceGenerator(name = "kategorijos_tipas_seq", sequenceName = "kategorijos_tipas_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "kategorijos_tipas_seq")
     private Long id;
 
     @Column(name = "pavadinimas")
-    private String name;
-
-    @Column(name = "vienetas")
     private String value;
 
-    @OneToMany(mappedBy = "measurement")
-    private List<Product> productMeasurementList;
+    @OneToMany(mappedBy = "categoryType")
+    private List<CocktailCategory> cocktailCategories;
 }

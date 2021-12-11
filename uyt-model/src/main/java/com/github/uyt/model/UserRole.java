@@ -21,17 +21,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Builder
 @NoArgsConstructor
-@Table(name = "VARTOTOJO_GRUPE")
+@Table(name = "vartotojo_grupe")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserRole {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "vartotojo_grupe_seq", sequenceName = "VARTOTOJO_GRUPE_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "vartotojo_grupe_seq", sequenceName = "vartotojo_grupe_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vartotojo_grupe_seq")
     private long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "pavadinimas")
     private String value;
 
     @OneToMany(mappedBy = "userRole")

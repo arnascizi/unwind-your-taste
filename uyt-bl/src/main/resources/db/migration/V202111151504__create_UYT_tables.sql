@@ -50,18 +50,18 @@ comment on column kontaktai.gatve is 'Gyvenamosios vietos adresas';
 comment on column kontaktai.namo_nr is 'Gyvenamosios vietos namo numeris';
 comment on column kontaktai.buto_nr is 'Gyvenamosios vietos buto numeris';
 
-create sequence if not exists vartotojo_gupe_id_seq maxvalue 2147483647;
-alter sequence vartotojo_gupe_id_seq owner to postgres;
-drop table if exists vartotojo_gupe;
-create table if not exists vartotojo_gupe
+create sequence if not exists vartotojo_grupe_id_seq maxvalue 2147483647;
+alter sequence vartotojo_grupe_id_seq owner to postgres;
+drop table if exists vartotojo_grupe;
+create table if not exists vartotojo_grupe
 (
-    id          integer default nextval('vartotojo_gupe_id_seq'::regclass) not null
-        constraint vartotojo_gupe_id_pkey primary key,
+    id          integer default nextval('vartotojo_grupe_id_seq'::regclass) not null
+        constraint vartotojo_grupe_id_pkey primary key,
     pavadinimas character varying                                          not null
 );
-comment on table vartotojo_gupe is 'Vartotojo grupes aprašanti lentelė';
-comment on column vartotojo_gupe.id is 'Prasminis lentelės raktas';
-comment on column vartotojo_gupe.pavadinimas is 'Vartotojo grupės pavadinimas';
+comment on table vartotojo_grupe is 'Vartotojo grupes aprašanti lentelė';
+comment on column vartotojo_grupe.id is 'Prasminis lentelės raktas';
+comment on column vartotojo_grupe.pavadinimas is 'Vartotojo grupės pavadinimas';
 
 create sequence if not exists vartotojas_id_seq maxvalue 2147483647;
 alter sequence vartotojas_id_seq owner to postgres;
@@ -75,7 +75,7 @@ create table if not exists vartotojas
     slaptazodis         character varying                                      not null,
     aktyvuotas          boolean                                                not null,
     vartotojo_grupe_id  integer
-        constraint vartotojo_gupe_if_fkey references vartotojo_gupe on delete no action on update no action
+        constraint vartotojo_grupe_id_fkey references vartotojo_grupe on delete no action on update no action
 );
 comment on table vartotojas is 'Vartotoją aprašanti lentelė';
 comment on column vartotojas.id is 'Prasminis lentelės raktas';
@@ -131,35 +131,36 @@ comment on column matavimo_vienetas.id is 'Prasminis lentelės raktas';
 comment on column matavimo_vienetas.pavadinimas is 'Matavimo vieneto pavadinimas';
 comment on column matavimo_vienetas.vienetas is 'Matavimo vieneto žymėjimas';
 
--- koks tipas?
-create sequence if not exists tipas_id_seq maxvalue 2147483647;
-alter sequence tipas_id_seq owner to postgres;
-drop table if exists tipas;
-create table if not exists tipas
+create sequence if not exists kategorijos_tipas_id_seq maxvalue 2147483647;
+alter sequence kategorijos_tipas_id_seq owner to postgres;
+drop table if exists kategorijos_tipas;
+create table if not exists kategorijos_tipas
 (
-    id          integer default nextval('tipas_id_seq') not null
-        constraint tipas_id_pkey primary key,
-    pavadinimas character varying                       not null
+    id          integer default nextval('kategorijos_tipas_id_seq') not null
+        constraint kategorijos_tipas_id_pkey primary key,
+    pavadinimas character varying                                   not null
 );
-comment on table tipas is 'Tipą aprašanti lentelė';
-comment on column tipas.id is 'Prasminis lentelės raktas';
-comment on column tipas.pavadinimas is 'Tipo pavadinimas';
+comment on table kategorijos_tipas is 'Kategorijos tipą aprašanti lentelė';
+comment on column kategorijos_tipas.id is 'Prasminis lentelės raktas';
+comment on column kategorijos_tipas.pavadinimas is 'Kategorijos tipo pavadinimas';
 
--- Kieno kategorija
-create sequence if not exists kategorija_id_seq maxvalue 2147483647;
-alter sequence kategorija_id_seq owner to postgres;
-drop table if exists kategorija;
-create table if not exists kategorija
+create sequence if not exists kokteilio_kategorija_id_seq maxvalue 2147483647;
+alter sequence kokteilio_kategorija_id_seq owner to postgres;
+drop table if exists kokteilio_kategorija;
+create table if not exists kokteilio_kategorija
 (
-    id          integer default nextval('kategorija_id_seq') not null
-        constraint kategorija_id_pkey primary key,
-    pavadinimas character varying                            not null,
-    aprasymas   character varying                            not null
+    id                   integer default nextval('kokteilio_kategorija_id_seq') not null
+        constraint kokteilio_kategorija_id_pkey primary key,
+    pavadinimas          character varying                                      not null,
+    aprasymas            character varying                                      not null,
+    kategorijos_tipas_id integer
+        constraint kategorijos_tipas_id_fkey references kategorijos_tipas on delete no action on update no action
 );
-comment on table kategorija is 'Kategoriją aprašanti lentelė';
-comment on column kategorija.id is 'Prasminis lentelės raktas';
-comment on column kategorija.pavadinimas is 'Kategorijos pavadinimas';
-comment on column kategorija.aprasymas is 'Trumpas aprašymas apie kategoriją';
+comment on table kokteilio_kategorija is 'Kokteilio kategoriją aprašanti lentelė';
+comment on column kokteilio_kategorija.id is 'Prasminis lentelės raktas';
+comment on column kokteilio_kategorija.pavadinimas is 'Kokteilio kategorijos pavadinimas';
+comment on column kokteilio_kategorija.aprasymas is 'Trumpas aprašymas apie kokteilio kategoriją';
+comment on column kokteilio_kategorija.kategorijos_tipas_id is 'Nuoroda į kategorijos tipo prasminį raktą';
 
 create sequence if not exists sudetingumas_id_seq maxvalue 2147483647;
 alter sequence sudetingumas_id_seq owner to postgres;
@@ -197,43 +198,37 @@ alter sequence receptas_id_seq owner to postgres;
 drop table if exists receptas;
 create table if not exists receptas
 (
-    id                   integer                    default nextval('receptas_id_seq') not null
+    id                      integer                    default nextval('receptas_id_seq') not null
         constraint receptas_id_pkey primary key,
-    pavadinimas          character varying not null,
-    paruosimo_laikas     character varying not null,
-    gaminimo_instrukcija character varying not null,
-    patiekimas           character varying not null,
-    patalpinimo_laikas   timestamp         not null default current_timestamp,
-    atnaujinimo_laikas   timestamp         not null default current_timestamp,
-    paveiksliukas        bytea             null,
-    vartotojas_id        integer
+    pavadinimas             character varying not null,
+    gaminimo_instrukcija    character varying not null,
+    patiekimas              character varying not null,
+    patalpinimo_laikas      timestamp         not null default current_timestamp,
+    atnaujinimo_laikas      timestamp         not null default current_timestamp,
+    paveiksliukas           bytea             null,
+    vartotojas_id           integer
         constraint vartotojas_id_fkey references vartotojas on delete no action
             on update no action,
-    tipas_id             integer
-        constraint tipas_id_fkey references tipas on delete no action
+    kokteilio_kategorija_id integer
+        constraint kokteilio_kategorija_id_fkey references kokteilio_kategorija on delete no action
             on update no action,
-    kategorija_id        integer
-        constraint kategorija_id_fkey references kategorija on delete no action
-            on update no action,
-    sudetingumas_id      integer
+    sudetingumas_id         integer
         constraint sudetingumas_id_fkey references sudetingumas on delete no action
             on update no action,
-    komentaras_id        integer
+    komentaras_id           integer
         constraint komentaras_id_fkey references komentaras on delete no action
             on update no action
 );
 comment on table receptas is 'Receptą aprašanti lentelė';
 comment on column receptas.id is 'Prasminis lentelės raktas';
 comment on column receptas.pavadinimas is 'Receptui priskirtas pavadinimas';
-comment on column receptas.paruosimo_laikas is 'Koketeilio paruošimo laikas';
 comment on column receptas.paveiksliukas is 'Kokteilio nuotrauka';
 comment on column receptas.gaminimo_instrukcija is 'Kokteilio gaminimo instrukcija';
 comment on column receptas.patiekimas is 'Rekomenduojamas kokteilio patiekimas';
 comment on column receptas.patalpinimo_laikas is 'Recepto patalpinimo laikas';
 comment on column receptas.atnaujinimo_laikas is 'Recepto koregavimo laikas';
 comment on column receptas.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
-comment on column receptas.tipas_id is 'Nuorodą į tipo prasminį raktą';
-comment on column receptas.kategorija_id is 'Nuorodą į kategorijos prasminį raktą';
+comment on column receptas.kokteilio_kategorija_id is 'Nuorodą į kokteilio kategorijos prasminį raktą';
 comment on column receptas.sudetingumas_id is 'Nuorodą į sudėtingumo prasminį raktą';
 comment on column receptas.komentaras_id is 'Nuorodą į komentaro prasminį raktą';
 
@@ -258,7 +253,6 @@ create table if not exists produktas
     id                   integer default nextval('produktas_id_seq'::regclass) not null
         constraint produktas_id_pkey primary key,
     pavadinimas          character varying                                     not null,
-    kiekis               decimal(5, 2)                                         not null,
     produkto_rusis_id    integer
         constraint produkto_rusis_id_fkey references produkto_rusis on delete no action on update no action,
     matavimo_vienetas_id integer
@@ -267,7 +261,6 @@ create table if not exists produktas
 comment on table produktas is 'Produktą aprašanti lentelė';
 comment on column produktas.id is 'Prasminis lentelės raktas';
 comment on column produktas.pavadinimas is 'Produkto pavadinimas';
-comment on column produktas.kiekis is 'Produkto kiekis';
 comment on column produktas.produkto_rusis_id is 'Nuorodą į produkto rūšies prasminį raktą';
 comment on column produktas.matavimo_vienetas_id is 'Nuorodą į matavimo vieneto prasminį raktą';
 
@@ -277,34 +270,10 @@ create table if not exists sudetis
     receptas_id  integer
         constraint receptas_id_fkey references receptas on delete no action on update no action,
     produktas_id integer
-        constraint produktas_id_fkey references produktas on delete no action on update no action
+        constraint produktas_id_fkey references produktas on delete no action on update no action,
+    kiekis               decimal(5, 2)                                         not null
 );
 comment on table sudetis is 'Sudėtį aprašanti lentelė';
 comment on column sudetis.receptas_id is 'Nuorodą į recepto prasminį raktą';
 comment on column sudetis.produktas_id is 'Nuorodą į produkto prasminį raktą';
-
--- kokia rusis
-create sequence if not exists rusis_id_seq maxvalue 2147483647;
-alter sequence rusis_id_seq owner to postgres;
-drop table if exists rusis;
-create table if not exists rusis
-(
-    id          integer default nextval('rusis_id_seq'::regclass) not null
-        constraint rusis_id_pkey primary key,
-    pavadinimas character varying                                 not null
-);
-comment on table rusis is 'Rušį aprašanti lentelė';
-comment on column rusis.id is 'Prasminis lentelės raktas';
-comment on column rusis.pavadinimas is 'Rūšies pavadinimas';
-
-drop table if exists kokteilio_rusis;
-create table if not exists kokteilio_rusis
-(
-    receptas_id integer
-        constraint receptas_id_fkey references receptas on delete no action on update no action,
-    rusis_id    integer
-        constraint rusis_id_fkey references rusis on delete no action on update no action
-);
-comment on table kokteilio_rusis is 'Koketeilio rušį aprašanti lentelė';
-comment on column kokteilio_rusis.receptas_id is 'Nuorodą į recepto prasminį raktą';
-comment on column kokteilio_rusis.rusis_id is 'Nuorodą į rūšies prasminį raktą';
+comment on column sudetis.kiekis is 'Produkto kiekis';

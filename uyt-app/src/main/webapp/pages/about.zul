@@ -7,6 +7,6 @@
     <h4 class="mt-3 text-muted">${c:l('common.project.name')}</h4>
   </div>
   <div class="container">
-    <p class="text-muted">${c:l('common.content')}</p>
+    <p class="text-muted">${c:l('about.description')}</p>
   </div>
 </xh:div>

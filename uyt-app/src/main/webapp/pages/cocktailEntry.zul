@@ -21,7 +21,7 @@
             <zul:combobox type="text" name="complexity" value="" placeholder="Recipe complexity" />
           </div>
           <div class="form-group">
-            <zul:combobox type="text" name="category" value="" placeholder="Recipe category" />
+            <zul:combobox type="text" name="cocktailCategory" value="" placeholder="Recipe cocktailCategory" />
           </div>
           <div class="row mr-4 mt-2">
             <div class="col-xs-4 mr-3">

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,34 +21,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "VARTOTOJAS")
 @Getter
 @Setter
 @Builder
+@Table(name = "vartotojas")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserAccount {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "vartotojas_seq", sequenceName = "VARTOTOJAS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "vartotojas_seq", sequenceName = "vartotojas_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vartotojas_seq")
-    private long userId;
+    private Long id;
 
-    @Column(name = "PRISIJUNGIMO_VARDAS")
+    @Column(name = "prisijungimo_vardas")
     private String username;
 
-    @Column(name = "EL_PASTAS")
+    @Column(name = "el_pastas")
     private String userEmail;
 
-    @Column(name = "SLAPTAZODIS")
+    @Column(name = "slaptazodis")
     private String password;
 
-    @Column(name = "AKTYVUOTAS")
+    @Column(name = "aktyvuotas")
     private boolean enabled;
 
     @ManyToOne
-    @JoinColumn(name = "VARTOTOJO_GRUPE_ID", nullable = false)
+    @JoinColumn(name = "vartotojo_grupe_id", nullable = false)
     private UserRole userRole;
 
     @OneToMany(mappedBy = "userAccount")
@@ -58,3 +57,6 @@ public class UserAccount {
     @OneToMany(mappedBy = "userAccount")
     private List<Recipe> recipeList;
 }
+
+
+

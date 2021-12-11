@@ -8,7 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.github.uyt.bl.repository.UserRepository;
+import com.github.uyt.bl.repository.UserRoleRepository;
 import com.github.uyt.model.UserAccount;
+import com.github.uyt.model.UserDetailsPrinciple;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +19,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
+    private static final long DEFAULT_USER_ROLE_ID = 1L;
+
     private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @Transactional
     public void save(UserAccount userAccount) {
+        if (userAccount == null) {
+            return;
+        }
+        userAccount.setUserRole(userRoleRepository.getOne(DEFAULT_USER_ROLE_ID));
         userRepository.save(userAccount);
     }
 

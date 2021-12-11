@@ -30,8 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers("/")
-                .permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/cocktails").authenticated()
                 .and()
                 .logout()
                 .logoutUrl("/logout")

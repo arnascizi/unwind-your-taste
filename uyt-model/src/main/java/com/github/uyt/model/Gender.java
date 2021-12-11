@@ -20,18 +20,18 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Builder
-@Table(name = "LYTIS")
+@Table(name = "lytis")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Gender {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "lytis_seq", sequenceName = "LYTIS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "lytis_seq", sequenceName = "lytis_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lytis_seq")
-    private long id;
+    private Long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "pavadinimas")
     private String value;
 
     @OneToMany(mappedBy = "gender")

@@ -14,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,55 +24,65 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "RECEPTAS")
+@Table(name = "receptas")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Recipe {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "receptas_seq", sequenceName = "RECEPTAS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "receptas_seq", sequenceName = "receptas_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receptas_seq")
     private Long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "pavadinimas")
     private String title;
 
-    @Column(name = "PARUOSIMO_LAIKAS")
-    private String preparationTime;
-
-    @Column(name = "GAMINIMO_INSTRUKCIJA")
+    @Column(name = "gaminimo_instrukcija")
     private String preparationDescription;
 
-    @Column(name = "PATIEKIMAS")
+    @Column(name = "patiekimas")
     private String serving;
 
-    @Column(name = "PATALPINIMO_LAIKAS")
+    @Column(name = "patalpinimo_laikas")
     private LocalDateTime createdAt;
 
-    @Column(name = "ATNAUJINIMO_LAIKAS")
+    @Column(name = "atnaujinimo_laikas")
     private LocalDateTime updatedAt;
 
-    @Column(name = "PAVEIKSLIUKAS")
+    @Column(name = "paveiksliukas")
     private byte[] image;
 
     @ManyToOne
-    @JoinColumn(name = "VARTOTOJAS_ID", nullable = false)
+    @JoinColumn(name = "vartotojas_id", nullable = false)
     private UserAccount userAccount;
 
     @ManyToOne
-    @JoinColumn(name = "KATEGORIJA_ID", nullable = false)
-    private Category category;
+    @JoinColumn(name = "kokteilio_kategorija_id", nullable = false)
+    private CocktailCategory cocktailCategory;
 
     @OneToMany(mappedBy = "recipe")
     private List<Review> reviewList;
 
     @ManyToOne
-    @JoinColumn(name = "SUDETINGUMAS_ID", nullable = false)
+    @JoinColumn(name = "sudetingumas_id", nullable = false)
     private Complexity complexity;
 
-    @ManyToMany
-    @JoinTable(name = "SUDETIS", joinColumns = @JoinColumn(name = "RECEPTAS_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUKTAS_ID"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "sudetis", joinColumns = @JoinColumn(name = "receptas_id"), inverseJoinColumns = @JoinColumn(name = "produktas_id"))
     private List<Product> productList;
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", preparationDescription='" + preparationDescription + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", complexity=" + complexity +
+                ", productList=" + productList +
+                '}';
+    }
 }
 

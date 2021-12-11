@@ -12,30 +12,29 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformationSuppo
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Component;
 
-import com.github.uyt.bl.repository.UserRepository;
-import com.github.uyt.model.UserAccount;
-import com.github.uyt.model.UserAccount_;
+import com.github.uyt.bl.repository.UserRoleRepository;
+import com.github.uyt.model.UserRole;
 
 import lombok.NonNull;
 
 @Component
 @Transactional
-public class UserRepositoryImpl extends SimpleJpaRepository<UserAccount, Long> implements UserRepository {
+public class UserRoleRepositoryImpl extends SimpleJpaRepository<UserRole, Long> implements UserRoleRepository {
 
     @PersistenceContext private EntityManager em;
 
     @Autowired
-    public UserRepositoryImpl(EntityManager entityManager) {
-        super(JpaEntityInformationSupport.getEntityInformation(UserAccount.class, entityManager), entityManager);
+    public UserRoleRepositoryImpl(EntityManager entityManager) {
+        super(JpaEntityInformationSupport.getEntityInformation(UserRole.class, entityManager), entityManager);
     }
 
     @Override
-    public UserAccount findByUsername(@NonNull String username) {
+    public UserRole findUserRoleByValue(@NonNull String userRole) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<UserAccount> criteria = cb.createQuery(UserAccount.class);
-        Root<UserAccount> root = criteria.from(UserAccount.class);
+        CriteriaQuery<UserRole> criteria = cb.createQuery(UserRole.class);
+        Root<UserRole> root = criteria.from(UserRole.class);
 
-        criteria.where(cb.equal(root.get(UserAccount_.USERNAME), username));
+        // criteria.where(cb.equal(root.get(UserRole_.VALUE), userRole.toUpperCase(Locale.ROOT)));
         return em.createQuery(criteria).getSingleResult();
     }
 }

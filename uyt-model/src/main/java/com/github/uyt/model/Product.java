@@ -23,30 +23,37 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "PRODUKTAS")
+@Table(name = "produktas")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Product {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "produktas_seq", sequenceName = "PRODUKTAS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "produktas_seq", sequenceName = "produktas_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produktas_seq")
     private Long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "pavadinimas")
     private String name;
 
-    @Column(name = "KIEKIS")
-    private BigDecimal amount;
-
     @ManyToOne
-    @JoinColumn(name = "MATAVIMO_VIENETAS_ID", nullable = false)
+    @JoinColumn(name = "matavimo_vienetas_id", nullable = false)
     private Measurement measurement;
 
     @ManyToOne
-    @JoinColumn(name = "PRODUKTO_RUSIS_ID", nullable = false)
+    @JoinColumn(name = "produkto_rusis_id", nullable = false)
     private ProductType productType;
 
-    @ManyToMany(mappedBy = "productList")
+    @ManyToMany(mappedBy = "productList", fetch = FetchType.EAGER)
     private List<Recipe> recipeList;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", measurement=" + measurement +
+                ", recipeList=" + recipeList +
+                '}';
+    }
 }

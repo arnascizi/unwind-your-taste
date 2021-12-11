@@ -29,7 +29,6 @@ public class RegisterVm implements Serializable {
 
     @Init
     public void init() {
-        model.setRole("ROLE_ADMIN");
     }
 
     @Command
@@ -37,11 +36,5 @@ public class RegisterVm implements Serializable {
     public void doRegister() {
         accountHelper.register(model);
         Clients.submitForm("register-form");
-    }
-
-    @Command
-    public void doSubmit() {
-        accountHelper.getUserByName(model.getUsername());
-        Clients.submitForm("login-form");
     }
 }

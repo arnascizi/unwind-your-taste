@@ -1,4 +1,4 @@
-package com.github.uyt.bl.service;
+package com.github.uyt.model;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -6,8 +6,6 @@ import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.github.uyt.model.UserAccount;
 
 public class UserDetailsPrinciple implements UserDetails {
 
@@ -19,7 +17,7 @@ public class UserDetailsPrinciple implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.<GrantedAuthority>singletonList(new SimpleGrantedAuthority(userAccount.getUserRole()));
+        return Collections.<GrantedAuthority>singletonList(new SimpleGrantedAuthority(userAccount.getUserRole().getValue()));
     }
 
     @Override

@@ -21,17 +21,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
-@Table(name = "SUDETINGUMAS")
+@Table(name = "sudetingumas")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Complexity {
 
     @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "sudetingumas_seq", sequenceName = "SUDETINGUMAS_ID_SEQ", allocationSize = 1)
+    @Column(name = "id")
+    @SequenceGenerator(name = "sudetingumas_seq", sequenceName = "sudetingumas_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sudetingumas_seq")
-    private long id;
+    private Long id;
 
-    @Column(name = "PAVADINIMAS")
+    @Column(name = "pavadinimas")
     private String value;
 
     @OneToMany(mappedBy = "complexity")

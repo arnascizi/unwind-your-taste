@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.github.uyt.bl.service.UserService;
 import com.github.uyt.model.UserAccount;
-import com.github.uyt.model.UserRole;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.UserView;
 
@@ -56,7 +55,6 @@ public class AccountHelper {
         return UserAccount.builder()
                 .username(userView.getUsername())
                 .password(passwordEncoder.encode(userView.getPassword()))
-                .userRole(UserRole.builder().value(userView.getRole()).build())
                 .userEmail(userView.getEmail())
                 .build();
     }
