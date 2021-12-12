@@ -22,7 +22,7 @@
     <xh:nav>
       <zul:apply templateURI="/templates/navigation.zul" />
     </xh:nav>
-    <div class="container col-md-8 px-3 d-block bg-white">
+    <div class="container col-md-9 px-3 d-block bg-white">
       <div class="main-bg d-flex row mx-1">
         <div class="col-md-12 p-5 ">
           <main>
@@ -31,32 +31,31 @@
         </div>
       </div>
     </div>
-<!--    <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">-->
-<!--      &lt;!&ndash; TODO Some additional info  &ndash;&gt;-->
-<!--      <div class="container">-->
-<!--        <div class="d-flex row">-->
-<!--          <div class="col-md-3 mx-1">-->
-<!--            <ul>-->
-<!--              <li class="text-white">Info 1</li>-->
-<!--              <li class="text-white">Info 2</li>-->
-<!--              <li class="text-white">Info 3</li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--          <div class="col-md-5 mx-2">-->
-<!--            <p class="text-white">Empty</p>-->
-<!--          </div>-->
-<!--          <div class="col-md-3 mx-1">-->
-<!--            <ul>-->
-<!--              <li class="text-white">Another info 1</li>-->
-<!--              <li class="text-white">Another info 2</li>-->
-<!--              <li class="text-white">-->
-<!--                <p class="text-white">Random stuff</p>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </footer>-->
-
+    <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">
+      <!-- TODO Some additional info  -->
+      <div class="container">
+        <div class="d-flex row">
+          <div class="col-md-3 mx-1">
+            <ul>
+              <li class="text-white">Info 1</li>
+              <li class="text-white">Info 2</li>
+              <li class="text-white">Info 3</li>
+            </ul>
+          </div>
+          <div class="col-md-5 mx-2">
+            <p class="text-white">Empty</p>
+          </div>
+          <div class="col-md-3 mx-1">
+            <ul>
+              <li class="text-white">Another info 1</li>
+              <li class="text-white">Another info 2</li>
+              <li class="text-white">
+                <p class="text-white">Random stuff</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
   </xh:body>
 </xh:html>

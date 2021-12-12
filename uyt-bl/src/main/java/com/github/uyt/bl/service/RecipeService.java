@@ -1,5 +1,7 @@
 package com.github.uyt.bl.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,8 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
 
-    public Page<Recipe> getAllRecipes(@NonNull Pageable pageable) {
-        return recipeRepository.fetchAllRecipes(pageable);
+    public List<Recipe> getAllRecipes() {
+        return recipeRepository.findAll();
     }
 
     public Page<Recipe> finAllPageable(@NonNull Pageable pageable) {

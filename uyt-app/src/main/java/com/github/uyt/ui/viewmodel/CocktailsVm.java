@@ -12,7 +12,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.ui.helper.RecipeHelper;
-import com.github.uyt.ui.view.RecipeView;
+import com.github.uyt.ui.view.RecipePreviewView;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +24,7 @@ public class CocktailsVm implements Serializable {
 
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
 
-    @Getter @Setter private List<RecipeView> recipeList;
+    @Getter @Setter private List<RecipePreviewView> recipeList;
     @Getter @Setter private int currentPage;
     @Getter private int maxPages;
 
@@ -32,8 +32,8 @@ public class CocktailsVm implements Serializable {
     public void init() {
         currentPage = 0;
         Pageable pageable = PageRequest.of(currentPage, PAGE_SIZE);
-        recipeList = recipeHelper.getAllRecipes(pageable);
-        maxPages = recipeList.size();
+        recipeList = recipeHelper.getAllRecipesPreview(pageable);
+        maxPages = recipeHelper.getRecipeCount();
     }
 
     @Command
@@ -45,7 +45,7 @@ public class CocktailsVm implements Serializable {
     @NotifyChange({"currentPage", "recipeList"})
     public void doPaging() {
         Pageable pageable = PageRequest.of(currentPage, PAGE_SIZE);
-        recipeList = recipeHelper.getAllRecipes(pageable);
+        recipeList = recipeHelper.getAllRecipesPreview(pageable);
     }
 
     public static int getPageSize() {
