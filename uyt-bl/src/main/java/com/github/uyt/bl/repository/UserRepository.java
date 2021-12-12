@@ -9,6 +9,4 @@ import com.github.uyt.model.UserAccount;
 public interface UserRepository extends JpaRepository<UserAccount, Long> {
 
     UserAccount findByUsername(String username);
-
-    // UserAccount findByEmail(String email);
 }

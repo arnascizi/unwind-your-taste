@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.github.uyt.bl.service.UserService;
+import com.github.uyt.bl.LoginAuthenticationProvider;
+import com.github.uyt.bl.service.UserAccountService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,11 +19,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserService userService;
+    private final UserAccountService userAccountService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authProvider());
+        auth.authenticationProvider(new LoginAuthenticationProvider());
     }
 
     @Override
@@ -31,11 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/cocktails").authenticated()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                // .antMatchers("/cocktails").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -45,7 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
-                .failureUrl("/login");
+                .failureUrl("/login")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/");
     }
 
     @Bean
@@ -56,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userService);
+        authProvider.setUserDetailsService(userAccountService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

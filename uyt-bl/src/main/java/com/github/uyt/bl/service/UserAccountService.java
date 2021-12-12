@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserAccountService implements UserDetailsService {
 
     private static final long DEFAULT_USER_ROLE_ID = 1L;
 

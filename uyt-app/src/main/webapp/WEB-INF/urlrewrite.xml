@@ -28,6 +28,12 @@
   </rule>
 
   <rule>
+    <from>^/cocktail?(.*)</from>
+    <set name="id">$1</set>
+    <to>/pages/cocktail.zul</to>
+  </rule>
+
+  <rule>
     <from>^/cocktailEntry</from>
     <to>/pages/cocktailEntry.zul</to>
   </rule>

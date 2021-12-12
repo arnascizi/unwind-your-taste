@@ -3,7 +3,6 @@ package com.github.uyt.ui.view;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.github.uyt.model.Complexity;
 import com.github.uyt.model.Review;
 
 import lombok.AllArgsConstructor;
@@ -21,14 +20,13 @@ public class RecipeView {
 
     private long id;
     private String title;
-    private String prepTime;
     private byte[] image;
     private String guideline;
     private String serving;
     private LocalDateTime uploadTime;
     private LocalDateTime updateTime;
-    private UserView userView;
+    private String uploader;
     private List<Review> reviews;
-    private Complexity complexity;
-    private CocktailCategory category;
+    private String complexity;
+    private String category;
 }

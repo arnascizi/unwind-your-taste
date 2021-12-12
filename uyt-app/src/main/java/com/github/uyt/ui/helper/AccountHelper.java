@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.github.uyt.bl.service.UserService;
+import com.github.uyt.bl.service.UserAccountService;
 import com.github.uyt.model.UserAccount;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.UserView;
@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountHelper {
 
-    private final UserService userService;
+    private final UserAccountService userAccountService;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public LoggedUser getLoggedUser() {
@@ -36,12 +36,12 @@ public class AccountHelper {
 
     public void register(UserView userView) {
         if (userView != null) {
-            userService.save(buildUserAccount(userView));
+            userAccountService.save(buildUserAccount(userView));
         }
     }
 
     public UserView getUserByName(String username) {
-        return buildUserView(userService.loadUserByUsername(username));
+        return buildUserView(userAccountService.loadUserByUsername(username));
     }
 
     private UserView buildUserView(UserDetails details) {

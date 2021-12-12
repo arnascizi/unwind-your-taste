@@ -23,7 +23,7 @@ public class LoginVm implements Serializable {
     private static final String USERNAME = "loginUsername";
     private static final String PASSWORD = "loginPassword";
 
-    @WireVariable(rewireOnActivate = true) private AccountHelper accountHelper;
+    @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
     @Getter @Setter private Map<String, String> vmsgs = new HashMap<>();
     @Getter private LoginView model = new LoginView();
 
@@ -34,7 +34,8 @@ public class LoginVm implements Serializable {
     @Command
     public void doLogin() {
         if (isValid()) {
-            Clients.submitForm("loginForm");
+            // accountHelper.getUserByName(model.getUsername());
+            Clients.submitForm("login-form");
         }
     }
 

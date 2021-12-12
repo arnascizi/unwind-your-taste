@@ -1,6 +1,7 @@
 package com.github.uyt.model;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -78,8 +79,13 @@ public class Recipe {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", preparationDescription='" + preparationDescription + '\'' +
+                ", serving='" + serving + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", image=" + Arrays.toString(image) +
+                ", userAccount=" + userAccount +
+                ", cocktailCategory=" + cocktailCategory +
+                ", reviewList=" + reviewList +
                 ", complexity=" + complexity +
                 ", productList=" + productList +
                 '}';

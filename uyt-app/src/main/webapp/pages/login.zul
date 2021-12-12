@@ -8,11 +8,11 @@
       <div class="d-flex justify-content-center">
         <div class="mx-auto col-sm-8 col-md-6 col-lg-4">
           <h2 class="mb-4">${c:l('common.login')}</h2>
-          <xh:form action="/login" method="POST" id="loginForm">
+          <xh:form action="/login" method="POST" id="login-form">
             <div class="form-group">
               <div class="input-group">
-                <zul:textbox type="text" sclass="form-control border-top-0 border-left-0 border-right-0" id="loginUsername" placeholder="${c:l('login.username')}"
-                        value="@load(vm.model.username) @save(vm.model.username)" errorMessage="@load(vm.vmsgs['loginUsername'])" />
+                <zul:textbox type="text" sclass="form-control border-top-0 border-left-0 border-right-0" id="loginUsername" name="loginUsername" placeholder="${c:l('login.username')}"
+                        value="@load(vm.model.username) @save(vm.model.username, before='doLogin')" errorMessage="@load(vm.vmsgs['loginUsername'])" />
                 <div class="input-group-append">
                   <div class="input-group-text bg-white border-top-0 border-left-0 border-right-0">
                     <i class="bi bi-person fill" />
@@ -23,8 +23,8 @@
 
             <div class="form-group">
               <div class="input-group">
-                <zul:textbox type="password" sclass="form-control border-top-0 border-left-0 border-right-0" id="loginPassword" placeholder="${c:l('login.password')}"
-                        value="@load(vm.model.password) @save(vm.model.password)" errorMessage="@load(vm.vmsgs['loginPassword'])" />
+                <zul:textbox type="password" sclass="form-control border-top-0 border-left-0 border-right-0" id="loginPassword" name="loginPassword" placeholder="${c:l('login.password')}"
+                        value="@load(vm.model.password) @save(vm.model.password, before='doLogin')" errorMessage="@load(vm.vmsgs['loginPassword'])" />
                 <div class="input-group-prepend">
                   <div class="input-group-text bg-white border-top-0 border-left-0 border-right-0">
                     <i class="bi bi-lock-fill" />
@@ -41,7 +41,7 @@
             </div>
             <div class="row d-flex justify-content mt-3">
               <div class="form-group col-sm-6">
-                <xh:button sclass="btn btn-outline-secondary col-sm-12" onClick="@command('doLogin')">${c:l('common.login')}</xh:button>
+                <xh:button type="submit" sclass="btn btn-outline-secondary col-sm-12" onClick="@command('doLogin')">${c:l('common.login')}</xh:button>
               </div>
 
               <div class="col-sm-6">
