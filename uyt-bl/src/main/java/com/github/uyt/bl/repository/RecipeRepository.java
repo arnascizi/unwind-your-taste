@@ -1,5 +1,7 @@
 package com.github.uyt.bl.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -16,4 +18,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
    Page<Recipe> fetchAllRecipes(Pageable pageable);
 
    Recipe fetchSingleRecipe(Long id);
+
+   List<Recipe> fetchLatestRecipes();
 }

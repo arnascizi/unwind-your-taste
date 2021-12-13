@@ -35,4 +35,8 @@ public class RecipeService {
     public Recipe fetchSingleRecipe(@NonNull Long id) {
         return recipeRepository.fetchSingleRecipe(id);
     }
+
+    public List<Recipe> getRecommendedRecipes() {
+        return recipeRepository.fetchLatestRecipes();
+    }
 }

@@ -2,6 +2,7 @@ package com.github.uyt.ui.helper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,10 @@ public class RecipeHelper {
 
     public RecipeView getDetailedRecipeView(Long id) {
         return buildRecipe(recipeService.fetchSingleRecipe(id));
+    }
+
+    public List<RecipePreviewView> getRecommendedRecipes() {
+        return recipeService.getRecommendedRecipes().stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
     private RecipePreviewView buildRecipePreview(Recipe recipe) {

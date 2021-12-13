@@ -1,14 +1,19 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" xmlns:sh="shadow" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.SidebarVm')">
   <h5 class="ml-4">${c:l('common.recommendations')}</h5>
   <hr/>
-  <div>
-    <div class="col-xs-6 mb-2">
-      <zul:recipePreviewComponent />
-    </div>
-    <div class="col-xs-6">
-      <zul:recipePreviewComponent />
-    </div>
-  </div>
+  <xh:div>
+    <sh:forEach items="@load('vm.recommendedRecipes')">
+      <xh:div class="mx-0 px-1 mt-2 w-25">
+        <xh:div class="card col-sm-12 bg-light shadow">
+          <zul:image class="card-img-top" content="@load(each.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+          <div class="card-body">
+            <xh:a class="card-link" onClick="@command(vm.doSelect(each.id))">${each.title}</xh:a>
+            <p class="card-text"><small class="text-muted">${each.complexity}</small></p>
+          </div>
+        </xh:div>
+      </xh:div>
+    </sh:forEach>
+  </xh:div>
 </xh:div>
 

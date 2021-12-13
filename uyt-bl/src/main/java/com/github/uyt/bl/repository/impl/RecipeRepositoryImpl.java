@@ -1,5 +1,8 @@
 package com.github.uyt.bl.repository.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -38,7 +41,7 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
-        criteria.select(root);
+        criteria.select(root).orderBy(root.get(Recipe_.TITLE));
         TypedQuery<Recipe> query = em.createQuery(criteria);
         return new PageImpl<>(query.getResultList(), pageable, query.getResultList().size());
     }
@@ -50,5 +53,15 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         Root<Recipe> root = criteria.from(Recipe.class);
         criteria.where(cb.equal(root.get(Recipe_.ID), id));
         return em.createQuery(criteria).getSingleResult();
+    }
+
+    @Override
+    public List<Recipe> fetchLatestRecipes() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
+        Root<Recipe> root = criteria.from(Recipe.class);
+        criteria.select(root).orderBy(root.get(Recipe_.TITLE));
+        criteria.select(root);
+        return em.createQuery(criteria).getResultList().stream().limit(3).collect(Collectors.toList());
     }
 }
