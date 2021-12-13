@@ -148,88 +148,88 @@ values (1, 'After eight', 'Viską supilkite tiesiog į taurę be ledo.', 'Papuo�
 
        (3, 'Bloody mary',
         'Visas sudedamąsias dalis supilkite į plaktuvę su ledu, išplakite ir nukoškite į taurę. Ruošdami šį kokteilį, druskos, pipirų ar Vusterio padažoi verčiau nenaudokite per mažai negu per daug - galėsite pagardinti pagal skonį vėliau.',
-        'Papuoškite saliero lapkočiu ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\3-bloody-marry.jfif'), 5, 61, 2, null),
+        'Papuoškite saliero lapkočiu ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\3-bloody-mary.jfif'), 5, 61, 2, null),
 
        (4, 'Blue wonder', 'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę.', 'Patiekite be puošmenų ir šiaudelio.', current_timestamp, current_timestamp,
         pg_read_binary_file('C:\images\4-blue-wonder.jpg'), 5, 61, 1, null),
 
        (5, 'Cuba libre',
         'Supjaustykite žaliąją citriną į 4 dalis, sudėkite į taurę ir lengvai patraiškykite grūstuvėliu - tačiau ne per smarkiai, kad iš odelės neišsiskirtu kartumas. Jei gausite per mažai sulčių, be citrinų sulčių,įpilkite dar 2 arbatinius (10 ml) žaliųjų citrinų sulčių. Paskui į taurę supilkite romą, o galiausiai kodą.',
-        'papuoškite cuba libre žaliosios citrinos griežinėliu ir patiekite su ilgu šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\5-cuba-libre.jped'), 5, 61, 2, null),
+        'papuoškite cuba libre žaliosios citrinos griežinėliu ir patiekite su ilgu šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\5-cuba-libre.jpeg'), 5, 61, 2, null),
 
        (6, 'Dry martini', 'Viską išplakite plaktuvėje su ledu ir nukoškite ė matinio taurę.', 'Patiekite be puošmenų ir šiaudelio.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\6-dry-martini.jfif'), 5, 61, 2,
         null),
 
-       (7, 'Gimlet', 'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę', 'Patiekite be puošmenų.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\7-gimlet.jepg'), 5, 61, 1, null),
+       (7, 'Gimlet', 'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę', 'Patiekite be puošmenų.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\7-gimlet.jpeg'), 5, 61, 1, null),
 
        (8, 'Adonis', 'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai.', 'Papuoškite apelsino griežinėliu, patiekite su šiaudeliu.',
-        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\8-donis.jfif'), 5, 62, 1, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\8-adonis.jfif'), 5, 62, 1, null),
 
        (9, 'Amaretto sunrise',
         'Viss ingredientus, išskyrus braškių sirupą, supilkite į plaktuvę su ledu, išplakite ir nukoškite į stiklinę, kurioje įfėti 1 - 2 ledo gabaliukai. Paskui supilkite braškių sirupą',
-        'Papuoškite banano griežinėliu ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, null, 5, 62, 1, null),
+        'Papuoškite banano griežinėliu ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\9-amareto-sunrise.png'), 5, 62, 1, null),
 
        (10, 'Asta flip',
         'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai', 'Papuoškite apelsino griežinėliu ir patiekite su šiaudeliu', current_timestamp,
-        current_timestamp, null, 5, 62, 2, null),
+        current_timestamp, pg_read_binary_file('C:\images\10-asta-flip.jpg'), 5, 62, 2, null),
 
        (11, 'Bitter vodka',
         'Visas sudedamąsias dalis, išskyrus Bitter lemon ir spanguolių sirupą, išplakite plaktuvėje su ledu ir nukoškite į stiklinę, kurioje įdėti 1 - 2 ledo gabaliukai. Pripilkite iki viršaus Bitter lemon. Paskui supilkite spanguolių sirupą',
-        'Papuoškite žaliosios citrinos griežinėliu. Patiekite su šiaudeliu.', current_timestamp, current_timestamp, null, 5, 62, 2, null),
+        'Papuoškite žaliosios citrinos griežinėliu. Patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\11-bitter-vodka.jpg'), 5, 62, 2, null),
 
        (12, 'Blow', 'Viską, išskyrus braškių sirupą, išplakite plaktuvėje su ledu ir nukoškite į stiklinę, kurioje įdėti 1 - 2 ledo gabaliukai.',
-        'Papuoškite apelsino griežinėliu. Patiekite su šiaudeliu.', current_timestamp, current_timestamp, null, 5, 62, 2, null),
+        'Papuoškite apelsino griežinėliu. Patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\12-blow.jfif'), 5, 62, 2, null),
 
        (13, 'Beach of paradise',
         'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai.',
-        'Papuoškite ananso gabaliuku ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, null, 5, 65, 2, null),
+        'Papuoškite ananso gabaliuku ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\13-beach-paradise.jpg'), 5, 65, 2, null),
 
        (14, 'Alien', 'Viską supilkite į maišytuvą ir gerai sumaišykite. Paskui supilkite į puodelį, kuriame įdėti 1 - 2 ledo gabaliukai.', 'Papuoškite braške ir patiekite su 2 šiaudeliais.',
-        current_timestamp, current_timestamp, null, 5, 63, 2, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\14-alien.jfif'), 5, 63, 2, null),
 
        (15, 'Flash',
         'Vyšnių ir apelsinų sultis išplakite plaktuvėje su ledu ir nukoškite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai. Beveik iki viršaus pripilkite gazuoto vanges, paskui supilkite Blue Curacao.',
         'Papuoškite apelsino griežinėliu ir patiekite su šiaudeliu.',
-        current_timestamp, current_timestamp, null, 5, 71, 2, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\15-flash.jfif'), 5, 71, 2, null),
 
        (16, 'Ipanema',
         'Stipriai pakočiokite žaliąją citriną tarp delnų arba ant stalo, kad suminkštėtų ir nupjovę galus, turinčius daugiausiai karčiųjų aliejų, padalinkite ją į 8 dalis. Sudėkite citrinos gabaliukus į taurę ir atsargiai patraiškykite grūstuvėliu, stengdamiesi nepaleisti karčiųjų aliejų. Įberkite 1 - 2 šaukštus rudojo cukraus. Jeigu citrina nepakankamai sultinga, dar įpilkite 2 arbatinius šaukštelius (10 ml) -aliųjų citrinų sulčių. 3/4 taurės pripildykite grūsto ledo ir iki viršsaus pripilkite imbierinio alaus. Atsargiai išmaišykite baro šaukštu, kad kokteilis nesiliautų šnypštęs.',
         'Įdėkite grūsto ledo ir patiekite su vienu storu šiaudeliu arba 2 plonais bet be puošmenų.',
-        current_timestamp, current_timestamp, null, 5, 71, 3, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\16-ipanema.jpg'), 5, 71, 3, null),
 
        (17, 'Baileys colada', 'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai.',
-        'Papuoškite banano griežinėliu arba ananaso gabaliuku. Patiekite su šiaudeliu.', current_timestamp, current_timestamp, null, 5, 64, 2, null),
+        'Papuoškite banano griežinėliu arba ananaso gabaliuku. Patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\17-baileys-colada.jpg'), 5, 64, 2, null),
 
        (18, 'Banana kiss',
         'Visas sudedamąsias dalis, išskyrus šokolado sirupą, gerai išmaišykite maišiklyje. SUpilkite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai. Ant viršaus supilkite šokolado sirupą',
-        'Papuoškite banano griežinėliu ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, null, 5, 64, 2, null),
+        'Papuoškite banano griežinėliu ir patiekite su šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\18-banana-kiss.jfif'), 5, 64, 2, null),
 
        (19, 'Bull killer', 'Pirmiausia į taurę įdėkite 2 gabaliukus ledo ir supilkite visas sudedamąsias dalis, išskyrus Red Bull. Vėliau įpilkite Red Bull.', 'Papuoškite citrinos riekele.',
-        current_timestamp, current_timestamp, null, 5, 66, 2, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\19-bull-killer.jpg'), 5, 66, 2, null),
 
        (20, 'Hero',
         'Viską išplakite plaktuvėje su ledu ir nukoškite į taurę, kurioje įdėti 1 - 2 ledo gabaliukai.',
         'Papuoškite persiko riekele.',
-        current_timestamp, current_timestamp, null, 5, 66, 2, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\20-hero.jpg'), 5, 66, 2, null),
 
        (21, 'Amaretto flirt',
         'Pirma nulupkite ananaso žievę ir supjaustykite jį smulkiais gabaliukais. Viską, išskyrus putojanti vyną, supilkite į maišiklį ir gerai išmaišykite. Supilkite kokteilį į taurę, kurioje įdėti 1 - 2 ledo gabaliukai. Paskui pripilkite iki viršaus putojančio vyno',
         'Papuoškite ananso gabaliuku ir patiekite su šiaudeliu.',
-        current_timestamp, current_timestamp, null, 5, 68, 3, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\21-amareto-flirt.jpg'), 5, 68, 3, null),
 
        (22, 'Amaretto misery',
         'Į highball taurę įdėkite 2 arba ę ledo gabaliukus, paskui supilkite amaretą. Iki viršaus pripilkite obuolių sulčių.',
         'Papuoškite obuolio ar apelsino griežinėliu ir patiekite su šiaudeliu.',
-        current_timestamp, current_timestamp, null, 5, 69, 1, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\22-amaretto-misery.jpeg'), 5, 69, 1, null),
 
        (23, 'Irish coffe',
         'Viską, išskyrus kavą, supilkite į puodelį. Paskui supilkite karštą kavą.',
         'Papuoškite plakta grietinėle ir patiekite su šaukšteliu.',
-        current_timestamp, current_timestamp, null, 5, 72, 1, null),
+        current_timestamp, current_timestamp, pg_read_binary_file('C:\images\23-irish-coffee.jfif'), 5, 72, 1, null),
 
        (24, 'B52',
         'Pirma supilkite kavos likerį į karščiui atsparią taurelę, Paskui per baro šaukšto nugarėlę atsargiai supilkite likeri Baileys. Šie skysčiai turėtų sudaryti atskirus sluoksnius, Tada taip pat supilkite romą.',
-        'Patiekite be puošmenų, tačiau su degtukais, servetėle ir trumpu šiaudeliu.', current_timestamp, current_timestamp, null, 5, 67, 3, null);
+        'Patiekite be puošmenų, tačiau su degtukais, servetėle ir trumpu šiaudeliu.', current_timestamp, current_timestamp, pg_read_binary_file('C:\images\24-b52.jfif'), 5, 67, 3, null);
 
 insert into sudetis (receptas_id, produktas_id, kiekis)
 VALUES (1, 1, 40),

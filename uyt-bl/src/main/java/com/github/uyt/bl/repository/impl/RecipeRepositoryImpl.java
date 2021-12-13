@@ -41,7 +41,6 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
-        criteria.select(root).orderBy(root.get(Recipe_.TITLE));
         TypedQuery<Recipe> query = em.createQuery(criteria);
         return new PageImpl<>(query.getResultList(), pageable, query.getResultList().size());
     }
@@ -60,7 +59,6 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
-        criteria.select(root).orderBy(root.get(Recipe_.TITLE));
         criteria.select(root);
         return em.createQuery(criteria).getResultList().stream().limit(3).collect(Collectors.toList());
     }

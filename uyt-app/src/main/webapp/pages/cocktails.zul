@@ -4,62 +4,51 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailsVm')">
-  <div class="container mt-0">
-  <h3 class="text-muted">${c:l('common.cocktails')}</h3>
-  <hr />
-  <!--    <a class="btn btn-outline-success" href="/cocktailEntry">Add cocktail</a>-->
-  <div class="mt-5">
-    <div class="input-group d-flex justify-content-center">
-      <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@save(vm.searchParam, before='doSearch')" />
-      <div class="col-xs-4">
-        <zul:combobox class="input-group-prepend mx-1">
-          <zul:comboitem label="all" value="all" />
-          <zul:comboitem label="tag" value="tag" />
-          <zul:comboitem label="name" value="name" />
-        </zul:combobox>
-      </div>
-      <div class="col-xs-4">
-        <div class="input-group-prepend mx-1">
+  <div class="container mt-0 pb-5">
+    <h3 class="text-muted">${c:l('common.cocktails')}</h3>
+    <hr />
+    <!--    <a class="btn btn-outline-success" href="/cocktailEntry">Add cocktail</a>-->
+    <div class="mt-5">
+      <div class="input-group d-flex justify-content-center">
+        <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@save(vm.searchParam, before='doSearch')" />
+        <div class="col-xs-4">
           <zul:combobox class="input-group-prepend mx-1">
             <zul:comboitem label="all" value="all" />
             <zul:comboitem label="tag" value="tag" />
             <zul:comboitem label="name" value="name" />
           </zul:combobox>
-          <zul:button class="input-group-prepend btn btn-sm text-white w-50 col-xs-2 mx-1" type="button" style="background-color: #617e9f" label="${c:l('common.search')}" onClick="@command('doSearch')" />
         </div>
+        <div class="col-xs-4">
+          <div class="input-group-prepend mx-1">
+            <zul:combobox class="input-group-prepend mx-1">
+              <zul:comboitem label="all" value="all" />
+              <zul:comboitem label="tag" value="tag" />
+              <zul:comboitem label="name" value="name" />
+            </zul:combobox>
+            <zul:button class="input-group-prepend btn btn-sm text-white w-50 col-xs-2 mx-1" type="button" style="background-color: #617e9f" label="${c:l('common.search')}"
+                    onClick="@command('doSearch')" />
+          </div>
+        </div>
+
+        <xh:div class="container mt-3 mb-5 col-sm-12">
+          <xh:div class="d-flex justify-content-center row">
+            <sh:forEach items="@load(vm.recipeList)">
+              <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">
+                <xh:div class="card col-sm-12 bg-light shadow">
+                  <zul:image class="card-img-top" content="@load(each.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+                  <div class="card-body">
+                    <xh:a class="card-link" onClick="@command(vm.doSelect(each.id))">${each.title}</xh:a>
+                    <p class="card-text">
+                      <small class="text-muted">${each.complexity}</small>
+                    </p>
+                  </div>
+                </xh:div>
+              </xh:div>
+            </sh:forEach>
+          </xh:div>
+        </xh:div>
       </div>
-
-    <xh:div class="container mt-3 col-sm-12">
-      <xh:div class="d-flex justify-content-center row">
-        <sh:forEach items="@load(vm.recipeList)">
-          <xh:div class="mx-0 px-1 mt-2 w-25">
-          <xh:div class="card col-sm-12 bg-light shadow">
-            <zul:image class="card-img-top" content="@load(each.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
-            <div class="card-body">
-              <xh:a class="card-link" onClick="@command(vm.doSelect(each.id))">${each.title}</xh:a>
-              <p class="card-text"><small class="text-muted">${each.complexity}</small></p>
-            </div>
-          </xh:div>
-          </xh:div>
-
-<!--          <xh:div class="mx-2 mt-2 w-25">-->
-<!--            <div class="col-sm-12 bg-light shadow card px-5">-->
-<!--              <xh:img class="card-img w-100" alt="${each.title}" />-->
-<!--              <div class="card-body d-flex row">-->
-<!--                <div class="col-sm-6 mx-0 px-0">-->
-<!--                  <xh:label >${each.complexity}</xh:label>-->
-<!--                </div>-->
-<!--                <div class="col-sm-6 mx-0 px-0">-->
-<!--                  <xh:a class="mt-3" onClick="@command(vm.doSelect(each.id))">${each.title}</xh:a>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </xh:div>-->
-        </sh:forEach>
-      </xh:div>
-    </xh:div>
-  </div>
-  <zul:paging sclass="mt-3" totalSize="@load(vm.maxPages)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os"/>
-  </div>
+      <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.maxPages)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />
+    </div>
   </div>
 </xh:div>

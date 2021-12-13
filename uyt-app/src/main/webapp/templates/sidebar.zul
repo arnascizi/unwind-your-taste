@@ -3,8 +3,8 @@
   <h5 class="ml-4">${c:l('common.recommendations')}</h5>
   <hr/>
   <xh:div>
-    <sh:forEach items="@load('vm.recommendedRecipes')">
-      <xh:div class="mx-0 px-1 mt-2 w-25">
+    <sh:forEach items="@load(vm.recommendedRecipes)">
+      <xh:div class="mx-0 px-1 mt-2 w-100">
         <xh:div class="card col-sm-12 bg-light shadow">
           <zul:image class="card-img-top" content="@load(each.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
           <div class="card-body">
