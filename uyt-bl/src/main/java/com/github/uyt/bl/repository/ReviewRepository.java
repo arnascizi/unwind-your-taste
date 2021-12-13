@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.github.uyt.model.Review;
 
-@Repository
+@Transactional
+@NoRepositoryBean
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+
+    List<Review> getAllUserReviews(Long userId);
 }
