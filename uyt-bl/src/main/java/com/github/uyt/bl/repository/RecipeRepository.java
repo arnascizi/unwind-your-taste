@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import com.github.uyt.model.Recipe;
+import com.github.uyt.model.Search;
 
 @NoRepositoryBean
 @Transactional
@@ -20,4 +21,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
    Recipe fetchSingleRecipe(Long id);
 
    List<Recipe> fetchLatestRecipes();
+
+   Page<Recipe> fetchSearchResult(Pageable pageable, Search search);
 }

@@ -37,7 +37,7 @@ public class ReviewRepositoryImpl extends SimpleJpaRepository<Review, Long> impl
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Review> criteria = cb.createQuery(Review.class);
         Root<Review> root = criteria.from(Review.class);
-        criteria.where(cb.equal(root.get(Review_.USER_ACCOUNT).get(UserAccount_.ID), userId));
+        criteria.where(cb.equal(root.get(Review_.userAccount).get(UserAccount_.id), userId));
         criteria.select(root);
         return em.createQuery(criteria).getResultList();
     }

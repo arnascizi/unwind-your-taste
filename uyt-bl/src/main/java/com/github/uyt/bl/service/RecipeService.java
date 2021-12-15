@@ -5,17 +5,16 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.github.uyt.bl.repository.RecipeRepository;
 import com.github.uyt.model.Recipe;
+import com.github.uyt.model.Search;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
@@ -38,5 +37,9 @@ public class RecipeService {
 
     public List<Recipe> getRecommendedRecipes() {
         return recipeRepository.fetchLatestRecipes();
+    }
+
+    public Page<Recipe> fetchSearchResult(Pageable pageable, Search search) {
+        return recipeRepository.fetchSearchResult(pageable, search);
     }
 }

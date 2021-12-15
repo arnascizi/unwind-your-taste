@@ -10,9 +10,12 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.ui.helper.AccountHelper;
+import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.view.LoggedUser;
+import com.github.uyt.ui.view.SearchView;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class TemplateVm implements Serializable {
     private static final long serialVersionUID = -4642314582073834590L;
@@ -21,7 +24,9 @@ public class TemplateVm implements Serializable {
     private static final Locale LOCALE_EN = Locale.ENGLISH;
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
+    @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
 
+    @Getter @Setter private SearchView search = new SearchView();
     @Getter private String username;
 
     @Init
@@ -40,6 +45,11 @@ public class TemplateVm implements Serializable {
     public void doSetLocaleLt() {
         Executions.getCurrent().getSession().setAttribute(Attributes.PREFERRED_LOCALE, LOCALE_LT);
         Executions.sendRedirect(null);
+    }
+
+    @Command
+    public void doSearch() {
+        Executions.sendRedirect("/cocktails?searchValue=" + search.getSearchValue());
     }
 
     public boolean isUserLogged() {

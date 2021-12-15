@@ -20,12 +20,14 @@ import javax.persistence.Table;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
 @Table(name = "receptas")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Recipe {
@@ -72,23 +74,5 @@ public class Recipe {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sudetis", joinColumns = @JoinColumn(name = "receptas_id"), inverseJoinColumns = @JoinColumn(name = "produktas_id"))
     private List<Product> productList;
-
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", preparationDescription='" + preparationDescription + '\'' +
-                ", serving='" + serving + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", image=" + Arrays.toString(image) +
-                ", userAccount=" + userAccount +
-                ", cocktailCategory=" + cocktailCategory +
-                ", reviewList=" + reviewList +
-                ", complexity=" + complexity +
-                ", productList=" + productList +
-                '}';
-    }
 }
 

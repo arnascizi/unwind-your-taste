@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.uyt.model.Review;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class RecipeView {
 
     private long id;
@@ -27,6 +28,7 @@ public class RecipeView {
     private LocalDateTime updateTime;
     private String uploader;
     private List<Review> reviews;
+    private List<ProductView> products;
     private String complexity;
     private String category;
 }

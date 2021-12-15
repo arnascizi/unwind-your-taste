@@ -4,7 +4,6 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" apply="org.zkoss.bind.BindComposer" self="@{define(pageContent)}" validationMessages="@id('vmsgs')"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RegisterVm')">
-  <div>
     <div class="p-5">
       <div class="mx-auto col-sm-12 col-md-8 col-lg-6">
         <h2 class="mb-4">${c:l('common.register')}</h2>
@@ -77,5 +76,4 @@
         </form>
       </div>
     </div>
-  </div>
 </xh:div>

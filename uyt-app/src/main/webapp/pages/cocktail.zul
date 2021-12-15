@@ -2,13 +2,115 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RecipeVm')">
-  <din class="container-auth">
-    <div class="signup-content">
-      <div class="signup-form">
-        <h2 class="form-title">${vm.model.title}</h2>
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RecipeVm')">
+  <div class="container mt-0 pb-5">
+    <h3 class="pt-5 text-muted">${vm.model.title}
+      <small class="h6 text-muted text-small float-right">${vm.model.uploadTime}</small>
+      <br/>
+      <small class="h6 text-muted text-small float-right">${c:l('recipe.uploaded.by')} ${vm.model.uploader}</small>
+    </h3>
+    <hr />
+    <div class="mt-5">
+      <div class="container d-block">
+        <div class="row">
+          <div class="col-sm-4 border">
+            <div>
+              <zul:image class="card-img-top m-0" content="@load(vm.model.image) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+            </div>
 
+            <div class="px-1 py-1 mx-auto">
+              <div class="row justify-content-center">
+                <div class="col-sm-12 text-center mb-1">
+                  <div class="card">
+                    <div class="row justify-content-left d-flex">
+                      <div class="col-md-4 d-flex flex-column">
+                        <div class="rating-box">
+                          <h1 class="pt-4">4.0</h1>
+                          <p class="">out of 5</p>
+                        </div>
+                        <div> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-inactive mx-1"></span> </div>
+                      </div>
+                      <div class="col-md-8">
+                        <div class="rating-bar0 justify-content-center">
+                          <table class="text-left mx-auto">
+                            <tr>
+                              <td class="rating-label">Excellent</td>
+                              <td class="rating-bar">
+                                <div class="bar-container">
+                                  <div class="bar-5"></div>
+                                </div>
+                              </td>
+                              <td class="text-right">123</td>
+                            </tr>
+                            <tr>
+                              <td class="rating-label">Good</td>
+                              <td class="rating-bar">
+                                <div class="bar-container">
+                                  <div class="bar-4"></div>
+                                </div>
+                              </td>
+                              <td class="text-right">23</td>
+                            </tr>
+                            <tr>
+                              <td class="rating-label">Average</td>
+                              <td class="rating-bar">
+                                <div class="bar-container">
+                                  <div class="bar-3"></div>
+                                </div>
+                              </td>
+                              <td class="text-right">10</td>
+                            </tr>
+                            <tr>
+                              <td class="rating-label">Poor</td>
+                              <td class="rating-bar">
+                                <div class="bar-container">
+                                  <div class="bar-2"></div>
+                                </div>
+                              </td>
+                              <td class="text-right">3</td>
+                            </tr>
+                            <tr>
+                              <td class="rating-label">Terrible</td>
+                              <td class="rating-bar">
+                                <div class="bar-container">
+                                  <div class="bar-1"></div>
+                                </div>
+                              </td>
+                              <td class="text-right">0</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-sm-8 border float-right">
+            <xh:p>${vm.model.title}</xh:p>
+            <xh:div class="d-flex">
+              <sh:forEach items="@load(vm.model.products)" var="product">
+                <xh:p>${product.name}</xh:p>
+                <xh:p>${product.productType}</xh:p>
+                <xh:p>${product.measurement}</xh:p>
+                <br/>
+              </sh:forEach>
+            </xh:div>
+            <xh:p>${vm.model.complexity}</xh:p>
+            <xh:p>${vm.model.guideline}</xh:p>
+            <xh:p>${vm.model.serving}</xh:p>
+            <xh:p>${vm.model.category}</xh:p>
+            <xh:p>${vm.model.updateTime}</xh:p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 border">
+          </div>
+        </div>
       </div>
     </div>
-  </din>
+  </div>
 </xh:div>

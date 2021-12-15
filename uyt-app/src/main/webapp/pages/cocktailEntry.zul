@@ -3,10 +3,8 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}">
-  <din class="container-auth">
-    <div class="signup-content">
-      <div class="signup-form">
-        <h2 class="form-title">Submit new recipe</h2>
+  <div class="container mt-0 pb-5">
+    <h3 class="pt-5 text-muted">${vm.model.title}</h3>
         <form method="POST" class="register-form" id="newRecipe">
           <div class="form-group">
             <zul:textbox type="text" name="recipeTitle" value="" placeholder="Recipe title" />
@@ -36,6 +34,4 @@
           </div>
         </form>
       </div>
-    </div>
-  </din>
 </xh:div>

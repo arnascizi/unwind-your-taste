@@ -34,6 +34,12 @@
   </rule>
 
   <rule>
+    <from>^/cocktails?(.*)</from>
+    <set name="searchValue">$1</set>
+    <to>/pages/cocktails.zul</to>
+  </rule>
+
+  <rule>
     <from>^/cocktailEntry</from>
     <to>/pages/cocktailEntry.zul</to>
   </rule>

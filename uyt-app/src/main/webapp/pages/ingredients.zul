@@ -3,9 +3,11 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
-  <div class="container mt-5 pt-5">
-  </div>
-  <div class="container">
-    In progress..
+  <div class="container mt-0 pb-5">
+    <h3 class="pt-5 text-muted">${vm.model.title}</h3>
+    <hr />
+    <div class="container">
+      In progress..
+    </div>
   </div>
 </xh:div>
