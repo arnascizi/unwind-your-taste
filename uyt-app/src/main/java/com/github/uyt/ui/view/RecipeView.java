@@ -28,7 +28,7 @@ public class RecipeView {
     private LocalDateTime updateTime;
     private String uploader;
     private List<Review> reviews;
-    private List<ProductView> products;
+    private List<CompositionView> products;
     private String complexity;
     private String category;
 }

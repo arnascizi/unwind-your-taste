@@ -1,6 +1,5 @@
 package com.github.uyt.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -44,6 +43,6 @@ public class Product {
     @JoinColumn(name = "produkto_rusis_id", nullable = false)
     private ProductType productType;
 
-    @ManyToMany(mappedBy = "productList", fetch = FetchType.EAGER)
-    private List<Recipe> recipeList;
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Composition> productList;
 }

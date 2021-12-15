@@ -1,7 +1,6 @@
 package com.github.uyt.model;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -71,8 +68,7 @@ public class Recipe {
     @JoinColumn(name = "sudetingumas_id", nullable = false)
     private Complexity complexity;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "sudetis", joinColumns = @JoinColumn(name = "receptas_id"), inverseJoinColumns = @JoinColumn(name = "produktas_id"))
-    private List<Product> productList;
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
+    private List<Composition> productList;
 }
 

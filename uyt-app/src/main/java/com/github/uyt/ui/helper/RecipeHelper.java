@@ -18,9 +18,11 @@ import org.springframework.stereotype.Component;
 
 import com.github.uyt.bl.service.RecipeService;
 import com.github.uyt.bl.service.UserAccountService;
+import com.github.uyt.model.Composition;
 import com.github.uyt.model.Product;
 import com.github.uyt.model.Recipe;
 import com.github.uyt.model.Search;
+import com.github.uyt.ui.view.CompositionView;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.ProductView;
 import com.github.uyt.ui.view.RecipePreviewView;
@@ -116,7 +118,7 @@ public class RecipeHelper {
                 .uploader(recipe.getUserAccount().getUsername())
                 .complexity(recipe.getComplexity().getValue())
                 .category(recipe.getCocktailCategory().getName())
-                .products(recipe.getProductList().stream().map(this::buildProductView).collect(Collectors.toList()))
+                .products(recipe.getProductList().stream().map(this::buildCompositionView).collect(Collectors.toList()))
                 .image(recipe.getImage())
                 .build();
     }
@@ -126,7 +128,15 @@ public class RecipeHelper {
                 .id(product.getId())
                 .name(product.getName())
                 .productType(product.getProductType().getName())
-                .measurement(product.getMeasurement().getName())
+                .measurement(product.getMeasurement().getValue())
+                .build();
+    }
+
+    private CompositionView buildCompositionView(Composition composition) {
+        return CompositionView.builder()
+                .id(composition.getId())
+                .productView(buildProductView(composition.getProduct()))
+                .amount(composition.getAmount())
                 .build();
     }
 

@@ -218,7 +218,7 @@ values (1, 'After eight', 'Viską supilkite tiesiog į taurę be ledo.', 'Papuo�
         current_timestamp, current_timestamp, pg_read_binary_file('C:\images\21-amareto-flirt.jpg'), 5, 68, 3, null),
 
        (22, 'Amaretto misery',
-        'Į highball taurę įdėkite 2 arba ę ledo gabaliukus, paskui supilkite amaretą. Iki viršaus pripilkite obuolių sulčių.',
+        'Į highball taurę įdėkite 2 arba 3 ledo gabaliukus, paskui supilkite amaretą. Iki viršaus pripilkite obuolių sulčių.',
         'Papuoškite obuolio ar apelsino griežinėliu ir patiekite su šiaudeliu.',
         current_timestamp, current_timestamp, pg_read_binary_file('C:\images\22-amaretto-misery.jpeg'), 5, 69, 1, null),
 

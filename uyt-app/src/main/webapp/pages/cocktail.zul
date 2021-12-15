@@ -13,7 +13,7 @@
     <div class="mt-5">
       <div class="container d-block">
         <div class="row">
-          <div class="col-sm-4 border">
+          <div class="col-sm-4">
             <div>
               <zul:image class="card-img-top m-0" content="@load(vm.model.image) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
             </div>
@@ -89,25 +89,32 @@
 
 
           </div>
-          <div class="col-sm-8 border float-right">
-            <xh:p>${vm.model.title}</xh:p>
-            <xh:div class="d-flex">
+          <div class="col-sm-8 float-right">
+            <div class="d-flex justify-content-center pt-3">
+              <p class="mx-5">${vm.model.title}</p>
+              <p class="mx-5">${vm.model.category}</p>
+              <p class="mx-5">${vm.model.complexity}</p>
+            </div>
+            <hr/>
+
+            <xh:div>
               <sh:forEach items="@load(vm.model.products)" var="product">
-                <xh:p>${product.name}</xh:p>
-                <xh:p>${product.productType}</xh:p>
-                <xh:p>${product.measurement}</xh:p>
-                <br/>
+                <xh:div class="d-flex row my-1 justify-content-end">
+                  <xh:p class="my-0 px-1">${product.productView.name}</xh:p>
+                  <xh:p class="my-0 px-1">${product.amount}</xh:p>
+                  <xh:p class="my-0 px-1">${product.productView.measurement}</xh:p>
+                </xh:div>
               </sh:forEach>
             </xh:div>
-            <xh:p>${vm.model.complexity}</xh:p>
+            <hr/>
             <xh:p>${vm.model.guideline}</xh:p>
             <xh:p>${vm.model.serving}</xh:p>
-            <xh:p>${vm.model.category}</xh:p>
+            <hr/>
             <xh:p>${vm.model.updateTime}</xh:p>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12 border">
+          <div class="col-sm-12">
           </div>
         </div>
       </div>

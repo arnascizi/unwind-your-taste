@@ -1,6 +1,7 @@
+create schema if not exists public;
+
 create sequence if not exists lytis_id_seq maxvalue 2147483647;
 alter sequence lytis_id_seq owner to postgres;
-drop table if exists lytis;
 create table if not exists lytis
 (
     id          integer default nextval('lytis_id_seq'::regclass) not null
@@ -13,7 +14,6 @@ comment on column lytis.pavadinimas is 'Lytį nusakantis pavadinimas';
 
 create sequence if not exists salis_id_seq maxvalue 2147483647;
 alter sequence salis_id_seq owner to postgres;
-drop table if exists salis;
 create table if not exists salis
 (
     id           integer default nextval('salis_id_seq'::regclass) not null
@@ -28,7 +28,6 @@ comment on column salis.salies_kodas is 'Šalies kodas pagal iso-3166-1 standart
 
 create sequence if not exists kontaktai_id_seq maxvalue 2147483647;
 alter sequence kontaktai_id_seq owner to postgres;
-drop table if exists kontaktai;
 create table if not exists kontaktai
 (
     id          integer default nextval('kontaktai_id_seq'::regclass) not null
@@ -52,7 +51,6 @@ comment on column kontaktai.buto_nr is 'Gyvenamosios vietos buto numeris';
 
 create sequence if not exists vartotojo_grupe_id_seq maxvalue 2147483647;
 alter sequence vartotojo_grupe_id_seq owner to postgres;
-drop table if exists vartotojo_grupe;
 create table if not exists vartotojo_grupe
 (
     id          integer default nextval('vartotojo_grupe_id_seq'::regclass) not null
@@ -65,7 +63,6 @@ comment on column vartotojo_grupe.pavadinimas is 'Vartotojo grupės pavadinimas'
 
 create sequence if not exists vartotojas_id_seq maxvalue 2147483647;
 alter sequence vartotojas_id_seq owner to postgres;
-drop table if exists vartotojas;
 create table if not exists vartotojas
 (
     id                  integer default nextval('vartotojas_id_seq'::regclass) not null
@@ -87,7 +84,6 @@ comment on column vartotojas.vartotojo_grupe_id is 'Nuorodą į vartotojo grupi�
 
 create sequence if not exists vartotojo_duomenys_id_seq maxvalue 2147483647;
 alter sequence vartotojo_duomenys_id_seq owner to postgres;
-drop table if exists vartotojo_duomenys;
 create table if not exists vartotojo_duomenys
 (
     id               integer default nextval('vartotojo_duomenys_id_seq'::regclass) not null
@@ -118,7 +114,6 @@ comment on column vartotojo_duomenys.vartotojas_id is 'Nuorodą į vartotojo pra
 
 create sequence if not exists matavimo_vienetas_id_seq maxvalue 2147483647;
 alter sequence matavimo_vienetas_id_seq owner to postgres;
-drop table if exists matavimo_vienetas;
 create table if not exists matavimo_vienetas
 (
     id          integer default nextval('matavimo_vienetas_id_seq') not null
@@ -133,7 +128,6 @@ comment on column matavimo_vienetas.vienetas is 'Matavimo vieneto žymėjimas';
 
 create sequence if not exists kategorijos_tipas_id_seq maxvalue 2147483647;
 alter sequence kategorijos_tipas_id_seq owner to postgres;
-drop table if exists kategorijos_tipas;
 create table if not exists kategorijos_tipas
 (
     id          integer default nextval('kategorijos_tipas_id_seq') not null
@@ -146,7 +140,6 @@ comment on column kategorijos_tipas.pavadinimas is 'Kategorijos tipo pavadinimas
 
 create sequence if not exists kokteilio_kategorija_id_seq maxvalue 2147483647;
 alter sequence kokteilio_kategorija_id_seq owner to postgres;
-drop table if exists kokteilio_kategorija;
 create table if not exists kokteilio_kategorija
 (
     id                   integer default nextval('kokteilio_kategorija_id_seq') not null
@@ -164,7 +157,6 @@ comment on column kokteilio_kategorija.kategorijos_tipas_id is 'Nuoroda į kateg
 
 create sequence if not exists sudetingumas_id_seq maxvalue 2147483647;
 alter sequence sudetingumas_id_seq owner to postgres;
-drop table if exists sudetingumas;
 create table if not exists sudetingumas
 (
     id          integer default nextval('sudetingumas_id_seq') not null
@@ -177,7 +169,6 @@ comment on column sudetingumas.pavadinimas is 'Sudėtingumo reikšmės pavadinim
 
 create sequence if not exists komentaras_id_seq maxvalue 2147483647;
 alter sequence komentaras_id_seq owner to postgres;
-drop table if exists komentaras;
 create table if not exists komentaras
 (
     id            integer                default nextval('komentaras_id_seq'::regclass) not null
@@ -195,7 +186,6 @@ comment on column komentaras.vartotojas_id is 'Nuorodą į vartotojo prasminį r
 
 create sequence if not exists receptas_id_seq maxvalue 2147483647;
 alter sequence receptas_id_seq owner to postgres;
-drop table if exists receptas;
 create table if not exists receptas
 (
     id                      integer                    default nextval('receptas_id_seq') not null
@@ -234,7 +224,6 @@ comment on column receptas.komentaras_id is 'Nuorodą į komentaro prasminį rak
 
 create sequence if not exists produkto_rusis_id_seq maxvalue 2147483647;
 alter sequence produkto_rusis_id_seq owner to postgres;
-drop table if exists produkto_rusis;
 create table if not exists produkto_rusis
 (
     id          integer default nextval('produkto_rusis_id_seq'::regclass) not null
@@ -247,7 +236,6 @@ comment on column produkto_rusis.pavadinimas is 'Produkto rūšies pavadinimas';
 
 create sequence if not exists produktas_id_seq maxvalue 2147483647;
 alter sequence produktas_id_seq owner to postgres;
-drop table if exists produktas;
 create table if not exists produktas
 (
     id                   integer default nextval('produktas_id_seq'::regclass) not null
@@ -264,9 +252,11 @@ comment on column produktas.pavadinimas is 'Produkto pavadinimas';
 comment on column produktas.produkto_rusis_id is 'Nuorodą į produkto rūšies prasminį raktą';
 comment on column produktas.matavimo_vienetas_id is 'Nuorodą į matavimo vieneto prasminį raktą';
 
-drop table if exists sudetis;
+create sequence if not exists sudetis_id_seq maxvalue 2147483647;
+alter sequence sudetis_id_seq owner to postgres;
 create table if not exists sudetis
 (
+    id integer default nextval('sudetis_id_seq'::regclass) not null constraint sudetis_id_pkey primary key ,
     receptas_id  integer
         constraint receptas_id_fkey references receptas on delete no action on update no action,
     produktas_id integer
@@ -274,6 +264,7 @@ create table if not exists sudetis
     kiekis               decimal(5, 2)                                         not null
 );
 comment on table sudetis is 'Sudėtį aprašanti lentelė';
+comment on column sudetis.id is 'Prasminis lentelės raktas';
 comment on column sudetis.receptas_id is 'Nuorodą į recepto prasminį raktą';
 comment on column sudetis.produktas_id is 'Nuorodą į produkto prasminį raktą';
 comment on column sudetis.kiekis is 'Produkto kiekis';
