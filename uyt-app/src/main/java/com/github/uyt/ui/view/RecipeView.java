@@ -3,8 +3,6 @@ package com.github.uyt.ui.view;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.github.uyt.model.Review;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +25,7 @@ public class RecipeView {
     private LocalDateTime uploadTime;
     private LocalDateTime updateTime;
     private String uploader;
-    private List<Review> reviews;
+    private List<ReviewView> reviews;
     private List<CompositionView> products;
     private String complexity;
     private String category;

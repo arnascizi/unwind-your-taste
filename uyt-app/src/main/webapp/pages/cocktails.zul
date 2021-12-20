@@ -2,7 +2,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}"
+<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailsVm')">
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">${c:l('common.cocktails')}</h3>
@@ -12,38 +12,41 @@
       <div class="input-group d-flex justify-content-center">
         <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@bind(vm.search.searchValue)" />
         <div class="col-xs-4">
-          <zul:combobox class="input-group-prepend mx-1" selectedItem="@bind(vm.search.category)">
-            <sh:forEach items="@load(vm.cocktailCategories)">
-              <zul:comboitem label="${each.title}" value="${each.title}" />
+          <zul:combobox sclass="input-group-prepend mx-1" selectedItem="@bind(vm.search.category)">
+            <sh:forEach items="@load(vm.cocktailCategories)" var="category">
+              <zul:comboitem label="${category.title}" value="${category.title}" />
             </sh:forEach>
           </zul:combobox>
         </div>
         <div class="col-xs-4">
           <xh:div class="input-group-prepend mx-1">
-            <zul:combobox class="input-group-prepend mx-1" selectedItem="@bind(vm.search.categoryType)" onChange="@command('doChangeSelection')" >
-              <sh:forEach items="@load(vm.categoryTypeViews)">
-                <zul:comboitem label="${each.type}" value="${each.type}" />
+            <zul:combobox sclass="input-group-prepend mx-1" selectedItem="@bind(vm.search.categoryType)" onChange="@command('doChangeSelection')">
+              <sh:forEach items="@load(vm.categoryTypeViews)" var="categoryType">
+                <zul:comboitem label="${categoryType.type}" value="${categoryType.type}" />
               </sh:forEach>
             </zul:combobox>
 
-            <zul:button class="input-group-prepend btn btn-sm text-white w-50 col-xs-2 mx-1" type="button" style="background-color: #617e9f" label="${c:l('common.search')}"
+            <zul:button class="input-group-prepend btn btn-outline-secondary btn-sm w-50 col-xs-2 mx-1" type="button" label="${c:l('common.search')}"
                     onClick="@command('doSearch')" />
           </xh:div>
         </div>
 
         <xh:div class="container mt-3 mb-5 col-sm-12">
           <xh:div class="d-flex justify-content-center row">
-            <sh:forEach items="@load(vm.recipeList)">
+            <sh:forEach items="@load(vm.recipeList)" var="recipe">
               <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">
-                <xh:div class="card col-sm-12 bg-light shadow">
-                  <zul:image class="card-img-top mt-1" content="@load(each.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
-                  <div class="card-body">
-                    <xh:a class="card-link" onClick="@command(vm.doSelect(each.id))">${each.title}</xh:a>
-                    <p class="card-text">
-                      <small class="text-muted">${each.complexity}</small>
-                    </p>
-                  </div>
-                </xh:div>
+                <zul:recipePreviewComponent recipeId="${recipe.id}" />
+                <!--              <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">-->
+                <!--                <xh:div class="card col-sm-12 bg-light shadow">-->
+                <!--                  <zul:image class="card-img-top mt-1" content="@load(recipe.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />-->
+                <!--                  <div class="card-body">-->
+                <!--                    <xh:a class="card-link" onClick="@command(vm.doSelect(recipe.id))">${recipe.title}</xh:a>-->
+                <!--                    <p class="card-text">-->
+                <!--                      <small class="text-muted">${recipe.complexity}</small>-->
+                <!--                    </p>-->
+                <!--                  </div>-->
+                <!--                </xh:div>-->
+                <!--              </xh:div>-->
               </xh:div>
             </sh:forEach>
           </xh:div>

@@ -42,6 +42,10 @@ public class UserAccountService implements UserDetailsService {
         return new UserDetailsPrinciple(account);
     }
 
+    public String getUsernameById(@NonNull Long userId) {
+        return userRepository.getUsernameById(userId);
+    }
+
     public UserAccount getUserAccount(@NonNull String username) {
         return userRepository.findByUsername(username);
     }

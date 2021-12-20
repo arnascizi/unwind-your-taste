@@ -7,7 +7,7 @@
     <label-location>/WEB-INF/i18n/login.properties</label-location>
     <label-location>/WEB-INF/i18n/register.properties</label-location>
     <label-location>/WEB-INF/i18n/about.properties</label-location>
-    <label-location>/WEB-INF/i18n/recipe.properties</label-location>
+    <label-location>/WEB-INF/i18n/cocktail.properties</label-location>
   </system-config>
 
   <desktop-config>

@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,27 +42,15 @@ public class RecipeHelper {
     }
 
     public List<RecipeView> getAllRecipes(Pageable pageable) {
-        ArrayList<RecipeView> list = new ArrayList<>();
-        for (Recipe recipe : recipeService.finAllPageable(pageable)) {
-            list.add(buildRecipeView(recipe));
-        }
-        return list;
+        return recipeService.finAllPageable(pageable).stream().map(this::buildRecipeView).collect(Collectors.toList());
     }
 
     public List<RecipePreviewView> getAllRecipesPreview(Pageable pageable) {
-        ArrayList<RecipePreviewView> list = new ArrayList<>();
-        for (Recipe recipe : recipeService.finAllPageable(pageable)) {
-            list.add(buildRecipePreview(recipe));
-        }
-        return list;
+        return recipeService.finAllPageable(pageable).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
     public List<RecipePreviewView> getSearchResultRecipePreview(Pageable pageable, SearchView searchView) {
-        ArrayList<RecipePreviewView> list = new ArrayList<>();
-        for (Recipe recipe : recipeService.fetchSearchResult(pageable, buildSearch(searchView))) {
-            list.add(buildRecipePreview(recipe));
-        }
-        return list;
+        return recipeService.fetchSearchResult(pageable, buildSearch(searchView)).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
     public RecipeView getDetailedRecipeView(Long id) {
@@ -72,6 +59,10 @@ public class RecipeHelper {
 
     public List<RecipePreviewView> getRecommendedRecipes() {
         return recipeService.getRecommendedRecipes().stream().map(this::buildRecipePreview).collect(Collectors.toList());
+    }
+
+    public RecipePreviewView getRecipePreview(Long id) {
+        return buildRecipePreview(recipeService.fetchSingleRecipe(id));
     }
 
     public void saveRecipe(RecipeView recipeView, LoggedUser loggedUser) {
@@ -139,6 +130,7 @@ public class RecipeHelper {
                 .amount(composition.getAmount())
                 .build();
     }
+
 
     public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
         try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {

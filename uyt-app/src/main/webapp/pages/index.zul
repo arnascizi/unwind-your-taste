@@ -9,14 +9,14 @@
     <div class="row d-flex">
       <xh:div class="col-xs-6">
         <sh:forEach items="@load(vm.categories)">
-          <div class="p-1">
+          <xh:div class="p-1">
             <div class="card">
               <div class="card-body">
                 <div class="card-title">${each.title}</div>
                 <div class="card-text">${each.description}</div>
               </div>
             </div>
-          </div>
+          </xh:div>
         </sh:forEach>
       </xh:div>
 

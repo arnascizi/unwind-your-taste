@@ -2,12 +2,12 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.RecipeVm')">
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailVm')">
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">${vm.model.title}
       <small class="h6 text-muted text-small float-right">${vm.model.uploadTime}</small>
-      <br/>
-      <small class="h6 text-muted text-small float-right">${c:l('recipe.uploaded.by')} ${vm.model.uploader}</small>
+      <br />
+      <small class="h6 text-muted text-small float-right">${c:l('cocktail.uploaded.by')} ${vm.model.uploader}</small>
     </h3>
     <hr />
     <div class="mt-5">
@@ -18,84 +18,26 @@
               <zul:image class="card-img-top m-0" content="@load(vm.model.image) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
             </div>
 
-            <div class="px-1 py-1 mx-auto">
-              <div class="row justify-content-center">
-                <div class="col-sm-12 text-center mb-1">
-                  <div class="card">
-                    <div class="row justify-content-left d-flex">
-                      <div class="col-md-4 d-flex flex-column">
-                        <div class="rating-box">
-                          <h1 class="pt-4">4.0</h1>
-                          <p class="">out of 5</p>
-                        </div>
-                        <div> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-active mx-1"></span> <span class="fa fa-star star-inactive mx-1"></span> </div>
-                      </div>
-                      <div class="col-md-8">
-                        <div class="rating-bar0 justify-content-center">
-                          <table class="text-left mx-auto">
-                            <tr>
-                              <td class="rating-label">Excellent</td>
-                              <td class="rating-bar">
-                                <div class="bar-container">
-                                  <div class="bar-5"></div>
-                                </div>
-                              </td>
-                              <td class="text-right">123</td>
-                            </tr>
-                            <tr>
-                              <td class="rating-label">Good</td>
-                              <td class="rating-bar">
-                                <div class="bar-container">
-                                  <div class="bar-4"></div>
-                                </div>
-                              </td>
-                              <td class="text-right">23</td>
-                            </tr>
-                            <tr>
-                              <td class="rating-label">Average</td>
-                              <td class="rating-bar">
-                                <div class="bar-container">
-                                  <div class="bar-3"></div>
-                                </div>
-                              </td>
-                              <td class="text-right">10</td>
-                            </tr>
-                            <tr>
-                              <td class="rating-label">Poor</td>
-                              <td class="rating-bar">
-                                <div class="bar-container">
-                                  <div class="bar-2"></div>
-                                </div>
-                              </td>
-                              <td class="text-right">3</td>
-                            </tr>
-                            <tr>
-                              <td class="rating-label">Terrible</td>
-                              <td class="rating-bar">
-                                <div class="bar-container">
-                                  <div class="bar-1"></div>
-                                </div>
-                              </td>
-                              <td class="text-right">0</td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
           </div>
           <div class="col-sm-8 float-right">
             <div class="d-flex justify-content-center pt-3">
-              <p class="mx-5">${vm.model.title}</p>
-              <p class="mx-5">${vm.model.category}</p>
-              <p class="mx-5">${vm.model.complexity}</p>
+              <!--              <p class="mx-4">rating: ${vm.totalRating} of 5 (${vm.model.getReviews().size()})</p>-->
+              <zul:label value="@load(vm.totalRating)" />
+              <p>of 5 (</p>
+              <zul:label value="@load(vm.ratingCount)" />
+              <p>)</p>
+              <p class="mx-4">title: ${vm.model.title}</p>
+              <p class="mx-4">category: ${vm.model.category}</p>
+              <p class="mx-4">dificulty: ${vm.model.complexity}</p>
+              <div class="fb-share-button" data-href="https://localhost:8443/cocktail?id=${vm.model.id}" data-layout="button" data-size="large">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A8443%2Fcocktail%3Fid%3D${vm.model.id}&amp;src=sdkpreparse"
+                        class="btn btn-primary btn-sm">
+                  <i class="bi bi-share" />
+                  ${c:l('cocktail.share')}
+                </a>
+              </div>
             </div>
-            <hr/>
+            <hr />
 
             <xh:div>
               <sh:forEach items="@load(vm.model.products)" var="product">
@@ -106,16 +48,63 @@
                 </xh:div>
               </sh:forEach>
             </xh:div>
-            <hr/>
+            <hr />
             <xh:p>${vm.model.guideline}</xh:p>
             <xh:p>${vm.model.serving}</xh:p>
-            <hr/>
+            <hr />
             <xh:p>${vm.model.updateTime}</xh:p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-          </div>
+        <div>
+          <xh:div class="col-sm-12">
+            <div class="container mt-5">
+              <div class="d-flex justify-content-center mb-4">
+                <h3>${c:l('cocktail.reviews')}</h3>
+              </div>
+              <hr />
+              <div class="container">
+                <xh:div class="d-flex justify-content-center col-sm-12 row">
+                  <sh:forEach items="@load(vm.reviews)" var="review">
+                      <zul:reviewComponent reviewId="${review.id}" />
+                  </sh:forEach>
+                </xh:div>
+              </div>
+<!--              <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.ratingCount)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />-->
+              <hr />
+              <div class="d-flex justify-content-center row">
+                <div class="bg-light p-2 col-md-8 mt-3">
+                  <div class="form-group  d-flex flex-row">
+                    <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${review.user}" width="10" />
+                    <span class="d-block font-weight-bold name">${review.user}</span>
+                    <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@bind(vm.review.evaluation)" onCheck="@command('doTest')">
+                      <div class="col-sm-2 my-0">
+                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio1" value="1" label="1" />
+                      </div>
+                      <div class="col-sm-2 my-0">
+                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio2" value="2" label="2" />
+                      </div>
+                      <div class="col-sm-2 my-0">
+                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio3" value="3" label="3" />
+                      </div>
+                      <div class="col-sm-2 my-0">
+                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio4" value="4" label="4" />
+                      </div>
+                      <div class="col-sm-2 my-0">
+                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio5" value="5" label="5" />
+                      </div>
+                    </zul:radiogroup>
+                  </div>
+                  <div class="d-flex flex-row align-items-start">
+                    <zul:textbox name="msg" id="message" cols="30" rows="5" sclass="form-control" value="@bind(vm.review.comment)" />
+                  </div>
+                  <div class="mt-2 text-right">
+                    <zul:button sclass="btn btn-primary btn-sm shadow-none" onClick="@command('doSubmitReview')">Post comment</zul:button>
+                    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="reset">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </xh:div>
         </div>
       </div>
     </div>

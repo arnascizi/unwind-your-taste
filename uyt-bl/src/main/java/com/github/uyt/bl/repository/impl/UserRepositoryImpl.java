@@ -39,4 +39,15 @@ public class UserRepositoryImpl extends SimpleJpaRepository<UserAccount, Long> i
         criteria.select(root);
         return em.createQuery(criteria).getSingleResult();
     }
+
+    @Override
+    public String getUsernameById(@NonNull Long userId) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<String> criteria = cb.createQuery(String.class);
+        Root<UserAccount> root = criteria.from(UserAccount.class);
+
+        criteria.where(cb.equal(root.get(UserAccount_.id), userId));
+        criteria.select(root.get(UserAccount_.username));
+        return em.createQuery(criteria).getSingleResult();
+    }
 }

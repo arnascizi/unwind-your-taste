@@ -13,13 +13,13 @@ public enum PageTranslationEnum {
     ERROR("error"),
     LOGIN("login"),
     REGISTER("register"),
-    RECIPE("recipe"),
+    COCKTAIL("cocktail"),
     ABOUT("about");
 
     private final String translationValue;
 
     private static final List<PageTranslationEnum> TRANSLATION_ENUMS =
-            Arrays.asList(COMMON, ERROR, LOGIN, REGISTER, RECIPE, ABOUT);
+            Arrays.asList(COMMON, ERROR, LOGIN, REGISTER, COCKTAIL, ABOUT);
 
     public static List<PageTranslationEnum> getTranslationEnums() {
         return TRANSLATION_ENUMS;

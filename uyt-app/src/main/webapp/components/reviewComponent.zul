@@ -1,0 +1,33 @@
+<xh:div xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns="native" viewModel="@id('vm') @init(arg.includer)">
+    <xh:div class="d-flex flex-column col-sm-12">
+      <div class="bg-light p-2 border-bottom mb-2 shadow-sm">
+        <div class="d-flex flex-row user-info">
+          <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${review.user}" alt="${review.user}" width="40" />
+          <div class="col-sm-4 ml-2">
+            <span class="d-block font-weight-bold name">${review.user}</span>
+            <span class="date text-black-50">
+              <small>${review.updatedAt}</small>
+            </span>
+          </div>
+          <div class="col-sm-2">
+            <span class="d-block font-weight-bold"><i class="bi bi-star" />${review.evaluation}
+            </span>
+          </div>
+          <div class="col-sm-4 d-flex flex-row-reverse">
+            <div class="justify-content-end mx-1">
+              <xh:button class="btn btn-outline-warning btn-sm" onClick="@command(vm.doEdit(review.id))">
+                <i class="bi bi-pencil" />
+              </xh:button>
+              <xh:button class="btn btn-outline-danger btn-sm" onClick="@command(vm.doDelete(review.id))">
+                <i class="bi bi-trash" />
+              </xh:button>
+            </div>
+          </div>
+        </div>
+        <div class="mt-2">
+          <p class="comment-text">${review.comment}
+          </p>
+        </div>
+      </div>
+    </xh:div>
+</xh:div>

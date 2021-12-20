@@ -61,7 +61,7 @@ public class Recipe {
     @JoinColumn(name = "kokteilio_kategorija_id", nullable = false)
     private CocktailCategory cocktailCategory;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY)
     private List<Review> reviewList;
 
     @ManyToOne

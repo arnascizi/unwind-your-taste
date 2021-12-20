@@ -6,6 +6,12 @@
   <depends>zkmax</depends>
 
   <component>
+    <component-name>reviewComponent</component-name>
+    <component-class>com.github.uyt.ui.components.ReviewComponent</component-class>
+    <macro-uri>/components/reviewComponent.zul</macro-uri>
+  </component>
+
+  <component>
     <component-name>recipePreviewComponent</component-name>
     <component-class>com.github.uyt.ui.components.RecipePreviewComponent</component-class>
     <macro-uri>/components/recipePreviewComponent.zul</macro-uri>

@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class ComonAttributesHelper {
+public class CommonAttributesHelper {
 
     private final CommonComponentsService commonComponentsService;
 

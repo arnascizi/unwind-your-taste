@@ -1,4 +1,26 @@
+drop schema public cascade;
 create schema if not exists public;
+
+create table flyway_schema_history
+(
+    installed_rank integer                 not null
+        constraint flyway_schema_history_pk
+            primary key,
+    version        varchar(50),
+    description    varchar(200)            not null,
+    type           varchar(20)             not null,
+    script         varchar(1000)           not null,
+    checksum       integer,
+    installed_by   varchar(100)            not null,
+    installed_on   timestamp default now() not null,
+    execution_time integer                 not null,
+    success        boolean                 not null
+);
+
+alter table flyway_schema_history
+    owner to postgres;
+create index flyway_schema_history_s_idx
+    on flyway_schema_history (success);
 
 create sequence if not exists lytis_id_seq maxvalue 2147483647;
 alter sequence lytis_id_seq owner to postgres;
@@ -167,23 +189,6 @@ comment on table sudetingumas is 'Sudėtingumą aprašanti lentelė';
 comment on column sudetingumas.id is 'Prasminis lentelės raktas';
 comment on column sudetingumas.pavadinimas is 'Sudėtingumo reikšmės pavadinimas';
 
-create sequence if not exists komentaras_id_seq maxvalue 2147483647;
-alter sequence komentaras_id_seq owner to postgres;
-create table if not exists komentaras
-(
-    id            integer                default nextval('komentaras_id_seq'::regclass) not null
-        constraint komentaras_id_pkey primary key,
-    tekstas       character varying null,
-    vertinimas    decimal(3)        null default 0,
-    vartotojas_id integer
-        constraint vartotojas_id_fkey references vartotojas on delete no action on update no action
-);
-comment on table komentaras is 'Komentarą aprašanti lentelė';
-comment on column komentaras.id is 'Prasminis lentelės raktas';
-comment on column komentaras.tekstas is 'Komentaros tekstas';
-comment on column komentaras.vertinimas is 'Komentaros vertinimas';
-comment on column komentaras.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
-
 create sequence if not exists receptas_id_seq maxvalue 2147483647;
 alter sequence receptas_id_seq owner to postgres;
 create table if not exists receptas
@@ -204,9 +209,6 @@ create table if not exists receptas
             on update no action,
     sudetingumas_id         integer
         constraint sudetingumas_id_fkey references sudetingumas on delete no action
-            on update no action,
-    komentaras_id           integer
-        constraint komentaras_id_fkey references komentaras on delete no action
             on update no action
 );
 comment on table receptas is 'Receptą aprašanti lentelė';
@@ -220,7 +222,30 @@ comment on column receptas.atnaujinimo_laikas is 'Recepto koregavimo laikas';
 comment on column receptas.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
 comment on column receptas.kokteilio_kategorija_id is 'Nuorodą į kokteilio kategorijos prasminį raktą';
 comment on column receptas.sudetingumas_id is 'Nuorodą į sudėtingumo prasminį raktą';
-comment on column receptas.komentaras_id is 'Nuorodą į komentaro prasminį raktą';
+
+create sequence if not exists komentaras_id_seq maxvalue 2147483647;
+alter sequence komentaras_id_seq owner to postgres;
+create table if not exists komentaras
+(
+    id            integer                default nextval('komentaras_id_seq'::regclass) not null
+        constraint komentaras_id_pkey primary key,
+    tekstas       character varying null,
+    vertinimas    decimal(3)        null default 0,
+    patalpinimo_laikas      timestamp         not null default current_timestamp,
+    atnaujinimo_laikas      timestamp         not null default current_timestamp,
+    vartotojas_id integer
+        constraint vartotojas_id_fkey references vartotojas on delete no action on update no action,
+    receptas_id integer
+        constraint receptas_id_fkey references receptas on delete no action on update no action
+);
+comment on table komentaras is 'Komentarą aprašanti lentelė';
+comment on column komentaras.id is 'Prasminis lentelės raktas';
+comment on column komentaras.tekstas is 'Komentaros tekstas';
+comment on column komentaras.vertinimas is 'Komentaros vertinimas';
+comment on column komentaras.patalpinimo_laikas is 'Komentaro patalpinimo laikas';
+comment on column komentaras.atnaujinimo_laikas is 'Komentaro koregavimo laikas';
+comment on column komentaras.vartotojas_id is 'Nuorodą į vartotojo prasminį raktą';
+comment on column komentaras.receptas_id is 'Nuorodą į recepto prasminį raktą';
 
 create sequence if not exists produkto_rusis_id_seq maxvalue 2147483647;
 alter sequence produkto_rusis_id_seq owner to postgres;
