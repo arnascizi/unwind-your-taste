@@ -32,7 +32,7 @@ public class CocktailsVm implements Serializable {
 
     @Getter @Setter private List<RecipePreviewView> recipeList;
     @Getter @Setter private SearchView search = new SearchView();
-    @Getter @Setter private int currentPage;
+    @Getter @Setter private int currentPage = 0;
     @Getter @Setter private List<CategoryTypeView> categoryTypeViews;
     @Getter @Setter private List<CategoryView> cocktailCategories;
     @Getter private int maxPages;
@@ -40,17 +40,13 @@ public class CocktailsVm implements Serializable {
     @Init
     public void init(@QueryParam("searchValue") String searchValue) {
         search.setSearchValue(searchValue == null ? StringUtils.EMPTY : searchValue);
-        categoryTypeViews = commonAttributesHelper.getAllCategoryTypes();
-        search.setCategoryType(categoryTypeViews.get(1).getType());
-        search.setCategory("");
-        Pageable pageable = PageRequest.of(currentPage, getPageSize());
-
+        Pageable pageable = PageRequest.of(currentPage, 8);
         recipeList = search.getSearchValue() != null
                 ? recipeHelper.getSearchResultRecipePreview(pageable, search)
                 : recipeHelper.getAllRecipesPreview(pageable);
-
+        categoryTypeViews = commonAttributesHelper.getAllCategoryTypes();
         maxPages = recipeList.size();
-        cocktailCategories = commonAttributesHelper.getCocktailCategories(search.getCategoryType());
+        cocktailCategories = commonAttributesHelper.getCocktailCategories();
     }
 
     @Command
@@ -69,7 +65,7 @@ public class CocktailsVm implements Serializable {
     @Command
     @NotifyChange({"categoryTypeViews", "search", "cocktailCategories", "recipeList", "maxPages"})
     public void doSearch() {
-        Pageable pageable = PageRequest.of(currentPage, getPageSize());
+        Pageable pageable = PageRequest.of(currentPage, 8);
         maxPages = recipeHelper.getAllRecipesPreview(pageable).size();
         recipeList = recipeHelper.getSearchResultRecipePreview(pageable, search);
     }

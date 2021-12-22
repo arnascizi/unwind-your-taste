@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ProductRepositoryService {
+public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public List<Product> fetchALLProducts() {
         return productRepository.getAllProducts();

@@ -36,23 +36,12 @@
             <sh:forEach items="@load(vm.recipeList)" var="recipe">
               <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">
                 <zul:recipePreviewComponent recipeId="${recipe.id}" />
-                <!--              <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">-->
-                <!--                <xh:div class="card col-sm-12 bg-light shadow">-->
-                <!--                  <zul:image class="card-img-top mt-1" content="@load(recipe.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />-->
-                <!--                  <div class="card-body">-->
-                <!--                    <xh:a class="card-link" onClick="@command(vm.doSelect(recipe.id))">${recipe.title}</xh:a>-->
-                <!--                    <p class="card-text">-->
-                <!--                      <small class="text-muted">${recipe.complexity}</small>-->
-                <!--                    </p>-->
-                <!--                  </div>-->
-                <!--                </xh:div>-->
-                <!--              </xh:div>-->
               </xh:div>
             </sh:forEach>
           </xh:div>
         </xh:div>
       </div>
-      <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.maxPages)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />
+      <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.maxPages)" pageSize="8" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />
     </div>
   </div>
 </xh:div>

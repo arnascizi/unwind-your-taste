@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.github.uyt.bl.LoginAuthenticationProvider;
 import com.github.uyt.bl.service.UserAccountService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,13 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authProvider());
-        auth.authenticationProvider(new LoginAuthenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.headers().frameOptions().disable();
+        // http.headers().frameOptions().disable();
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 // .antMatchers("/cocktails").authenticated()

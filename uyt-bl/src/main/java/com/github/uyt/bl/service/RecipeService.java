@@ -42,4 +42,8 @@ public class RecipeService {
     public Page<Recipe> fetchSearchResult(Pageable pageable, Search search) {
         return recipeRepository.fetchSearchResult(pageable, search);
     }
+
+    public List<Recipe> getRecipesByProduct(Long productId) {
+        return recipeRepository.getRecipeByProduct(productId);
+    }
 }

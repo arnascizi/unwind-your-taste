@@ -3,12 +3,14 @@ package com.github.uyt.ui.viewmodel;
 import java.io.Serializable;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.web.Attributes;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.view.LoggedUser;
@@ -32,7 +34,7 @@ public class TemplateVm implements Serializable {
     @Init
     public void init() {
         LoggedUser loggedUser = accountHelper.getLoggedUser();
-        username = loggedUser != null ? loggedUser.getUsername() : "still nothing!";
+        username = loggedUser != null ? loggedUser.getUsername() : StringUtils.EMPTY;
     }
 
     @Command
@@ -49,7 +51,11 @@ public class TemplateVm implements Serializable {
 
     @Command
     public void doSearch() {
-        Executions.sendRedirect("/cocktails?searchValue=" + search.getSearchValue());
+        Executions.sendRedirect( PageLocationEnum.COCKTAIL.getUrl() + "?searchValue=" + search.getSearchValue());
+    }
+
+    public boolean isFullPage() {
+        return false;
     }
 
     public boolean isUserLogged() {

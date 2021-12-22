@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.model.CommonConstants;
+import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
 import com.github.uyt.ui.view.RecipeView;
@@ -26,6 +27,7 @@ public class CocktailVm implements Serializable {
 
     private static final int PAGE_SIZE = 5;
 
+    @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
     @WireVariable(rewireOnActivate = true) private transient ReviewHelper reviewHelper;
 
@@ -50,10 +52,10 @@ public class CocktailVm implements Serializable {
     @Command
     @NotifyChange({"model", "reviews", "totalRating", "ratingCount"})
     public void doSubmitReview() {
-        if (!isValid()) {
-            return;
-        }
-        review.setUser("arnas");
+        // if (!isValid()) {
+        //     return;
+        // }
+        review.setUser(accountHelper.getLoggedUser().getUsername());
         reviewHelper.saveReview(review);
         // totalRating = calculateTotalRating();
         ratingCount = reviews.size();
@@ -61,24 +63,18 @@ public class CocktailVm implements Serializable {
     }
 
     @Command
-    public void doTest() {
-        System.out.println(review.getEvaluation());
-    }
-
-    @Command
-    @NotifyChange({"reviews", "review", "model", "totalRating", "ratingCount"})
-    public void doEdit(String reviewId) {
-        // reviewHelper.deleteReview(Long.parseLong(reviewId));
-        // loadReviews(model.getId());
-        // totalRating = calculateTotalRating();
-        // ratingCount = reviews.size();
-    }
-
-    @Command
     @NotifyChange({"currentPage", "reviews"})
     public void doPaging() {
         Pageable pageable = PageRequest.of(currentPage, getPageSize());
         reviews = reviewHelper.getReviewsPageable(pageable, model.getId());
+    }
+
+    public String getLoggedUserUsername() {
+        return accountHelper.getLoggedUser().getUsername();
+    }
+
+    public boolean isUserLogged() {
+        return accountHelper.getLoggedUser() != null;
     }
 
     private double calculateTotalRating() {

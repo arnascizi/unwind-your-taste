@@ -45,7 +45,7 @@ public class CocktailCategoryRepositoryImpl extends SimpleJpaRepository<Cocktail
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CocktailCategory> criteria = cb.createQuery(CocktailCategory.class);
         Root<CocktailCategory> root = criteria.from(CocktailCategory.class);
-        criteria.select(root);
+        criteria.select(root).distinct(true);
         return em.createQuery(criteria).getResultList();
     }
 

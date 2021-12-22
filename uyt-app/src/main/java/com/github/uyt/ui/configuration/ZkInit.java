@@ -10,7 +10,7 @@ import org.zkoss.util.resource.Locators;
 import org.zkoss.zk.ui.WebApp;
 import org.zkoss.zk.ui.util.WebAppInit;
 
-import com.github.uyt.model.PageTranslationEnum;
+import com.github.uyt.enums.PageTranslationEnum;
 
 public class ZkInit implements WebAppInit {
 

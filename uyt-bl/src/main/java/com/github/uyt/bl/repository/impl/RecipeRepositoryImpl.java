@@ -28,6 +28,10 @@ import com.github.uyt.model.CategoryType;
 import com.github.uyt.model.CategoryType_;
 import com.github.uyt.model.CocktailCategory;
 import com.github.uyt.model.CocktailCategory_;
+import com.github.uyt.model.Composition;
+import com.github.uyt.model.Composition_;
+import com.github.uyt.model.Product;
+import com.github.uyt.model.Product_;
 import com.github.uyt.model.Recipe;
 import com.github.uyt.model.Recipe_;
 import com.github.uyt.model.Search;
@@ -70,7 +74,8 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
 
-        criteria.select(root).where(cb.equal(root.get(Recipe_.id), Math.floor(Math.random() * 24))).distinct(true);
+        // criteria.select(root).where(cb.equal(root.get(Recipe_.id), Math.floor(Math.random() * 24))).distinct(true);
+        criteria.orderBy(cb.desc(root.get(Recipe_.createdAt)));
         return new ArrayList<>(em.createQuery(criteria).getResultList());
     }
 
@@ -98,5 +103,17 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         criteria.where(predicates.toArray(new Predicate[0]));
         TypedQuery<Recipe> query = em.createQuery(criteria);
         return new PageImpl<>(query.getResultList(), pageable, query.getResultList().size());
+    }
+
+    @Override
+    public List<Recipe> getRecipeByProduct(Long productId) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
+        Root<Recipe> root = criteria.from(Recipe.class);
+        Join<Recipe, Composition> compositionJoin = root.join(Recipe_.productList);
+        Join<Composition, Product> productJoin = compositionJoin.join(Composition_.product);
+
+        criteria.select(root).where(cb.equal(productJoin.get(Product_.id), productId));
+        return em.createQuery(criteria).getResultList();
     }
 }

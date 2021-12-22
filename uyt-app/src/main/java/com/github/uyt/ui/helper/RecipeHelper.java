@@ -1,17 +1,9 @@
 package com.github.uyt.ui.helper;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.imageio.ImageIO;
-
-import org.imgscalr.Scalr;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -63,6 +55,10 @@ public class RecipeHelper {
 
     public RecipePreviewView getRecipePreview(Long id) {
         return buildRecipePreview(recipeService.fetchSingleRecipe(id));
+    }
+
+    public List<RecipePreviewView> getRecipesByProduct(Long productId) {
+        return recipeService.getRecipesByProduct(productId).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
     public void saveRecipe(RecipeView recipeView, LoggedUser loggedUser) {
@@ -131,13 +127,12 @@ public class RecipeHelper {
                 .build();
     }
 
-
-    public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
-        try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-            BufferedImage bufferedImage = ImageIO.read(inputStream);
-            BufferedImage thumbnail = Scalr.resize(bufferedImage, 150);
-            ImageIO.write(thumbnail, fileType, byteArrayOutputStream);
-            return byteArrayOutputStream.toByteArray();
-        }
-    }
+    // public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
+    //     try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+    //         BufferedImage bufferedImage = ImageIO.read(inputStream);
+    //         BufferedImage thumbnail = Scalr.resize(bufferedImage, 150);
+    //         ImageIO.write(thumbnail, fileType, byteArrayOutputStream);
+    //         return byteArrayOutputStream.toByteArray();
+    //     }
+    // }
 }

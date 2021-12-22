@@ -71,12 +71,12 @@
               </div>
 <!--              <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.ratingCount)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />-->
               <hr />
-              <div class="d-flex justify-content-center row">
+              <xh:div if="${(vm.userLogged)}" class="d-flex justify-content-center row">
                 <div class="bg-light p-2 col-md-8 mt-3">
                   <div class="form-group  d-flex flex-row">
-                    <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${review.user}" width="10" />
-                    <span class="d-block font-weight-bold name">${review.user}</span>
-                    <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@bind(vm.review.evaluation)" onCheck="@command('doTest')">
+                    <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${(vm.getLoggedUserUsername())}" width="10" />
+                    <span class="d-block font-weight-bold name">${(vm.getLoggedUserUsername())}</span>
+                    <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@bind(vm.review.evaluation)" >
                       <div class="col-sm-2 my-0">
                         <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio1" value="1" label="1" />
                       </div>
@@ -102,7 +102,7 @@
                     <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="reset">Cancel</button>
                   </div>
                 </div>
-              </div>
+              </xh:div>
             </div>
           </xh:div>
         </div>

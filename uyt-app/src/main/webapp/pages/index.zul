@@ -2,10 +2,13 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IndexVm')">
+<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IndexVm')">
   <div class="container mt-5 pt-5">
     <h4 class="mt-3 text-muted">${c:l('about.popular')}</h4>
-    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum velit? Ab cum eius expedita praesentium rem.</p>
+    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum
+      velit? Ab cum eius expedita praesentium rem.
+    </p>
     <div class="row d-flex">
       <xh:div class="col-xs-6">
         <sh:forEach items="@load(vm.categories)">
@@ -25,14 +28,17 @@
   <div class="container mt-5 pt-5">
     <h4 class="mt-3 text-muted">Latest
       <span class="badge badge-light">
-        <button class="btn btn-outline-secondary btn-sm" href="#">View all</button>
+        <xh:button class="btn btn-outline-secondary btn-sm" onClick="@command('doCheckAll')">View all</xh:button>
       </span>
     </h4>
     <div class="row d-flex">
-      <div class="col-xs-6">
-<!--        <zul:recipePreviewComponent model="@load(vm.recipePreviewView)" />-->
-      </div>
-
+      <xh:div>
+        <sh:forEach items="@load(vm.latestRecipes)" var="recipe">
+          <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">
+            <zul:recipePreviewComponent recipeId="${recipe.id}" />
+          </xh:div>
+        </sh:forEach>
+      </xh:div>
     </div>
   </div>
 

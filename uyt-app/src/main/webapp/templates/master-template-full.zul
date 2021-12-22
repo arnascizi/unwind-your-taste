@@ -1,7 +1,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <!DOCTYPE html>
-<xh:html xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul">
+<xh:html xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow" xmlns:zul="http://www.zkoss.org/2005/zul">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -30,6 +30,16 @@
               <xh:div self="@{insert(pageContent)}" />
             </main>
           </div>
+<!--          <div class="col-md-3 px-5 ">-->
+<!--            <main class="container col-md-9 px-3 d-block bg-white">-->
+<!--              <zul:apply templateURI="/templates/sidebar.zul" />-->
+<!--            </main>-->
+<!--          </div>-->
+<!--          <div class="col-md-9 px-5 ">-->
+<!--            <main class="container col-md-9 px-3 d-block bg-white">-->
+<!--              <xh:div self="@{insert(pageContent)}" />-->
+<!--            </main>-->
+<!--          </div>-->
           <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">
             <!-- TODO Some additional info  -->
             <div class="container">

@@ -20,12 +20,12 @@ import lombok.Setter;
 public class LoginVm implements Serializable {
     private static final long serialVersionUID = 5576405403122295236L;
 
-    private static final String USERNAME = "loginUsername";
-    private static final String PASSWORD = "loginPassword";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
     @Getter @Setter private Map<String, String> vmsgs = new HashMap<>();
-    @Getter private LoginView model = new LoginView();
+    @Getter @Setter private LoginView model = new LoginView();
 
     @Init
     public void init() {
@@ -33,10 +33,7 @@ public class LoginVm implements Serializable {
 
     @Command
     public void doLogin() {
-        if (isValid()) {
-            // accountHelper.getUserByName(model.getUsername());
-            Clients.submitForm("login-form");
-        }
+            Clients.submitForm("loginForm");
     }
 
     private boolean isValid() {

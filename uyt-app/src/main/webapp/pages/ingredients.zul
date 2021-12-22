@@ -2,12 +2,31 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
+<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IngredientsVm')">
   <div class="container mt-0 pb-5">
-    <h3 class="pt-5 text-muted">${vm.model.title}</h3>
+    <h3 class="pt-5 text-muted">Test</h3>
     <hr />
-    <div class="container">
-      In progress..
+    <div class="container d-flex row">
+      <xh:div class="col-sm-4">
+        <sh:forEach items="@load(vm.ingredients)" var="ingredient">
+          <xh:button class="btn btn-outline-danger btn-sm" onClick="@command(vm.doExpand(ingredient.id))">${ingredient.name}</xh:button>
+        </sh:forEach>
+      </xh:div>
+      <xh:div class="col-sm-8">
+        <sh:if test="@load(vm.recipes ne 'null')">
+          <sh:forEach items="@load(vm.recipes)" var="recipe">
+            <xh:div class="card col-sm-12 bg-light shadow">
+              <zul:image class="card-img-top mt-1" content="@load(recipe.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+              <div class="card-body">
+                <xh:a class="card-link" onClick="@command(vm.doSelect(recipe.id))">${recipe.title}</xh:a>
+                <p class="card-text">
+                  <small class="text-muted">${recipe.complexity}</small>
+                </p>
+              </div>
+            </xh:div>
+          </sh:forEach>
+        </sh:if>
+      </xh:div>
     </div>
   </div>
 </xh:div>

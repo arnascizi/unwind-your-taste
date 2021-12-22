@@ -23,4 +23,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
    List<Recipe> fetchLatestRecipes();
 
    Page<Recipe> fetchSearchResult(Pageable pageable, Search search);
+
+   List<Recipe> getRecipeByProduct(Long productId);
 }
