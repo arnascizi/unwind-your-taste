@@ -17,4 +17,10 @@
     <macro-uri>/components/recipePreviewComponent.zul</macro-uri>
   </component>
 
+  <component>
+    <component-name>ingredientAddComponent</component-name>
+    <component-class>com.github.uyt.ui.components.IngredientAddComponent</component-class>
+    <macro-uri>/components/ingredientAddComponent.zul</macro-uri>
+  </component>
+
 </language-addon>

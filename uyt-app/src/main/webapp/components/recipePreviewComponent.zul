@@ -1,16 +1,14 @@
 <xh:div xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns="native" viewModel="@id('vm') @init(arg.includer)">
-  <xh:div class="card col-sm-12 bg-light shadow">
-    <zul:image class="card-img-top m-0 p-0" content="@load(vm.model.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
-    <div class="card-body w-100 d-flex row justify-content-center">
-        <xh:a class="card-link text-secondary h5 col-sm-12" onClick="@command(vm.doSelect(vm.model.id))">
-          ${vm.model.title}
-        </xh:a>
-        <xh:span class="@load(('mx-3 text-' += vm.difficultyColor))">
-          <i class="bi bi-chevron-double-up"></i>
-        </xh:span>
-        <xh:span class="mx-3 text-warning"><i class="bi bi-star-fill"></i>
-          ${vm.rating} (${vm.model.evaluationCount})
-        </xh:span>
+  <xh:div class="p-0 col-sm-12 bg-light shadow d-flex row">
+    <zul:image sclass="card-img-top px-0 mx-0 preview-image" content="@load(vm.model.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+    <div class="card-body px-1 mx-1 d-flex row justify-content">
+      <xh:a class="card-link text-secondary h6 float-left w-100" onClick="@command(vm.doSelect(vm.model.id))">
+        ${vm.model.title}
+      </xh:a>
+      <xh:span class="mr-2 text-warning float-right">
+        <i class="bi bi-star-fill"></i>
+        ${vm.model.rating} (${vm.model.evaluationCount})
+      </xh:span>
     </div>
   </xh:div>
 </xh:div>

@@ -2,6 +2,7 @@ package com.github.uyt.ui.viewmodel;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
@@ -22,7 +23,7 @@ public class SidebarVm implements Serializable {
 
     @Init
     public void init(){
-        recommendedRecipes = recipeHelper.getRecommendedRecipes();
+        recommendedRecipes = recipeHelper.getRecommendedRecipes().stream().limit(3).collect(Collectors.toList());
     }
 
     @Command

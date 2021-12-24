@@ -9,10 +9,13 @@ import com.github.uyt.bl.service.CommonComponentsService;
 import com.github.uyt.bl.service.ProductService;
 import com.github.uyt.model.CategoryType;
 import com.github.uyt.model.CocktailCategory;
+import com.github.uyt.model.Complexity;
 import com.github.uyt.model.Product;
 import com.github.uyt.ui.view.CategoryTypeView;
 import com.github.uyt.ui.view.CategoryView;
-import com.github.uyt.ui.view.IngredientView;
+import com.github.uyt.ui.view.ComplexityView;
+import com.github.uyt.ui.view.DetailedCategoryView;
+import com.github.uyt.ui.view.ProductView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,8 +38,31 @@ public class CommonAttributesHelper {
         return commonComponentsService.fetchAllCategoryTypes().stream().map(this::buildCategoryTypeView).collect(Collectors.toList());
     }
 
-    public List<IngredientView> getAllIngredients() {
+    public List<ProductView> getAllIngredients() {
         return productService.fetchALLProducts().stream().map(this::buildIngredientView).collect(Collectors.toList());
+    }
+
+    public List<ComplexityView> getAllComplexities() {
+        return commonComponentsService.fetchAllComplexities().stream().map(this::buildComplexityView).collect(Collectors.toList());
+    }
+
+    public List<DetailedCategoryView> getAllDetailedCategories() {
+        return commonComponentsService.fetchAllCategories().stream().map(this::buildDetailedCategoryView).collect(Collectors.toList());
+    }
+
+    private DetailedCategoryView buildDetailedCategoryView(CocktailCategory category) {
+        return DetailedCategoryView.builder()
+                .id(category.getId())
+                .title(category.getName())
+                .categoryType(category.getCategoryType().getValue())
+                .build();
+    }
+
+    private ComplexityView buildComplexityView(Complexity complexity) {
+        return ComplexityView.builder()
+                .id(complexity.getId())
+                .complexityValue(complexity.getValue())
+                .build();
     }
 
     private CategoryView buildCategoryView(CocktailCategory category) {
@@ -54,10 +80,12 @@ public class CommonAttributesHelper {
                 .build();
     }
 
-    private IngredientView buildIngredientView(Product product) {
-        return IngredientView.builder()
+    private ProductView buildIngredientView(Product product) {
+        return ProductView.builder()
                 .id(product.getId())
                 .name(product.getName())
+                .measurement(product.getMeasurement().getValue())
+                .productType(product.getProductType().getName())
                 .build();
     }
 }

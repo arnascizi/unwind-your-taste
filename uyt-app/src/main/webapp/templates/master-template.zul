@@ -17,51 +17,52 @@
   </head>
   <xh:body class="bg-light mx-0 px-0" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.TemplateVm')">
     <div class="d-block">
+      <div>
       <xh:header class="col-sm-12 mx-0 px-0">
         <zul:apply templateURI="/templates/header.zul" />
       </xh:header>
       <xh:nav>
         <zul:apply templateURI="/templates/navigation.zul" />
       </xh:nav>
-      <div>
-        <div class="main-bg d-flex row mx-0">
-                    <div class="col-md-3 px-5 ">
-                      <main class="container col-md-9 px-3 d-block bg-white">
-                        <zul:apply templateURI="/templates/sidebar.zul" />
-                      </main>
-                    </div>
-                    <div class="col-md-9 px-5 ">
-                      <main class="container col-md-9 px-3 d-block bg-white">
-                        <xh:div self="@{insert(pageContent)}" />
-                      </main>
-                    </div>
-          <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">
-            <!-- TODO Some additional info  -->
-            <div class="container">
-              <div class="d-flex row">
-                <div class="col-md-3 mx-1">
-                  <ul>
-                    <li class="text-white">Info 1</li>
-                    <li class="text-white">Info 2</li>
-                    <li class="text-white">Info 3</li>
-                  </ul>
-                </div>
-                <div class="col-md-5 mx-2">
-                  <p class="text-white">Empty</p>
-                </div>
-                <div class="col-md-3 mx-1">
-                  <ul>
-                    <li class="text-white">Another info 1</li>
-                    <li class="text-white">Another info 2</li>
-                    <li class="text-white">
-                      <p class="text-white">Random stuff</p>
-                    </li>
-                  </ul>
-                </div>
+        <div class="container col-md-9 d-flex justify-content bg-white">
+          <div class="col-md-3 px-5 ">
+            <main class="px-3 d-block">
+              <zul:apply templateURI="/templates/sidebar.zul" />
+            </main>
+          </div>
+          <div class="col-md-9 px-5 ">
+            <main class="px-3 d-block">
+              <xh:div self="@{insert(pageContent)}" />
+            </main>
+          </div>
+        </div>
+        <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">
+          <!-- TODO Some additional info  -->
+          <div class="container">
+            <div class="d-flex row">
+              <div class="col-md-3 mx-1">
+                <ul>
+                  <li class="text-white">Info 1</li>
+                  <li class="text-white">Info 2</li>
+                  <li class="text-white">Info 3</li>
+                </ul>
+              </div>
+              <div class="col-md-5 mx-2">
+                <p class="text-white">Empty</p>
+              </div>
+              <div class="col-md-3 mx-1">
+                <ul>
+                  <li class="text-white">Another info 1</li>
+                  <li class="text-white">Another info 2</li>
+                  <li class="text-white">
+                    <p class="text-white">Random stuff</p>
+                  </li>
+                </ul>
               </div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </footer>
+
       </div>
     </div>
   </xh:body>

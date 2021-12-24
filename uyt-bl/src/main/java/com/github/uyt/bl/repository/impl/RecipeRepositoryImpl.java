@@ -74,8 +74,17 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
 
-        // criteria.select(root).where(cb.equal(root.get(Recipe_.id), Math.floor(Math.random() * 24))).distinct(true);
         criteria.orderBy(cb.desc(root.get(Recipe_.createdAt)));
+        return new ArrayList<>(em.createQuery(criteria).getResultList());
+    }
+
+    @Override
+    public List<Recipe> fetchRandomRecipes() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
+        Root<Recipe> root = criteria.from(Recipe.class);
+
+        criteria.select(root).where(cb.equal(root.get(Recipe_.id), Math.floor(Math.random() * 24))).distinct(true);
         return new ArrayList<>(em.createQuery(criteria).getResultList());
     }
 

@@ -36,6 +36,10 @@ public class RecipeService {
     }
 
     public List<Recipe> getRecommendedRecipes() {
+        return recipeRepository.fetchRandomRecipes();
+    }
+
+    public List<Recipe> getLatestRecipes() {
         return recipeRepository.fetchLatestRecipes();
     }
 

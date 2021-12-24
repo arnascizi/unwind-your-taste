@@ -8,7 +8,7 @@
     <hr />
     <div class="container d-flex row">
       <xh:div class="col-sm-4">
-        <sh:forEach items="@load(vm.ingredients)" var="ingredient">
+        <sh:forEach items="@bind(vm.ingredients)" var="ingredient">
           <xh:button class="btn btn-outline-danger btn-sm" onClick="@command(vm.doExpand(ingredient.id))">${ingredient.name}</xh:button>
         </sh:forEach>
       </xh:div>

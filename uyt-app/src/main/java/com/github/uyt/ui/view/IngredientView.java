@@ -18,4 +18,7 @@ public class IngredientView implements Serializable {
 
     private Long id;
     private String name;
+    private String productType;
+    private String measurement;
+    private String amount;
 }

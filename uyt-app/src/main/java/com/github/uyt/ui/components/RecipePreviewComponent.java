@@ -13,7 +13,6 @@ import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
 import com.github.uyt.ui.view.RecipePreviewView;
-import com.github.uyt.ui.view.ReviewView;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,15 +26,11 @@ public class RecipePreviewComponent extends HtmlMacroComponent {
     @Getter @Setter private String recipeId;
     @Getter private RecipePreviewView model;
     @Getter private String difficultyColor;
-    @Getter private Double rating;
 
     @Init
     public void init() {
         model = recipeHelper.getRecipePreview(Long.parseLong(recipeId));
-        model.setEvaluationCount(reviewHelper.getRecipeReviews(model.getId()).size());
-        rating = model.getEvaluationCount() > 0
-                ? Double.valueOf(reviewHelper.getRecipeReviews(model.getId()).stream().map(ReviewView::getEvaluation).reduce(0, Integer::sum)) / model.getEvaluationCount()
-                : 0;
+        model.setRating(0);
         complexityValue();
     }
 

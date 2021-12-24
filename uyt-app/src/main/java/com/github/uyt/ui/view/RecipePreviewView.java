@@ -21,4 +21,5 @@ public class RecipePreviewView implements Serializable {
     private byte[] thumbnail;
     private String complexity;
     private Integer evaluationCount;
+    private Integer rating;
 }

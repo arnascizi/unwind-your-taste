@@ -12,7 +12,7 @@ public enum PageLocationEnum {
 
     ABOUT("/about"),
     COCKTAIL("/cocktail"),
-    COCKTAIL_ENTRY("/cocktailEntry"),
+    COCKTAIL_ENTRY("/createCocktail"),
     COCKTAILS("/cocktails"),
     ERROR("/error"),
     INDEX("/index"),

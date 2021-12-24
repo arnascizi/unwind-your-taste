@@ -9,7 +9,6 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.model.CommonConstants;
@@ -41,7 +40,6 @@ public class CocktailVm implements Serializable {
     @Init
     @NotifyChange({"model", "review", "totalRating", "reviews"})
     public void init(@QueryParam("id") String id) {
-        Executions.getCurrent().getParameter("id");
         model = recipeHelper.getDetailedRecipeView(Long.parseLong(id));
         loadReviews(model.getId());
         ratingCount = reviews.size();

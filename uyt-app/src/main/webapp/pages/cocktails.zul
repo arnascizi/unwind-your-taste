@@ -7,7 +7,7 @@
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">${c:l('common.cocktails')}</h3>
     <hr />
-    <!--    <a class="btn btn-outline-success" href="/cocktailEntry">Add cocktail</a>-->
+        <a class="btn btn-outline-success" href="/createCocktail">Add cocktail</a>
     <div class="mt-5">
       <div class="input-group d-flex justify-content-center">
         <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@bind(vm.search.searchValue)" />
@@ -34,7 +34,7 @@
         <xh:div class="container mt-3 mb-5 col-sm-12">
           <xh:div class="d-flex justify-content-center row">
             <sh:forEach items="@load(vm.recipeList)" var="recipe">
-              <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">
+              <xh:div class="mx-0 px-1 mt-2 d-block col-sm-3">
                 <zul:recipePreviewComponent recipeId="${recipe.id}" />
               </xh:div>
             </sh:forEach>

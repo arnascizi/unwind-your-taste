@@ -15,7 +15,7 @@
           <xh:div class="p-1">
             <div class="card">
               <div class="card-body">
-                <div class="card-title">${each.title}</div>
+                <xh:a class="card-title" onclick="@command('doSearch(each.id))')">${each.title}</xh:a>
                 <div class="card-text">${each.description}</div>
               </div>
             </div>
@@ -31,15 +31,14 @@
         <xh:button class="btn btn-outline-secondary btn-sm" onClick="@command('doCheckAll')">View all</xh:button>
       </span>
     </h4>
-    <div class="row d-flex">
-      <xh:div>
+    <xh:div class="container mt-3 mb-5 col-sm-12">
+      <xh:div class="d-flex justify-content-center row">
         <sh:forEach items="@load(vm.latestRecipes)" var="recipe">
-          <xh:div class="mx-0 px-1 mt-2 w-25 d-flex">
+          <xh:div class="mx-0 px-1 mt-2 d-block col-sm-3 row">
             <zul:recipePreviewComponent recipeId="${recipe.id}" />
           </xh:div>
         </sh:forEach>
       </xh:div>
-    </div>
+    </xh:div>
   </div>
-
 </xh:div>

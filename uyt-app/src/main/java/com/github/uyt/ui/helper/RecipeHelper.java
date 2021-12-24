@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.github.uyt.bl.service.RecipeService;
+import com.github.uyt.bl.service.ReviewService;
 import com.github.uyt.bl.service.UserAccountService;
 import com.github.uyt.model.Composition;
 import com.github.uyt.model.Product;
@@ -28,6 +29,7 @@ public class RecipeHelper {
 
     private final RecipeService recipeService;
     private final UserAccountService userAccountService;
+    private final ReviewService reviewService;
 
     public int getRecipeCount() {
         return recipeService.getAllRecipes().size();
@@ -51,6 +53,10 @@ public class RecipeHelper {
 
     public List<RecipePreviewView> getRecommendedRecipes() {
         return recipeService.getRecommendedRecipes().stream().map(this::buildRecipePreview).collect(Collectors.toList());
+    }
+
+    public List<RecipePreviewView> getLatestRecipes() {
+        return recipeService.getLatestRecipes().stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
     public RecipePreviewView getRecipePreview(Long id) {
@@ -91,6 +97,7 @@ public class RecipeHelper {
                 .title(recipe.getTitle())
                 .complexity(recipe.getComplexity().getValue())
                 .thumbnail(recipe.getImage())
+                .evaluationCount(reviewService.getRecipeReviews(recipe.getId()).size())
                 .build();
     }
 

@@ -11,7 +11,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
-import com.github.uyt.ui.view.IngredientView;
+import com.github.uyt.ui.view.ProductView;
 import com.github.uyt.ui.view.RecipePreviewView;
 
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class IngredientsVm implements Serializable {
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
 
     @Getter @Setter private List<RecipePreviewView> recipes = new ArrayList<>();
-    @Getter @Setter private List<IngredientView> ingredients;
+    @Getter @Setter private List<ProductView> ingredients;
 
     @Init
     public void init() {
