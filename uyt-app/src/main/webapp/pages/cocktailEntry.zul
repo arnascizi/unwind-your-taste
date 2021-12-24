@@ -16,9 +16,9 @@
                       content="@load(vm.model.image, after={'doUploadImage'}) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
             </xh:div>
             <sh:forEach items="@load(vm.products)" var="product">
-              <div class="d-block">
-                <zul:label value="${product.productView.name} ${product.amount} ${product.productView.measurement}" />
-              </div>
+              <xh:div class="d-block">
+                <zul:label value="@load(product.productView.name)" />
+              </xh:div>
             </sh:forEach>
           </xh:div>
         </div>

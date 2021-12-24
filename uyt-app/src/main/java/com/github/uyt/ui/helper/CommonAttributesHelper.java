@@ -14,7 +14,6 @@ import com.github.uyt.model.Product;
 import com.github.uyt.ui.view.CategoryTypeView;
 import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.ComplexityView;
-import com.github.uyt.ui.view.DetailedCategoryView;
 import com.github.uyt.ui.view.ProductView;
 
 import lombok.RequiredArgsConstructor;
@@ -46,15 +45,15 @@ public class CommonAttributesHelper {
         return commonComponentsService.fetchAllComplexities().stream().map(this::buildComplexityView).collect(Collectors.toList());
     }
 
-    public List<DetailedCategoryView> getAllDetailedCategories() {
+    public List<CategoryView> getAllDetailedCategories() {
         return commonComponentsService.fetchAllCategories().stream().map(this::buildDetailedCategoryView).collect(Collectors.toList());
     }
 
-    private DetailedCategoryView buildDetailedCategoryView(CocktailCategory category) {
-        return DetailedCategoryView.builder()
+    private CategoryView buildDetailedCategoryView(CocktailCategory category) {
+        return CategoryView.builder()
                 .id(category.getId())
                 .title(category.getName())
-                .categoryType(category.getCategoryType().getValue())
+                // .categoryType(category.getCategoryType().getValue())
                 .build();
     }
 

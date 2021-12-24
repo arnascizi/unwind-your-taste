@@ -17,9 +17,9 @@ import org.zkoss.zul.Messagebox;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
+import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.ComplexityView;
 import com.github.uyt.ui.view.CompositionView;
-import com.github.uyt.ui.view.DetailedCategoryView;
 import com.github.uyt.ui.view.ProductView;
 import com.github.uyt.ui.view.RecipeView;
 
@@ -27,7 +27,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class CocktailEntryVm implements Serializable {
-    private static final long serialVersionUID= -1813920837374820512L;
+    private static final long serialVersionUID = -1813920837374820512L;
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
@@ -38,7 +38,7 @@ public class CocktailEntryVm implements Serializable {
     @Getter @Setter private ProductView productModel = new ProductView();
     @Getter @Setter private CompositionView ingredientModel = new CompositionView();
     @Getter @Setter private String productId;
-    @Getter private List<DetailedCategoryView> categories = new ArrayList<>();
+    @Getter private List<CategoryView> categories = new ArrayList<>();
     @Getter private List<ProductView> ingredients = new ArrayList<>();
     @Getter private List<ComplexityView> complexities = new ArrayList<>();
 
@@ -82,9 +82,21 @@ public class CocktailEntryVm implements Serializable {
     @Command
     @NotifyChange({"ingredientModel", "products", "amount"})
     public void doAddProduct() {
-        ingredientModel.setProductView(productModel);
-        products.add(ingredientModel);
-        System.out.println(productModel.getName());
+
+        recipeHelper.saveRecipe(RecipeView.builder()
+                .title("recipeView.getTitle()")
+                .guideline("recipeView.getGuideline()")
+                .serving("recipeView.getServing()")
+                .uploadTime(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
+                .image(model.getImage())
+                .categoryView(categories.get(0))
+                .complexity(complexities.get(0))
+                .build(), accountHelper.getLoggedUser());
+
+        // ingredientModel.setProductView(productModel);
+        // products.add(ingredientModel);
+        // System.out.println(productModel.getName());
         // productModel = new ProductView();
         // ingredientModel = new CompositionView();
     }

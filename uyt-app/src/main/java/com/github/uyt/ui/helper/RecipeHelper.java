@@ -10,10 +10,14 @@ import org.springframework.stereotype.Component;
 import com.github.uyt.bl.service.RecipeService;
 import com.github.uyt.bl.service.ReviewService;
 import com.github.uyt.bl.service.UserAccountService;
+import com.github.uyt.model.CocktailCategory;
+import com.github.uyt.model.Complexity;
 import com.github.uyt.model.Composition;
 import com.github.uyt.model.Product;
 import com.github.uyt.model.Recipe;
 import com.github.uyt.model.Search;
+import com.github.uyt.ui.view.CategoryView;
+import com.github.uyt.ui.view.ComplexityView;
 import com.github.uyt.ui.view.CompositionView;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.ProductView;
@@ -80,6 +84,23 @@ public class RecipeHelper {
                 .updatedAt(LocalDateTime.now())
                 .image(recipeView.getImage())
                 .userAccount(userAccountService.getUserAccount(loggedUser.getUsername()))
+                .cocktailCategory(buildCocktailCategory(recipeView.getCategoryView()))
+                .complexity(buildComplexity(recipeView.getComplexity()))
+                .build();
+    }
+
+    private Complexity buildComplexity(ComplexityView view) {
+        return Complexity.builder()
+                .id(view.getId())
+                .value(view.getComplexityValue())
+                .build();
+    }
+
+    private CocktailCategory buildCocktailCategory(CategoryView view) {
+        return CocktailCategory.builder()
+                .id(view.getId())
+                .description(view.getDescription())
+                .name(view.getTitle())
                 .build();
     }
 
@@ -110,10 +131,19 @@ public class RecipeHelper {
                 .uploadTime(recipe.getCreatedAt())
                 .updateTime(recipe.getUpdatedAt())
                 .uploader(recipe.getUserAccount().getUsername())
-                .complexity(recipe.getComplexity().getValue())
+                .complexity(buildComplexityView(recipe.getComplexity()))
                 .category(recipe.getCocktailCategory().getName())
                 .products(recipe.getProductList().stream().map(this::buildCompositionView).collect(Collectors.toList()))
                 .image(recipe.getImage())
+                .categoryView(buildCategoryView(recipe.getCocktailCategory()))
+                .build();
+    }
+
+    private CategoryView buildCategoryView(CocktailCategory category) {
+        return CategoryView.builder()
+                .id(category.getId())
+                .description(category.getDescription())
+                .title(category.getName())
                 .build();
     }
 
@@ -131,6 +161,13 @@ public class RecipeHelper {
                 .id(composition.getId())
                 .productView(buildProductView(composition.getProduct()))
                 .amount(composition.getAmount())
+                .build();
+    }
+
+    private ComplexityView buildComplexityView(Complexity complexity) {
+        return ComplexityView.builder()
+                .id(complexity.getId())
+                .complexityValue(complexity.getValue())
                 .build();
     }
 

@@ -27,6 +27,7 @@ public class RecipeView {
     private String uploader;
     private List<ReviewView> reviews;
     private List<CompositionView> products;
-    private String complexity;
+    private ComplexityView complexity;
     private String category;
+    private CategoryView categoryView;
 }
