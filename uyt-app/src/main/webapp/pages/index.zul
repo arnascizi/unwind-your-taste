@@ -4,8 +4,9 @@
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IndexVm')">
-  <div class="container mt-5 pt-5">
-    <h4 class="mt-3 text-muted">${c:l('about.popular')}</h4>
+  <div class="container mt-0 pt-5">
+    <h3 class="pt-3 text-muted">${c:l('about.popular')}</h3>
+    <hr/>
     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum
       velit? Ab cum eius expedita praesentium rem.
     </p>
@@ -15,7 +16,7 @@
           <xh:div class="p-1">
             <div class="card">
               <div class="card-body">
-                <xh:a class="card-title" onclick="@command('doSearch(each.id))')">${each.title}</xh:a>
+                <xh:a class="card-title stretched-link" onclick="@command('doSearch(each.id))')">${each.title}</xh:a>
                 <div class="card-text">${each.description}</div>
               </div>
             </div>

@@ -17,6 +17,7 @@ import org.zkoss.zul.Messagebox;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
+import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.ComplexityView;
 import com.github.uyt.ui.view.CompositionView;
@@ -75,7 +76,7 @@ public class CocktailEntryVm implements Serializable {
                     .updateTime(LocalDateTime.now())
                     .image(model.getImage())
                     .build();
-            recipeHelper.saveRecipe(testView, accountHelper.getLoggedUser());
+            recipeHelper.saveRecipe(testView, SecurityFunctions.getLoggedUser());
         }
     }
 
@@ -92,7 +93,7 @@ public class CocktailEntryVm implements Serializable {
                 .image(model.getImage())
                 .categoryView(categories.get(0))
                 .complexity(complexities.get(0))
-                .build(), accountHelper.getLoggedUser());
+                .build(), SecurityFunctions.getLoggedUser());
 
         // ingredientModel.setProductView(productModel);
         // products.add(ingredientModel);

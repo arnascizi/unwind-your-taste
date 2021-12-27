@@ -31,8 +31,7 @@
               <div class="form-group">
                 <zul:combobox sclass="input-group-append mx-1" selectedItem="@load(vm.productModel.productType)" placeholder="Select category">
                   <sh:forEach items="@load(vm.categories)" var="category">
-                    <zul:comboitem value="${category.categoryType}" label="${category.title}" />
-                    <!--                    <zul:comboitem sclass="form-control" label="${category.title} " value="${category.categoryType}"  />-->
+                    <zul:comboitem value="${category.title}" label="${category.title}" />
                   </sh:forEach>
                 </zul:combobox>
               </div>

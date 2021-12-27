@@ -24,7 +24,7 @@ public class IngredientsVm implements Serializable {
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
 
     @Getter @Setter private List<RecipePreviewView> recipes = new ArrayList<>();
-    @Getter @Setter private List<ProductView> ingredients;
+    @Getter @Setter private List<ProductView> ingredients = new ArrayList<>();
 
     @Init
     public void init() {
@@ -35,6 +35,11 @@ public class IngredientsVm implements Serializable {
     @NotifyChange({"ingredients", "recipes"})
     public void doExpand(String id) {
         recipes.clear();
-        recipes = recipeHelper.getRecipesByProduct(Long.parseLong(id));
+        loadRecipes(Long.parseLong(id));
+        System.out.println(recipes.size());
+    }
+
+    private void loadRecipes(Long id) {
+        recipes = recipeHelper.getRecipesByProduct(id);
     }
 }

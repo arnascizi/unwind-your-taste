@@ -15,6 +15,7 @@ import com.github.uyt.model.CommonConstants;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
+import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.RecipeView;
 import com.github.uyt.ui.view.ReviewView;
 
@@ -53,9 +54,8 @@ public class CocktailVm implements Serializable {
         // if (!isValid()) {
         //     return;
         // }
-        review.setUser(accountHelper.getLoggedUser().getUsername());
+        review.setUser(SecurityFunctions.getLoggedUser().getUsername());
         reviewHelper.saveReview(review);
-        // totalRating = calculateTotalRating();
         ratingCount = reviews.size();
         loadReviews(model.getId());
     }
@@ -68,11 +68,11 @@ public class CocktailVm implements Serializable {
     }
 
     public String getLoggedUserUsername() {
-        return accountHelper.getLoggedUser().getUsername();
+        return SecurityFunctions.getLoggedUser().getUsername();
     }
 
     public boolean isUserLogged() {
-        return accountHelper.getLoggedUser() != null;
+        return SecurityFunctions.getLoggedUser() != null;
     }
 
     private double calculateTotalRating() {

@@ -1,14 +1,16 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/templates/master-template-full.zul"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<?page complete="true"?>
+<?page id="cocktail" complete="true"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailVm')">
   <div class="container mt-0 pb-5">
-    <h3 class="pt-5 text-muted">${vm.model.title}
-      <small class="h6 text-muted text-small float-right">${vm.model.uploadTime}</small>
-      <br />
-      <small class="h6 text-muted text-small float-right">${c:l('cocktail.uploaded.by')} ${vm.model.uploader}</small>
-    </h3>
+    <div class="d-flex justify-content">
+      <h3 class="pt-5 text-muted col-sm-6">${c:l('cocktail.name')} ${vm.model.title}</h3>
+      <div class="col-sm-6 pt-5">
+        <small class="h6 text-muted text-small float-right mr-0 col-sm-12">${c:l('cocktail.upload.time')} ${vm.model.uploader}</small>
+        <small class="h6 text-muted text-small float-right mr-0 col-sm-12">${vm.model.uploadTime}</small>
+      </div>
+    </div>
     <hr />
     <div class="mt-5">
       <div class="container d-block">
@@ -20,15 +22,10 @@
 
           </div>
           <div class="col-sm-8 float-right">
-            <div class="d-flex justify-content-center pt-3">
-              <!--              <p class="mx-4">rating: ${vm.totalRating} of 5 (${vm.model.getReviews().size()})</p>-->
-              <zul:label value="@load(vm.totalRating)" />
-              <p>of 5 (</p>
-              <zul:label value="@load(vm.ratingCount)" />
-              <p>)</p>
-              <p class="mx-4">title: ${vm.model.title}</p>
-              <p class="mx-4">category: ${vm.model.category}</p>
-              <p class="mx-4">dificulty: ${vm.model.complexity}</p>
+            <div class="d-flex justify-content pt-3">
+              <p class="mx-4">${c:l('cocktail.name')} ${vm.model.title}</p>
+              <p class="mx-4">${c:l('cocktail.category')} ${vm.model.category}</p>
+              <p class="mx-4">${c:l('cocktail.difficulty')} ${vm.model.complexity.complexityValue}</p>
               <div class="fb-share-button" data-href="https://localhost:8443/cocktail?id=${vm.model.id}" data-layout="button" data-size="large">
                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A8443%2Fcocktail%3Fid%3D${vm.model.id}&amp;src=sdkpreparse"
                         class="btn btn-primary btn-sm">
@@ -38,74 +35,77 @@
               </div>
             </div>
             <hr />
-
-            <xh:div>
-              <sh:forEach items="@load(vm.model.products)" var="product">
-                <xh:div class="d-flex row my-1 justify-content-end">
-                  <xh:p class="my-0 px-1">${product.productView.name}</xh:p>
-                  <xh:p class="my-0 px-1">${product.amount}</xh:p>
-                  <xh:p class="my-0 px-1">${product.productView.measurement}</xh:p>
-                </xh:div>
-              </sh:forEach>
-            </xh:div>
-            <hr />
-            <xh:p>${vm.model.guideline}</xh:p>
-            <xh:p>${vm.model.serving}</xh:p>
-            <hr />
-            <xh:p>${vm.model.updateTime}</xh:p>
-          </div>
-        </div>
-        <div>
-          <xh:div class="col-sm-12">
-            <div class="container mt-5">
-              <div class="d-flex justify-content-center mb-4">
-                <h3>${c:l('cocktail.reviews')}</h3>
+            <div class="d-flex justify-content">
+              <xh:div class="col-6">
+                <xh:div class="h5">${c:l('cocktail.composition')}</xh:div>
+                <sh:forEach items="@load(vm.model.products)" var="product">
+                  <xh:div class="justify-content">
+                    <xh:p class="my-0">${product.productView.name} ${product.amount} ${product.productView.measurement}</xh:p>
+                  </xh:div>
+                </sh:forEach>
+              </xh:div>
+              <div class="col-6 border-left justify-content">
+                <xh:div class="h5">${c:l('cocktail.guideline')}</xh:div>
+                <xh:p>${vm.model.guideline}</xh:p>
+                <br />
+                <xh:div class="h5">${c:l('cocktail.serving')}</xh:div>
+                <xh:p>${vm.model.serving}</xh:p>
               </div>
-              <hr />
-              <div class="container">
-                <xh:div class="d-flex justify-content-center col-sm-12 row">
-                  <sh:forEach items="@load(vm.reviews)" var="review">
-                      <zul:reviewComponent reviewId="${review.id}" />
-                  </sh:forEach>
-                </xh:div>
-              </div>
-<!--              <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.ratingCount)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />-->
-              <hr />
-              <xh:div if="${(vm.userLogged)}" class="d-flex justify-content-center row">
-                <div class="bg-light p-2 col-md-8 mt-3">
-                  <div class="form-group  d-flex flex-row">
-                    <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${(vm.getLoggedUserUsername())}" width="10" />
-                    <span class="d-block font-weight-bold name">${(vm.getLoggedUserUsername())}</span>
-                    <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@bind(vm.review.evaluation)" >
-                      <div class="col-sm-2 my-0">
-                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio1" value="1" label="1" />
-                      </div>
-                      <div class="col-sm-2 my-0">
-                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio2" value="2" label="2" />
-                      </div>
-                      <div class="col-sm-2 my-0">
-                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio3" value="3" label="3" />
-                      </div>
-                      <div class="col-sm-2 my-0">
-                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio4" value="4" label="4" />
-                      </div>
-                      <div class="col-sm-2 my-0">
-                        <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio5" value="5" label="5" />
-                      </div>
-                    </zul:radiogroup>
+            </div>
+            <hr />
+            <div>
+              <xh:div class="col-sm-12 p-1">
+                <div class="container mt-1">
+                  <div class="d-flex justify-content-center mb-4">
+                    <h3>${c:l('cocktail.reviews')}</h3>
                   </div>
-                  <div class="d-flex flex-row align-items-start">
-                    <zul:textbox name="msg" id="message" cols="30" rows="5" sclass="form-control" value="@bind(vm.review.comment)" />
+                  <hr />
+                  <div class="container">
+                    <xh:div class="d-block justify-content-center px-5 mx-5 col-sm-12">
+                      <sh:forEach items="@load(vm.reviews)" var="review">
+                        <zul:reviewComponent reviewId="${review.id}" />
+                      </sh:forEach>
+                    </xh:div>
                   </div>
-                  <div class="mt-2 text-right">
-                    <zul:button sclass="btn btn-primary btn-sm shadow-none" onClick="@command('doSubmitReview')">Post comment</zul:button>
-                    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="reset">Cancel</button>
-                  </div>
+                  <!--              <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.ratingCount)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />-->
                 </div>
               </xh:div>
             </div>
-          </xh:div>
+          </div>
         </div>
+        <hr />
+        <xh:div if="${(vm.userLogged)}" class="d-flex justify-content-center row">
+          <div class="bg-light p-2 col-md-8 mt-3 border bg-light">
+            <div class="form-group  d-flex flex-row">
+              <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${(vm.getLoggedUserUsername())}" width="10" />
+              <span class="d-block font-weight-bold name">${(vm.getLoggedUserUsername())}</span>
+              <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@bind(vm.review.evaluation)">
+                <div class="col-sm-2 my-0">
+                  <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio1" value="1" label="1" />
+                </div>
+                <div class="col-sm-2 my-0">
+                  <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio2" value="2" label="2" />
+                </div>
+                <div class="col-sm-2 my-0">
+                  <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio3" value="3" label="3" />
+                </div>
+                <div class="col-sm-2 my-0">
+                  <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio4" value="4" label="4" />
+                </div>
+                <div class="col-sm-2 my-0">
+                  <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio5" value="5" label="5" />
+                </div>
+              </zul:radiogroup>
+            </div>
+            <div class="d-flex flex-row align-items-start">
+              <zul:textbox name="msg" id="message" cols="30" rows="5" sclass="form-control" value="@bind(vm.review.comment)" />
+            </div>
+            <div class="mt-2 text-right">
+              <zul:button sclass="btn btn-primary btn-sm shadow-none" onClick="@command('doSubmitReview')">${c:l('cocktail.comment')}</zul:button>
+              <!--              <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="reset">Cancel</button>-->
+            </div>
+          </div>
+        </xh:div>
       </div>
     </div>
   </div>

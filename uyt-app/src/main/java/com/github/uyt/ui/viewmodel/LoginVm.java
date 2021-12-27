@@ -33,7 +33,9 @@ public class LoginVm implements Serializable {
 
     @Command
     public void doLogin() {
+        // if (isValid()) {
             Clients.submitForm("loginForm");
+        // }
     }
 
     private boolean isValid() {

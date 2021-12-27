@@ -2,12 +2,16 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}"
+<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="xhtml" self="@{define(pageContent)}"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailsVm')">
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">${c:l('common.cocktails')}</h3>
     <hr />
-        <a class="btn btn-outline-success" href="/createCocktail">Add cocktail</a>
+    <xh:div>
+      <sh:if test="@load(vm.userLogged)">
+        <xh:a class="btn btn-outline-success" href="/createCocktail">Add cocktail</xh:a>
+      </sh:if>
+    </xh:div>
     <div class="mt-5">
       <div class="input-group d-flex justify-content-center">
         <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@bind(vm.search.searchValue)" />

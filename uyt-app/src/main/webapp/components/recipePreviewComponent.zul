@@ -2,7 +2,7 @@
   <xh:div class="p-0 col-sm-12 bg-light shadow d-flex row">
     <zul:image sclass="card-img-top px-0 mx-0 preview-image" content="@load(vm.model.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
     <div class="card-body px-1 mx-1 d-flex row justify-content">
-      <xh:a class="card-link text-secondary h6 float-left w-100" onClick="@command(vm.doSelect(vm.model.id))">
+      <xh:a class="card-link text-secondary h6 float-left w-100 stretched-link" onClick="@command(vm.doSelect(vm.model.id))">
         ${vm.model.title}
       </xh:a>
       <xh:span class="mr-2 text-warning float-right">

@@ -1,16 +1,21 @@
 package com.github.uyt.ui.components;
 
+import java.util.Objects;
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
-import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zhtml.Messagebox;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.HtmlMacroComponent;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
 
+import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
+import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.ReviewView;
 
 import lombok.Getter;
@@ -32,23 +37,19 @@ public class ReviewComponent extends HtmlMacroComponent {
     }
 
     @Command
-    @NotifyChange("ReviewComponent")
     public void doDelete(String id) {
         Messagebox.show(Labels.getRequiredLabel("cocktail.delete.confirm"), "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
-            if (event.getName().equals("onOK")) {
+            if (event.getName().equals(Events.ON_OK)) {
                 reviewHelper.deleteReview(Long.parseLong(id));
                 Clients.showNotification(Labels.getRequiredLabel("cocktail.delete.success"));
+                Executions.sendRedirect(PageLocationEnum.COCKTAIL.getUrl() + "?id=" + model.getRecipeId());
             } else {
                 Clients.showNotification(Labels.getRequiredLabel("cocktail.delete.cancel"));
             }
         });
     }
 
-    public boolean isUserLogged() {
-        return accountHelper.getLoggedUser() != null;
-    }
-
     public boolean isAbleToModify() {
-        return isUserLogged() && model.getUser().equals(accountHelper.getLoggedUser().getUsername());
+        return SecurityFunctions.isUserLogged() && model.getUser().equals(Objects.requireNonNull(SecurityFunctions.getLoggedUser()).getUsername());
     }
 }

@@ -6,25 +6,21 @@
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">Test</h3>
     <hr />
-    <div class="container d-flex row">
+    <div class="container d-flex justify-content">
       <xh:div class="col-sm-4">
         <sh:forEach items="@bind(vm.ingredients)" var="ingredient">
           <xh:button class="btn btn-outline-danger btn-sm" onClick="@command(vm.doExpand(ingredient.id))">${ingredient.name}</xh:button>
         </sh:forEach>
       </xh:div>
       <xh:div class="col-sm-8">
-        <sh:if test="@load(vm.recipes ne 'null')">
-          <sh:forEach items="@load(vm.recipes)" var="recipe">
-            <xh:div class="card col-sm-12 bg-light shadow">
-              <zul:image class="card-img-top mt-1" content="@load(recipe.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
-              <div class="card-body">
-                <xh:a class="card-link" onClick="@command(vm.doSelect(recipe.id))">${recipe.title}</xh:a>
-                <p class="card-text">
-                  <small class="text-muted">${recipe.complexity}</small>
-                </p>
-              </div>
-            </xh:div>
-          </sh:forEach>
+        <sh:if test="@load(vm.recipes.size() > 0)">
+          <xh:div class="d-flex justify-content-center row">
+            <sh:forEach items="@load(vm.recipes)" var="recipe">
+              <xh:div class="mx-0 px-1 mt-2 d-block col-sm-3">
+                <zul:recipePreviewComponent recipeId="${recipe.id}" />
+              </xh:div>
+            </sh:forEach>
+          </xh:div>
         </sh:if>
       </xh:div>
     </div>

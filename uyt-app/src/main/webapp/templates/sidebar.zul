@@ -1,6 +1,6 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" xmlns:sh="shadow" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.SidebarVm')">
-  <h5 class="ml-4">${c:l('common.recommendations')}</h5>
+  <h5 class="ml-4 pt-5">${c:l('common.recommendations')}</h5>
   <hr />
   <xh:div class="container mt-3 mb-5 col-sm-12">
     <xh:div class="d-column justify-content-center row">

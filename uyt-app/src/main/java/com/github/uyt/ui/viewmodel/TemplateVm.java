@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
+import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.SearchView;
 
@@ -33,7 +34,7 @@ public class TemplateVm implements Serializable {
 
     @Init
     public void init() {
-        LoggedUser loggedUser = accountHelper.getLoggedUser();
+        LoggedUser loggedUser = SecurityFunctions.getLoggedUser();
         username = loggedUser != null ? loggedUser.getUsername() : StringUtils.EMPTY;
     }
 
@@ -59,7 +60,7 @@ public class TemplateVm implements Serializable {
     }
 
     public boolean isUserLogged() {
-        return accountHelper.getLoggedUser() != null;
+        return SecurityFunctions.isUserLogged();
     }
 
     public String getCurrentLanguage() {

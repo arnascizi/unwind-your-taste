@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib>
+<taglib>
+  <short-name>security-functions</short-name>
+  <tlib-version>1.0</tlib-version>
+  <uri>https://localhost:8443/security-functions</uri>
+
+  <function>
+    <name>isUserLogged</name>
+    <function-class>com.github.uyt.ui.utility.SecurityFunctions</function-class>
+    <function-signature>java.lang.Boolean isUserLogged()</function-signature>
+  </function>
+
+  <function>
+    <name>getLoggedUser</name>
+    <function-class>com.github.uyt.ui.utility.SecurityFunctions</function-class>
+    <function-signature>com.github.uyt.ui.view.LoggedUser getLoggedUser()</function-signature>
+  </function>
+  <function>
+
+    <name>hasRole</name>
+    <function-class>com.github.uyt.ui.utility.SecurityFunctions</function-class>
+    <function-signature>java.lang.Boolean hasRole(String role)</function-signature>
+  </function>
+</taglib>

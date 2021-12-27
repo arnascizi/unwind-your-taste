@@ -12,8 +12,10 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
+import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.CategoryTypeView;
 import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.RecipePreviewView;
@@ -28,6 +30,7 @@ public class CocktailsVm implements Serializable {
     private static final int PAGE_SIZE = 8;
 
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
+    @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
     @WireVariable(rewireOnActivate = true) private transient CommonAttributesHelper commonAttributesHelper;
 
     @Getter @Setter private List<RecipePreviewView> recipeList;
@@ -72,5 +75,9 @@ public class CocktailsVm implements Serializable {
 
     public static int getPageSize() {
         return PAGE_SIZE;
+    }
+
+    public boolean isUserLogged() {
+        return SecurityFunctions.getLoggedUser() != null;
     }
 }

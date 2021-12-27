@@ -10,7 +10,7 @@
         </ul>
       </div>
       <div class="col-md-5 mx-2">
-        <p class="text-white">Empty</p>
+        <p class="text-white">${c:l('common.footer.info')}</p>
       </div>
       <div class="col-md-3 mx-1">
         <ul>
