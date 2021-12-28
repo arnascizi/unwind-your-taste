@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE config>
+<config>
+  <config-name>uyt-app</config-name>
+  <taglib>
+    <taglib-uri>https://localhost:8443/security-functions</taglib-uri>
+    <taglib-location>/metainfo/tld/security-functions.tld</taglib-location>
+  </taglib>
+</config>
