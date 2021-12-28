@@ -30,41 +30,8 @@
               <xh:div self="@{insert(pageContent)}" />
             </main>
           </div>
-<!--          <div class="col-md-3 px-5 ">-->
-<!--            <main class="container col-md-9 px-3 d-block bg-white">-->
-<!--              <zul:apply templateURI="/templates/sidebar.zul" />-->
-<!--            </main>-->
-<!--          </div>-->
-<!--          <div class="col-md-9 px-5 ">-->
-<!--            <main class="container col-md-9 px-3 d-block bg-white">-->
-<!--              <xh:div self="@{insert(pageContent)}" />-->
-<!--            </main>-->
-<!--          </div>-->
           <footer class="col-sm-12 m-0 py-5 px-0 color-hoki">
-            <!-- TODO Some additional info  -->
-            <div class="container">
-              <div class="d-flex row">
-                <div class="col-md-3 mx-1">
-                  <ul>
-                    <li class="text-white">Info 1</li>
-                    <li class="text-white">Info 2</li>
-                    <li class="text-white">Info 3</li>
-                  </ul>
-                </div>
-                <div class="col-md-5 mx-2">
-                  <p class="text-white">Empty</p>
-                </div>
-                <div class="col-md-3 mx-1">
-                  <ul>
-                    <li class="text-white">Another info 1</li>
-                    <li class="text-white">Another info 2</li>
-                    <li class="text-white">
-                      <p class="text-white">Random stuff</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <zul:apply templateURI="/templates/footer.zul" />
           </footer>
         </div>
       </div>

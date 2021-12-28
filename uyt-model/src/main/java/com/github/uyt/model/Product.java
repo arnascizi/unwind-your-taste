@@ -16,11 +16,13 @@ import javax.persistence.Table;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Builder
 @NoArgsConstructor
 @Table(name = "produktas")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

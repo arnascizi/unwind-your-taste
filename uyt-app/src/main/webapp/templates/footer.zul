@@ -1,26 +1,8 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <xh:nav xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="navigation" class="nav-bg navbar-expand-lg mx-auto col-lg-12">
   <div class="container">
-    <div class="d-flex row">
-      <div class="col-md-3 mx-1">
-        <ul>
-          <li class="text-white">Info 1</li>
-          <li class="text-white">Info 2</li>
-          <li class="text-white">Info 3</li>
-        </ul>
-      </div>
-      <div class="col-md-5 mx-2">
-        <p class="text-white">${c:l('common.footer.info')}</p>
-      </div>
-      <div class="col-md-3 mx-1">
-        <ul>
-          <li class="text-white">Another info 1</li>
-          <li class="text-white">Another info 2</li>
-          <li class="text-white">
-            <p class="text-white">Random stuff</p>
-          </li>
-        </ul>
-      </div>
+    <div class="d-flex justify-content-center">
+        <p class="text-light mt-3">${c:l('common.footer.info')}</p>
     </div>
   </div>
 </xh:nav>

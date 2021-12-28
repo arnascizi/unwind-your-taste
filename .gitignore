@@ -7,10 +7,8 @@ uyt-app/.mvn/wrapper/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 mvnw
-uyt-bl/src/main/resources/postgres-data.sql
-uyt-bl/src/main/resources/data.sql
-uyt-app/src/main/resources/myCertificate.crt
-uyt-app/src/main/resources/springboot.p12
+#uyt-app/src/main/resources/myCertificate.crt
+#uyt-app/src/main/resources/springboot.p12
 
 ### STS ###
 .apt_generated

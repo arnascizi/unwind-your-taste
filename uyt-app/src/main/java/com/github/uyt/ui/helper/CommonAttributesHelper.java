@@ -45,18 +45,6 @@ public class CommonAttributesHelper {
         return commonComponentsService.fetchAllComplexities().stream().map(this::buildComplexityView).collect(Collectors.toList());
     }
 
-    public List<CategoryView> getAllDetailedCategories() {
-        return commonComponentsService.fetchAllCategories().stream().map(this::buildDetailedCategoryView).collect(Collectors.toList());
-    }
-
-    private CategoryView buildDetailedCategoryView(CocktailCategory category) {
-        return CategoryView.builder()
-                .id(category.getId())
-                .title(category.getName())
-                // .categoryType(category.getCategoryType().getValue())
-                .build();
-    }
-
     private ComplexityView buildComplexityView(Complexity complexity) {
         return ComplexityView.builder()
                 .id(complexity.getId())

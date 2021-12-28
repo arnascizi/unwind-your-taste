@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                // .antMatchers("/cocktails").authenticated()
+                .antMatchers("/createCocktail").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

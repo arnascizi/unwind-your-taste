@@ -1,19 +1,21 @@
 package com.github.uyt.ui.viewmodel;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.media.Media;
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
 
+import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
@@ -35,17 +37,18 @@ public class CocktailEntryVm implements Serializable {
     @WireVariable(rewireOnActivate = true) private transient CommonAttributesHelper commonAttributesHelper;
 
     @Getter @Setter private List<CompositionView> products = new ArrayList<>();
-    @Getter @Setter private RecipeView model = new RecipeView();
-    @Getter @Setter private ProductView productModel = new ProductView();
     @Getter @Setter private CompositionView ingredientModel = new CompositionView();
-    @Getter @Setter private String productId;
+    @Getter @Setter private ComplexityView complexity;
+    @Getter @Setter private CategoryView category;
+    @Getter @Setter private ProductView productModel = new ProductView();
+    @Getter @Setter private RecipeView model = new RecipeView();
+    @Getter private List<ComplexityView> complexities = new ArrayList<>();
     @Getter private List<CategoryView> categories = new ArrayList<>();
     @Getter private List<ProductView> ingredients = new ArrayList<>();
-    @Getter private List<ComplexityView> complexities = new ArrayList<>();
 
     @Init
     public void init() {
-        categories = commonAttributesHelper.getAllDetailedCategories();
+        categories = commonAttributesHelper.getCocktailCategories();
         ingredients = commonAttributesHelper.getAllIngredients();
         complexities = commonAttributesHelper.getAllComplexities();
     }
@@ -67,42 +70,57 @@ public class CocktailEntryVm implements Serializable {
     @NotifyChange("model")
     public void doSubmit() {
         if (isValid()) {
-            RecipeView testView = new RecipeView();
-            testView.builder()
-                    .title("recipeView.getTitle()")
-                    .guideline("recipeView.getGuideline()")
-                    .serving("recipeView.getServing()")
-                    .uploadTime(LocalDateTime.now())
-                    .updateTime(LocalDateTime.now())
+            recipeHelper.saveRecipe(RecipeView.builder()
+                    .title(model.getTitle())
+                    .products(products)
+                    .guideline(model.getGuideline())
+                    .serving(model.getServing())
                     .image(model.getImage())
-                    .build();
-            recipeHelper.saveRecipe(testView, SecurityFunctions.getLoggedUser());
+                    .categoryView(category)
+                    .complexity(complexity)
+                    .build(), SecurityFunctions.getLoggedUser());
+            Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
         }
     }
 
     @Command
-    @NotifyChange({"ingredientModel", "products", "amount"})
+    @NotifyChange({"ingredientModel", "products", "amount", "productModel"})
     public void doAddProduct() {
+        ingredientModel.setProductView(productModel);
+        products.add(ingredientModel);
+        System.out.println(ingredientModel.getProductView().getName() + StringUtils.SPACE + ingredientModel.getProductView().getMeasurement());
+        productModel = new ProductView();
+        ingredientModel = new CompositionView();
+        model.setProducts(products);
+        model.getProducts().stream().forEach(compositionView -> System.out.println(compositionView.toString()));
+    }
 
-        recipeHelper.saveRecipe(RecipeView.builder()
-                .title("recipeView.getTitle()")
-                .guideline("recipeView.getGuideline()")
-                .serving("recipeView.getServing()")
-                .uploadTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .image(model.getImage())
-                .categoryView(categories.get(0))
-                .complexity(complexities.get(0))
-                .build(), SecurityFunctions.getLoggedUser());
+    public String getIngredientValue(CompositionView compositionView) {
+        return compositionView.getProductView().getName() + StringUtils.SPACE + compositionView.getAmount() + StringUtils.SPACE + compositionView.getProductView().getMeasurement();
+    }
 
-        // ingredientModel.setProductView(productModel);
-        // products.add(ingredientModel);
-        // System.out.println(productModel.getName());
-        // productModel = new ProductView();
-        // ingredientModel = new CompositionView();
+    @Command
+    @NotifyChange({"model", "products"})
+    public void doResolveCategory() {
+        products.stream().forEach(System.out::println);
     }
 
     private boolean isValid() {
-        return false;
+        if (model.getComplexity() == null) {
+            return false;
+        } else if (model.getCategoryView() == null) {
+            return false;
+        } else if (model.getGuideline() == null) {
+            return false;
+        } else if (model.getTitle() == null) {
+            return false;
+        } else if (model.getImage() == null) {
+            return false;
+        } else if (model.getUploader() == null) {
+            return false;
+        } else if (model.getServing() == null) {
+            return false;
+        }
+        return true;
     }
 }

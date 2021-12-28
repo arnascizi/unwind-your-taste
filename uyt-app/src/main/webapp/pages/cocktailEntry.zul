@@ -5,7 +5,7 @@
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow" xmlns:zul="http://www.zkoss.org/2005/zul" apply="org.zkoss.bind.BindComposer" self="@{define(pageContent)}"
         viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailEntryVm')">
   <div class="container mt-0 pb-5">
-    <h3 class="pt-5 text-muted">New recipe</h3>
+    <h3 class="pt-5 text-muted">${c:l('cocktailEntry.new')}</h3>
     <hr />
     <form method="POST" class="register-form" id="newRecipe">
       <div class="d-flex">
@@ -17,7 +17,7 @@
             </xh:div>
             <sh:forEach items="@load(vm.products)" var="product">
               <xh:div class="d-block">
-                <zul:label value="@load(product.productView.name)" />
+                <zul:label value="@load(vm.getIngredientValue(product))" />
               </xh:div>
             </sh:forEach>
           </xh:div>
@@ -29,9 +29,9 @@
             </div>
             <div class="col-sm-8 px-0">
               <div class="form-group">
-                <zul:combobox sclass="input-group-append mx-1" selectedItem="@load(vm.productModel.productType)" placeholder="Select category">
+                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.category)" placeholder="Select category">
                   <sh:forEach items="@load(vm.categories)" var="category">
-                    <zul:comboitem value="${category.title}" label="${category.title}" />
+                    <zul:comboitem value="${category}" label="${category.title}" />
                   </sh:forEach>
                 </zul:combobox>
               </div>
@@ -51,9 +51,9 @@
                 </div>
               </div>
               <div class="form-group">
-                <zul:combobox sclass="input-group-append mx-1" selectedItem="@load(vm.model.complexity)" placeholder="Select complexity">
+                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.complexity)" placeholder="Select complexity">
                   <sh:forEach items="@load(vm.complexities)" var="complexity">
-                    <zul:comboitem value="${complexity.id}" label="${complexity.complexityValue}" />
+                    <zul:comboitem value="${complexity}" label="${complexity.complexityValue}" />
                   </sh:forEach>
                 </zul:combobox>
               </div>

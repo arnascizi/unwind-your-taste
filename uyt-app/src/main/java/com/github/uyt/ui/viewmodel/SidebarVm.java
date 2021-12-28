@@ -9,6 +9,7 @@ import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.view.RecipePreviewView;
 
@@ -28,6 +29,6 @@ public class SidebarVm implements Serializable {
 
     @Command
     public void doSelect(String id) {
-        Executions.sendRedirect("/cocktail?id=" + id);
+        Executions.sendRedirect(PageLocationEnum.COCKTAIL.getUrl() + "?id=" + id);
     }
 }
