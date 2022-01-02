@@ -1,6 +1,5 @@
 package com.github.uyt.ui.view;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AccessLevel;
@@ -22,8 +21,8 @@ public class RecipeView {
     private byte[] image;
     private String guideline;
     private String serving;
-    private LocalDateTime uploadTime;
-    private LocalDateTime updateTime;
+    private String uploadTime;
+    private String updateTime;
     private String uploader;
     private List<ReviewView> reviews;
     private List<CompositionView> products;

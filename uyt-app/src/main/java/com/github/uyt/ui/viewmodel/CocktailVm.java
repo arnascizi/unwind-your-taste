@@ -2,6 +2,7 @@ package com.github.uyt.ui.viewmodel;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,9 +10,10 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
-import com.github.uyt.model.CommonConstants;
+import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
@@ -67,18 +69,18 @@ public class CocktailVm implements Serializable {
         reviews = reviewHelper.getReviewsPageable(pageable, model.getId());
     }
 
+    @Command
+    public void doDelete() {
+        recipeHelper.deleteRecipe(model.getId());
+        Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
+    }
+
     public String getLoggedUserUsername() {
         return SecurityFunctions.getLoggedUser().getUsername();
     }
 
     public boolean isUserLogged() {
         return SecurityFunctions.getLoggedUser() != null;
-    }
-
-    private double calculateTotalRating() {
-        return reviews.size() != 0
-                ? getReviews().stream().map(ReviewView::getEvaluation).reduce(CommonConstants.ZERO, Integer::sum) / reviews.size()
-                : 0;
     }
 
     private void loadReviews(Long id) {
@@ -92,5 +94,9 @@ public class CocktailVm implements Serializable {
 
     private boolean isValid() {
         return review.getEvaluation() < 1;
+    }
+
+    public boolean isAbleToModify() {
+        return SecurityFunctions.isUserLogged() && model.getUploader().equals(Objects.requireNonNull(SecurityFunctions.getLoggedUser()).getUsername());
     }
 }

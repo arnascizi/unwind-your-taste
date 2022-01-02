@@ -35,11 +35,6 @@ public class IngredientsVm implements Serializable {
     @NotifyChange({"ingredients", "recipes"})
     public void doExpand(String id) {
         recipes.clear();
-        loadRecipes(Long.parseLong(id));
-        System.out.println(recipes.size());
-    }
-
-    private void loadRecipes(Long id) {
-        recipes = recipeHelper.getRecipesByProduct(id);
+        recipes.addAll(recipeHelper.getRecipesByProduct(Long.parseLong(id)));
     }
 }

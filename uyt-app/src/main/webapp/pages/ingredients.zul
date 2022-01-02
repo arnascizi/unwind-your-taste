@@ -2,18 +2,19 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IngredientsVm')">
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IngredientsVm')">
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">Test</h3>
     <hr />
     <div class="container d-flex justify-content">
       <xh:div class="col-sm-4">
-        <sh:forEach items="@bind(vm.ingredients)" var="ingredient">
-          <xh:button class="btn btn-outline-danger btn-sm" onClick="@command(vm.doExpand(ingredient.id))">${ingredient.name}</xh:button>
+        <sh:forEach items="@load(vm.ingredients)" var="ingredient">
+          <xh:a class="btn btn-outline-danger btn-sm" onClick="@command(vm.doExpand(ingredient.id))">${ingredient.name}</xh:a>
         </sh:forEach>
       </xh:div>
+      <zul:label value="@load(vm.recipes.size())" />
       <xh:div class="col-sm-8">
-        <sh:if test="@load(vm.recipes.size() > 0)">
+        <sh:if test="@load(!vm.recipes.isEmpty())">
           <xh:div class="d-flex justify-content-center row">
             <sh:forEach items="@load(vm.recipes)" var="recipe">
               <xh:div class="mx-0 px-1 mt-2 d-block col-sm-3">

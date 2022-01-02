@@ -2,6 +2,7 @@ package com.github.uyt.bl.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.github.uyt.bl.repository.CocktailCategoryRepository;
@@ -14,6 +15,7 @@ import com.github.uyt.model.Complexity;
 import com.github.uyt.model.Measurement;
 import com.github.uyt.model.ProductType;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -41,7 +43,7 @@ public class CommonComponentsService {
         return complexityRepository.fetchAllComplexities();
     }
 
-    public Measurement fetchMeasurementByName(String name) {
+    public Measurement fetchMeasurementByName(@NonNull String name) {
         return measurementRepository.findMeasurementByName(name);
     }
 

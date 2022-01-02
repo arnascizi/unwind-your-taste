@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.github.uyt.bl.service.RecipeService;
 import com.github.uyt.bl.service.ReviewService;
 import com.github.uyt.bl.service.UserAccountService;
+import com.github.uyt.model.CommonConstants;
 import com.github.uyt.model.Review;
 import com.github.uyt.ui.view.ReviewView;
 
@@ -48,8 +49,8 @@ public class ReviewHelper {
                 .id(review.getId())
                 .comment(review.getComment())
                 .evaluation(review.getRating())
-                .createdAt(review.getCreatedAt())
-                .updatedAt(review.getUpdatedAt())
+                .createdAt(CommonConstants.dateTimeFormatter.format(review.getCreatedAt()))
+                .updatedAt(CommonConstants.dateTimeFormatter.format(review.getUpdatedAt()))
                 .user(userAccountService.getUsernameById(review.getUserAccount().getId()))
                 .recipeId(review.getRecipe().getId())
                 .build();

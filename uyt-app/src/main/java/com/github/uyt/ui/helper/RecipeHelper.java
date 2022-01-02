@@ -12,6 +12,7 @@ import com.github.uyt.bl.service.RecipeService;
 import com.github.uyt.bl.service.ReviewService;
 import com.github.uyt.bl.service.UserAccountService;
 import com.github.uyt.model.CocktailCategory;
+import com.github.uyt.model.CommonConstants;
 import com.github.uyt.model.Complexity;
 import com.github.uyt.model.Composition;
 import com.github.uyt.model.Product;
@@ -27,6 +28,7 @@ import com.github.uyt.ui.view.RecipePreviewView;
 import com.github.uyt.ui.view.RecipeView;
 import com.github.uyt.ui.view.SearchView;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -42,19 +44,15 @@ public class RecipeHelper {
         return recipeService.getAllRecipes().size();
     }
 
-    public List<RecipeView> getAllRecipes(Pageable pageable) {
-        return recipeService.finAllPageable(pageable).stream().map(this::buildRecipeView).collect(Collectors.toList());
-    }
-
-    public List<RecipePreviewView> getAllRecipesPreview(Pageable pageable) {
+    public List<RecipePreviewView> getAllRecipesPreview(@NonNull Pageable pageable) {
         return recipeService.finAllPageable(pageable).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
-    public List<RecipePreviewView> getSearchResultRecipePreview(Pageable pageable, SearchView searchView) {
+    public List<RecipePreviewView> getSearchResultRecipePreview(@NonNull Pageable pageable, @NonNull SearchView searchView) {
         return recipeService.fetchSearchResult(pageable, buildSearch(searchView)).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
-    public RecipeView getDetailedRecipeView(Long id) {
+    public RecipeView getDetailedRecipeView(@NonNull Long id) {
         return buildRecipeView(recipeService.fetchSingleRecipe(id));
     }
 
@@ -66,23 +64,27 @@ public class RecipeHelper {
         return recipeService.getLatestRecipes().stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
-    public RecipePreviewView getRecipePreview(Long id) {
+    public RecipePreviewView getRecipePreview(@NonNull Long id) {
         return buildRecipePreview(recipeService.fetchSingleRecipe(id));
     }
 
-    public List<RecipePreviewView> getRecipesByProduct(Long productId) {
+    public List<RecipePreviewView> getRecipesByProduct(@NonNull Long productId) {
         return recipeService.getRecipesByProduct(productId).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
-    public void saveRecipe(RecipeView recipeView, LoggedUser loggedUser) {
+    public void saveRecipe(@NonNull RecipeView recipeView, @NonNull LoggedUser loggedUser) {
         recipeService.save(buildRecipe(recipeView));
+    }
+
+    public void deleteRecipe(@NonNull Long recipeId) {
+        recipeService.deleteRecipe(recipeId);
     }
 
     private Recipe buildRecipe(RecipeView recipeView) {
         return Recipe.builder()
                 .title(recipeView.getTitle())
                 .preparationDescription(recipeView.getGuideline())
-                .productList(recipeView.getProducts().stream().map(compositionView -> buildComposition(compositionView.getProductView(), compositionView.getAmount())).collect(Collectors.toList()))
+                .productList(recipeView.getProducts().stream().map(compositionView -> buildComposition(compositionView.getProductView(), compositionView.getAmount(), recipeView)).collect(Collectors.toList()))
                 .serving(recipeView.getServing())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
@@ -142,8 +144,8 @@ public class RecipeHelper {
                 .title(recipe.getTitle())
                 .guideline(recipe.getPreparationDescription())
                 .serving(recipe.getServing())
-                .uploadTime(recipe.getCreatedAt())
-                .updateTime(recipe.getUpdatedAt())
+                .uploadTime(CommonConstants.dateTimeFormatter.format(recipe.getCreatedAt()))
+                .updateTime(CommonConstants.dateTimeFormatter.format(recipe.getUpdatedAt()))
                 .uploader(recipe.getUserAccount().getUsername())
                 .complexity(buildComplexityView(recipe.getComplexity()))
                 .category(recipe.getCocktailCategory().getName())
@@ -170,7 +172,7 @@ public class RecipeHelper {
                 .build();
     }
 
-    private Composition buildComposition(ProductView productView, Long amount) {
+    private Composition buildComposition(ProductView productView, Long amount, RecipeView recipe) {
         return Composition.builder()
                 .id(productView.getId())
                 .product(buildProduct(productView))
@@ -193,12 +195,4 @@ public class RecipeHelper {
                 .build();
     }
 
-    // public byte[] createThumbnail(byte[] image, String fileType) throws IOException {
-    //     try (InputStream inputStream = new ByteArrayInputStream(image); ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-    //         BufferedImage bufferedImage = ImageIO.read(inputStream);
-    //         BufferedImage thumbnail = Scalr.resize(bufferedImage, 150);
-    //         ImageIO.write(thumbnail, fileType, byteArrayOutputStream);
-    //         return byteArrayOutputStream.toByteArray();
-    //     }
-    // }
 }

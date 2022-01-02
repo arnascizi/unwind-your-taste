@@ -16,6 +16,8 @@ import com.github.uyt.bl.repository.MeasurementRepository;
 import com.github.uyt.model.Measurement;
 import com.github.uyt.model.Measurement_;
 
+import lombok.NonNull;
+
 @Component
 @Transactional
 public class MeasurementRepositoryImpl extends SimpleJpaRepository<Measurement, Long> implements MeasurementRepository {
@@ -28,7 +30,7 @@ public class MeasurementRepositoryImpl extends SimpleJpaRepository<Measurement, 
     }
 
     @Override
-    public Measurement findMeasurementByName(String name) {
+    public Measurement findMeasurementByName(@NonNull String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Measurement> criteria = cb.createQuery(Measurement.class);
         Root<Measurement> root = criteria.from(Measurement.class);

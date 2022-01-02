@@ -16,6 +16,8 @@ import com.github.uyt.bl.repository.ProductTypeRepository;
 import com.github.uyt.model.ProductType;
 import com.github.uyt.model.ProductType_;
 
+import lombok.NonNull;
+
 @Component
 @Transactional
 public class ProductTypeRepositoryImpl extends SimpleJpaRepository<ProductType, Long> implements ProductTypeRepository {
@@ -28,7 +30,7 @@ public class ProductTypeRepositoryImpl extends SimpleJpaRepository<ProductType, 
     }
 
     @Override
-    public ProductType findProductTypeByName(String name) {
+    public ProductType findProductTypeByName(@NonNull String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<ProductType> criteria = cb.createQuery(ProductType.class);
         Root<ProductType> root = criteria.from(ProductType.class);

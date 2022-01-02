@@ -15,10 +15,10 @@
           </div>
           <div class="col-sm-4 d-flex flex-row-reverse">
             <xh:div if="${(vm.ableToModify)}" class="justify-content-end mx-1">
-              <xh:button class="btn btn-outline-warning btn-sm" onClick="@command(vm.doEdit(review.id))">
+              <xh:button class="btn btn-outline-warning btn-sm" onClick="@command('doEdit')">
                 <i class="bi bi-pencil" />
               </xh:button>
-              <xh:button class="btn btn-outline-danger btn-sm" onClick="@command(vm.doDelete(review.id))">
+              <xh:button class="btn btn-outline-danger btn-sm" onClick="@command('doDelete')">
                 <i class="bi bi-trash" />
               </xh:button>
             </xh:div>

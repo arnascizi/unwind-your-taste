@@ -1,7 +1,5 @@
 package com.github.uyt.ui.view;
 
-import java.time.LocalDateTime;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +17,8 @@ public class ReviewView {
     private Long id;
     private String user;
     private String comment;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String createdAt;
+    private String updatedAt;
     private Long recipeId;
     private Integer evaluation;
 }

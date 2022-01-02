@@ -50,7 +50,7 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
     }
 
     @Override
-    public Page<Recipe> fetchAllRecipes(Pageable pageable) {
+    public Page<Recipe> fetchAllRecipes(@NonNull Pageable pageable) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
@@ -89,7 +89,7 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
     }
 
     @Override
-    public Page<Recipe> fetchSearchResult(Pageable pageable, Search search) {
+    public Page<Recipe> fetchSearchResult(@NonNull Pageable pageable, @NonNull Search search) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
@@ -115,7 +115,7 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
     }
 
     @Override
-    public List<Recipe> getRecipeByProduct(Long productId) {
+    public List<Recipe> getRecipeByProduct(@NonNull Long productId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);

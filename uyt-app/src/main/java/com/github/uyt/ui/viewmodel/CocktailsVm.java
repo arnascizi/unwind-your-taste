@@ -12,6 +12,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.annotation.QueryParam;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import com.github.uyt.model.CommonConstants;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
@@ -35,7 +36,7 @@ public class CocktailsVm implements Serializable {
 
     @Getter @Setter private List<RecipePreviewView> recipeList;
     @Getter @Setter private SearchView search = new SearchView();
-    @Getter @Setter private int currentPage = 0;
+    @Getter @Setter private int currentPage = CommonConstants.ZERO;
     @Getter @Setter private List<CategoryTypeView> categoryTypeViews;
     @Getter @Setter private List<CategoryView> cocktailCategories;
     @Getter private int maxPages;
@@ -43,12 +44,12 @@ public class CocktailsVm implements Serializable {
     @Init
     public void init(@QueryParam("searchValue") String searchValue) {
         search.setSearchValue(searchValue == null ? StringUtils.EMPTY : searchValue);
-        Pageable pageable = PageRequest.of(currentPage, 8);
-        recipeList = search.getSearchValue() != null
-                ? recipeHelper.getSearchResultRecipePreview(pageable, search)
-                : recipeHelper.getAllRecipesPreview(pageable);
+        Pageable pageable = PageRequest.of(currentPage, PAGE_SIZE);
+        recipeList = StringUtils.isEmpty(search.getSearchValue())
+                ? recipeHelper.getAllRecipesPreview(pageable)
+                : recipeHelper.getSearchResultRecipePreview(pageable, search);
         categoryTypeViews = commonAttributesHelper.getAllCategoryTypes();
-        maxPages = recipeList.size();
+        maxPages = recipeHelper.getRecipeCount();
         cocktailCategories = commonAttributesHelper.getCocktailCategories();
     }
 
@@ -68,8 +69,8 @@ public class CocktailsVm implements Serializable {
     @Command
     @NotifyChange({"categoryTypeViews", "search", "cocktailCategories", "recipeList", "maxPages"})
     public void doSearch() {
-        Pageable pageable = PageRequest.of(currentPage, 8);
-        maxPages = recipeHelper.getAllRecipesPreview(pageable).size();
+        Pageable pageable = PageRequest.of(currentPage, PAGE_SIZE);
+        maxPages = recipeHelper.getRecipeCount();
         recipeList = recipeHelper.getSearchResultRecipePreview(pageable, search);
     }
 

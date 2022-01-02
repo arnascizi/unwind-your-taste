@@ -20,6 +20,8 @@ import com.github.uyt.model.CategoryType_;
 import com.github.uyt.model.CocktailCategory;
 import com.github.uyt.model.CocktailCategory_;
 
+import lombok.NonNull;
+
 @Component
 @Transactional
 public class CocktailCategoryRepositoryImpl extends SimpleJpaRepository<CocktailCategory, Long> implements CocktailCategoryRepository {
@@ -31,7 +33,7 @@ public class CocktailCategoryRepositoryImpl extends SimpleJpaRepository<Cocktail
     }
 
     @Override
-    public List<CocktailCategory> fetchCocktailCategoriesByType(String categoryType) {
+    public List<CocktailCategory> fetchCocktailCategoriesByType(@NonNull String categoryType) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CocktailCategory> criteria = cb.createQuery(CocktailCategory.class);
         Root<CocktailCategory> root = criteria.from(CocktailCategory.class);

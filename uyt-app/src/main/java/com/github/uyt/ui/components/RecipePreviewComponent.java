@@ -10,6 +10,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.enums.DifficultyEnum;
 import com.github.uyt.enums.PageLocationEnum;
+import com.github.uyt.model.CommonConstants;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
 import com.github.uyt.ui.view.RecipePreviewView;
@@ -30,13 +31,20 @@ public class RecipePreviewComponent extends HtmlMacroComponent {
     @Init
     public void init() {
         model = recipeHelper.getRecipePreview(Long.parseLong(recipeId));
-        model.setRating(0);
+        model.setRating(model.getEvaluationCount() != 0 ? Double.parseDouble(CommonConstants.decimalFormat.format((resolveRating() / model.getEvaluationCount()))) : 0.0);
         complexityValue();
     }
 
     @Command
     public void doSelect(String id) {
         Executions.sendRedirect(PageLocationEnum.COCKTAIL.getUrl() + "?id=" + id);
+    }
+
+    private double resolveRating() {
+        return reviewHelper.getRecipeReviews(model.getId()).stream()
+                .map(review -> review.getEvaluation() != null ? review.getEvaluation(): 0)
+                .mapToDouble(Integer::intValue)
+                .sum();
     }
 
     private String complexityValue() {

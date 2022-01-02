@@ -37,16 +37,21 @@ public class ReviewComponent extends HtmlMacroComponent {
     }
 
     @Command
-    public void doDelete(String id) {
+    public void doDelete() {
         Messagebox.show(Labels.getRequiredLabel("cocktail.delete.confirm"), "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
             if (event.getName().equals(Events.ON_OK)) {
-                reviewHelper.deleteReview(Long.parseLong(id));
+                reviewHelper.deleteReview(model.getId());
                 Clients.showNotification(Labels.getRequiredLabel("cocktail.delete.success"));
                 Executions.sendRedirect(PageLocationEnum.COCKTAIL.getUrl() + "?id=" + model.getRecipeId());
             } else {
                 Clients.showNotification(Labels.getRequiredLabel("cocktail.delete.cancel"));
             }
         });
+    }
+
+    @Command
+    public void doUpdate() {
+    //TODO
     }
 
     public boolean isAbleToModify() {

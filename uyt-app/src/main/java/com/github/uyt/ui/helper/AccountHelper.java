@@ -8,6 +8,7 @@ import com.github.uyt.bl.service.UserAccountService;
 import com.github.uyt.model.UserAccount;
 import com.github.uyt.ui.view.UserView;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -21,6 +22,10 @@ public class AccountHelper {
         if (userView != null) {
             userAccountService.save(buildUserAccount(userView));
         }
+    }
+
+    public void deleteUser(@NonNull String username) {
+        userAccountService.deleteUser(username);
     }
 
     public UserView getUserByName(String username) {

@@ -49,4 +49,11 @@ public class UserAccountService implements UserDetailsService {
     public UserAccount getUserAccount(@NonNull String username) {
         return userRepository.findByUsername(username);
     }
+
+    public void deleteUser(@NonNull String username) {
+        UserAccount user = userRepository.findByUsername(username);
+        if (user != null) {
+            userRepository.deleteById(user.getId());
+        }
+    }
 }

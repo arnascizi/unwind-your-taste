@@ -7,7 +7,7 @@
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">${c:l('cocktailEntry.new')}</h3>
     <hr />
-    <form method="POST" class="register-form" id="newRecipe">
+    <form action="/createCocktail" method="POST" class="register-form" id="newRecipe">
       <div class="d-flex">
         <div class="col-sm-4 justify-content">
           <xh:div class="d-block">

@@ -27,7 +27,7 @@ public class RecipeService {
         return recipeRepository.findAll(pageable);
     }
 
-    public void save(Recipe recipe) {
+    public void save(@NonNull Recipe recipe) {
         recipeRepository.save(recipe);
     }
 
@@ -43,11 +43,15 @@ public class RecipeService {
         return recipeRepository.fetchLatestRecipes();
     }
 
-    public Page<Recipe> fetchSearchResult(Pageable pageable, Search search) {
+    public Page<Recipe> fetchSearchResult(@NonNull Pageable pageable, @NonNull Search search) {
         return recipeRepository.fetchSearchResult(pageable, search);
     }
 
-    public List<Recipe> getRecipesByProduct(Long productId) {
+    public List<Recipe> getRecipesByProduct(@NonNull Long productId) {
         return recipeRepository.getRecipeByProduct(productId);
+    }
+
+    public void deleteRecipe(@NonNull Long recipeId) {
+        recipeRepository.deleteById(recipeId);
     }
 }

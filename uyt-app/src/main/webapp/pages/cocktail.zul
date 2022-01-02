@@ -11,6 +11,9 @@
         <small class="h6 text-muted text-small float-right mr-0 col-sm-12">${vm.model.uploadTime}</small>
       </div>
     </div>
+    <xh:div if="${vm.isAbleToModify()}">
+      <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="Delete"/>
+    </xh:div>
     <hr />
     <div class="mt-5">
       <div class="container d-block">

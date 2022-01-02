@@ -9,6 +9,7 @@
     <label-location>/WEB-INF/i18n/about.properties</label-location>
     <label-location>/WEB-INF/i18n/cocktail.properties</label-location>
     <label-location>/WEB-INF/i18n/cocktailEntry.properties</label-location>
+    <label-location>/WEB-INF/i18n/settings.properties</label-location>
   </system-config>
 
   <desktop-config>

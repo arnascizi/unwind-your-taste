@@ -67,20 +67,30 @@ public class CocktailEntryVm implements Serializable {
     }
 
     @Command
-    @NotifyChange("model")
     public void doSubmit() {
-        if (isValid()) {
-            recipeHelper.saveRecipe(RecipeView.builder()
-                    .title(model.getTitle())
-                    .products(products)
-                    .guideline(model.getGuideline())
-                    .serving(model.getServing())
-                    .image(model.getImage())
-                    .categoryView(category)
-                    .complexity(complexity)
-                    .build(), SecurityFunctions.getLoggedUser());
+        // if (!isValid()) {
+            model.setProducts(products);
+            model.setCategoryView(category);
+            model.setComplexity(complexity);
+            recipeHelper.saveRecipe(model, SecurityFunctions.getLoggedUser());
+
+
+
+
+
+
+            //
+            // recipeHelper.saveRecipe(RecipeView.builder()
+            //         .title(model.getTitle())
+            //         .products(products)
+            //         .guideline(model.getGuideline())
+            //         .serving(model.getServing())
+            //         .image(model.getImage())
+            //         .categoryView(category)
+            //         .complexity(complexity)
+            //         .build(), SecurityFunctions.getLoggedUser());
             Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
-        }
+        // }
     }
 
     @Command
@@ -88,11 +98,8 @@ public class CocktailEntryVm implements Serializable {
     public void doAddProduct() {
         ingredientModel.setProductView(productModel);
         products.add(ingredientModel);
-        System.out.println(ingredientModel.getProductView().getName() + StringUtils.SPACE + ingredientModel.getProductView().getMeasurement());
         productModel = new ProductView();
         ingredientModel = new CompositionView();
-        model.setProducts(products);
-        model.getProducts().stream().forEach(compositionView -> System.out.println(compositionView.toString()));
     }
 
     public String getIngredientValue(CompositionView compositionView) {

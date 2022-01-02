@@ -48,7 +48,7 @@ public class ReviewRepositoryImpl extends SimpleJpaRepository<Review, Long> impl
     }
 
     @Override
-    public List<Review> getAllRecipeReviews(Long recipeId) {
+    public List<Review> getAllRecipeReviews(@NonNull Long recipeId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Review> criteria = cb.createQuery(Review.class);
         Root<Review> root = criteria.from(Review.class);
@@ -58,7 +58,7 @@ public class ReviewRepositoryImpl extends SimpleJpaRepository<Review, Long> impl
     }
 
     @Override
-    public Page<Review> getRecipeReviewsPaged(Pageable pageable, Long recipeId) {
+    public Page<Review> getRecipeReviewsPaged(@NonNull Pageable pageable, @NonNull Long recipeId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Review> criteria = cb.createQuery(Review.class);
         Root<Review> root = criteria.from(Review.class);
@@ -68,7 +68,7 @@ public class ReviewRepositoryImpl extends SimpleJpaRepository<Review, Long> impl
     }
 
     @Override
-    public Review getReviewById(Long reviewId) {
+    public Review getReviewById(@NonNull Long reviewId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Review> criteria = cb.createQuery(Review.class);
         Root<Review> root = criteria.from(Review.class);

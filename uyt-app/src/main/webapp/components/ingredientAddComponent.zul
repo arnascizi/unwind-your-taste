@@ -1,2 +1,0 @@
-<xh:div xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns="native" viewModel="@id('vm') @init(arg.includer)">
-</xh:div>
