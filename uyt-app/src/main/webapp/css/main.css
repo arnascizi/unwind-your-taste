@@ -6,6 +6,10 @@
     box-shadow: 0 2px 0 0 rgb(97, 126, 159) !important;
 }
 
+body {
+    height: 600px;
+}
+
 * {
     font-family: Arial, sans-serif, Serif;
     font-weight: 300;

@@ -1,6 +1,8 @@
 <xh:div xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns="native" viewModel="@id('vm') @init(arg.includer)">
-  <xh:div class="p-0 col-sm-12 bg-light shadow d-flex row">
+  <xh:div class="p-0 col-sm-12 bg-light shadow d-block">
+    <div class="col-sm-12">
     <zul:image sclass="card-img-top px-0 mx-0 preview-image" content="@load(vm.model.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+    </div>
     <div class="card-body px-1 mx-1 d-flex row justify-content">
       <xh:a class="card-link text-secondary h6 float-left w-100 stretched-link" onClick="@command(vm.doSelect(vm.model.id))">
         ${vm.model.title}

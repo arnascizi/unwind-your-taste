@@ -1,5 +1,6 @@
 package com.github.uyt.bl.repository.impl;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -28,6 +29,7 @@ import com.github.uyt.model.CategoryType;
 import com.github.uyt.model.CategoryType_;
 import com.github.uyt.model.CocktailCategory;
 import com.github.uyt.model.CocktailCategory_;
+import com.github.uyt.model.CommonConstants;
 import com.github.uyt.model.Composition;
 import com.github.uyt.model.Composition_;
 import com.github.uyt.model.Product;
@@ -83,9 +85,16 @@ public class RecipeRepositoryImpl extends SimpleJpaRepository<Recipe, Long> impl
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Recipe> criteria = cb.createQuery(Recipe.class);
         Root<Recipe> root = criteria.from(Recipe.class);
+        Join<Recipe, CocktailCategory> categoryJoin = root.join(Recipe_.cocktailCategory);
+        Join<CocktailCategory, CategoryType> typeJoin = categoryJoin.join(CocktailCategory_.categoryType);
 
-        criteria.select(root).where(cb.equal(root.get(Recipe_.id), Math.floor(Math.random() * 24))).distinct(true);
-        return new ArrayList<>(em.createQuery(criteria).getResultList());
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (LocalTime.now().isAfter(CommonConstants.MORNING) && LocalTime.now().isBefore(CommonConstants.EVENING)) {
+            predicates.add(cb.equal(typeJoin.get(CategoryType_.value), CommonConstants.NON_ALCOHOLIC));
+        }
+        criteria.where(predicates.toArray(new Predicate[0]));
+        return em.createQuery(criteria).getResultList();
     }
 
     @Override

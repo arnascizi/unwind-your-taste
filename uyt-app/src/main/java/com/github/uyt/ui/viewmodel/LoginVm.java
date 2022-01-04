@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
@@ -24,6 +25,7 @@ public class LoginVm implements Serializable {
     private static final String PASSWORD = "password";
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
+
     @Getter @Setter private Map<String, String> vmsgs = new HashMap<>();
     @Getter @Setter private LoginView model = new LoginView();
 
@@ -32,10 +34,11 @@ public class LoginVm implements Serializable {
     }
 
     @Command
+    @NotifyChange({"model", "vmsgs"})
     public void doLogin() {
-        // if (isValid()) {
+        if (isValid()) {
             Clients.submitForm("loginForm");
-        // }
+        }
     }
 
     private boolean isValid() {

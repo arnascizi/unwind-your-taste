@@ -2,7 +2,7 @@ package com.github.uyt.ui.viewmodel;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
 
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
@@ -14,21 +14,26 @@ import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.view.RecipePreviewView;
 
 import lombok.Getter;
-import lombok.Setter;
 
 public class SidebarVm implements Serializable {
     private static final long serialVersionUID = 3950722338244936020L;
 
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
-    @Getter @Setter private List<RecipePreviewView> recommendedRecipes;
+    @Getter private RecipePreviewView recommendedRecipe = new RecipePreviewView();
 
     @Init
     public void init(){
-        recommendedRecipes = recipeHelper.getRecommendedRecipes().stream().limit(3).collect(Collectors.toList());
+        List<RecipePreviewView> recipePreviewViews = recipeHelper.getRecommendedRecipes();
+        recommendedRecipe = getRandomRecipe(recipePreviewViews);
     }
 
     @Command
     public void doSelect(String id) {
         Executions.sendRedirect(PageLocationEnum.COCKTAIL.getUrl() + "?id=" + id);
+    }
+
+    private RecipePreviewView getRandomRecipe(List<RecipePreviewView> recommendedRecipes) {
+        Random rand = new Random();
+        return recommendedRecipes.get(rand.nextInt(recommendedRecipes.size()));
     }
 }

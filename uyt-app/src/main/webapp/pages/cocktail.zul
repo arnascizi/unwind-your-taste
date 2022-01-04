@@ -12,7 +12,7 @@
       </div>
     </div>
     <xh:div if="${vm.isAbleToModify()}">
-      <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="Delete"/>
+      <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="${c:l('common.delete')}"/>
     </xh:div>
     <hr />
     <div class="mt-5">
@@ -82,7 +82,7 @@
             <div class="form-group  d-flex flex-row">
               <img class="rounded-circle col-sm-2" src="https://eu.ui-avatars.com/api/?background=random&amp;name=${(vm.getLoggedUserUsername())}" width="10" />
               <span class="d-block font-weight-bold name">${(vm.getLoggedUserUsername())}</span>
-              <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@bind(vm.review.evaluation)">
+              <zul:radiogroup sclass="form-check form-check-inline mr-0" selectedItem="@load(vm.review.evaluation) @save(vm.review.evaluation, before='doSubmitReview')">
                 <div class="col-sm-2 my-0">
                   <zul:radio sclass="form-check-input mx-0" name="inlineRadioOptions" id="inlineRadio1" value="1" label="1" />
                 </div>

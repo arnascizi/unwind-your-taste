@@ -7,8 +7,7 @@
   <div class="container mt-0 pt-5">
     <h3 class="pt-3 text-muted">${c:l('about.popular')}</h3>
     <hr/>
-    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum
-      velit? Ab cum eius expedita praesentium rem.
+    <p class="text-muted">${c:l('common.popular.categories')}
     </p>
     <div class="row d-flex">
       <xh:div class="col-xs-6">
@@ -27,9 +26,9 @@
     </div>
   </div>
   <div class="container mt-5 pt-5">
-    <h4 class="mt-3 text-muted">Latest
+    <h4 class="mt-3 text-muted">${c:l('common.latest')}
       <span class="badge badge-light">
-        <xh:button class="btn btn-outline-secondary btn-sm" onClick="@command('doCheckAll')">View all</xh:button>
+        <xh:button class="btn btn-outline-secondary btn-sm" onClick="@command('doCheckAll')">${c:l('common.view.all')}</xh:button>
       </span>
     </h4>
     <xh:div class="container mt-3 mb-5 col-sm-12">

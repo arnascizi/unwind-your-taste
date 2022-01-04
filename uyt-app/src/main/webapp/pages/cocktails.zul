@@ -16,7 +16,7 @@
       <div class="input-group d-flex justify-content-center">
         <zul:textbox type="text" sclass="col-xs-12 col-md-5 mx-1" placeholder="${c:l('common.search')}" value="@bind(vm.search.searchValue)" />
         <div class="col-xs-4">
-          <zul:combobox sclass="input-group-prepend mx-1" selectedItem="@bind(vm.search.category)">
+          <zul:combobox sclass="input-group-prepend mx-1" selectedItem="@bind(vm.search.category)" placeholder="${c:l('common.category')}">
             <sh:forEach items="@load(vm.cocktailCategories)" var="category">
               <zul:comboitem label="${category.title}" value="${category.title}" />
             </sh:forEach>
@@ -24,7 +24,7 @@
         </div>
         <div class="col-xs-4">
           <xh:div class="input-group-prepend mx-1">
-            <zul:combobox sclass="input-group-prepend mx-1" selectedItem="@bind(vm.search.categoryType)" onChange="@command('doChangeSelection')">
+            <zul:combobox sclass="input-group-prepend mx-1" placeholder="${c:l('common.categoryType')}" selectedItem="@bind(vm.search.categoryType)" onChange="@command('doChangeSelection')">
               <sh:forEach items="@load(vm.categoryTypeViews)" var="categoryType">
                 <zul:comboitem label="${categoryType.type}" value="${categoryType.type}" />
               </sh:forEach>

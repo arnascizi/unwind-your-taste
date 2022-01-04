@@ -39,7 +39,7 @@ public class SettingsVm implements Serializable {
     public void doDelete() {
         Messagebox.show(Labels.getRequiredLabel("settings.delete.confirm"), "Question?", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, event -> {
             if (event.getName().equals(Events.ON_OK)) {
-                accountHelper.getUserByName(model.getUsername());
+                accountHelper.deleteUser(model.getUsername());
                 Clients.showNotification(Labels.getRequiredLabel("settings.delete.success"));
                 Executions.sendRedirect("/logout");
             } else {

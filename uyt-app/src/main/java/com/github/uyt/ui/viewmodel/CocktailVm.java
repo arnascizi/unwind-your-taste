@@ -14,6 +14,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
 import com.github.uyt.enums.PageLocationEnum;
+import com.github.uyt.model.CommonConstants;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.helper.ReviewHelper;
@@ -46,17 +47,17 @@ public class CocktailVm implements Serializable {
         model = recipeHelper.getDetailedRecipeView(Long.parseLong(id));
         loadReviews(model.getId());
         ratingCount = reviews.size();
-        totalRating = 0;
+        totalRating = CommonConstants.ZERO;
         review.setRecipeId(Long.parseLong(id));
     }
 
     @Command
     @NotifyChange({"model", "reviews", "totalRating", "ratingCount"})
     public void doSubmitReview() {
-        // if (!isValid()) {
-        //     return;
-        // }
-        review.setUser(SecurityFunctions.getLoggedUser().getUsername());
+        if (review.getEvaluation() == null) {
+            review.setEvaluation(CommonConstants.ZERO);
+        }
+        review.setUser(Objects.requireNonNull(SecurityFunctions.getLoggedUser()).getUsername());
         reviewHelper.saveReview(review);
         ratingCount = reviews.size();
         loadReviews(model.getId());
@@ -76,7 +77,7 @@ public class CocktailVm implements Serializable {
     }
 
     public String getLoggedUserUsername() {
-        return SecurityFunctions.getLoggedUser().getUsername();
+        return Objects.requireNonNull(SecurityFunctions.getLoggedUser()).getUsername();
     }
 
     public boolean isUserLogged() {
@@ -90,10 +91,6 @@ public class CocktailVm implements Serializable {
 
     public int getPageSize() {
         return PAGE_SIZE;
-    }
-
-    private boolean isValid() {
-        return review.getEvaluation() < 1;
     }
 
     public boolean isAbleToModify() {

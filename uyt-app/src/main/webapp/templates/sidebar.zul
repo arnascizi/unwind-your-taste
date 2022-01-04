@@ -4,11 +4,9 @@
   <hr />
   <xh:div class="container mt-3 mb-5 col-sm-12">
     <xh:div class="d-column justify-content-center row">
-      <sh:forEach items="@load(vm.recommendedRecipes)" var="recipe">
         <xh:div class="mx-0 px-1 mt-2 d-block col-sm-12">
-          <zul:recipePreviewComponent recipeId="${recipe.id}" />
+          <zul:recipePreviewComponent recipeId="${vm.recommendedRecipe.id}" />
         </xh:div>
-      </sh:forEach>
     </xh:div>
   </xh:div>
 </xh:div>
