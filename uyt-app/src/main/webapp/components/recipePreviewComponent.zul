@@ -1,11 +1,16 @@
 <xh:div xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns="native" viewModel="@id('vm') @init(arg.includer)">
-  <div class="mx-3">
-    <div class="col-xs-12 bg-light shadow card px-5">
-      <div class="card-body">
-        <xh:img class="card-img" />
-        <xh:label>${vm.model.complexity}</xh:label>
-        <xh:a class="card-title" href="#">${vm.model.title}</xh:a>
-      </div>
+  <xh:div class="p-0 col-sm-12 bg-light shadow d-block">
+    <div class="col-sm-12">
+    <zul:image sclass="card-img-top px-0 mx-0 preview-image" content="@load(vm.model.thumbnail) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
     </div>
-  </div>
+    <div class="card-body px-1 mx-1 d-flex row justify-content">
+      <xh:a class="card-link text-secondary h6 float-left w-100 stretched-link" onClick="@command(vm.doSelect(vm.model.id))">
+        ${vm.model.title}
+      </xh:a>
+      <xh:span class="mr-2 text-warning float-right">
+        <i class="bi bi-star-fill"></i>
+        ${vm.model.rating} (${vm.model.evaluationCount})
+      </xh:span>
+    </div>
+  </xh:div>
 </xh:div>

@@ -1,28 +1,44 @@
 package com.github.uyt.ui.viewmodel;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
+import com.github.uyt.enums.PageLocationEnum;
+import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
 import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.RecipePreviewView;
 
 import lombok.Getter;
-import lombok.Setter;
 
 public class IndexVm implements Serializable {
     private static final long serialVersionUID = -68937799999085117L;
 
-    @WireVariable(rewireOnActivate = true) private RecipeHelper recipeHelper;
-    @Getter @Setter private RecipePreviewView recipePreviewView = new RecipePreviewView();
-    @Getter private List<CategoryView> categories = new ArrayList<>();
+    @WireVariable(rewireOnActivate = true) private transient CommonAttributesHelper commonAttributesHelper;
+    @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
+
+    @Getter private List<CategoryView> categories;
+    @Getter private List<RecipePreviewView> latestRecipes;
 
     @Init
     private void init() {
-        recipePreviewView = recipeHelper.singleMockRecipe();
+        categories = commonAttributesHelper.getCocktailCategories().stream().limit(3).collect(Collectors.toList());
+        latestRecipes = recipeHelper.getLatestRecipes().stream().limit(4).collect(Collectors.toList());
+    }
+
+    @Command
+    public void doSearch(String id) {
+        Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
+    }
+
+    @Command
+    public void doCheckAll() {
+        Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
     }
 }

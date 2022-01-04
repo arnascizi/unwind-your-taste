@@ -2,11 +2,13 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}">
-  <div class="container mt-5">
-    <h4 class="mt-3 text-muted">Settings</h4>
-  </div>
-  <div class="container">
-    <p class="text-muted">Some settings</p>
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.SettingsVm')">
+  <div class="container mt-0 pb-5">
+    <h3 class="pt-5 text-muted">Settings</h3>
+    <hr />
+    <div class="container">
+      <p class="text-muted">${vm.model.username}</p>
+    </div>
+    <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="Delete"/>
   </div>
 </xh:div>

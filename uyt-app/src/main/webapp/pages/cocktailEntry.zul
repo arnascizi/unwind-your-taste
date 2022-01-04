@@ -2,40 +2,85 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" self="@{define(pageContent)}">
-  <din class="container-auth">
-    <div class="signup-content">
-      <div class="signup-form">
-        <h2 class="form-title">Submit new recipe</h2>
-        <form method="POST" class="register-form" id="newRecipe">
-          <div class="form-group">
-            <zul:textbox type="text" name="recipeTitle" value="" placeholder="Recipe title" />
-          </div>
-          <div class="form-group">
-            <zul:textbox type="text" name="prepTime" value="" placeholder="Preparation time" />
-          </div>
-          <div class="form-group">
-            <zul:textbox type="text" name="serving" value="" placeholder="Servings" />
-          </div>
-          <div class="form-group">
-            <zul:combobox type="text" name="complexity" value="" placeholder="Recipe complexity" />
-          </div>
-          <div class="form-group">
-            <zul:combobox type="text" name="category" value="" placeholder="Recipe category" />
-          </div>
-          <div class="row mr-4 mt-2">
-            <div class="col-xs-4 mr-3">
-              <zul:button class="btn btn-outline-success btn-sm" type="submit" label="Submit" />
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow" xmlns:zul="http://www.zkoss.org/2005/zul" apply="org.zkoss.bind.BindComposer" self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailEntryVm')">
+  <div class="container mt-0 pb-5">
+    <h3 class="pt-5 text-muted">${c:l('cocktailEntry.new')}</h3>
+    <hr />
+    <form action="/createCocktail" method="POST" class="register-form" id="newRecipe">
+      <div class="d-flex">
+        <div class="col-sm-4 justify-content">
+          <xh:div class="d-block">
+            <xh:div class="form-group">
+              <zul:image style="width: 250px; height: 200px;" id="imagethumb" class=""
+                      content="@load(vm.model.image, after={'doUploadImage'}) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
+            </xh:div>
+            <sh:forEach items="@load(vm.products)" var="product">
+              <xh:div class="d-block">
+                <zul:label value="@load(vm.getIngredientValue(product))" />
+              </xh:div>
+            </sh:forEach>
+          </xh:div>
+        </div>
+        <div class="col-sm-8 justify-content">
+          <div class="d-flex justify-content">
+            <div class="col-sm-4 px-0">
+              <zul:button upload="true" class="btn btn-outline-secondary mb-3" onUpload="@command('doUploadImage', image=event.media)">choose pic...</zul:button>
             </div>
-            <div class="col-xs-4 mr-3">
-              <zul:button class="btn btn-outline-warning btn-sm" type="reset" label="Clear" />
-            </div>
-            <div class="col-xs-4 mr-3">
-              <zul:button class="btn btn-outline-danger btn-sm" type="button" label="Cancel" />
+            <div class="col-sm-8 px-0">
+              <div class="form-group">
+                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.category)" placeholder="Select category">
+                  <sh:forEach items="@load(vm.categories)" var="category">
+                    <zul:comboitem value="${category}" label="${category.title}" />
+                  </sh:forEach>
+                </zul:combobox>
+              </div>
+              <div class="form-group d-flex justify-content">
+                <div class="col-sm-4 px-1">
+                  <zul:textbox sclass="form-control" type="text" name="amount" value="@bind(vm.ingredientModel.amount)" placeholder="Amount" />
+                </div>
+                <div class="col-sm-6 px-1">
+                  <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.productModel)" placeholder="Select ingredient">
+                    <sh:forEach items="@load(vm.ingredients)" var="ingredient">
+                      <zul:comboitem value="${ingredient}" label="${ingredient.name}" />
+                    </sh:forEach>
+                  </zul:combobox>
+                </div>
+                <div class="col-sm-2 px-1">
+                  <zul:button sclass="btn btn-outline-success w-100" label="+" onClick="@command('doAddProduct')" />
+                </div>
+              </div>
+              <div class="form-group">
+                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.complexity)" placeholder="Select complexity">
+                  <sh:forEach items="@load(vm.complexities)" var="complexity">
+                    <zul:comboitem value="${complexity}" label="${complexity.complexityValue}" />
+                  </sh:forEach>
+                </zul:combobox>
+              </div>
             </div>
           </div>
-        </form>
+          <div class="form-group">
+            <div class="form-group">
+              <zul:textbox sclass="form-control" type="text" name="recipeTitle" value="@bind(vm.model.title)" placeholder="Recipe title" />
+            </div>
+            <div class="form-group">
+              <zul:textbox sclass="form-control" type="text" name="prepTime" value="@bind(vm.model.guideline)" multiline="true" rows="4"
+                      placeholder="Preparation" />
+            </div>
+            <div class="form-group">
+              <zul:textbox sclass="form-control" type="text" name="serving" value="@bind(vm.model.serving)" placeholder="Serving" />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </din>
+      <div class="d-flex justify-content-end">
+        <div class="col-xs-4 mr-3">
+          <zul:button class="btn btn-outline-secondary" type="submit" label="Submit" onClick="@command('doSubmit')" />
+        </div>
+        <div class="col-xs-4 mr-3">
+          <zul:button class="btn btn-outline-danger" type="button" label="Cancel" />
+        </div>
+      </div>
+    </form>
+  </div>
 </xh:div>

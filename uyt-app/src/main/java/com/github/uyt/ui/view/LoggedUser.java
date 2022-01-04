@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class LoggedUser implements Serializable {
     private static final long serialVersionUID = -1385105897781345648L;
 
+    private Long id;
     private String username;
     private String role;
 }

@@ -3,8 +3,8 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}">
-  <div class="container mt-5">
-    <h4 class="mt-3 text-muted">${c:l('error.unexpected')}</h4>
+  <div class="container mt-0 pb-5">
+    <h4 class="pt-5 text-muted">${c:l('error.unexpected')}</h4>
     <hr />
   </div>
 </xh:div>

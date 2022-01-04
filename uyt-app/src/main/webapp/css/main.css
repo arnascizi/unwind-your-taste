@@ -2,6 +2,14 @@
     background-color: #617e9f;
 }
 
+.form-control:focus, .form-control:focus + div{
+    box-shadow: 0 2px 0 0 rgb(97, 126, 159) !important;
+}
+
+body {
+    height: 600px;
+}
+
 * {
     font-family: Arial, sans-serif, Serif;
     font-weight: 300;
@@ -44,6 +52,11 @@ h2 {
     color: #222;
     font-family: Poppins;
     font-size: 36px;
+}
+
+.form-control {
+    border: none;
+    border-bottom: black 1px solid;
 }
 
 .main {
@@ -372,5 +385,14 @@ label.valid:after {
     }
 }
 
+.preview-component {
+    width: 300px;
+    height: 400px;
+}
 
-/**/
+.preview-image {
+    width: 100%;
+    height: 18em;
+    object-fit: contain;
+}
+

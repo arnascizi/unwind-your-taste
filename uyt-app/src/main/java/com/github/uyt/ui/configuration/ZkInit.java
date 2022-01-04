@@ -1,7 +1,6 @@
 package com.github.uyt.ui.configuration;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Locale;
 
 import org.zkoss.util.resource.LabelLocator;
@@ -11,12 +10,14 @@ import org.zkoss.util.resource.Locators;
 import org.zkoss.zk.ui.WebApp;
 import org.zkoss.zk.ui.util.WebAppInit;
 
+import com.github.uyt.enums.PageTranslationEnum;
+
 public class ZkInit implements WebAppInit {
 
     @Override
     public void init(WebApp wapp) {
-        for (String name : Arrays.asList("common, error, login, register")) {
-            Labels.register(new ExtraLabelLocator("./i18n/" + name + ".properties"));
+        for (PageTranslationEnum translation : PageTranslationEnum.getTranslationEnums()) {
+            Labels.register(new ExtraLabelLocator("./i18n/" + translation.getTranslationValue() + ".properties"));
         }
     }
 

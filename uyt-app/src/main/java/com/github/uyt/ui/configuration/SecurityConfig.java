@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.github.uyt.bl.service.UserService;
+import com.github.uyt.bl.service.UserAccountService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,12 +17,8 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    public static final String ZUL_FILES = "/zkau/web/**/*.zul";
-    public static final String[] ZK_RESOURCES = {"/zkau/web/**/js/**", "/zkau/web/**/zul/css/**", "/zkau/web/**/img/**"};
-    // allow desktop cleanup after logout or when reloading login page
-    public static final String REMOVE_DESKTOP_REGEX = "/zkau\\?dtid=.*&cmd_0=rmDesktop&.*";
 
-    private final UserService userService;
+    private final UserAccountService userAccountService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
@@ -31,21 +27,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.csrf().disable().antMatcher("/*").authorizeRequests()
-        //         .antMatchers("/").authenticated()
-        //         .anyRequest().authenticated()
-        //         .and()
-        //         .oauth2Login().loginPage("/login").permitAll()
-        //         .and()
-        //         .logout().logoutSuccessUrl("/");
-
-        http.csrf().disable()
-                .requiresChannel(channel -> channel.anyRequest().requiresSecure())
-                .authorizeRequests(authorize -> authorize.anyRequest().permitAll())
-                .oauth2Login()
-                .loginPage("/login").defaultSuccessUrl("/", true).failureUrl("/login")
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/createCocktail").authenticated()
                 .and()
-                .logout().logoutUrl("/logout").deleteCookies("JSESSIONID").logoutSuccessUrl("/");
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login")
+                .and()
+                .oauth2Login()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/");
     }
 
     @Bean
@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userService);
+        authProvider.setUserDetailsService(userAccountService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

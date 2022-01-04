@@ -1,5 +1,2 @@
-### TODO:
-- Database
-- Back-end
-- Front-end
-- Documentation
+# Kokteilių receptų internetinė svetainė
+##### Baigiamajį darbą rengė - Arnas Čižikovas PI18s

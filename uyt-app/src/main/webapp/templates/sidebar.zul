@@ -1,14 +1,13 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
-<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" class="">
-  <h5 class="ml-4">${c:l('common.recommendations')}</h5>
-  <hr/>
-  <div>
-    <div class="col-xs-6 mb-2">
-      <zul:recipePreviewComponent />
-    </div>
-    <div class="col-xs-6">
-      <zul:recipePreviewComponent />
-    </div>
-  </div>
+<xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="sidebar" xmlns:sh="shadow" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.SidebarVm')">
+  <h5 class="ml-4 pt-5">${c:l('common.recommendations')}</h5>
+  <hr />
+  <xh:div class="container mt-3 mb-5 col-sm-12">
+    <xh:div class="d-column justify-content-center row">
+        <xh:div class="mx-0 px-1 mt-2 d-block col-sm-12">
+          <zul:recipePreviewComponent recipeId="${vm.recommendedRecipe.id}" />
+        </xh:div>
+    </xh:div>
+  </xh:div>
 </xh:div>
 

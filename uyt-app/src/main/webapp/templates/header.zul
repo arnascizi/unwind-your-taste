@@ -9,11 +9,11 @@
     </div>
     <div class="col-sm-8 col-md-6 col-lg-5 ml-5 pl-5">
       <div class="input-group">
-        <zul:textbox sclass="form-control form-control-sm" type="text" placeholder="${c:l('common.search')}" />
+        <zul:textbox sclass="form-control form-control-sm" type="text" placeholder="${c:l('common.search')}" value="@bind(vm.search.searchValue)" />
         <div class="input-group-append">
-          <button class="btn btn-light btn-sm">
+          <xh:button class="btn btn-light btn-sm" onClick="@command('doSearch')">
             <i class="bi bi-search" />
-          </button>
+          </xh:button>
         </div>
       </div>
     </div>

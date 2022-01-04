@@ -2,42 +2,54 @@
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN" "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite use-query-string="true">
 
-  <rule>
+  <rule match-type="regex">
     <from>^/$</from>
     <to>/pages/index.zul</to>
   </rule>
 
-  <rule>
+  <rule match-type="regex">
     <from>^/register$</from>
     <to>/pages/register.zul</to>
   </rule>
 
-  <rule>
+  <rule match-type="regex">
     <from>^/login$</from>
     <to>/pages/login.zul</to>
   </rule>
 
-  <rule>
+  <rule match-type="regex">
     <from>^/about</from>
     <to>/pages/about.zul</to>
   </rule>
 
-  <rule>
+  <rule match-type="regex">
     <from>^/cocktails</from>
     <to>/pages/cocktails.zul</to>
   </rule>
 
-  <rule>
-    <from>^/cocktailEntry</from>
+  <rule match-type="regex">
+    <from>^/cocktail?(.*)</from>
+    <set name="id">$1</set>
+    <to>/pages/cocktail.zul</to>
+  </rule>
+
+  <rule match-type="regex">
+    <from>^/cocktails?(.*)</from>
+    <set name="searchValue">$1</set>
+    <to>/pages/cocktails.zul</to>
+  </rule>
+
+  <rule match-type="regex">
+    <from>^/createCocktail</from>
     <to>/pages/cocktailEntry.zul</to>
   </rule>
 
-  <rule>
+  <rule match-type="regex">
     <from>^/ingredients</from>
     <to>/pages/ingredients.zul</to>
   </rule>
 
-  <rule>
+  <rule match-type="regex">
     <from>^/settings</from>
     <to>/pages/settings.zul</to>
   </rule>

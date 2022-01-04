@@ -2,29 +2,43 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
-<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IndexVm')">
-  <div class="container mt-5">
-    <h4 class="mt-3 text-muted">Popular categories</h4>
-    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur commodi cum delectus, eaque odio pariatur qui unde vitae. Deserunt explicabo natus reiciendis rerum velit? Ab cum eius expedita praesentium rem.</p>
+<xh:div xmlns="native" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" xmlns:xh="http://www.w3.org/1999/xhtml" self="@{define(pageContent)}"
+        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.IndexVm')">
+  <div class="container mt-0 pt-5">
+    <h3 class="pt-3 text-muted">${c:l('about.popular')}</h3>
+    <hr/>
+    <p class="text-muted">${c:l('common.popular.categories')}
+    </p>
     <div class="row d-flex">
-      <div class="col-xs-6">
-<!--        <zul:recipePreviewComponent model="@load(vm.recipePreviewView)" />-->
-      </div>
+      <xh:div class="col-xs-6">
+        <sh:forEach items="@load(vm.categories)">
+          <xh:div class="p-1">
+            <div class="card">
+              <div class="card-body">
+                <xh:a class="card-title stretched-link" onclick="@command('doSearch(each.id))')">${each.title}</xh:a>
+                <div class="card-text">${each.description}</div>
+              </div>
+            </div>
+          </xh:div>
+        </sh:forEach>
+      </xh:div>
 
     </div>
   </div>
-  <div class="container mt-5">
-    <h4 class="mt-3 text-muted">Latest
+  <div class="container mt-5 pt-5">
+    <h4 class="mt-3 text-muted">${c:l('common.latest')}
       <span class="badge badge-light">
-        <button class="btn btn-outline-secondary btn-sm" href="#">View all</button>
+        <xh:button class="btn btn-outline-secondary btn-sm" onClick="@command('doCheckAll')">${c:l('common.view.all')}</xh:button>
       </span>
     </h4>
-    <div class="row d-flex">
-      <div class="col-xs-6">
-<!--        <zul:recipePreviewComponent model="@load(vm.recipePreviewView)" />-->
-      </div>
-
-    </div>
+    <xh:div class="container mt-3 mb-5 col-sm-12">
+      <xh:div class="d-flex justify-content-center row">
+        <sh:forEach items="@load(vm.latestRecipes)" var="recipe">
+          <xh:div class="mx-0 px-1 mt-2 d-block col-sm-3 row">
+            <zul:recipePreviewComponent recipeId="${recipe.id}" />
+          </xh:div>
+        </sh:forEach>
+      </xh:div>
+    </xh:div>
   </div>
-
 </xh:div>

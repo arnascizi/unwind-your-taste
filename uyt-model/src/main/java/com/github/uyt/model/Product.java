@@ -1,42 +1,50 @@
 package com.github.uyt.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
-@Table(name = "PRODUKTAS")
+@Builder
 @NoArgsConstructor
+@Table(name = "produktas")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Product {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
+    @SequenceGenerator(name = "produktas_seq", sequenceName = "produktas_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produktas_seq")
     private Long id;
 
-    @Column(name = "PAVADINIMAS")
-    private String productName;
-
-    @Column(name = "KIEKIS")
-    private BigDecimal productAmount;
+    @Column(name = "pavadinimas")
+    private String name;
 
     @ManyToOne
-    private ProductType productType;
-
-    @ManyToOne
+    @JoinColumn(name = "matavimo_vienetas_id", nullable = false)
     private Measurement measurement;
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Recipe.class)
-    private List<Recipe> recipeList;
+    @ManyToOne
+    @JoinColumn(name = "produkto_rusis_id", nullable = false)
+    private ProductType productType;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Composition> productList;
 }
