@@ -19,7 +19,6 @@ import com.github.uyt.enums.PageLocationEnum;
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.helper.CommonAttributesHelper;
 import com.github.uyt.ui.helper.RecipeHelper;
-import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.ComplexityView;
 import com.github.uyt.ui.view.CompositionView;
@@ -72,23 +71,7 @@ public class CocktailEntryVm implements Serializable {
             model.setProducts(products);
             model.setCategoryView(category);
             model.setComplexity(complexity);
-            recipeHelper.saveRecipe(model, SecurityFunctions.getLoggedUser());
-
-
-
-
-
-
-            //
-            // recipeHelper.saveRecipe(RecipeView.builder()
-            //         .title(model.getTitle())
-            //         .products(products)
-            //         .guideline(model.getGuideline())
-            //         .serving(model.getServing())
-            //         .image(model.getImage())
-            //         .categoryView(category)
-            //         .complexity(complexity)
-            //         .build(), SecurityFunctions.getLoggedUser());
+            recipeHelper.saveRecipe(model);
             Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
         // }
     }

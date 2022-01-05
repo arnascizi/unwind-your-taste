@@ -22,7 +22,6 @@ import com.github.uyt.ui.utility.SecurityFunctions;
 import com.github.uyt.ui.view.CategoryView;
 import com.github.uyt.ui.view.ComplexityView;
 import com.github.uyt.ui.view.CompositionView;
-import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.ProductView;
 import com.github.uyt.ui.view.RecipePreviewView;
 import com.github.uyt.ui.view.RecipeView;
@@ -72,8 +71,8 @@ public class RecipeHelper {
         return recipeService.getRecipesByProduct(productId).stream().map(this::buildRecipePreview).collect(Collectors.toList());
     }
 
-    public void saveRecipe(@NonNull RecipeView recipeView, @NonNull LoggedUser loggedUser) {
-        recipeService.save(buildRecipe(recipeView));
+    public void saveRecipe(@NonNull RecipeView recipeView) {
+        recipeService.save(buildFullRecipe(recipeView));
     }
 
     public void deleteRecipe(@NonNull Long recipeId) {
@@ -84,7 +83,22 @@ public class RecipeHelper {
         return Recipe.builder()
                 .title(recipeView.getTitle())
                 .preparationDescription(recipeView.getGuideline())
-                .productList(recipeView.getProducts().stream().map(compositionView -> buildComposition(compositionView.getProductView(), compositionView.getAmount(), recipeView)).collect(Collectors.toList()))
+                // .productList(recipeView.getProducts().stream().map(this::buildComposition).collect(Collectors.toList()))
+                .serving(recipeView.getServing())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .image(recipeView.getImage())
+                .userAccount(userAccountService.getUserAccount(SecurityFunctions.getLoggedUser().getUsername()))
+                .cocktailCategory(buildCocktailCategory(recipeView.getCategoryView()))
+                .complexity(buildComplexity(recipeView.getComplexity()))
+                .build();
+    }
+
+    private Recipe buildFullRecipe(RecipeView recipeView) {
+        return Recipe.builder()
+                .title(recipeView.getTitle())
+                .preparationDescription(recipeView.getGuideline())
+                .productList(recipeView.getProducts().stream().map(compositionView -> buildComposition(compositionView.getProductView(), compositionView.getAmount())).collect(Collectors.toList()))
                 .serving(recipeView.getServing())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
@@ -104,6 +118,14 @@ public class RecipeHelper {
                 .build();
     }
 
+    private Product buildProduct(ProductView productView, RecipeView recipeView) {
+        return Product.builder()
+                .id(productView.getId())
+                .name(productView.getName())
+                .measurement(commonComponentsService.fetchMeasurementByName(productView.getMeasurement()))
+                .productType(commonComponentsService.fetchProductTypeByName(productView.getProductType()))
+                .build();
+    }
 
     private Complexity buildComplexity(ComplexityView view) {
         return Complexity.builder()
@@ -172,7 +194,7 @@ public class RecipeHelper {
                 .build();
     }
 
-    private Composition buildComposition(ProductView productView, Long amount, RecipeView recipe) {
+    private Composition buildComposition(ProductView productView, Long amount) {
         return Composition.builder()
                 .id(productView.getId())
                 .product(buildProduct(productView))
