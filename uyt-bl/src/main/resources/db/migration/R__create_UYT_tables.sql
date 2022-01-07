@@ -1,3 +1,5 @@
+GRANT EXECUTE TO szzqxrmqwhoxjs;
+
 create sequence if not exists lytis_id_seq maxvalue 2147483647;
 create table if not exists lytis
 (
