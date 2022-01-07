@@ -1,3 +1,5 @@
+GRANT EXECUTE TO ${POST_USER_HEROKU};
+
 TRUNCATE kategorijos_tipas, kokteilio_kategorija, komentaras, kontaktai, lytis, matavimo_vienetas, produktas, produkto_rusis, receptas,
 salis, sudetingumas, sudetis, vartotojas, vartotojo_duomenys, vartotojo_grupe CASCADE;
 
