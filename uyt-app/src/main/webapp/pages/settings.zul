@@ -7,8 +7,13 @@
     <h3 class="pt-5 text-muted">Settings</h3>
     <hr />
     <div class="container">
-      <p class="text-muted">${vm.model.username}</p>
+<!--      <p class="text-muted">${vm.model.username}</p>-->
+<!--      <p class="text-muted">${vm.model.role}</p>-->
     </div>
     <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="Delete"/>
+    <div class="container">
+    <p class="text-muted">${vm.user.username}</p>
+    <p class="text-muted">${vm.user.role}</p>
+  </div>
   </div>
 </xh:div>

@@ -16,5 +16,6 @@ public class LoggedUser implements Serializable {
 
     private Long id;
     private String username;
+    private String email;
     private String role;
 }

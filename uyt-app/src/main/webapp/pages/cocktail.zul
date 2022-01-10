@@ -3,6 +3,17 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page id="cocktail" complete="true"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" xmlns:sh="shadow" self="@{define(pageContent)}" viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailVm')">
+
+  <!-- Include the JavaScript SDK on your page once, ideally right after the opening body tag. -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src ='https://connect.facebook.net/en_GB/sdk.js#xfbml=1&amp;version=v3.0&amp;appId=1774450775918270&amp;autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
   <div class="container mt-0 pb-5">
     <div class="d-flex justify-content">
       <h3 class="pt-5 text-muted col-sm-6">${c:l('cocktail.name')} ${vm.model.title}</h3>
@@ -30,13 +41,25 @@
               <p class="mx-4">${c:l('cocktail.name')} ${vm.model.title}</p>
               <p class="mx-4">${c:l('cocktail.category')} ${vm.model.category}</p>
               <p class="mx-4">${c:l('cocktail.difficulty')} ${vm.model.complexity.complexityValue}</p>
-              <div class="fb-share-button" data-href="https://localhost:8443/cocktail?id=${vm.model.id}" data-layout="button" data-size="large">
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A8443%2Fcocktail%3Fid%3D${vm.model.id}&amp;src=sdkpreparse"
-                        class="btn btn-primary btn-sm">
-                  <i class="bi bi-share" />
-                  ${c:l('cocktail.share')}
-                </a>
+
+              <!-- Place this code wherever you want plugin to appear -->
+              <div class="fb-share-button"
+                      data-href="https://unwind-your-taste.herokuapp.com/cocktail?id=${vm.model.id}"
+                      data-layout="button"
+                      data-size="small"
+                      data-mobile-iframe="true">
+                <a target="_blank"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A8443%2Fcocktail%3Fid%3D${vm.model.id}&amp;src=sdkpreparse"
+                        class="fb-xfbml-parse-ignore">Share</a>
               </div>
+
+<!--              <div class="fb-share-button" data-href="https://localhost:8443/cocktail?id=${vm.model.id}" data-layout="button" data-size="large">-->
+<!--                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A8443%2Fcocktail%3Fid%3D${vm.model.id}&amp;src=sdkpreparse"-->
+<!--                        class="btn btn-primary btn-sm">-->
+<!--                  <i class="bi bi-share" />-->
+<!--                  ${c:l('cocktail.share')}-->
+<!--                </a>-->
+<!--              </div>-->
             </div>
             <hr />
             <div class="d-flex justify-content">

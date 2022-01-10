@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.util.Clients;
 
 import com.github.uyt.ui.helper.AccountHelper;
 import com.github.uyt.ui.utility.SecurityFunctions;
+import com.github.uyt.ui.view.LoggedUser;
 import com.github.uyt.ui.view.UserView;
 
 import lombok.Getter;
@@ -24,10 +25,14 @@ public class SettingsVm implements Serializable {
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
 
     @Getter @Setter private UserView model;
+    @Getter @Setter private LoggedUser user;
 
     @Init
     public void init() {
-        model = accountHelper.getUserByName(SecurityFunctions.getLoggedUser().getUsername());
+        user = SecurityFunctions.getLoggedUser();
+        // if (accountHelper.getUserByName(SecurityFunctions.getLoggedUser().getUsername()) != null) {
+        //     model = accountHelper.getUserByName(SecurityFunctions.getLoggedUser().getUsername());
+        // }
     }
 
     @Command

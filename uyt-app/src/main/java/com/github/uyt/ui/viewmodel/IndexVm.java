@@ -26,6 +26,7 @@ public class IndexVm implements Serializable {
     @Getter private List<CategoryView> categories;
     @Getter private List<RecipePreviewView> latestRecipes;
 
+
     @Init
     private void init() {
         categories = commonAttributesHelper.getCocktailCategories().stream().limit(3).collect(Collectors.toList());

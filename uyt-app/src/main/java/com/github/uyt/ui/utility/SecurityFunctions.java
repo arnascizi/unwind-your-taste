@@ -3,6 +3,7 @@ package com.github.uyt.ui.utility;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.github.uyt.ui.view.LoggedUser;
 
@@ -16,6 +17,8 @@ public class SecurityFunctions {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
             return LoggedUser.builder().username(((UserDetails) principal).getUsername()).role(String.valueOf(((UserDetails) principal).getAuthorities())).build();
+        } else if (principal instanceof OAuth2User) {
+            return LoggedUser.builder().username(((OAuth2User) principal).getAttribute("name")).email(((OAuth2User) principal).getAttribute("email")).role(String.valueOf(((OAuth2User) principal).getAuthorities())).build();
         }
         return null;
     }
