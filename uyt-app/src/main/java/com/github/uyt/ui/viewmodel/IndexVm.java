@@ -29,7 +29,7 @@ public class IndexVm implements Serializable {
     @Init
     private void init() {
         categories = commonAttributesHelper.getCocktailCategories().stream().limit(3).collect(Collectors.toList());
-        latestRecipes = recipeHelper.getLatestRecipes().stream().limit(4).collect(Collectors.toList());
+        latestRecipes = recipeHelper.getLatestRecipes().stream().limit(3).collect(Collectors.toList());
     }
 
     @Command

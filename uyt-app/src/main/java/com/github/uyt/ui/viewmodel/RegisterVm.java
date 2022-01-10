@@ -56,14 +56,10 @@ public class RegisterVm implements Serializable {
 
         if (StringUtils.isEmpty(model.getPassword())) {
             vmsgs.put(PASSWORD, Labels.getRequiredLabel("error.empty"));
-        } else if (model.getPassword() != model.getPassRepeat()) {
-            vmsgs.put(PASSWORD, Labels.getRequiredLabel("error.does.not.match"));
         }
 
         if (StringUtils.isEmpty(model.getPassRepeat())) {
             vmsgs.put(PASS_REPEAT, Labels.getRequiredLabel("error.empty"));
-        } else if (model.getPassRepeat() != model.getPassword()) {
-            vmsgs.put(PASS_REPEAT, Labels.getRequiredLabel("error.does.not.match"));
         }
 
         if (StringUtils.isEmpty(model.getEmail())) {

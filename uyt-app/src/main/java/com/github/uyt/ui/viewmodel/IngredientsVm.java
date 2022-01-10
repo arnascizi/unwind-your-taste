@@ -25,6 +25,7 @@ public class IngredientsVm implements Serializable {
 
     @Getter @Setter private List<RecipePreviewView> recipes = new ArrayList<>();
     @Getter @Setter private List<ProductView> ingredients = new ArrayList<>();
+    @Getter @Setter private Long someId;
 
     @Init
     public void init() {
@@ -32,9 +33,15 @@ public class IngredientsVm implements Serializable {
     }
 
     @Command
-    @NotifyChange({"ingredients", "recipes"})
-    public void doExpand(String id) {
-        recipes.clear();
-        recipes.addAll(recipeHelper.getRecipesByProduct(Long.parseLong(id)));
+    @NotifyChange({"ingredients", "recipes", "someId"})
+    public void doFillRecipes(String id) {
+        System.out.println(id);
+        someId = Long.parseLong(id);
+        if (!recipes.isEmpty()) {
+            recipes.clear();
+        }
+
+        recipes = recipeHelper.getRecipesByProduct(Long.parseLong(id));
+        ingredients = commonAttributesHelper.getAllIngredients();
     }
 }

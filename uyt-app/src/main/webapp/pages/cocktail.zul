@@ -11,8 +11,9 @@
         <small class="h6 text-muted text-small float-right mr-0 col-sm-12">${vm.model.uploadTime}</small>
       </div>
     </div>
+
     <xh:div if="${vm.isAbleToModify()}">
-      <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="${c:l('common.delete')}"/>
+      <zul:button class="btn btn-danger" onClick="@command('doDelete')" label="${c:l('common.delete')}" />
     </xh:div>
     <hr />
     <div class="mt-5">
@@ -55,23 +56,21 @@
                 <xh:p>${vm.model.serving}</xh:p>
               </div>
             </div>
-            <hr />
             <div>
               <xh:div class="col-sm-12 p-1">
                 <div class="container mt-1">
                   <div class="d-flex justify-content-center mb-4">
                     <h3>${c:l('cocktail.reviews')}</h3>
                   </div>
-                  <hr />
-                  <div class="container">
-                    <xh:div class="d-block justify-content-center px-5 mx-5 col-sm-12">
-                      <sh:forEach items="@load(vm.reviews)" var="review">
-                        <zul:reviewComponent reviewId="${review.id}" />
-                      </sh:forEach>
-                    </xh:div>
-                  </div>
-                  <!--              <zul:paging sclass="mt-3 mb-5" totalSize="@load(vm.ratingCount)" pageSize="@load(vm.getPageSize())" activePage="@bind(vm.currentPage)" onClick="@command('doPaging')" mold="os" />-->
                 </div>
+                <hr />
+                <xh:div class="d-block justify-content-center">
+                  <sh:forEach items="@load(vm.reviews)" var="review">
+                    <xh:div class="col-sm-12 justify-content-center px-5 mx-5">
+                      <zul:reviewComponent reviewId="${review.id}" />
+                    </xh:div>
+                  </sh:forEach>
+                </xh:div>
               </xh:div>
             </div>
           </div>

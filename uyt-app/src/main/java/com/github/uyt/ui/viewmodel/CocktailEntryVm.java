@@ -67,13 +67,13 @@ public class CocktailEntryVm implements Serializable {
 
     @Command
     public void doSubmit() {
-        // if (!isValid()) {
+        if (isValid()) {
             model.setProducts(products);
             model.setCategoryView(category);
             model.setComplexity(complexity);
             recipeHelper.saveRecipe(model);
             Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
-        // }
+        }
     }
 
     @Command

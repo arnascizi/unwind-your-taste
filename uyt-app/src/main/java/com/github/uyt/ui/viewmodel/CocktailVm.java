@@ -85,7 +85,7 @@ public class CocktailVm implements Serializable {
     }
 
     private void loadReviews(Long id) {
-        Pageable pageable = PageRequest.of(currentPage, getPageSize());
+        Pageable pageable = PageRequest.of(currentPage, PAGE_SIZE);
         reviews = reviewHelper.getReviewsPageable(pageable, id);
     }
 

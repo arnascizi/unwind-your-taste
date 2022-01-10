@@ -34,7 +34,7 @@
     <xh:div class="container mt-3 mb-5 col-sm-12">
       <xh:div class="d-flex justify-content-center row">
         <sh:forEach items="@load(vm.latestRecipes)" var="recipe">
-          <xh:div class="mx-0 px-1 mt-2 d-block col-sm-3 row">
+          <xh:div class="mx-0 px-1 mt-2 d-block col-sm-4 row">
             <zul:recipePreviewComponent recipeId="${recipe.id}" />
           </xh:div>
         </sh:forEach>
