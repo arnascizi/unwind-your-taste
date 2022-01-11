@@ -39,4 +39,4 @@ Projektas randamas šiuo adresu: https://localhost:8443/
 
 ---
 
-###### Baigiamajį darbą rengė - Arnas Čižikovas PI18s
+###### Baigiamajį darbą rengė - [Arnas Čižikovas](arnas.cizikovas@gmail.com) PI18s, 2022
