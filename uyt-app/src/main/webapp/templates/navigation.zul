@@ -1,6 +1,6 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <xh:nav xmlns="native" xmlns:xh="xhtml" xmlns:zul="http://www.zkoss.org/2005/zul" role="navigation" class="nav-bg navbar-expand-lg mx-auto col-xs-12 col-lg-6">
-  <div class="d-flex justify-content-center mt-2">
+  <div class="d-flex justify-content-center">
     <zul:button sclass="navigation-btn btn btn-light btn-sm border-top border-bottom" label="${c:l('navigation.home')}" href="/" />
     <zul:button sclass="navigation-btn btn btn-light btn-sm border-top border-bottom" label="${c:l('navigation.allRecipes')}" href="/cocktails" />
     <zul:button sclass="navigation-btn btn btn-light btn-sm border-top border-bottom" label="${c:l('navigation.Ingredients')}" href="/ingredients" />

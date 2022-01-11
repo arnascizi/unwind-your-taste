@@ -1,5 +1,5 @@
-TRUNCATE kategorijos_tipas, kokteilio_kategorija, komentaras, kontaktai, lytis, matavimo_vienetas, produktas, produkto_rusis, receptas,
-salis, sudetingumas, sudetis, vartotojas, vartotojo_duomenys, vartotojo_grupe CASCADE;
+-- TRUNCATE kategorijos_tipas, kokteilio_kategorija, komentaras, kontaktai, lytis, matavimo_vienetas, produktas, produkto_rusis, receptas,
+-- salis, sudetingumas, sudetis, vartotojas, vartotojo_duomenys, vartotojo_grupe CASCADE;
 
 insert into kategorijos_tipas (id, pavadinimas)
 values (1, 'Alkoholiniai'),
