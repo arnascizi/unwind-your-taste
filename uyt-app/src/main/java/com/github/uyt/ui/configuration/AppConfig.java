@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
+@ComponentScan(basePackages = {"com.github.uyt"})
 @EntityScan(basePackages = {"com.github.uyt.model"})
 @EnableJpaRepositories(basePackages = {"com.github.uyt.bl.repository"})
 public class AppConfig {}

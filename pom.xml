@@ -56,7 +56,6 @@
     <hibernate.version>5.4.31.Final</hibernate.version>
     <hibernate.model.version>6.0.0.Alpha3</hibernate.model.version>
     <hibernate.entity.version>5.2.3.Final</hibernate.entity.version>
-    <facebook.version>2.0.3.RELEASE</facebook.version>
     <postgresql.version>42.2.20</postgresql.version>
     <bootstrap.version>4.6.0</bootstrap.version>
     <bootstrap.jquery.version>3.6.0</bootstrap.jquery.version>
@@ -67,7 +66,6 @@
     <spring.oauth.version>2.3.3.RELEASE</spring.oauth.version>
     <spring.social.version>2.0.3.RELEASE</spring.social.version>
     <spring.security.version>2.1.0.RELEASE</spring.security.version>
-    <spring.security.jose.version>5.6.0</spring.security.jose.version>
     <spring.oauth.autoconfigure.version>2.6.1</spring.oauth.autoconfigure.version>
     <heroku.version>3.0.3</heroku.version>
     <flyway.version>8.0.4</flyway.version>
@@ -195,11 +193,6 @@
         <artifactId>spring-boot-starter-oauth2-client</artifactId>
         <version>${spring.oauth.version}</version>
       </dependency>
-<!--      <dependency>-->
-<!--        <groupId>org.springframework.security</groupId>-->
-<!--        <artifactId>spring-security-oauth2-jose</artifactId>-->
-<!--        <version>${spring.security.jose.version}</version>-->
-<!--      </dependency>-->
       <dependency>
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt</artifactId>
@@ -265,11 +258,6 @@
         <groupId>org.imgscalr</groupId>
         <artifactId>imgscalr-lib</artifactId>
         <version>${imgscalr.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.social</groupId>
-        <artifactId>spring-social-facebook</artifactId>
-        <version>${facebook.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.apis</groupId>

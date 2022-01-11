@@ -3,7 +3,7 @@
 <taglib>
   <short-name>security-functions</short-name>
   <tlib-version>1.0</tlib-version>
-  <uri>https://localhost:8443/security-functions</uri>
+  <uri>/security-functions</uri>
 
   <function>
     <name>isUserLogged</name>
