@@ -14,11 +14,6 @@
 >  - CSS
 >  - HTML
 >  - Bootstrap
----
-
-### Svetainė patalpinta naudojant [Heroku](https://heroku.com) debesijos paslaugomis:
-[Kokteilių receptų internetinė svetainė](https://crws.herokuapp.com)
-
 
 ---
 
@@ -35,7 +30,12 @@ Pažymėti ` Working Directory ` arba paspausti ` ALT + W ` klaviatūros mygtuku
 
 Šioje eilutėje reikia įvesti ` $MODULE_WORKING_DIR$ `, paspausti ` OK ` ir tuomet paspausti ` shift+F10 ` klaviatūros kombinaciją.
 
-Projektas randamas šiuo adresu: https://localhost:8443/
+Po projekto paleidimo, jis tampa pasiekiamas šiuo adresu: https://localhost:8443/
+
+---
+
+* Svetainė patalpinta naudojant [Heroku](https://heroku.com) debesijos paslaugomis: [Receptų svetainė](https://crws.herokuapp.com).
+*  Programinis kodas patalpintas [GitHub](https://github.com) versijavimo sistemoje: [Programinis kodas](https://github.com/arnascizi/unwind-your-taste.git).
 
 ---
 
