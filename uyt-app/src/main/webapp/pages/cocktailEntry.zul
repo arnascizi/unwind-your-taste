@@ -3,16 +3,16 @@
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 <?page complete="true"?>
 <xh:div xmlns="native" xmlns:xh="xhtml" xmlns:sh="shadow" xmlns:zul="http://www.zkoss.org/2005/zul" apply="org.zkoss.bind.BindComposer" self="@{define(pageContent)}"
-        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailEntryVm')">
+        viewModel="@id('vm') @init('com.github.uyt.ui.viewmodel.CocktailEntryVm')" validationMessages="@id('vmsgs')">
   <div class="container mt-0 pb-5">
     <h3 class="pt-5 text-muted">${c:l('cocktailEntry.new')}</h3>
     <hr />
-    <form action="/createCocktail" method="POST" class="register-form" id="newRecipe">
+    <form action="/createCocktail" method="POST" enctype="multipart/form-data" id="newRecipe">
       <div class="d-flex">
         <div class="col-sm-4 justify-content">
           <xh:div class="d-block">
             <xh:div class="form-group">
-              <zul:image style="width: 250px; height: 200px;" id="imagethumb" class=""
+              <zul:image style="width: 250px; height: 200px;" id="imagethumb"
                       content="@load(vm.model.image, after={'doUploadImage'}) @converter('com.github.uyt.ui.utility.ImageToZkImageConverter')" />
             </xh:div>
             <sh:forEach items="@load(vm.products)" var="product">
@@ -25,11 +25,11 @@
         <div class="col-sm-8 justify-content">
           <div class="d-flex justify-content">
             <div class="col-sm-4 px-0">
-              <zul:button upload="true" class="btn btn-outline-secondary mb-3" onUpload="@command('doUploadImage', image=event.media)">choose pic...</zul:button>
+              <zul:button upload="true" class="btn btn-outline-secondary mb-3" onUpload="@command('doUploadImage', image=event.media)">${c:l('cocktailEntry.choose')}</zul:button>
             </div>
             <div class="col-sm-8 px-0">
               <div class="form-group">
-                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.category)" placeholder="Select category">
+                <zul:combobox name="category" sclass="input-group-append mx-1" selectedItem="@bind(vm.category)" placeholder="${c:l('cocktailEntry.category')}" errorMessage="@load(vm.vmsgs['category'])">
                   <sh:forEach items="@load(vm.categories)" var="category">
                     <zul:comboitem value="${category}" label="${category.title}" />
                   </sh:forEach>
@@ -37,10 +37,10 @@
               </div>
               <div class="form-group d-flex justify-content">
                 <div class="col-sm-4 px-1">
-                  <zul:textbox sclass="form-control" type="text" name="amount" value="@bind(vm.ingredientModel.amount)" placeholder="Amount" />
+                  <zul:textbox sclass="form-control" type="text" name="amount" value="@bind(vm.ingredientModel.amount)" placeholder="${c:l('cocktailEntry.amount')}" />
                 </div>
                 <div class="col-sm-6 px-1">
-                  <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.productModel)" placeholder="Select ingredient">
+                  <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.productModel)" placeholder="${c:l('cocktailEntry.ingredient')}">
                     <sh:forEach items="@load(vm.ingredients)" var="ingredient">
                       <zul:comboitem value="${ingredient}" label="${ingredient.name}" />
                     </sh:forEach>
@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.complexity)" placeholder="Select complexity">
+                <zul:combobox sclass="input-group-append mx-1" selectedItem="@bind(vm.complexity)" placeholder="${c:l('cocktailEntry.complexity')}">
                   <sh:forEach items="@load(vm.complexities)" var="complexity">
                     <zul:comboitem value="${complexity}" label="${complexity.complexityValue}" />
                   </sh:forEach>
@@ -61,24 +61,24 @@
           </div>
           <div class="form-group">
             <div class="form-group">
-              <zul:textbox sclass="form-control" type="text" name="recipeTitle" value="@bind(vm.model.title)" placeholder="Recipe title" />
+              <zul:textbox sclass="form-control" type="text" name="title" value="@bind(vm.model.title)" placeholder="${c:l('cocktailEntry.title')}" errorMessage="@load(vm.vmsgs['title'])"/>
             </div>
             <div class="form-group">
               <zul:textbox sclass="form-control" type="text" name="prepTime" value="@bind(vm.model.guideline)" multiline="true" rows="4"
-                      placeholder="Preparation" />
+                      placeholder="${c:l('cocktailEntry.guideline')}" />
             </div>
             <div class="form-group">
-              <zul:textbox sclass="form-control" type="text" name="serving" value="@bind(vm.model.serving)" placeholder="Serving" />
+              <zul:textbox sclass="form-control" type="text" name="serving" value="@bind(vm.model.serving)" placeholder="${c:l('cocktailEntry.serving')}" />
             </div>
           </div>
         </div>
       </div>
       <div class="d-flex justify-content-end">
         <div class="col-xs-4 mr-3">
-          <zul:button class="btn btn-outline-secondary" type="submit" label="Submit" onClick="@command('doSubmit')" />
+          <zul:button class="btn btn-outline-secondary" type="button" label="${c:l('cocktailEntry.submit')}" onClick="@command('doSubmit')" />
         </div>
         <div class="col-xs-4 mr-3">
-          <zul:button class="btn btn-outline-danger" type="button" label="Cancel" />
+          <zul:button class="btn btn-outline-danger" type="button" label="${c:l('cocktailEntry.cancel')}" onClick="@command('doCancel')"/>
         </div>
       </div>
     </form>

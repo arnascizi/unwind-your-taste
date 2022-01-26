@@ -58,6 +58,12 @@
           </div>
         </div>
 
+        <div class="form-group">
+            <zul:datebox sclass="input-group-prepend border-top-0 border-left-0 border-right-0" name="birthDate" buttonVisible="true"
+                    value="@load(vm.model.birthDate) @save(vm.model.birthDate, before='doRegister')"
+                    placeholder="${c:l('register.birthDate')}" errorMessage="@load(vm.vmsgs['birthDate'])"  />
+        </div>
+
         <div class="row d-flex justify-content mt-5">
           <div class="form-group col-sm-6">
             <xh:button type="button" name="signup" id="signup" class="btn btn-outline-secondary col-sm-12" onClick="@command('doRegister')">${c:l('common.register')}</xh:button>

@@ -27,6 +27,7 @@ public class RegisterVm implements Serializable {
     private static final String PASSWORD = "password";
     private static final String PASS_REPEAT = "passRepeat";
     private static final String EMAIL = "email";
+    private static final String BIRTH_DATE = "birthDate";
 
     @WireVariable(rewireOnActivate = true) private transient AccountHelper accountHelper;
 
@@ -64,6 +65,10 @@ public class RegisterVm implements Serializable {
 
         if (StringUtils.isEmpty(model.getEmail())) {
             vmsgs.put(EMAIL, Labels.getRequiredLabel("error.empty"));
+        }
+
+        if (StringUtils.isEmpty(model.getBirthDate())) {
+            vmsgs.put(BIRTH_DATE, Labels.getRequiredLabel("error.empty"));
         }
 
         return vmsgs.isEmpty();

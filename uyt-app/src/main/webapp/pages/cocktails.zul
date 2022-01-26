@@ -9,7 +9,7 @@
     <hr />
     <xh:div>
       <sh:if test="@load(vm.userLogged)">
-        <xh:a class="btn btn-outline-success" href="/createCocktail">Add cocktail</xh:a>
+        <xh:a class="btn btn-outline-success" href="/createCocktail">${c:l('common.addNewCocktail')}</xh:a>
       </sh:if>
     </xh:div>
     <div class="mt-5">

@@ -19,4 +19,5 @@ public class UserView {
     private String passRepeat;
     private String email;
     private String role;
+    private String birthDate;
 }

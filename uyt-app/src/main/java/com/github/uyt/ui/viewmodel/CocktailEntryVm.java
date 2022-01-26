@@ -2,7 +2,9 @@ package com.github.uyt.ui.viewmodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.zkoss.bind.annotation.BindingParam;
@@ -35,6 +37,7 @@ public class CocktailEntryVm implements Serializable {
     @WireVariable(rewireOnActivate = true) private transient RecipeHelper recipeHelper;
     @WireVariable(rewireOnActivate = true) private transient CommonAttributesHelper commonAttributesHelper;
 
+    @Getter @Setter private Map<String, String> vmsgs = new HashMap<>();
     @Getter @Setter private List<CompositionView> products = new ArrayList<>();
     @Getter @Setter private CompositionView ingredientModel = new CompositionView();
     @Getter @Setter private ComplexityView complexity;
@@ -66,6 +69,7 @@ public class CocktailEntryVm implements Serializable {
     }
 
     @Command
+    @NotifyChange({"model", "complexities", "categories", "ingredients"})
     public void doSubmit() {
         if (isValid()) {
             model.setProducts(products);
@@ -95,22 +99,42 @@ public class CocktailEntryVm implements Serializable {
         products.stream().forEach(System.out::println);
     }
 
+    @Command
+    public void doCancel() {
+        Executions.sendRedirect(PageLocationEnum.COCKTAILS.getUrl());
+    }
+
     private boolean isValid() {
-        if (model.getComplexity() == null) {
-            return false;
-        } else if (model.getCategoryView() == null) {
-            return false;
-        } else if (model.getGuideline() == null) {
-            return false;
-        } else if (model.getTitle() == null) {
-            return false;
-        } else if (model.getImage() == null) {
-            return false;
-        } else if (model.getUploader() == null) {
-            return false;
-        } else if (model.getServing() == null) {
-            return false;
+        vmsgs.clear();
+
+        if (category == null) {
+            vmsgs.put("category", Labels.getRequiredLabel("error.empty"));
         }
-        return true;
+
+        if (model.getCategoryView() == null) {
+            vmsgs.put("category", Labels.getRequiredLabel("error.empty"));
+        }
+
+        if (model.getGuideline() == null) {
+            vmsgs.put("category", Labels.getRequiredLabel("error.empty"));
+        }
+
+        if (StringUtils.isEmpty(model.getTitle())) {
+            vmsgs.put("title", Labels.getRequiredLabel("error.empty"));
+        }
+
+        if (model.getImage() == null) {
+            vmsgs.put("category", Labels.getRequiredLabel("error.empty"));
+        }
+
+        if (model.getUploader() == null) {
+            vmsgs.put("category", Labels.getRequiredLabel("error.empty"));
+        }
+
+        if (model.getServing() == null) {
+            vmsgs.put("category", Labels.getRequiredLabel("error.empty"));
+        }
+
+        return vmsgs.isEmpty();
     }
 }
